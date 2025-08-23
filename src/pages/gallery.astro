@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ImageGallery from '../components/ImageGallery.astro';
+import { customModifications, standardContainers, yardAndStorage } from '../data/images';
+---
+
+<BaseLayout 
+  title="Photo Gallery - LC Container | Custom Builds & Container Solutions"
+  description="Browse our comprehensive photo gallery showcasing custom container builds, modifications, and our facility. See the quality and craftsmanship of LC Container's work."
+>
+  <Header />
+  
+  <!-- Enhanced Hero Section -->
+  <section class="pt-32 pb-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div class="content-wrap text-center">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+        Photo Gallery
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed">
+        Explore our portfolio of custom container builds, modifications, and facility tours. 
+        Each image showcases our commitment to quality and attention to detail.
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery Navigation -->
+  <section class="py-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+    <div class="content-wrap">
+      <div class="flex flex-wrap justify-center gap-4">
+        <button 
+          id="nav-all" 
+          class="px-6 py-3 bg-blue-600 text-white rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+          onclick="filterGallery('all')"
+        >
+          All Photos
+        </button>
+        <button 
+          id="nav-custom" 
+          class="px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 transform hover:scale-105"
+          onclick="filterGallery('custom')"
+        >
+          Custom Builds
+        </button>
+        <button 
+          id="nav-standard" 
+          class="px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 transform hover:scale-105"
+          onclick="filterGallery('standard')"
+        >
+          Standard Containers
+        </button>
+        <button 
+          id="nav-facility" 
+          class="px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 transform hover:scale-105"
+          onclick="filterGallery('facility')"
+        >
+          Our Facility
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Content -->
+  <section class="py-24 bg-white dark:bg-slate-900">
+    <div class="content-wrap">
+      <!-- Custom Builds Gallery -->
+      <div id="gallery-custom" class="gallery-section mb-20">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            Custom Builds & Modifications
+          </h2>
+          <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
+            Transform your vision into reality with our custom container modifications. 
+            From offices to retail spaces, we create exactly what you need.
+          </p>
+        </div>
+        
+        <ImageGallery 
+          images={customModifications}
+          columns={3}
+          showTitles={true}
+          showOverlay={true}
+          aspectRatio="landscape"
+          class="mb-16"
+        />
+        
+        <!-- Custom Builds Stats -->
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          <div class="p-8 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl border border-blue-200 dark:border-blue-700/50">
+            <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">500+</div>
+            <div class="text-slate-700 dark:text-slate-200 font-semibold">Custom Projects</div>
+          </div>
+          <div class="p-8 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-3xl border border-green-200 dark:border-green-700/50">
+            <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">98%</div>
+            <div class="text-slate-700 dark:text-slate-200 font-semibold">Client Satisfaction</div>
+          </div>
+          <div class="p-8 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-3xl border border-purple-200 dark:border-purple-700/50">
+            <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">20+</div>
+            <div class="text-slate-700 dark:text-slate-200 font-semibold">Years Experience</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Standard Containers Gallery -->
+      <div id="gallery-standard" class="gallery-section mb-20">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            Standard Containers
+          </h2>
+          <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
+            Quality new and used containers in various sizes. All units inspected and guaranteed 
+            wind and water tight with competitive pricing.
+          </p>
+        </div>
+        
+        <ImageGallery 
+          images={standardContainers}
+          columns={4}
+          showTitles={true}
+          showOverlay={true}
+          aspectRatio="landscape"
+          class="mb-16"
+        />
+        
+        <!-- Container Types Info -->
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl border border-slate-200 dark:border-slate-600">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">20ft Containers</h3>
+            <ul class="space-y-2 text-slate-700 dark:text-slate-200">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                160 sq ft of storage space
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Perfect for small to medium storage needs
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Easy to transport and position
+              </li>
+            </ul>
+          </div>
+          <div class="p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl border border-slate-200 dark:border-slate-600">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">40ft Containers</h3>
+            <ul class="space-y-2 text-slate-700 dark:text-slate-200">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                320 sq ft of storage space
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Ideal for large storage and commercial use
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                High cube options available
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facility Gallery -->
+      <div id="gallery-facility" class="gallery-section mb-20">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            Our Facility & Yard
+          </h2>
+          <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
+            Take a virtual tour of our facility and see our extensive inventory. 
+            Our organized yard makes it easy to find exactly what you need.
+          </p>
+        </div>
+        
+        <ImageGallery 
+          images={yardAndStorage}
+          columns={3}
+          showTitles={true}
+          showOverlay={true}
+          aspectRatio="landscape"
+          class="mb-16"
+        />
+        
+        <!-- Facility Features -->
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl border border-blue-200 dark:border-blue-700/50">
+            <div class="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Extensive Inventory</h3>
+            <p class="text-slate-700 dark:text-slate-200">Thousands of containers in stock, ready for immediate delivery</p>
+          </div>
+          <div class="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-3xl border border-green-200 dark:border-green-700/50">
+            <div class="w-16 h-16 bg-green-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Quality Control</h3>
+            <p class="text-slate-700 dark:text-slate-200">Every container inspected and guaranteed wind and water tight</p>
+          </div>
+          <div class="text-center p-8 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-3xl border border-purple-200 dark:border-purple-700/50">
+            <div class="w-16 h-16 bg-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Fast Delivery</h3>
+            <p class="text-slate-700 dark:text-slate-200">Statewide delivery service with quick turnaround times</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="text-center">
+        <div class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl p-12 shadow-2xl border border-slate-200 dark:border-slate-600">
+          <h3 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+            Ready to Start Your Project?
+          </h3>
+          <p class="text-xl text-slate-700 dark:text-slate-200 mb-10 max-w-3xl mx-auto">
+            Inspired by what you see? Let's discuss your container project and create something amazing together.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            <a 
+              href="/contact" 
+              class="group relative inline-flex items-center justify-center px-10 py-5 bg-blue-600 text-white text-lg font-semibold rounded-2xl hover:bg-blue-700 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+            >
+              <span class="relative z-10">Get Free Quote</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            
+            <a 
+              href="tel:(214) 524-4168" 
+              class="group relative inline-flex items-center justify-center px-10 py-5 bg-slate-100 dark:bg-slate-600 text-slate-900 dark:text-white text-lg font-semibold rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-500 shadow-2xl hover:shadow-slate-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-500/50"
+            >
+              <span class="relative z-10">Call Now</span>
+              <svg class="w-5 h-5 ml-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function filterGallery(category) {
+    // Hide all gallery sections
+    document.querySelectorAll('.gallery-section').forEach(section => {
+      section.style.display = 'none';
+    });
+    
+    // Show selected section
+    if (category === 'all') {
+      document.querySelectorAll('.gallery-section').forEach(section => {
+        section.style.display = 'block';
+      });
+    } else {
+      const targetSection = document.getElementById(`gallery-${category}`);
+      if (targetSection) {
+        targetSection.style.display = 'block';
+      }
+    }
+    
+    // Update navigation buttons
+    document.querySelectorAll('[id^="nav-"]').forEach(btn => {
+      btn.className = 'px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 transform hover:scale-105';
+    });
+    
+    const activeBtn = document.getElementById(`nav-${category}`);
+    if (activeBtn) {
+      activeBtn.className = 'px-6 py-3 bg-blue-600 text-white rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105';
+    }
+  }
+</script>

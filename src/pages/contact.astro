@@ -2,488 +2,368 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ScrollAnimation from '../components/ScrollAnimation.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import Map from '../components/Map.astro';
 ---
 
 <BaseLayout 
-  title="Contact LC Container - Get a Free Custom Quote | (214) 524-4168"
-  description="Contact LC Container for a free quote on custom container builds. Call (214) 524-4168 or visit our yard at 1211 E Fulghum Rd, Hutchins, TX. Serving Dallas-Fort Worth and 200-mile radius."
+  title="Contact Us - LC Container | Get Your Free Quote"
+  description="Contact LC Container for your shipping container needs. Get a free quote, visit our yard, or call us at (214) 524-4168. Expert service across Texas."
 >
   <Header />
   
-  <!-- Hero Section -->
-  <section class="pt-32 pb-16 bg-gradient-to-br from-primary-50 to-secondary-50">
-    <ScrollAnimation>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Get Your Free Custom Quote
-          </h1>
-          <p class="text-xl text-primary-200 max-w-3xl mx-auto">
-            Ready to start your custom container project? Contact us for a free consultation. 
-            Our experts will help you design the perfect solution for your needs.
-          </p>
-        </div>
-      </div>
-    </ScrollAnimation>
+  <!-- Enhanced Hero Section -->
+  <section class="pt-32 pb-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div class="content-wrap text-center">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+        Get Your Free Quote
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed">
+        Ready to start your container project? Fill out the form below and we'll get back to you within 24 hours with a custom quote.
+      </p>
+    </div>
   </section>
 
-  <!-- Contact Form & Info -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12">
-        <!-- Contact Form -->
-        <ScrollAnimation delay="200">
-          <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Send Us a Message</h2>
-            
-            <form class="space-y-6" id="contact-form" novalidate>
-              <!-- Success/Error Messages -->
-              <div id="form-message" class="hidden p-4 rounded-lg">
-                <div id="success-message" class="hidden bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg">
-                  <div class="flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="font-medium">Thank you! We'll get back to you within 24 hours.</span>
-                  </div>
-                </div>
-                <div id="error-message" class="hidden bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg">
-                  <div class="flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="font-medium">Please check your information and try again.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label for="firstName" class="block text-sm font-medium text-secondary-700 mb-2">First Name *</label>
-                  <input 
-                    type="text" 
-                    id="firstName" 
-                    name="firstName" 
-                    required 
-                    class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                    placeholder="Your first name"
-                    autocomplete="given-name"
-                  />
-                  <div class="error-message hidden text-red-600 text-sm mt-1"></div>
-                </div>
-                <div>
-                  <label for="lastName" class="block text-sm font-medium text-secondary-700 mb-2">Last Name *</label>
-                  <input 
-                    type="text" 
-                    id="lastName" 
-                    name="lastName" 
-                    required 
-                    class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                    placeholder="Your last name"
-                    autocomplete="family-name"
-                  />
-                  <div class="error-message hidden text-red-600 text-sm mt-1"></div>
-                </div>
-              </div>
-
+  <!-- Enhanced Contact Form & Info -->
+  <section class="py-24 bg-white dark:bg-slate-900">
+    <div class="content-wrap">
+      <div class="grid lg:grid-cols-2 gap-20">
+        <!-- Enhanced Contact Form -->
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-10 leading-tight">
+            Send Us a Message
+          </h2>
+          
+          <form class="space-y-8" action="/api/contact" method="POST">
+            <div class="grid md:grid-cols-2 gap-8">
               <div>
-                <label for="email" class="block text-sm font-medium text-secondary-700 mb-2">Email Address *</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  required 
-                  class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                  placeholder="your@email.com"
-                  autocomplete="email"
-                />
-                <div class="error-message hidden text-red-600 text-sm mt-1"></div>
-              </div>
-
-              <div>
-                <label for="phone" class="block text-sm font-medium text-secondary-700 mb-2">Phone Number *</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="phone" 
-                  required 
-                  class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                  placeholder="(214) 555-0123"
-                  autocomplete="tel"
-                />
-                <div class="error-message hidden text-red-600 text-sm mt-1"></div>
-              </div>
-
-              <div>
-                <label for="company" class="block text-sm font-medium text-secondary-700 mb-2">Company (Optional)</label>
+                <label for="firstName" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">First Name *</label>
                 <input 
                   type="text" 
-                  id="company" 
-                  name="company" 
-                  class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                  placeholder="Your company name"
-                  autocomplete="organization"
+                  id="firstName" 
+                  name="firstName" 
+                  required
+                  class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
+                  placeholder="John"
                 />
               </div>
-
+              
               <div>
-                <label for="service" class="block text-sm font-medium text-secondary-700 mb-2">Service Needed *</label>
-                <select 
-                  id="service" 
-                  name="service" 
-                  required 
-                  class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                >
-                  <option value="">Select a service</option>
-                  <option value="custom-builds">Custom Container Builds</option>
-                  <option value="container-sales">Container Sales</option>
-                  <option value="container-leasing">Container Leasing</option>
-                  <option value="modifications">Modifications</option>
-                  <option value="delivery">Delivery Service</option>
-                  <option value="storage-solutions">Storage Solutions</option>
-                  <option value="other">Other</option>
-                </select>
-                <div class="error-message hidden text-red-600 text-sm mt-1"></div>
+                <label for="lastName" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Last Name *</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  name="lastName" 
+                  required
+                  class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
+                  placeholder="Doe"
+                />
               </div>
+            </div>
 
-              <div>
-                <label for="containerSize" class="block text-sm font-medium text-secondary-700 mb-2">Container Size (Optional)</label>
-                <select 
-                  id="containerSize" 
-                  name="containerSize" 
-                  class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                >
-                  <option value="">Select size</option>
-                  <option value="20ft">20ft Container</option>
-                  <option value="40ft">40ft Container</option>
-                  <option value="high-cube">High Cube</option>
-                  <option value="multiple">Multiple Containers</option>
-                  <option value="not-sure">Not sure yet</option>
-                </select>
-              </div>
+            <div>
+              <label for="email" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Email Address *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
+                placeholder="john@example.com"
+              />
+            </div>
 
-              <div>
-                <label for="message" class="block text-sm font-medium text-secondary-700 mb-2">Project Details *</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  rows="4" 
-                  required 
-                  class="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                  placeholder="Tell us about your custom container project, requirements, timeline, and any specific needs..."
-                ></textarea>
-                <div class="error-message hidden text-red-600 text-sm mt-1"></div>
-              </div>
+            <div>
+              <label for="phone" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Phone Number *</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                required
+                class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
+                placeholder="(214) 555-0123"
+              />
+            </div>
 
-              <button 
-                type="submit" 
-                id="submit-btn"
-                class="w-full bg-primary-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            <div>
+              <label for="company" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Company (Optional)</label>
+              <input 
+                type="text" 
+                id="company" 
+                name="company"
+                class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
+                placeholder="Your Company Name"
+              />
+            </div>
+
+            <div>
+              <label for="service" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Service Needed *</label>
+              <select 
+                id="service" 
+                name="service" 
+                required
+                class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
               >
-                <span class="submit-text">Send Message</span>
-                <span class="loading-text hidden">Sending...</span>
-              </button>
-            </form>
-          </div>
-        </ScrollAnimation>
+                <option value="">Select a service</option>
+                <option value="container-sales">Container Sales</option>
+                <option value="container-leasing">Container Leasing</option>
+                <option value="custom-builds">Custom Builds</option>
+                <option value="modifications">Container Modifications</option>
+                <option value="delivery">Delivery Services</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
-        <!-- Contact Information -->
-        <ScrollAnimation delay="400">
-          <div>
-            <h2 class="text-3xl font-bold text-secondary-900 mb-8">Get in Touch</h2>
-            
-            <div class="space-y-8">
-              <!-- Phone -->
-              <div class="flex items-start">
-                <div class="flex-shrink-0">
-                  <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-secondary-900 mb-2">Call Us</h3>
-                                     <a href="tel:(214) 524-4168" class="text-xl text-secondary-600 font-semibold hover:text-secondary-700 transition-colors duration-200">
-                     (214) 524-4168
-                   </a>
-                  <p class="text-secondary-600 mt-1">Speak with our custom build experts</p>
-                </div>
+            <div>
+              <label for="containerSize" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Container Size (Optional)</label>
+              <select 
+                id="containerSize" 
+                name="containerSize"
+                class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300"
+              >
+                <option value="">Select size</option>
+                <option value="20ft">20ft Container</option>
+                <option value="40ft">40ft Container</option>
+                <option value="40ft-high-cube">40ft High Cube</option>
+                <option value="custom">Custom Size</option>
+                <option value="unsure">Not Sure</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Project Details *</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="6" 
+                required
+                class="w-full px-6 py-4 border border-slate-300 dark:border-slate-600 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:text-white text-lg transition-all duration-300 resize-none"
+                placeholder="Tell us about your project, timeline, and any specific requirements..."
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit"
+              class="group relative inline-flex items-center justify-center w-full px-10 py-5 bg-blue-600 text-white text-xl font-semibold rounded-2xl hover:bg-blue-700 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span class="relative z-10">Send Message</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <svg class="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Enhanced Contact Information -->
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-10 leading-tight">
+            Get in Touch
+          </h2>
+          
+          <div class="space-y-10">
+            <!-- Phone -->
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mr-6">
+                <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
               </div>
-
-                             <!-- Address -->
-               <div class="flex items-start">
-                 <div class="flex-shrink-0">
-                   <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
-                     <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                     </svg>
-                   </div>
-                 </div>
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-secondary-900 mb-2">Visit Our Yard</h3>
-                  <address class="text-secondary-600 not-italic">
-                    1211 E Fulghum Rd<br />
-                    Hutchins, TX 75141
-                  </address>
-                  <p class="text-secondary-600 mt-1">Come see our custom builds in person</p>
-                </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Call Us</h3>
+                <a href="tel:(214) 524-4168" class="text-2xl text-slate-700 dark:text-slate-200 font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+                  (214) 524-4168
+                </a>
+                <p class="text-slate-600 dark:text-slate-300 mt-2 text-lg">Speak with our custom build experts</p>
               </div>
+            </div>
 
-                             <!-- Email -->
-               <div class="flex items-start">
-                 <div class="flex-shrink-0">
-                   <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
-                     <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                     </svg>
-                   </div>
-                 </div>
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-secondary-900 mb-2">Email Us</h3>
-                                     <a href="mailto:info@lccontainer.com" class="text-secondary-600 hover:text-secondary-700 transition-colors duration-200">
-                     info@lccontainer.com
-                   </a>
-                  <p class="text-secondary-600 mt-1">We'll respond within 24 hours</p>
-                </div>
+            <!-- Address -->
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mr-6">
+                <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
               </div>
-
-                             <!-- Business Hours -->
-               <div class="flex items-start">
-                 <div class="flex-shrink-0">
-                   <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
-                     <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                     </svg>
-                   </div>
-                 </div>
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-secondary-900 mb-2">Business Hours</h3>
-                  <div class="text-secondary-600 space-y-1">
-                    <div>Monday - Friday: 8:00 AM - 5:00 PM</div>
-                    <div>Saturday: 9:00 AM - 3:00 PM</div>
-                    <div>Sunday: Closed</div>
-                  </div>
-                </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Visit Our Yard</h3>
+                <address class="text-slate-700 dark:text-slate-200 not-italic text-lg">
+                  1211 E Fulghum Rd<br />
+                  Hutchins, TX 75141
+                </address>
+                <p class="text-slate-600 dark:text-slate-300 mt-2 text-lg">Come see our custom builds in person</p>
               </div>
+            </div>
 
-                             <!-- Service Area -->
-               <div class="flex items-start">
-                 <div class="flex-shrink-0">
-                   <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
-                     <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                     </svg>
-                   </div>
-                 </div>
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-secondary-900 mb-2">Service Area</h3>
-                  <div class="text-secondary-600">
-                    <p>Dallas-Fort Worth Metroplex</p>
-                    <p>200-mile radius from Hutchins, TX</p>
-                    <p class="text-sm mt-1">Including Houston, Austin, San Antonio</p>
-                  </div>
+            <!-- Email -->
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mr-6">
+                <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Email Us</h3>
+                <a href="mailto:info@lccontainer.com" class="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-lg">
+                  info@lccontainer.com
+                </a>
+                <p class="text-slate-600 dark:text-slate-300 mt-2 text-lg">We'll respond within 24 hours</p>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mr-6">
+                <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Business Hours</h3>
+                <div class="text-slate-700 dark:text-slate-200 space-y-2 text-lg">
+                  <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</p>
+                  <p><strong>Saturday:</strong> 9:00 AM - 3:00 PM</p>
+                  <p><strong>Sunday:</strong> Closed</p>
                 </div>
               </div>
             </div>
 
-            <!-- Map -->
-            <div class="mt-8">
-              <h3 class="text-lg font-semibold text-secondary-900 mb-4">Find Us</h3>
-              <div class="bg-secondary-100 rounded-lg p-4 h-64 flex items-center justify-center">
-                <div class="text-center">
-                  <svg class="w-16 h-16 text-secondary-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <p class="text-secondary-600">Interactive map coming soon</p>
-                  <p class="text-sm text-secondary-500">1211 E Fulghum Rd, Hutchins, TX 75141</p>
+            <!-- Service Area -->
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mr-6">
+                <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Service Area</h3>
+                <div class="text-slate-700 dark:text-slate-200 text-lg">
+                  <p class="mb-3">We serve the entire state of Texas, with primary service areas including:</p>
+                  <ul class="list-disc list-inside space-y-1 ml-4">
+                    <li>Dallas-Fort Worth Metroplex</li>
+                    <li>Houston and surrounding areas</li>
+                    <li>Austin and Central Texas</li>
+                    <li>San Antonio and South Texas</li>
+                    <li>West Texas and Panhandle</li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-        </ScrollAnimation>
+
+          <!-- Enhanced CTA -->
+          <div class="mt-12 p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl border border-slate-200 dark:border-slate-600">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Need Immediate Assistance?</h3>
+            <p class="text-slate-700 dark:text-slate-200 mb-6">Call us now for instant support and quick answers to your questions.</p>
+            <a 
+              href="tel:(214) 524-4168" 
+              class="group relative inline-flex items-center justify-center w-full px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-2xl hover:bg-blue-700 shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+            >
+              <span class="relative z-10">Call (214) 524-4168</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <svg class="w-5 h-5 ml-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <Footer />
-
-  <script>
-    // Enhanced contact form handling with validation
-    const form = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const submitText = submitBtn?.querySelector('.submit-text');
-    const loadingText = submitBtn?.querySelector('.loading-text');
-    const formMessage = document.getElementById('form-message');
-    const successMessage = document.getElementById('success-message');
-    const errorMessage = document.getElementById('error-message');
-    
-    // Form validation
-    function validateField(field) {
-      const value = field.value.trim();
-      const errorDiv = field.parentElement.querySelector('.error-message');
+  <!-- Map Section -->
+  <section class="py-24 bg-slate-50 dark:bg-slate-800">
+    <div class="content-wrap">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+          Visit Our Location
+        </h2>
+        <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
+          Come see our facility and browse our extensive inventory of containers. 
+          We're conveniently located in Hutchins, Texas, just minutes from Dallas.
+        </p>
+      </div>
       
-      // Remove existing error styling
-      field.classList.remove('border-red-500');
-      field.classList.add('border-secondary-300');
-      errorDiv.classList.add('hidden');
-      
-      // Check if required field is empty
-      if (field.hasAttribute('required') && !value) {
-        field.classList.remove('border-secondary-300');
-        field.classList.add('border-red-500');
-        errorDiv.textContent = 'This field is required';
-        errorDiv.classList.remove('hidden');
-        return false;
-      }
-      
-      // Email validation
-      if (field.type === 'email' && value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-          field.classList.remove('border-secondary-300');
-          field.classList.add('border-red-500');
-          errorDiv.textContent = 'Please enter a valid email address';
-          errorDiv.classList.remove('hidden');
-          return false;
-        }
-      }
-      
-      // Phone validation
-      if (field.type === 'tel' && value) {
-        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-        const cleanPhone = value.replace(/[\s\-\(\)]/g, '');
-        if (!phoneRegex.test(cleanPhone)) {
-          field.classList.remove('border-secondary-300');
-          field.classList.add('border-red-500');
-          errorDiv.textContent = 'Please enter a valid phone number';
-          errorDiv.classList.remove('hidden');
-          return false;
-        }
-      }
-      
-      return true;
-    }
-    
-    // Real-time validation
-    if (form) {
-      const inputs = form.querySelectorAll('input, select, textarea');
-      inputs.forEach(input => {
-        input.addEventListener('blur', () => validateField(input));
-        input.addEventListener('input', () => {
-          if (input.classList.contains('border-red-500')) {
-            validateField(input);
-          }
-        });
-      });
-      
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Map -->
+        <div>
+          <Map height="h-[500px]" />
+        </div>
         
-        // Validate all fields
-        let isValid = true;
-        inputs.forEach(input => {
-          if (!validateField(input)) {
-            isValid = false;
-          }
-        });
-        
-        if (!isValid) {
-          showMessage('error');
-          return;
-        }
-        
-        // Show loading state
-        if (submitBtn && submitText && loadingText) {
-          submitBtn.disabled = true;
-          submitText.classList.add('hidden');
-          loadingText.classList.remove('hidden');
-        }
-        
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        try {
-          // Prepare form data for email
-          const emailData = {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            phone: data.phone,
-            company: data.company || '',
-            projectType: data.projectType,
-            message: data.message,
-            source: 'Contact Page'
-          };
-
-          // Send email via API
-          const response = await fetch('/api/send-email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              formData: emailData,
-              formType: 'contact'
-            })
-          });
-
-          const result = await response.json();
-
-          if (result.success) {
-            // Show success message
-            showMessage('success');
-            
-            // Reset form
-            form.reset();
-            
-            // Track conversion
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'form_submit', {
-                'event_category': 'Contact',
-                'event_label': 'Contact Form'
-              });
-            }
-          } else {
-            console.error('Email API error:', result.error);
-            showMessage('error');
-          }
+        <!-- Location Details -->
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+              Our Facility
+            </h3>
+            <p class="text-slate-700 dark:text-slate-200 text-lg leading-relaxed">
+              Our 10-acre facility houses thousands of containers ready for immediate delivery. 
+              From standard storage containers to custom builds, we have everything you need.
+            </p>
+          </div>
           
-        } catch (error) {
-          console.error('Form submission error:', error);
-          showMessage('error');
-        } finally {
-          // Reset button state
-          if (submitBtn && submitText && loadingText) {
-            submitBtn.disabled = false;
-            submitText.classList.remove('hidden');
-            loadingText.classList.add('hidden');
-          }
-        }
-      });
-    }
-    
-    function showMessage(type) {
-      if (formMessage && successMessage && errorMessage) {
-        formMessage.classList.remove('hidden');
-        successMessage.classList.add('hidden');
-        errorMessage.classList.add('hidden');
-        
-        if (type === 'success') {
-          successMessage.classList.remove('hidden');
-        } else {
-          errorMessage.classList.remove('hidden');
-        }
-        
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-          formMessage.classList.add('hidden');
-        }, 5000);
-      }
-    }
-  </script>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="p-6 bg-white dark:bg-slate-700 rounded-2xl border border-slate-200 dark:border-slate-600">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 class="font-semibold text-slate-900 dark:text-white">Business Hours</h4>
+              </div>
+              <div class="space-y-2 text-slate-700 dark:text-slate-200">
+                <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</p>
+                <p><strong>Saturday:</strong> 9:00 AM - 3:00 PM</p>
+                <p><strong>Sunday:</strong> Closed</p>
+              </div>
+            </div>
+            
+            <div class="p-6 bg-white dark:bg-slate-700 rounded-2xl border border-slate-200 dark:border-slate-600">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h4 class="font-semibold text-slate-900 dark:text-white">Parking</h4>
+              </div>
+              <p class="text-slate-700 dark:text-slate-200">
+                Free parking available on-site. Large vehicles and trucks welcome.
+              </p>
+            </div>
+          </div>
+          
+          <div class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-2xl border border-blue-200 dark:border-blue-700/50">
+            <h4 class="font-semibold text-slate-900 dark:text-white mb-3">Before You Visit</h4>
+            <ul class="space-y-2 text-slate-700 dark:text-slate-200">
+              <li class="flex items-start">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Call ahead to confirm specific container availability
+              </li>
+              <li class="flex items-start">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Bring your ID for business verification
+              </li>
+              <li class="flex items-start">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Wear appropriate footwear for yard tours
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+  <Footer />
 </BaseLayout>

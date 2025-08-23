@@ -2,47 +2,39 @@
 // Back to top button component
 ---
 
+<script>
+  // Back to top functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton?.classList.remove('opacity-0', 'invisible');
+        backToTopButton?.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton?.classList.add('opacity-0', 'invisible');
+        backToTopButton?.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    // Smooth scroll to top
+    backToTopButton?.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
 <button
   id="back-to-top"
-  class="fixed bottom-8 right-8 z-40 bg-primary-600 text-white p-3 rounded-full shadow-lg hover:bg-primary-700 transition-all duration-300 opacity-0 invisible transform translate-y-4 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+  class="fixed bottom-8 right-8 z-40 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 opacity-0 invisible transform translate-y-4 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
   aria-label="Back to top"
-  onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
 >
   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
   </svg>
 </button>
-
-<script>
-  // Show/hide back to top button based on scroll position
-  const backToTopButton = document.getElementById('back-to-top');
-  
-  if (backToTopButton) {
-    const showBackToTop = () => {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-        backToTopButton.classList.add('opacity-100', 'visible', 'translate-y-0');
-      } else {
-        backToTopButton.classList.add('opacity-0', 'invisible', 'translate-y-4');
-        backToTopButton.classList.remove('opacity-100', 'visible', 'translate-y-0');
-      }
-    };
-
-    // Throttle scroll events for performance
-    let ticking = false;
-    const updateBackToTop = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          showBackToTop();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', updateBackToTop);
-    
-    // Initial check
-    showBackToTop();
-  }
-</script>

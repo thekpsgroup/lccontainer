@@ -2,16 +2,16 @@
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60" id="site-header">
+<header class="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 shadow-lg" id="site-header">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20 lg:h-24">
-      <!-- Logo -->
+      <!-- Enhanced Logo -->
       <div class="flex-shrink-0">
-        <a href="/" class="flex items-center" aria-label="LC Container - Home">
+        <a href="/" class="flex items-center group" aria-label="LC Container - Home">
           <img 
             src="/photos/logos/lccontainer-logo-transparent-from-source-400.png" 
             alt="LC Container - Texas Shipping Containers Since 2003" 
-            class="h-12 lg:h-16 w-auto"
+            class="h-12 lg:h-16 w-auto transition-transform duration-300 group-hover:scale-105"
             loading="eager"
             width="300"
             height="64"
@@ -19,62 +19,93 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
 
-      <!-- Desktop Navigation -->
+      <!-- Enhanced Desktop Navigation -->
       <nav class="hidden lg:flex space-x-8" role="navigation" aria-label="Main navigation">
         <a 
           href="/" 
-          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+          class={`text-sm font-semibold transition-all duration-200 hover:text-blue-600 relative group ${
             currentPath === '/' 
-              ? 'text-accent border-b-2 border-accent' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+              ? 'text-blue-600' 
+              : 'text-slate-800 dark:text-slate-200'
           }`}
           aria-current={currentPath === '/' ? 'page' : undefined}
         >
           Home
+          <span class={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full ${
+            currentPath === '/' ? 'w-full' : ''
+          }`}></span>
         </a>
         <a 
           href="/services" 
-          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+          class={`text-sm font-semibold transition-all duration-200 hover:text-blue-600 relative group ${
             currentPath.startsWith('/services') 
-              ? 'text-accent border-b-2 border-accent' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+              ? 'text-blue-600' 
+              : 'text-slate-800 dark:text-slate-200'
           }`}
           aria-current={currentPath.startsWith('/services') ? 'page' : undefined}
         >
           Services
+          <span class={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full ${
+            currentPath.startsWith('/services') ? 'w-full' : ''
+          }`}></span>
         </a>
         <a 
           href="/about" 
-          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+          class={`text-sm font-semibold transition-all duration-200 hover:text-blue-600 relative group ${
             currentPath === '/about' 
-              ? 'text-accent border-b-2 border-accent' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+              ? 'text-blue-600' 
+              : 'text-slate-800 dark:text-slate-200'
           }`}
           aria-current={currentPath === '/about' ? 'page' : undefined}
         >
           About
+          <span class={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full ${
+            currentPath === '/about' ? 'w-full' : ''
+          }`}></span>
+        </a>
+        <a 
+          href="/gallery" 
+          class={`text-sm font-semibold transition-all duration-200 hover:text-blue-600 relative group ${
+            currentPath === '/gallery' 
+              ? 'text-blue-600' 
+              : 'text-slate-800 dark:text-slate-200'
+          }`}
+          aria-current={currentPath === '/gallery' ? 'page' : undefined}
+        >
+          Gallery
+          <span class={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full ${
+            currentPath === '/gallery' ? 'w-full' : ''
+          }`}></span>
         </a>
         <a 
           href="/contact" 
-          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+          class={`text-sm font-semibold transition-all duration-200 hover:text-blue-600 relative group ${
             currentPath === '/contact' 
-              ? 'text-accent border-b-2 border-accent' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+              ? 'text-blue-600' 
+              : 'text-slate-800 dark:text-slate-200'
           }`}
           aria-current={currentPath === '/contact' ? 'page' : undefined}
         >
           Contact
+          <span class={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full ${
+            currentPath === '/contact' ? 'w-full' : ''
+          }`}></span>
         </a>
       </nav>
 
-      <!-- CTA Button -->
-      <div class="hidden lg:flex items-center space-x-4">
+      <!-- Enhanced CTA Button -->
+      <div class="hidden lg:flex items-center space-x-6">
         <a 
           href="tel:(214) 524-4168" 
-          class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-accent transition-colors duration-200"
+          class="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 transition-colors duration-200 group"
           aria-label="Call us at (214) 524-4168"
         >
-          (214) 524-4168
+          <div class="flex items-center">
+            <svg class="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            (214) 524-4168
+          </div>
         </a>
         <a 
           href="/contact" 
@@ -85,11 +116,11 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
 
-      <!-- Mobile menu button -->
+      <!-- Enhanced Mobile menu button -->
       <div class="lg:hidden">
         <button 
           id="mobile-menu-button"
-          class="text-slate-700 dark:text-slate-200 hover:text-accent focus:outline-none focus:text-accent p-2"
+          class="text-slate-800 dark:text-slate-200 hover:text-blue-600 focus:outline-none focus:text-blue-600 p-2 transition-colors duration-200"
           aria-label="Toggle mobile menu"
           aria-expanded="false"
           aria-controls="mobile-menu"
@@ -100,125 +131,123 @@ const currentPath = Astro.url.pathname;
         </button>
       </div>
     </div>
+  </div>
 
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="lg:hidden hidden" role="navigation" aria-label="Mobile navigation">
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+  <!-- Enhanced Mobile menu -->
+  <div 
+    id="mobile-menu" 
+    class="lg:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-200/60 dark:border-slate-800/60 shadow-lg"
+  >
+    <div class="px-4 py-6 space-y-4">
+      <a 
+        href="/" 
+        class={`block text-base font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ${
+          currentPath === '/' 
+            ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' 
+            : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800'
+        }`}
+        aria-current={currentPath === '/' ? 'page' : undefined}
+      >
+        Home
+      </a>
+      <a 
+        href="/services" 
+        class={`block text-base font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ${
+          currentPath.startsWith('/services') 
+            ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' 
+            : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800'
+        }`}
+        aria-current={currentPath.startsWith('/services') ? 'page' : undefined}
+      >
+        Services
+      </a>
+      <a 
+        href="/about" 
+        class={`block text-base font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ${
+          currentPath === '/about' 
+            ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' 
+            : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800'
+        }`}
+        aria-current={currentPath === '/about' ? 'page' : undefined}
+      >
+        About
+      </a>
+      <a 
+        href="/gallery" 
+        class={`block text-base font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ${
+          currentPath === '/gallery' 
+            ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' 
+            : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800'
+        }`}
+        aria-current={currentPath === '/gallery' ? 'page' : undefined}
+      >
+        Gallery
+      </a>
+      <a 
+        href="/contact" 
+        class={`block text-base font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ${
+          currentPath === '/contact' 
+            ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' 
+            : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800'
+        }`}
+        aria-current={currentPath === '/contact' ? 'page' : undefined}
+      >
+        Contact
+      </a>
+      
+      <!-- Mobile CTA -->
+      <div class="pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
         <a 
-          href="/" 
-          class={`block px-3 py-2 rounded-md text-base font-medium ${
-            currentPath === '/' 
-              ? 'text-accent bg-accent/10' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
-          }`}
-          aria-current={currentPath === '/' ? 'page' : undefined}
+          href="tel:(214) 524-4168" 
+          class="block text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-blue-600 py-3 px-4 rounded-lg transition-colors duration-200"
+          aria-label="Call us at (214) 524-4168"
         >
-          Home
-        </a>
-        <a 
-          href="/services" 
-          class={`block px-3 py-2 rounded-md text-base font-medium ${
-            currentPath.startsWith('/services') 
-              ? 'text-accent bg-accent/10' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
-          }`}
-          aria-current={currentPath.startsWith('/services') ? 'page' : undefined}
-        >
-          Services
-        </a>
-        <a 
-          href="/about" 
-          class={`block px-3 py-2 rounded-md text-base font-medium ${
-            currentPath === '/about' 
-              ? 'text-accent bg-accent/10' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
-          }`}
-          aria-current={currentPath === '/about' ? 'page' : undefined}
-        >
-          About
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            (214) 524-4168
+          </div>
         </a>
         <a 
           href="/contact" 
-          class={`block px-3 py-2 rounded-md text-base font-medium ${
-            currentPath === '/contact' 
-              ? 'text-accent bg-accent/10' 
-              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
-          }`}
-          aria-current={currentPath === '/contact' ? 'page' : undefined}
+          class="btn-primary w-full text-center mt-3"
+          aria-label="Get a quote for container services"
         >
-          Contact
+          Get Free Quote
         </a>
-        
-        <div class="pt-4 pb-3 border-t border-slate-200 dark:border-slate-800">
-          <a 
-            href="tel:(214) 524-4168" 
-            class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:text-accent"
-            aria-label="Call us at (214) 524-4168"
-          >
-            (214) 524-4168
-          </a>
-          <a 
-            href="/contact" 
-            class="block mt-2 px-3 py-2 btn-primary text-center"
-            aria-label="Get a quote for container services"
-          >
-            Get Free Quote
-          </a>
-        </div>
       </div>
     </div>
   </div>
 </header>
 
 <script>
-  // Mobile menu toggle with accessibility
+  // Enhanced mobile menu functionality
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  const headerEl = document.getElementById('site-header');
 
   if (mobileMenuButton && mobileMenu) {
     mobileMenuButton.addEventListener('click', () => {
       const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      
       mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-      mobileMenu.classList.toggle('hidden');
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
+      
+      if (isExpanded) {
         mobileMenu.classList.add('hidden');
+        mobileMenuButton.classList.remove('text-blue-600');
+      } else {
+        mobileMenu.classList.remove('hidden');
+        mobileMenuButton.classList.add('text-blue-600');
       }
     });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.add('hidden');
-      }
-    });
-  }
 
-  // Scroll shadow with throttling
-  let ticking = false;
-  function applyShadow() {
-    if (!headerEl) return;
-    if (window.scrollY > 8) {
-      headerEl.classList.add('shadow-md');
-    } else {
-      headerEl.classList.remove('shadow-md');
-    }
-    ticking = false;
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+        mobileMenu.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenuButton.classList.remove('text-blue-600');
+      }
+    });
   }
-  
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(applyShadow);
-      ticking = true;
-    }
-  }
-  
-  applyShadow();
-  window.addEventListener('scroll', requestTick, { passive: true });
 </script>
