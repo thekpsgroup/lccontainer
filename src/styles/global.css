@@ -231,14 +231,37 @@
 
   /* Animation utilities */
   .fade-in {
-    @apply animate-in fade-in duration-700;
+    @apply opacity-0 animate-pulse;
+    animation: fadeIn 0.7s ease-out forwards;
   }
 
   .slide-up {
-    @apply animate-in slide-in-from-bottom-8 duration-700;
+    @apply opacity-0;
+    animation: slideUp 0.7s ease-out forwards;
   }
 
   .scale-in {
-    @apply animate-in zoom-in-95 duration-700;
+    @apply opacity-0;
+    animation: scaleIn 0.7s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
