@@ -229,6 +229,19 @@
     @apply bg-white/20 backdrop-blur-md border border-white/30;
   }
 
+  /* Floating Action Button for quick contact */
+  .fab {
+    @apply fixed bottom-6 right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-2xl hover:bg-green-700 hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-500/50;
+  }
+
+  .fab-phone {
+    @apply bg-green-600 hover:bg-green-700;
+  }
+
+  .fab-quote {
+    @apply bg-blue-600 hover:bg-blue-700;
+  }
+
   /* Animation utilities */
   .fade-in {
     @apply opacity-0 animate-pulse;

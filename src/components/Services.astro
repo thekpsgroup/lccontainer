@@ -1,226 +1,211 @@
 ---
-// Enhanced Services component with better spacing and CTAs
+// Ultra-compact, transactional Services component for fast container sales
 ---
 
-<section class="py-16 bg-white dark:bg-slate-900">
+<section class="py-8 bg-white dark:bg-slate-900">
   <div class="content-wrap">
-    <!-- Enhanced Header -->
-    <div class="text-center mb-20">
-      <div class="inline-flex items-center px-6 py-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-8 border border-blue-200 dark:border-blue-700/50">
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-        </svg>
-        Our Services
-      </div>
-      
-      <h2 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-8 leading-tight">
-        Complete Container Solutions
+    <!-- Compact Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">
+        Container Pricing & Services
       </h2>
-      <p class="text-xl md:text-2xl text-slate-700 dark:text-slate-200 max-w-4xl mx-auto leading-relaxed">
-        From sales to custom builds, we provide comprehensive container services across Texas. 
-        Every solution is tailored to your specific needs and budget.
+      <p class="text-base text-slate-700 dark:text-slate-200 max-w-2xl mx-auto">
+        Quality containers for sale or lease. Fast delivery across Texas.
       </p>
     </div>
 
-    <!-- Enhanced Services Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-20">
+    <!-- Pricing Table -->
+    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 mb-8">
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 text-center">Container Pricing</h3>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-slate-200 dark:border-slate-700">
+              <th class="text-left py-2 px-3 font-semibold text-slate-900 dark:text-white">Size</th>
+              <th class="text-center py-2 px-3 font-semibold text-slate-900 dark:text-white">Used</th>
+              <th class="text-center py-2 px-3 font-semibold text-slate-900 dark:text-white">New</th>
+              <th class="text-center py-2 px-3 font-semibold text-slate-900 dark:text-white">Monthly Lease</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+            <tr class="hover:bg-slate-100 dark:hover:bg-slate-700/50">
+              <td class="py-2 px-3 font-medium text-slate-900 dark:text-white">10'</td>
+              <td class="py-2 px-3 text-center text-green-600 dark:text-green-400 font-bold">$3,950</td>
+              <td class="py-2 px-3 text-center text-blue-600 dark:text-blue-400 font-bold">$4,950</td>
+              <td class="py-2 px-3 text-center text-slate-600 dark:text-slate-300">-</td>
+            </tr>
+            <tr class="hover:bg-slate-100 dark:hover:bg-slate-700/50">
+              <td class="py-2 px-3 font-medium text-slate-900 dark:text-white">20'</td>
+              <td class="py-2 px-3 text-center text-green-600 dark:text-green-400 font-bold">$1,850</td>
+              <td class="py-2 px-3 text-center text-blue-600 dark:text-blue-400 font-bold">$3,550</td>
+              <td class="py-2 px-3 text-center text-slate-600 dark:text-slate-300 font-bold">$150</td>
+            </tr>
+            <tr class="hover:bg-slate-100 dark:hover:bg-slate-700/50">
+              <td class="py-2 px-3 font-medium text-slate-900 dark:text-white">40' Standard</td>
+              <td class="py-2 px-3 text-center text-green-600 dark:text-green-400 font-bold">$2,650</td>
+              <td class="py-2 px-3 text-center text-blue-600 dark:text-blue-400 font-bold">$5,350</td>
+              <td class="py-2 px-3 text-center text-slate-600 dark:text-slate-300 font-bold">$200</td>
+            </tr>
+            <tr class="hover:bg-slate-100 dark:hover:bg-slate-700/50">
+              <td class="py-2 px-3 font-medium text-slate-900 dark:text-white">40' HC</td>
+              <td class="py-2 px-3 text-center text-green-600 dark:text-green-400 font-bold">$2,650</td>
+              <td class="py-2 px-3 text-center text-blue-600 dark:text-blue-400 font-bold">$5,250</td>
+              <td class="py-2 px-3 text-center text-slate-600 dark:text-slate-300 font-bold">$250</td>
+            </tr>
+            <tr class="hover:bg-slate-100 dark:hover:bg-slate-700/50">
+              <td class="py-2 px-3 font-medium text-slate-900 dark:text-white">45'</td>
+              <td class="py-2 px-3 text-center text-green-600 dark:text-green-400 font-bold">$3,650</td>
+              <td class="py-2 px-3 text-center text-slate-400 dark:text-slate-500">-</td>
+              <td class="py-2 px-3 text-center text-slate-600 dark:text-slate-300 font-bold">$300</td>
+            </tr>
+            <tr class="hover:bg-slate-100 dark:hover:bg-slate-700/50">
+              <td class="py-2 px-3 font-medium text-slate-900 dark:text-white">53'</td>
+              <td class="py-2 px-3 text-center text-green-600 dark:text-green-400 font-bold">$4,500</td>
+              <td class="py-2 px-3 text-center text-slate-400 dark:text-slate-500">-</td>
+              <td class="py-2 px-3 text-center text-slate-400 dark:text-slate-500">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-4 text-center">
+        <p class="text-slate-600 dark:text-slate-300 text-xs mb-3">
+          * Custom builds available - pricing varies by specifications
+        </p>
+        <a 
+          href="/contact" 
+          class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300"
+        >
+          Get Custom Quote
+        </a>
+      </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
       <!-- Container Sales -->
-      <div class="card card-hover p-10 group">
-        <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 border border-blue-200 dark:border-blue-700/50">
-          <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
           </svg>
         </div>
         
-        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-6 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
           Container Sales
         </h3>
         
-        <p class="text-slate-700 dark:text-slate-200 mb-8 text-lg leading-8">
-          Quality new and used containers in various sizes. All units inspected and guaranteed 
-          wind and water tight with competitive pricing.
+        <p class="text-slate-700 dark:text-slate-200 mb-3 text-sm">
+          New and used containers. All units inspected and guaranteed wind and water tight.
         </p>
-        
-        <ul class="space-y-4 mb-10">
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">20ft and 40ft containers</span>
-          </li>
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">New and used options</span>
-          </li>
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">Quality guaranteed</span>
-          </li>
-        </ul>
         
         <a 
           href="/contact" 
-          class="group/btn relative inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+          class="text-blue-600 dark:text-blue-400 font-semibold text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
         >
-          Get Quote
-          <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+          Get Quote →
         </a>
       </div>
 
       <!-- Container Leasing -->
-      <div class="card card-hover p-10 group">
-        <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 border border-blue-200 dark:border-blue-700/50">
-          <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+        <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
           </svg>
         </div>
         
-        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-6 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
           Container Leasing
         </h3>
         
-        <p class="text-slate-700 dark:text-slate-200 mb-8 text-lg leading-8">
-          Flexible leasing options for temporary or long-term needs. Perfect for construction sites, 
-          events, and seasonal storage requirements.
+        <p class="text-slate-700 dark:text-slate-200 mb-3 text-sm">
+          Flexible rental terms. Short and long term leases available with delivery included.
         </p>
-        
-        <ul class="space-y-4 mb-10">
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">Flexible terms available</span>
-          </li>
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">Delivery and pickup included</span>
-          </li>
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">No long-term commitment</span>
-          </li>
-        </ul>
         
         <a 
           href="/services/leasing" 
-          class="group/btn relative inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+          class="text-green-600 dark:text-green-400 font-semibold text-sm hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200"
         >
-          Learn More
-          <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+          Learn More →
         </a>
       </div>
 
       <!-- Custom Builds -->
-      <div class="card card-hover p-10 group">
-        <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 border border-blue-200 dark:border-blue-700/50">
-          <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
         </div>
         
-        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-6 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
           Custom Builds
         </h3>
         
-        <p class="text-slate-700 dark:text-slate-200 mb-8 text-lg leading-8">
-          Transform containers into custom spaces. From offices to retail, we create exactly 
-          what you need with professional quality and attention to detail.
+        <p class="text-slate-700 dark:text-slate-200 mb-3 text-sm">
+          Offices, retail spaces, and specialty builds. Complete turnkey solutions.
         </p>
-        
-        <ul class="space-y-4 mb-10">
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">Offices and workspaces</span>
-          </li>
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">Retail and food service</span>
-          </li>
-          <li class="flex items-center text-slate-700 dark:text-slate-200 group/item">
-            <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors duration-200">
-              <svg class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <span class="text-base">Complete turnkey solutions</span>
-          </li>
-        </ul>
         
         <a 
           href="/services/custom-builds" 
-          class="group/btn relative inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+          class="text-purple-600 dark:text-purple-400 font-semibold text-sm hover:text-purple-700 dark:hover:text-purple-300 transition-colors duration-200"
         >
-          Start Project
-          <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+          Start Project →
         </a>
       </div>
     </div>
 
-    <!-- Enhanced CTA Section -->
+    <!-- Service Area -->
+    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 mb-8">
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 text-center">Service Area</h3>
+      
+      <div class="grid md:grid-cols-3 gap-3">
+        <div class="text-center p-3 bg-white dark:bg-slate-700 rounded-lg">
+          <h4 class="font-semibold text-slate-900 dark:text-white mb-1 text-sm">DFW Metroplex</h4>
+          <p class="text-slate-600 dark:text-slate-300 text-xs">Dallas, Fort Worth, Denton</p>
+        </div>
+        <div class="text-center p-3 bg-white dark:bg-slate-700 rounded-lg">
+          <h4 class="font-semibold text-slate-900 dark:text-white mb-1 text-sm">East Texas</h4>
+          <p class="text-slate-600 dark:text-slate-300 text-xs">Tyler, Sulphur Springs</p>
+        </div>
+        <div class="text-center p-3 bg-white dark:bg-slate-700 rounded-lg">
+          <h4 class="font-semibold text-slate-900 dark:text-white mb-1 text-sm">Central Texas</h4>
+          <p class="text-slate-600 dark:text-slate-300 text-xs">Waco, Austin, Houston</p>
+        </div>
+      </div>
+      
+      <div class="mt-4 text-center">
+        <p class="text-slate-600 dark:text-slate-300 text-xs">
+          Delivery available within 200-mile radius of Hutchins, TX
+        </p>
+      </div>
+    </div>
+
+    <!-- Fast CTA Section -->
     <div class="text-center">
-      <div class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl p-12 shadow-2xl border border-slate-200 dark:border-slate-600">
-        <h3 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-          Ready to Get Started?
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl p-6 shadow-lg border border-blue-200 dark:border-blue-700/50">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">
+          Ready to Order?
         </h3>
-        <p class="text-xl text-slate-700 dark:text-slate-200 mb-10 max-w-3xl mx-auto">
-          Let's discuss your project and find the perfect container solution. 
-          Get a free consultation and quote today.
+        <p class="text-base text-slate-700 dark:text-slate-200 mb-4">
+          Get pricing and delivery in 24 hours. Call or request a quote now.
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
           <a 
-            href="/contact" 
-            class="group relative inline-flex items-center justify-center px-10 py-5 bg-blue-600 text-white text-lg font-semibold rounded-2xl hover:bg-blue-700 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+            href="tel:214-524-4168" 
+            class="inline-flex items-center justify-center px-6 py-3 bg-green-600 text-white text-base font-bold rounded-lg hover:bg-green-700 shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105"
           >
-            <span class="relative z-10">Get Free Consultation</span>
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            Call: 214-524-4168
           </a>
           
           <a 
-            href="tel:(214) 524-4168" 
-            class="group relative inline-flex items-center justify-center px-10 py-5 bg-slate-100 dark:bg-slate-600 text-slate-900 dark:text-white text-lg font-semibold rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-500 shadow-2xl hover:shadow-slate-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-500/50"
+            href="/contact" 
+            class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white text-base font-semibold rounded-lg hover:bg-blue-700 shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105"
           >
-            <span class="relative z-10">Call Now</span>
-            <svg class="w-5 h-5 ml-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
+            Get Quote Now
           </a>
         </div>
       </div>

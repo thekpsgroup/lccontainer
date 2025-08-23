@@ -7,12 +7,12 @@ import ContainerGallery from '../components/ContainerGallery.astro';
 import Services from '../components/Services.astro';
 import TrustBadges from '../components/TrustBadges.astro';
 import TrustStrip from '../components/TrustStrip.astro';
-import ContainerCard from '../components/ContainerCard.astro';
+import FloatingActionButton from '../components/FloatingActionButton.astro';
 ---
 
 <BaseLayout
-  title="LC Container - Custom Shipping Container Builder | Dallas-Fort Worth & 200-Mile Radius"
-  description="Texas' premier custom shipping container builder since 2003. Specializing in custom offices, retail spaces, and specialty builds. Serving Dallas, Fort Worth, Houston, Austin, and 200-mile radius. Call (214) 524-4168 for custom quotes."
+  title="LC Container - Quality Shipping Containers | Dallas-Fort Worth & Texas"
+  description="Quality new & used shipping containers for sale or lease. Serving DFW, Houston, Austin & 200-mile radius. Fast delivery, competitive pricing. Call (214) 524-4168 for quotes."
 >
   <Header />
 
@@ -22,14 +22,17 @@ import ContainerCard from '../components/ContainerCard.astro';
   <!-- Trust Strip -->
   <TrustStrip />
 
-  <!-- Container Gallery -->
+  <!-- About & Services Section -->
   <ContainerGallery />
 
-  <!-- Services Section -->
+  <!-- Pricing & Services Section -->
   <Services />
 
   <!-- Trust Badges -->
   <TrustBadges />
+
+  <!-- Floating Action Button -->
+  <FloatingActionButton />
 
   <Footer />
 </BaseLayout>

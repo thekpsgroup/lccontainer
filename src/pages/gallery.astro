@@ -2,8 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ImageGallery from '../components/ImageGallery.astro';
-import { customModifications, standardContainers, yardAndStorage } from '../data/images';
+import { customModifications, standardContainers, yardAndStorage, allImages } from '../data/images';
 ---
 
 <BaseLayout 
@@ -64,171 +63,73 @@ import { customModifications, standardContainers, yardAndStorage } from '../data
   <!-- Gallery Content -->
   <section class="py-24 bg-white dark:bg-slate-900">
     <div class="content-wrap">
-      <!-- Custom Builds Gallery -->
-      <div id="gallery-custom" class="gallery-section mb-20">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            Custom Builds & Modifications
-          </h2>
-          <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
-            Transform your vision into reality with our custom container modifications. 
-            From offices to retail spaces, we create exactly what you need.
-          </p>
-        </div>
-        
-        <ImageGallery 
-          images={customModifications}
-          columns={3}
-          showTitles={true}
-          showOverlay={true}
-          aspectRatio="landscape"
-          class="mb-16"
-        />
-        
-        <!-- Custom Builds Stats -->
-        <div class="grid md:grid-cols-3 gap-8 text-center">
-          <div class="p-8 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl border border-blue-200 dark:border-blue-700/50">
-            <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">500+</div>
-            <div class="text-slate-700 dark:text-slate-200 font-semibold">Custom Projects</div>
+      <!-- Gallery Grid -->
+      <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {allImages.map((image, index) => (
+          <div 
+            class="gallery-item group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-[1.02] bg-white dark:bg-slate-800 cursor-pointer"
+            data-category={image.category.toLowerCase().replace(' ', '-')}
+            onclick={`openLightbox(${index})`}
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <!-- Image Container -->
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              
+              <!-- Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent"></div>
+              </div>
+              
+              <!-- Category Badge -->
+              <div class="absolute top-4 left-4 px-3 py-1 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 border border-white/20 dark:border-slate-700/20 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                {image.category}
+              </div>
+              
+              <!-- Zoom Icon -->
+              <div class="absolute top-4 right-4 w-10 h-10 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300">
+                <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Content Overlay -->
+            {(image.title || image.description) && (
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                {image.title && (
+                  <h3 class="text-white font-bold text-lg mb-2 leading-tight">
+                    {image.title}
+                  </h3>
+                )}
+                {image.description && (
+                  <p class="text-blue-200 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    {image.description}
+                  </p>
+                )}
+              </div>
+            )}
+            
+            <!-- Hover Border Effect -->
+            <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-blue-500/30 transition-all duration-300"></div>
           </div>
-          <div class="p-8 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-3xl border border-green-200 dark:border-green-700/50">
-            <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">98%</div>
-            <div class="text-slate-700 dark:text-slate-200 font-semibold">Client Satisfaction</div>
-          </div>
-          <div class="p-8 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-3xl border border-purple-200 dark:border-purple-700/50">
-            <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">20+</div>
-            <div class="text-slate-700 dark:text-slate-200 font-semibold">Years Experience</div>
-          </div>
-        </div>
+        ))}
       </div>
 
-      <!-- Standard Containers Gallery -->
-      <div id="gallery-standard" class="gallery-section mb-20">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            Standard Containers
-          </h2>
-          <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
-            Quality new and used containers in various sizes. All units inspected and guaranteed 
-            wind and water tight with competitive pricing.
-          </p>
-        </div>
-        
-        <ImageGallery 
-          images={standardContainers}
-          columns={4}
-          showTitles={true}
-          showOverlay={true}
-          aspectRatio="landscape"
-          class="mb-16"
-        />
-        
-        <!-- Container Types Info -->
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl border border-slate-200 dark:border-slate-600">
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">20ft Containers</h3>
-            <ul class="space-y-2 text-slate-700 dark:text-slate-200">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                160 sq ft of storage space
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Perfect for small to medium storage needs
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Easy to transport and position
-              </li>
-            </ul>
-          </div>
-          <div class="p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl border border-slate-200 dark:border-slate-600">
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">40ft Containers</h3>
-            <ul class="space-y-2 text-slate-700 dark:text-slate-200">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                320 sq ft of storage space
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Ideal for large storage and commercial use
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                High cube options available
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Facility Gallery -->
-      <div id="gallery-facility" class="gallery-section mb-20">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            Our Facility & Yard
-          </h2>
-          <p class="text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto">
-            Take a virtual tour of our facility and see our extensive inventory. 
-            Our organized yard makes it easy to find exactly what you need.
-          </p>
-        </div>
-        
-        <ImageGallery 
-          images={yardAndStorage}
-          columns={3}
-          showTitles={true}
-          showOverlay={true}
-          aspectRatio="landscape"
-          class="mb-16"
-        />
-        
-        <!-- Facility Features -->
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl border border-blue-200 dark:border-blue-700/50">
-            <div class="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Extensive Inventory</h3>
-            <p class="text-slate-700 dark:text-slate-200">Thousands of containers in stock, ready for immediate delivery</p>
-          </div>
-          <div class="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-3xl border border-green-200 dark:border-green-700/50">
-            <div class="w-16 h-16 bg-green-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Quality Control</h3>
-            <p class="text-slate-700 dark:text-slate-200">Every container inspected and guaranteed wind and water tight</p>
-          </div>
-          <div class="text-center p-8 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-3xl border border-purple-200 dark:border-purple-700/50">
-            <div class="w-16 h-16 bg-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Fast Delivery</h3>
-            <p class="text-slate-700 dark:text-slate-200">Statewide delivery service with quick turnaround times</p>
-          </div>
+      <!-- No Results Message -->
+      <div id="no-results" class="hidden text-center py-16">
+        <div class="text-slate-500 dark:text-slate-400 text-lg">
+          No images found for this category.
         </div>
       </div>
 
       <!-- CTA Section -->
-      <div class="text-center">
+      <div class="text-center mt-20">
         <div class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-3xl p-12 shadow-2xl border border-slate-200 dark:border-slate-600">
           <h3 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
             Ready to Start Your Project?
@@ -250,7 +151,7 @@ import { customModifications, standardContainers, yardAndStorage } from '../data
             </a>
             
             <a 
-              href="tel:(214) 524-4168" 
+              href="tel:214-524-4168" 
               class="group relative inline-flex items-center justify-center px-10 py-5 bg-slate-100 dark:bg-slate-600 text-slate-900 dark:text-white text-lg font-semibold rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-500 shadow-2xl hover:shadow-slate-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-500/50"
             >
               <span class="relative z-10">Call Now</span>
@@ -264,36 +165,225 @@ import { customModifications, standardContainers, yardAndStorage } from '../data
     </div>
   </section>
 
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+    <div class="relative max-w-7xl max-h-full">
+      <!-- Close Button -->
+      <button 
+        onclick="closeLightbox()" 
+        class="absolute top-4 right-4 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <!-- Navigation Buttons -->
+      <button 
+        onclick="previousImage()" 
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button 
+        onclick="nextImage()" 
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      
+      <!-- Image Container -->
+      <div class="relative">
+        <img 
+          id="lightbox-image" 
+          src="" 
+          alt="" 
+          class="max-w-full max-h-[80vh] object-contain rounded-lg"
+        />
+        
+        <!-- Image Info -->
+        <div id="lightbox-info" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+          <h3 id="lightbox-title" class="text-white font-bold text-xl mb-2"></h3>
+          <p id="lightbox-description" class="text-blue-200 text-sm"></p>
+          <p id="lightbox-category" class="text-slate-300 text-xs mt-2"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <Footer />
 </BaseLayout>
 
 <script>
+  // Gallery data
+  const galleryImages = JSON.parse('{JSON.stringify(allImages)}');
+  let currentFilter = 'all';
+  let currentImageIndex = 0;
+  let visibleImages = [];
+
+  // Filter gallery function
   function filterGallery(category) {
-    // Hide all gallery sections
-    document.querySelectorAll('.gallery-section').forEach(section => {
-      section.style.display = 'none';
+    currentFilter = category;
+    const items = document.querySelectorAll('.gallery-item');
+    let visibleCount = 0;
+    
+    items.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+      let shouldShow = false;
+      
+      if (category === 'all') {
+        shouldShow = true;
+      } else if (category === 'custom' && itemCategory === 'custom-modification') {
+        shouldShow = true;
+      } else if (category === 'standard' && itemCategory === 'standard-container') {
+        shouldShow = true;
+      } else if (category === 'facility' && itemCategory === 'facility') {
+        shouldShow = true;
+      }
+      
+      if (shouldShow) {
+        item.style.display = 'block';
+        visibleCount++;
+        visibleImages.push(item);
+      } else {
+        item.style.display = 'none';
+      }
     });
     
-    // Show selected section
-    if (category === 'all') {
-      document.querySelectorAll('.gallery-section').forEach(section => {
-        section.style.display = 'block';
-      });
+    // Show/hide no results message
+    const noResults = document.getElementById('no-results');
+    if (visibleCount === 0) {
+      noResults.classList.remove('hidden');
     } else {
-      const targetSection = document.getElementById(`gallery-${category}`);
-      if (targetSection) {
-        targetSection.style.display = 'block';
-      }
+      noResults.classList.add('hidden');
     }
     
     // Update navigation buttons
-    document.querySelectorAll('[id^="nav-"]').forEach(btn => {
+    updateNavigationButtons(category);
+  }
+
+  // Update navigation button styles
+  function updateNavigationButtons(activeCategory) {
+    const buttons = document.querySelectorAll('[id^="nav-"]');
+    buttons.forEach(btn => {
       btn.className = 'px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-2xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 transform hover:scale-105';
     });
     
-    const activeBtn = document.getElementById(`nav-${category}`);
+    const activeBtn = document.getElementById(`nav-${activeCategory}`);
     if (activeBtn) {
       activeBtn.className = 'px-6 py-3 bg-blue-600 text-white rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105';
     }
   }
+
+  // Lightbox functions
+  function openLightbox(index) {
+    currentImageIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    
+    const image = galleryImages[index];
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+    lightboxTitle.textContent = image.title || '';
+    lightboxDescription.textContent = image.description || '';
+    lightboxCategory.textContent = image.category || '';
+    
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+  }
+
+  function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    openLightbox(currentImageIndex);
+  }
+
+  function previousImage() {
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    openLightbox(currentImageIndex);
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox.classList.contains('hidden')) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowRight') {
+        nextImage();
+      } else if (e.key === 'ArrowLeft') {
+        previousImage();
+      }
+    }
+  });
+
+  // Close lightbox when clicking outside
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeLightbox();
+    }
+  });
+
+  // Initialize gallery
+  document.addEventListener('DOMContentLoaded', function() {
+    filterGallery('all');
+  });
 </script>
+
+<style>
+  /* Gallery animations */
+  .gallery-item {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Lightbox animations */
+  #lightbox {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  #lightbox img {
+    animation: zoomIn 0.3s ease-out;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.9);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+</style>
