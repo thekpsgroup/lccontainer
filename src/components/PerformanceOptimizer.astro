@@ -1,0 +1,176 @@
+---
+// Performance optimization component
+---
+
+<script>
+  // Performance optimizations
+  (function() {
+    'use strict';
+
+    // Lazy load images with Intersection Observer
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              img.removeAttribute('data-src');
+              observer.unobserve(img);
+            }
+          }
+        });
+      });
+
+      // Observe all lazy images
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+
+    // Preload critical resources
+    function preloadResource(href, as) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = href;
+      link.as = as;
+      document.head.appendChild(link);
+    }
+
+    // Preload critical CSS and fonts
+    preloadResource('/fonts/inter-var.woff2', 'font');
+    preloadResource('/photos/logos/lccontainer-logo-transparent-400.png', 'image');
+
+    // Optimize scroll performance
+    let ticking = false;
+    function updateOnScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          // Handle scroll-based animations
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', updateOnScroll, { passive: true });
+
+    // Optimize form submissions
+    document.addEventListener('submit', function(e) {
+      const form = e.target;
+      if (form.classList.contains('optimized-form')) {
+        // Prevent double submission
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+        }
+      }
+    });
+
+    // Optimize link clicks for internal navigation
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (link && link.hostname === window.location.hostname) {
+        // Prefetch internal links
+        const prefetchLink = document.createElement('link');
+        prefetchLink.rel = 'prefetch';
+        prefetchLink.href = link.href;
+        document.head.appendChild(prefetchLink);
+      }
+    });
+
+    // Optimize images on load
+    window.addEventListener('load', function() {
+      // Remove loading attribute from images
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.removeAttribute('loading');
+      });
+    });
+
+    // Service Worker registration with error handling
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('SW registered: ', registration);
+          })
+          .catch(function(registrationError) {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+
+    // Optimize animations for users who prefer reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+    }
+
+    // Optimize for mobile devices
+    if ('ontouchstart' in window) {
+      document.documentElement.classList.add('touch-device');
+    }
+
+    // Optimize for slow connections
+    if ('connection' in navigator) {
+      const connection = navigator.connection;
+      if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+        document.documentElement.classList.add('slow-connection');
+      }
+    }
+
+  })();
+</script>
+
+<style>
+  /* Performance optimizations */
+  .lazy {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .lazy.loaded {
+    opacity: 1;
+  }
+
+  /* Optimize for slow connections */
+  .slow-connection img {
+    filter: blur(1px);
+  }
+
+  .slow-connection img.loaded {
+    filter: none;
+  }
+
+  /* Optimize animations for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Optimize for touch devices */
+  .touch-device button,
+  .touch-device a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Optimize focus styles for performance */
+  *:focus-visible {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+  }
+
+  /* Optimize scroll performance */
+  .scroll-optimized {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+</style>

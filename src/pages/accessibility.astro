@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Accessibility Statement - LC Container"
+  description="Our commitment to digital accessibility. Learn how LC Container ensures inclusive access to our website and services."
+>
+  <Header />
+
+  <section class="pt-32 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold text-secondary-900 mb-6">Accessibility Statement</h1>
+        <p class="text-xl text-secondary-600">Last updated: December 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-accent-50 rounded-2xl p-8 mb-8">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Our Commitment</h2>
+          <p class="text-secondary-600">LC Container is committed to providing a website that is accessible to the widest possible audience, regardless of technology or ability. We aim to conform to WCAG 2.2 Level AA guidelines and follow accessibility best practices across design, development, and content.</p>
+        </div>
+
+        <div class="space-y-8">
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Measures We Take</h2>
+            <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+              <li>Semantic HTML and ARIA attributes where appropriate</li>
+              <li>Keyboard navigable menus and controls</li>
+              <li>Color contrast that meets WCAG AA standards</li>
+              <li>Text alternatives for non-text content (e.g., container photos)</li>
+              <li>Responsive layouts for mobile and desktop</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Known Limitations</h2>
+            <p class="text-secondary-600 mb-3">We continuously monitor and improve accessibility. Some third‑party integrations (e.g., maps, embedded tools) may not fully meet standards. We provide alternative contact options where possible.</p>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Feedback</h2>
+            <p class="text-secondary-600 mb-3">If you experience any difficulty using our site, please let us know. We respond within two business days.</p>
+            <div class="space-y-1 text-secondary-600">
+              <p>Email: <a href="mailto:info@lccontainer.com" class="text-primary-600 hover:text-primary-700">info@lccontainer.com</a></p>
+              <p>Phone: <a href="tel:(214) 524-4168" class="text-primary-600 hover:text-primary-700">(214) 524-4168</a></p>
+              <p>Address: 1211 E Fulghum Rd, Hutchins, TX 75141</p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Compatibility</h2>
+            <p class="text-secondary-600">Our website is designed to be compatible with modern browsers and assistive technologies on current operating systems. We recommend keeping your browser up to date.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

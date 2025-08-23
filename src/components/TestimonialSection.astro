@@ -1,0 +1,133 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  testimonials?: Array<{
+    quote: string;
+    author: string;
+    company: string;
+    rating: number;
+    image?: string;
+  }>;
+  class?: string;
+}
+
+const {
+  title = "What Our Customers Say",
+  subtitle = "Real stories from satisfied customers across Texas",
+  testimonials = [
+    {
+      quote: "LC Container transformed our construction site storage needs. Their custom office container was delivered on time and exceeded our expectations. The quality and attention to detail is outstanding.",
+      author: "Mike Rodriguez",
+      company: "Rodriguez Construction",
+      rating: 5
+    },
+    {
+      quote: "We needed a custom retail space quickly, and LC Container delivered. Their team worked with us every step of the way, from design to installation. Highly recommend!",
+      author: "Sarah Johnson",
+      company: "Texas Boutique",
+      rating: 5
+    },
+    {
+      quote: "20 years of experience shows in their work. We've used LC Container for multiple projects and they consistently deliver quality, on-time, and within budget.",
+      author: "David Chen",
+      company: "Chen Manufacturing",
+      rating: 5
+    },
+    {
+      quote: "The custom workshop they built for us is perfect. Professional installation, quality materials, and excellent customer service throughout the entire process.",
+      author: "Lisa Thompson",
+      company: "Thompson Auto Repair",
+      rating: 5
+    },
+    {
+      quote: "Fast delivery, competitive pricing, and expert advice. LC Container helped us find the perfect solution for our storage needs. Will definitely use them again.",
+      author: "Robert Martinez",
+      company: "Martinez Logistics",
+      rating: 5
+    },
+    {
+      quote: "Their custom container modifications are top-notch. We converted a container into a mobile medical clinic and it's been serving our community perfectly for over a year.",
+      author: "Dr. Amanda Wilson",
+      company: "Community Health Services",
+      rating: 5
+    }
+  ],
+  class: className = ''
+} = Astro.props;
+---
+
+<section class={`py-24 bg-gradient-to-br from-primary-50 to-accent-50 ${className}`}>
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
+        {title}
+      </h2>
+      <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+    
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {testimonials.map((testimonial, index) => (
+        <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+          <!-- Rating Stars -->
+          <div class="flex mb-4">
+            {Array.from({ length: testimonial.rating }, (_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          
+          <!-- Quote -->
+          <blockquote class="text-secondary-700 mb-6 leading-relaxed">
+            "{testimonial.quote}"
+          </blockquote>
+          
+          <!-- Author -->
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4">
+              <span class="text-primary-600 font-bold text-lg">
+                {testimonial.author.split(' ').map(n => n[0]).join('')}
+              </span>
+            </div>
+            <div>
+              <div class="font-semibold text-secondary-900">{testimonial.author}</div>
+              <div class="text-sm text-secondary-600">{testimonial.company}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Trust Indicators -->
+    <div class="mt-20 text-center">
+      <div class="bg-white rounded-3xl p-12 shadow-xl">
+        <h3 class="text-3xl font-bold text-secondary-900 mb-8">
+          Trusted by Businesses Across Texas
+        </h3>
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary-600 mb-2">98%</div>
+            <div class="text-secondary-600">Customer Satisfaction</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary-600 mb-2">24hr</div>
+            <div class="text-secondary-600">Response Time</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary-600 mb-2">500+</div>
+            <div class="text-secondary-600">Custom Projects</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary-600 mb-2">4.9★</div>
+            <div class="text-secondary-600">Average Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

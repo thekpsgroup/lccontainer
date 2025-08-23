@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Returns & Refunds Policy - LC Container"
+  description="Read LC Container's returns and refunds policy for container sales, leasing, and custom projects."
+>
+  <Header />
+
+  <section class="pt-32 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold text-secondary-900 mb-6">Returns & Refunds Policy</h1>
+        <p class="text-xl text-secondary-600">Last updated: December 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none space-y-8">
+        <div class="bg-accent-50 rounded-2xl p-8">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Sales (Containers Purchased Outright)</h2>
+          <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+            <li>All sales are final unless otherwise stated in writing</li>
+            <li>Containers are sold “as is” with condition disclosed prior to sale</li>
+            <li>Customer is responsible for site readiness at time of delivery</li>
+            <li>In the event of a material error, we will work to resolve promptly</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Leasing</h2>
+          <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+            <li>Monthly billing; partial months are billed in full unless specified</li>
+            <li>Pickup scheduling requires 3–5 business days’ notice</li>
+            <li>Fees may apply for excessive damage or cleaning</li>
+            <li>Security deposits (if any) are returned within 14 business days after inspection</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Custom Builds & Modifications</h2>
+          <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+            <li>Deposits are non‑refundable once fabrication begins</li>
+            <li>Change orders may affect timelines and costs</li>
+            <li>Project balance is due per agreement milestones</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Refund Process</h2>
+          <p class="text-secondary-600">If a refund is approved, we will process it to the original payment method within 5–10 business days. Processing times vary by bank or card issuer.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Contact</h2>
+          <p class="text-secondary-600">For questions about this policy, contact <a href="mailto:info@lccontainer.com" class="text-primary-600 hover:text-primary-700">info@lccontainer.com</a> or call <a href="tel:(214) 524-4168" class="text-primary-600 hover:text-primary-700">(214) 524-4168</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

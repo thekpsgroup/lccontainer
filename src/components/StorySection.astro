@@ -1,0 +1,133 @@
+---
+import OptimizedImage from './OptimizedImage.astro';
+import { yardAndStorage } from '../data/images';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  storyContent?: Array<{
+    year?: string;
+    title: string;
+    description: string;
+    image?: string;
+  }>;
+  class?: string;
+}
+
+const {
+  title = "Our Story",
+  subtitle = "From humble beginnings to Texas' premier container supplier",
+  storyContent = [
+    {
+      year: "2003",
+      title: "The Beginning",
+      description: "Founded by Eric Leger with a simple mission: provide quality shipping containers at fair prices with exceptional service. What started as a small family operation in Hutchins, Texas."
+    },
+    {
+      year: "2008",
+      title: "Expanding Services",
+      description: "Recognizing the growing demand for custom solutions, we began offering container modifications and custom builds. Our first custom office project marked the beginning of our transformation journey."
+    },
+    {
+      year: "2015",
+      title: "Statewide Growth",
+      description: "Expanded our service area to cover the entire state of Texas. Built our reputation as the go-to source for quality containers and custom modifications across the Lone Star State."
+    },
+    {
+      year: "2023",
+      title: "Industry Leader",
+      description: "Celebrated 20 years of excellence with over 10,000 containers delivered. Established as Texas' most trusted container supplier with unmatched expertise in custom builds."
+    }
+  ],
+  class: className = ''
+} = Astro.props;
+---
+
+<section class={`py-24 bg-gradient-to-br from-gray-50 to-white ${className}`}>
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
+        {title}
+      </h2>
+      <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+    
+    <!-- Timeline Story -->
+    <div class="max-w-6xl mx-auto">
+      <div class="relative">
+        <!-- Timeline Line -->
+        <div class="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-600 to-primary-400"></div>
+        
+        <!-- Story Items -->
+        <div class="space-y-16">
+          {storyContent.map((item, index) => (
+            <div class={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <!-- Timeline Dot -->
+              <div class="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-primary-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+              
+              <!-- Content Card -->
+              <div class={`ml-20 md:ml-0 md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
+                <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                  {item.year && (
+                    <div class="text-3xl font-bold text-primary-600 mb-4">{item.year}</div>
+                  )}
+                  <h3 class="text-2xl font-bold text-secondary-900 mb-4">{item.title}</h3>
+                  <p class="text-secondary-600 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+              
+              <!-- Image (if provided) -->
+              {item.image && (
+                <div class={`hidden md:block md:w-5/12 ${index % 2 === 0 ? 'md:ml-auto md:pl-12' : 'md:mr-auto md:pr-12'}`}>
+                  <div class="relative">
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.title}
+                      class="w-full h-64 object-cover rounded-2xl shadow-lg"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Current Status -->
+    <div class="mt-20 text-center">
+      <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-3xl p-12 text-white">
+        <h3 class="text-3xl font-bold mb-6">Today: Your Trusted Partner</h3>
+        <p class="text-xl mb-8 max-w-3xl mx-auto">
+          With over two decades of experience, we continue to innovate and deliver exceptional 
+          container solutions. Our commitment to quality, service, and customer satisfaction 
+          remains unchanged since day one.
+        </p>
+        <div class="flex flex-wrap justify-center gap-8">
+          <div class="text-center">
+            <div class="text-4xl font-bold mb-2">20+</div>
+            <div class="text-lg opacity-90">Years Experience</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold mb-2">10,000+</div>
+            <div class="text-lg opacity-90">Containers Delivered</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold mb-2">200</div>
+            <div class="text-lg opacity-90">Mile Service Radius</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+</style>

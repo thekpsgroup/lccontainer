@@ -1,0 +1,224 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60" id="site-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20 lg:h-24">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center" aria-label="LC Container - Home">
+          <img 
+            src="/photos/logos/lccontainer-logo-transparent-from-source-400.png" 
+            alt="LC Container - Texas Shipping Containers Since 2003" 
+            class="h-12 lg:h-16 w-auto"
+            loading="eager"
+            width="300"
+            height="64"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex space-x-8" role="navigation" aria-label="Main navigation">
+        <a 
+          href="/" 
+          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+            currentPath === '/' 
+              ? 'text-accent border-b-2 border-accent' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+          }`}
+          aria-current={currentPath === '/' ? 'page' : undefined}
+        >
+          Home
+        </a>
+        <a 
+          href="/services" 
+          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+            currentPath.startsWith('/services') 
+              ? 'text-accent border-b-2 border-accent' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+          }`}
+          aria-current={currentPath.startsWith('/services') ? 'page' : undefined}
+        >
+          Services
+        </a>
+        <a 
+          href="/about" 
+          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+            currentPath === '/about' 
+              ? 'text-accent border-b-2 border-accent' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+          }`}
+          aria-current={currentPath === '/about' ? 'page' : undefined}
+        >
+          About
+        </a>
+        <a 
+          href="/contact" 
+          class={`text-sm font-medium transition-colors duration-200 hover:underline underline-offset-8 decoration-accent ${
+            currentPath === '/contact' 
+              ? 'text-accent border-b-2 border-accent' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent'
+          }`}
+          aria-current={currentPath === '/contact' ? 'page' : undefined}
+        >
+          Contact
+        </a>
+      </nav>
+
+      <!-- CTA Button -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <a 
+          href="tel:(214) 524-4168" 
+          class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-accent transition-colors duration-200"
+          aria-label="Call us at (214) 524-4168"
+        >
+          (214) 524-4168
+        </a>
+        <a 
+          href="/contact" 
+          class="btn-primary"
+          aria-label="Get a quote for container services"
+        >
+          Get Free Quote
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="lg:hidden">
+        <button 
+          id="mobile-menu-button"
+          class="text-slate-700 dark:text-slate-200 hover:text-accent focus:outline-none focus:text-accent p-2"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="lg:hidden hidden" role="navigation" aria-label="Mobile navigation">
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        <a 
+          href="/" 
+          class={`block px-3 py-2 rounded-md text-base font-medium ${
+            currentPath === '/' 
+              ? 'text-accent bg-accent/10' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
+          }`}
+          aria-current={currentPath === '/' ? 'page' : undefined}
+        >
+          Home
+        </a>
+        <a 
+          href="/services" 
+          class={`block px-3 py-2 rounded-md text-base font-medium ${
+            currentPath.startsWith('/services') 
+              ? 'text-accent bg-accent/10' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
+          }`}
+          aria-current={currentPath.startsWith('/services') ? 'page' : undefined}
+        >
+          Services
+        </a>
+        <a 
+          href="/about" 
+          class={`block px-3 py-2 rounded-md text-base font-medium ${
+            currentPath === '/about' 
+              ? 'text-accent bg-accent/10' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
+          }`}
+          aria-current={currentPath === '/about' ? 'page' : undefined}
+        >
+          About
+        </a>
+        <a 
+          href="/contact" 
+          class={`block px-3 py-2 rounded-md text-base font-medium ${
+            currentPath === '/contact' 
+              ? 'text-accent bg-accent/10' 
+              : 'text-slate-700 dark:text-slate-200 hover:text-accent hover:bg-accent/10'
+          }`}
+          aria-current={currentPath === '/contact' ? 'page' : undefined}
+        >
+          Contact
+        </a>
+        
+        <div class="pt-4 pb-3 border-t border-slate-200 dark:border-slate-800">
+          <a 
+            href="tel:(214) 524-4168" 
+            class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:text-accent"
+            aria-label="Call us at (214) 524-4168"
+          >
+            (214) 524-4168
+          </a>
+          <a 
+            href="/contact" 
+            class="block mt-2 px-3 py-2 btn-primary text-center"
+            aria-label="Get a quote for container services"
+          >
+            Get Free Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle with accessibility
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const headerEl = document.getElementById('site-header');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+      }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  }
+
+  // Scroll shadow with throttling
+  let ticking = false;
+  function applyShadow() {
+    if (!headerEl) return;
+    if (window.scrollY > 8) {
+      headerEl.classList.add('shadow-md');
+    } else {
+      headerEl.classList.remove('shadow-md');
+    }
+    ticking = false;
+  }
+  
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(applyShadow);
+      ticking = true;
+    }
+  }
+  
+  applyShadow();
+  window.addEventListener('scroll', requestTick, { passive: true });
+</script>

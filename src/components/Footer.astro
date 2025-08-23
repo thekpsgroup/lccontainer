@@ -1,0 +1,57 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-primary-50 text-primary-600">
+  <!-- Main footer content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Company info -->
+      <div>
+        <h3 class="text-xl font-bold mb-4">LC Container</h3>
+        <p class="text-primary-400 mb-4">
+          Texas' premier custom shipping container builder since 2003
+        </p>
+        <div class="space-y-2 text-sm text-primary-400">
+          <p>1211 E Fulghum Rd, Hutchins, TX 75141</p>
+          <p>(214) 524-4168</p>
+          <p>Mon-Fri: 8AM-5PM | Sat: 9AM-3PM</p>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="text-xl font-bold mb-4">Services</h3>
+        <ul class="space-y-2 text-gray-300">
+          <li><a href="/services" class="hover:text-white transition-colors">Container Sales</a></li>
+          <li><a href="/services/custom-builds" class="hover:text-white transition-colors">Custom Builds</a></li>
+          <li><a href="/services" class="hover:text-white transition-colors">Container Delivery</a></li>
+          <li><a href="/services" class="hover:text-white transition-colors">Container Modifications</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact CTA -->
+      <div>
+        <h3 class="text-xl font-bold mb-4">Get Started</h3>
+        <p class="text-gray-300 mb-4">
+          Ready to get your container project started?
+        </p>
+        <a 
+          href="/contact" 
+          class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200 inline-block"
+        >
+          Get Free Quote
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal bar -->
+  <div class="border-t border-secondary-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="py-4 text-sm text-center text-gray-300">
+        © {currentYear} LC Container. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,233 @@
+---
+// SEOEnhancer component for advanced search engine optimization
+---
+
+<!-- Enhanced Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://lccontainer.com/#organization",
+      "name": "LC Container",
+      "url": "https://lccontainer.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-800.png",
+        "width": 800,
+        "height": 400
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-234-567-8900",
+        "contactType": "customer service",
+        "areaServed": "US-TX",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.facebook.com/lccontainer",
+        "https://www.linkedin.com/company/lccontainer",
+        "https://www.instagram.com/lccontainer"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://lccontainer.com/#localbusiness",
+      "name": "LC Container",
+      "image": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-800.png",
+      "description": "Custom container builds, modifications, and sales in Texas. Specializing in container offices, retail spaces, and specialty applications.",
+      "url": "https://lccontainer.com",
+      "telephone": "+1-234-567-8900",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Container Way",
+        "addressLocality": "Hutchins",
+        "addressRegion": "TX",
+        "postalCode": "75141",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.6429,
+        "longitude": -96.7139
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday", 
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      "priceRange": "$$",
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 32.6429,
+          "longitude": -96.7139
+        },
+        "geoRadius": "321868"
+      },
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 32.6429,
+          "longitude": -96.7139
+        },
+        "geoRadius": "321868"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Container Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Container Offices",
+              "description": "Professional office spaces built from shipping containers"
+            }
+          },
+          {
+            "@type": "Offer", 
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Container Sales",
+              "description": "New and used shipping containers for sale"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service", 
+              "name": "Container Leasing",
+              "description": "Flexible container leasing options"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What areas do you serve in Texas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We serve a 200-mile radius around Dallas, including Houston, Austin, San Antonio, Fort Worth, and surrounding areas."
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": "How long does a custom container build take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom container builds typically take 2-6 weeks depending on complexity. We provide detailed timelines during consultation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer financing for container projects?",
+      "acceptedAnswer": {
+        "@type": "Answer", 
+        "text": "Yes, we offer flexible financing options and can help you get approved quickly for your container project."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What warranty do you provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We provide a 5-year warranty on all custom container modifications and builds."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://lccontainer.com"
+    }
+  ]
+}
+</script>
+
+<!-- Enhanced Meta Tags -->
+<meta name="google-site-verification" content="your-google-verification-code" />
+<meta name="msvalidate.01" content="your-bing-verification-code" />
+<meta name="yandex-verification" content="your-yandex-verification-code" />
+
+<!-- Local SEO -->
+<meta name="geo.region" content="US-TX" />
+<meta name="geo.placename" content="Hutchins, Texas" />
+<meta name="geo.position" content="32.6429;-96.7139" />
+<meta name="ICBM" content="32.6429, -96.7139" />
+
+<!-- Business Hours -->
+<meta name="business:contact_data:street_address" content="123 Container Way" />
+<meta name="business:contact_data:locality" content="Hutchins" />
+<meta name="business:contact_data:region" content="TX" />
+<meta name="business:contact_data:postal_code" content="75141" />
+<meta name="business:contact_data:country_name" content="United States" />
+<meta name="business:contact_data:phone_number" content="+1-234-567-8900" />
+
+<!-- Service Area -->
+<meta name="business:service_area:geo_center" content="32.6429,-96.7139" />
+<meta name="business:service_area:geo_radius" content="321868" />
+
+<!-- Enhanced Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" href="/photos/logos/lccontainer-logo-transparent-400.png" as="image" type="image/png" />
+
+<!-- Structured Data for Current Page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": document.title,
+  "description": document.querySelector('meta[name="description"]')?.content,
+  "url": window.location.href,
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "LC Container",
+    "url": "https://lccontainer.com"
+  },
+  "about": {
+    "@type": "Organization",
+    "name": "LC Container"
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "LC Container",
+    "description": "Custom container builds and modifications in Texas"
+  }
+}
+</script>
+
+
+

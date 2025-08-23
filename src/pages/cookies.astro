@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Cookie Policy - LC Container"
+  description="Learn about how LC Container uses cookies and tracking technologies to improve your website experience and provide better services."
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold text-secondary-900 mb-6">
+          Cookie Policy
+        </h1>
+        <p class="text-xl text-secondary-600">
+          Last updated: December 2024
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cookie Policy Content -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-accent-50 rounded-2xl p-8 mb-8">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">What Are Cookies?</h2>
+          <p class="text-secondary-600">
+            Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better experience by remembering your preferences, analyzing how you use our site, and personalizing content.
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Types of Cookies -->
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Types of Cookies We Use</h2>
+            <div class="space-y-6">
+              <div class="bg-white border border-secondary-200 rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-secondary-900 mb-3">Essential Cookies</h3>
+                <p class="text-secondary-600 mb-3">These cookies are necessary for the website to function properly and cannot be disabled.</p>
+                <div class="space-y-2">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Session management and security</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Shopping cart functionality</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Form submission and validation</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-secondary-200 rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-secondary-900 mb-3">Analytics Cookies</h3>
+                <p class="text-secondary-600 mb-3">These cookies help us understand how visitors interact with our website to improve performance.</p>
+                <div class="space-y-2">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Google Analytics for website usage statistics</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Page performance and loading times</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">User behavior and navigation patterns</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-secondary-200 rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-secondary-900 mb-3">Marketing Cookies</h3>
+                <p class="text-secondary-600 mb-3">These cookies are used to deliver relevant advertisements and track marketing campaign effectiveness.</p>
+                <div class="space-y-2">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Google Ads for targeted advertising</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Social media advertising campaigns</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Email marketing campaign tracking</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-secondary-200 rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-secondary-900 mb-3">Preference Cookies</h3>
+                <p class="text-secondary-600 mb-3">These cookies remember your preferences to provide a personalized experience.</p>
+                <div class="space-y-2">
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Language and regional preferences</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Cookie consent preferences</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-primary-600 rounded-full mr-3"></div>
+                    <span class="text-secondary-700">Display preferences and settings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Third-Party Cookies -->
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Third-Party Cookies</h2>
+            <p class="text-secondary-600 mb-4">
+              We use third-party services that may set their own cookies. These services include:
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="bg-accent-50 rounded-xl p-6">
+                <h4 class="font-semibold text-secondary-900 mb-2">Google Analytics</h4>
+                <p class="text-secondary-600 text-sm">
+                  Helps us understand website traffic and user behavior. Google's privacy policy applies to these cookies.
+                </p>
+              </div>
+              <div class="bg-accent-50 rounded-xl p-6">
+                <h4 class="font-semibold text-secondary-900 mb-2">Google Ads</h4>
+                <p class="text-secondary-600 text-sm">
+                  Used for advertising purposes and conversion tracking. Google's privacy policy applies.
+                </p>
+              </div>
+              <div class="bg-accent-50 rounded-xl p-6">
+                <h4 class="font-semibold text-secondary-900 mb-2">Social Media</h4>
+                <p class="text-secondary-600 text-sm">
+                  Facebook, Twitter, and LinkedIn may set cookies for social sharing and advertising.
+                </p>
+              </div>
+              <div class="bg-accent-50 rounded-xl p-6">
+                <h4 class="font-semibold text-secondary-900 mb-2">Payment Processors</h4>
+                <p class="text-secondary-600 text-sm">
+                  Stripe, PayPal, and other payment processors may set cookies for transaction security.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cookie Management -->
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Managing Your Cookie Preferences</h2>
+            <div class="space-y-4">
+              <div>
+                <h3 class="text-xl font-semibold text-secondary-900 mb-2">Browser Settings</h3>
+                <p class="text-secondary-600 mb-3">You can control cookies through your browser settings:</p>
+                <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+                  <li><strong>Chrome:</strong> Settings → Privacy and security → Cookies and other site data</li>
+                  <li><strong>Firefox:</strong> Options → Privacy & Security → Cookies and Site Data</li>
+                  <li><strong>Safari:</strong> Preferences → Privacy → Manage Website Data</li>
+                  <li><strong>Edge:</strong> Settings → Cookies and site permissions → Cookies and site data</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="text-xl font-semibold text-secondary-900 mb-2">Cookie Consent</h3>
+                <p class="text-secondary-600">
+                  When you first visit our website, you'll see a cookie consent banner. You can change your preferences at any time by clicking the "Cookie Settings" link in our footer.
+                </p>
+              </div>
+              
+              <div>
+                <h3 class="text-xl font-semibold text-secondary-900 mb-2">Opt-Out Options</h3>
+                <p class="text-secondary-600 mb-3">You can opt out of certain types of cookies:</p>
+                <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+                  <li><a href="https://tools.google.com/dlpage/gaoptout" class="text-primary-600 hover:text-primary-700">Google Analytics Opt-out</a></li>
+                  <li><a href="https://adssettings.google.com/" class="text-primary-600 hover:text-primary-700">Google Ads Settings</a></li>
+                  <li><a href="https://www.facebook.com/settings?tab=ads" class="text-primary-600 hover:text-primary-700">Facebook Ad Preferences</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cookie Duration -->
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Cookie Duration</h2>
+            <div class="space-y-4">
+              <div class="bg-white border border-secondary-200 rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-secondary-900 mb-3">Session Cookies</h3>
+                <p class="text-secondary-600">
+                  These cookies are temporary and are deleted when you close your browser. They are used for essential website functionality.
+                </p>
+              </div>
+              
+              <div class="bg-white border border-secondary-200 rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-secondary-900 mb-3">Persistent Cookies</h3>
+                <p class="text-secondary-600">
+                  These cookies remain on your device for a set period (usually 1-2 years) unless you delete them. They are used for preferences and analytics.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Impact of Disabling Cookies -->
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Impact of Disabling Cookies</h2>
+            <div class="bg-accent-50 rounded-xl p-6">
+              <p class="text-secondary-600 mb-3">
+                While you can disable cookies, doing so may affect your experience on our website:
+              </p>
+              <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+                <li>Some website features may not work properly</li>
+                <li>You may need to re-enter information repeatedly</li>
+                <li>Personalized content and recommendations may not be available</li>
+                <li>Analytics data may be less accurate</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Updates to Policy -->
+          <div>
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Updates to This Cookie Policy</h2>
+            <p class="text-secondary-600">
+              We may update this Cookie Policy from time to time to reflect changes in our practices or for legal reasons. We will notify you of any material changes by posting the updated policy on our website and updating the "Last updated" date.
+            </p>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="bg-accent-50 rounded-2xl p-8">
+            <h2 class="text-2xl font-bold text-secondary-900 mb-4">Contact Us</h2>
+            <p class="text-secondary-600 mb-4">
+              If you have any questions about our use of cookies or this Cookie Policy, please contact us:
+            </p>
+            <div class="space-y-2 text-secondary-600">
+              <p><strong>LC Container</strong></p>
+              <p>1211 E Fulghum Rd</p>
+              <p>Hutchins, TX 75141</p>
+              <p>Phone: <a href="tel:(214) 524-4168" class="text-primary-600 hover:text-primary-700">(214) 524-4168</a></p>
+              <p>Email: <a href="mailto:info@lccontainer.com" class="text-primary-600 hover:text-primary-700">info@lccontainer.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

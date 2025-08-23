@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Shipping & Delivery Policy - LC Container"
+  description="Understand LC Container's shipping and delivery policy, site requirements, scheduling, fees, and responsibilities."
+>
+  <Header />
+
+  <section class="pt-32 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold text-secondary-900 mb-6">Shipping & Delivery Policy</h1>
+        <p class="text-xl text-secondary-600">Last updated: December 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none space-y-8">
+        <div class="bg-accent-50 rounded-2xl p-8">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Service Area</h2>
+          <p class="text-secondary-600">We deliver across the Dallas–Fort Worth metroplex and throughout Texas. Out‑of‑state deliveries are available upon request and subject to additional fees and transit time.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Scheduling</h2>
+          <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+            <li>Typical lead time: 24–72 hours after payment confirmation</li>
+            <li>Delivery windows are estimated and subject to traffic and weather</li>
+            <li>Customer or representative must be reachable by phone during delivery</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Site Requirements</h2>
+          <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+            <li>Clear, level surface capable of supporting container weight</li>
+            <li>Minimum 12' width, adequate turning radius, and overhead clearance</li>
+            <li>No overhead lines or underground utilities in placement area</li>
+            <li>Customer is responsible for permits, if required</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Equipment & Placement</h2>
+          <p class="text-secondary-600">We use tilt‑bed, flatbed, or crane services depending on site access and container size. Final placement is at the discretion of the operator for safety. Additional equipment may incur extra charges.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Fees</h2>
+          <ul class="list-disc list-inside text-secondary-600 space-y-1 ml-4">
+            <li>Delivery fees are based on distance, container size, and access</li>
+            <li>Wait time beyond 30 minutes may incur hourly charges</li>
+            <li>Failed delivery due to site inaccessibility is billable</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Inspection</h2>
+          <p class="text-secondary-600">Please inspect the container upon delivery and note any concerns with the driver at that time. Photos are recommended for your records.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Contact</h2>
+          <p class="text-secondary-600">Questions about delivery? Email <a href="mailto:info@lccontainer.com" class="text-primary-600 hover:text-primary-700">info@lccontainer.com</a> or call <a href="tel:(214) 524-4168" class="text-primary-600 hover:text-primary-700">(214) 524-4168</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

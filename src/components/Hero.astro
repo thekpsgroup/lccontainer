@@ -1,0 +1,77 @@
+---
+// Hero component with proper contrast and structure
+---
+
+<section class="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
+  <div class="content-wrap relative z-10 pt-20">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Content -->
+      <div class="text-center lg:text-left">
+        <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white mb-6">
+          Custom Shipping Containers — Built & Delivered in Texas
+        </h1>
+
+        <p class="text-lg text-slate-200 mb-8 max-w-[68ch]">
+          Quality containers, custom builds, and reliable delivery across Texas. 
+          From basic storage to complete custom offices, we handle your project from start to finish.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+          <a 
+            href="/contact" 
+            class="btn-primary"
+          >
+            Get Free Quote
+          </a>
+
+          <a 
+            href="tel:(214) 524-4168" 
+            class="btn-secondary"
+          >
+            Call (214) 524-4168
+          </a>
+        </div>
+
+        <!-- Trust indicators -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-slate-300">
+          <div class="flex items-center">
+            <span class="w-2 h-2 bg-accent rounded-full mr-2"></span>
+            Quality Guaranteed
+          </div>
+          <div class="flex items-center">
+            <span class="w-2 h-2 bg-accent rounded-full mr-2"></span>
+            Fast Delivery
+          </div>
+          <div class="flex items-center">
+            <span class="w-2 h-2 bg-accent rounded-full mr-2"></span>
+            Expert Support
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Image -->
+      <div class="relative">
+        <div class="on-image rounded-2xl overflow-hidden">
+          <img 
+            src="/photos/containers/hero-container.jpg" 
+            alt="Custom shipping container being delivered"
+            class="w-full h-80 lg:h-96 object-cover"
+            loading="eager"
+            width="600"
+            height="400"
+          />
+          <div class="overlay"></div>
+          <div class="text-container absolute inset-0 flex items-center justify-center">
+            <div class="text-center p-6">
+              <h3 class="text-xl font-semibold mb-2">Ready for Your Project</h3>
+              <p class="text-slate-200">Custom builds available</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

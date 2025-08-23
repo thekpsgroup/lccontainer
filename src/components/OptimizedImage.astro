@@ -1,0 +1,46 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  width = 800, 
+  height = 600, 
+  class: className = '',
+  loading = 'lazy',
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+} = Astro.props;
+
+// Generate responsive srcset for different screen sizes
+const generateSrcSet = (imagePath: string) => {
+  const sizes = [400, 800, 1200, 1600];
+  return sizes
+    .map(size => `${imagePath}?w=${size} ${size}w`)
+    .join(', ');
+};
+---
+
+<img 
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  class={`w-full h-auto ${className}`}
+  decoding="async"
+/>
+
+<style>
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

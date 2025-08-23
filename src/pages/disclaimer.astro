@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Disclaimer - LC Container"
+  description="Read important legal disclaimers related to website information, container condition, pricing, and third-party links."
+>
+  <Header />
+
+  <section class="pt-32 pb-16 bg-gradient-to-br from-primary-50 to-accent-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold text-secondary-900 mb-6">Disclaimer</h1>
+        <p class="text-xl text-secondary-600">Last updated: December 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none space-y-8">
+        <div class="bg-accent-50 rounded-2xl p-8">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Website Information</h2>
+          <p class="text-secondary-600">All information on this website is provided in good faith for general information purposes related to shipping containers and services. LC Container makes no representation or warranty of any kind regarding accuracy, adequacy, validity, reliability, or completeness. Your reliance is at your own risk.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Container Condition</h2>
+          <p class="text-secondary-600">Container photos and descriptions are representative. Actual units may vary in color, markings, and cosmetic condition due to prior service. Unless otherwise specified in writing, containers are sold “as is.” We recommend an on-site inspection or requesting up-to-date photos.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Pricing and Availability</h2>
+          <p class="text-secondary-600">Prices, specifications, and availability are subject to change without notice based on supply chain conditions, tariffs, and fuel costs. Quotes are valid for the time period stated on the quote document.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Delivery and Site Conditions</h2>
+          <p class="text-secondary-600">Delivery timing and placement depend on site accessibility, surface conditions, and safety constraints. Customer is responsible for ensuring adequate access, level ground, and clearance. Additional equipment (e.g., crane) may be required at customer expense.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Third‑Party Links</h2>
+          <p class="text-secondary-600">Our website may contain links to third‑party sites. LC Container has no control over and assumes no responsibility for the content, privacy policies, or practices of any third‑party sites or services.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Limitation of Liability</h2>
+          <p class="text-secondary-600">LC Container shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the website or reliance on any information provided. Your sole remedy is to discontinue using the site.</p>
+        </div>
+
+        <div class="bg-accent-50 rounded-2xl p-8">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">Contact</h2>
+          <p class="text-secondary-600">Questions about this disclaimer? Contact <a href="mailto:info@lccontainer.com" class="text-primary-600 hover:text-primary-700">info@lccontainer.com</a> or call <a href="tel:(214) 524-4168" class="text-primary-600 hover:text-primary-700">(214) 524-4168</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

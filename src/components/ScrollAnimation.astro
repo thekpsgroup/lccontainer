@@ -1,0 +1,83 @@
+---
+export interface Props {
+  class?: string;
+  delay?: number;
+  direction?: 'up' | 'down' | 'left' | 'right';
+  duration?: number;
+}
+
+const { class: className = '', delay = 0, direction = 'up', duration = 600 } = Astro.props;
+---
+
+<div class={`scroll-animate ${className}`} data-direction={direction} data-delay={delay} data-duration={duration}>
+  <slot />
+</div>
+
+<style>
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scroll-animate[data-direction="down"] {
+    transform: translateY(-30px);
+  }
+  
+  .scroll-animate[data-direction="left"] {
+    transform: translateX(30px);
+  }
+  
+  .scroll-animate[data-direction="right"] {
+    transform: translateX(-30px);
+  }
+  
+  .scroll-animate.animate {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-animate {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function animateOnScroll() {
+    const elements = document.querySelectorAll('.scroll-animate');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target as HTMLElement;
+          const delay = parseInt(element.dataset.delay || '0');
+          
+          setTimeout(() => {
+            element.classList.add('animate');
+          }, delay);
+          
+          observer.unobserve(element);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    elements.forEach(element => observer.observe(element));
+  }
+  
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animateOnScroll);
+  } else {
+    animateOnScroll();
+  }
+  
+  // Run on Astro page transitions
+  document.addEventListener('astro:page-load', animateOnScroll);
+</script>

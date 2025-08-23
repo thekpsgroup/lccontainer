@@ -1,0 +1,302 @@
+---
+export interface Props {
+  type: 'organization' | 'localBusiness' | 'product' | 'service' | 'article' | 'faq' | 'breadcrumb';
+  data: any;
+}
+
+const { type, data } = Astro.props;
+
+// Base organization schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LC Container",
+  "url": "https://lccontainer.com",
+  "logo": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-800.png",
+  "description": "Texas' premier custom shipping container builder and supplier since 2003. Specializing in custom container modifications, offices, retail spaces, and specialty builds across Dallas-Fort Worth and 200-mile radius.",
+  "foundingDate": "2003",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1211 E Fulghum Rd",
+    "addressLocality": "Hutchins",
+    "addressRegion": "TX",
+    "postalCode": "75141",
+    "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "(214) 524-4168",
+    "contactType": "customer service",
+    "areaServed": "US-TX",
+    "availableLanguage": "English"
+  },
+  "sameAs": [
+    "https://www.facebook.com/lccontainer",
+    "https://www.linkedin.com/company/lccontainer",
+    "https://www.instagram.com/lccontainer"
+  ]
+};
+
+// Local business schema
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "LC Container",
+  "description": "Texas' premier custom shipping container builder and supplier since 2003. Specializing in custom container modifications, offices, retail spaces, and specialty builds across Dallas-Fort Worth and 200-mile radius.",
+  "url": "https://lccontainer.com",
+  "telephone": "(214) 524-4168",
+  "email": "info@lccontainer.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1211 E Fulghum Rd",
+    "addressLocality": "Hutchins",
+    "addressRegion": "TX",
+    "postalCode": "75141",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.6429,
+    "longitude": -96.7139
+  },
+  "openingHours": [
+    "Mo-Fr 08:00-17:00",
+    "Sa 09:00-15:00"
+  ],
+  "priceRange": "$$",
+  "foundingDate": "2003",
+  "image": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-800.png",
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 32.6429,
+      "longitude": -96.7139
+    },
+    "geoRadius": "200 miles"
+  },
+  "serviceArea": {
+    "@type": "Place",
+    "name": "Dallas-Fort Worth Metroplex and surrounding areas",
+    "description": "Serving Dallas, Fort Worth, Houston, Austin, San Antonio, and all areas within 200 miles of Hutchins, Texas"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Custom Container Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Container Offices",
+          "description": "Professional office spaces built from shipping containers",
+          "category": "Commercial Construction"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Container Retail Spaces",
+          "description": "Retail stores and commercial spaces from containers",
+          "category": "Commercial Construction"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Container Living Spaces",
+          "description": "Residential and hospitality container modifications",
+          "category": "Residential Construction"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Specialty Container Builds",
+          "description": "Custom modifications for any industry or application",
+          "category": "Specialty Construction"
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "150",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
+
+// Product schema for containers
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom Shipping Container",
+  "description": "Custom modified shipping containers for offices, retail spaces, and specialty applications",
+  "brand": {
+    "@type": "Brand",
+    "name": "LC Container"
+  },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "LC Container"
+  },
+  "category": "Construction Materials",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "5000",
+      "priceCurrency": "USD",
+      "unitText": "container"
+    },
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "LocalBusiness",
+      "name": "LC Container"
+    }
+  },
+  "review": {
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Sarah M."
+    },
+    "reviewBody": "The custom build guide saved me thousands! I was able to plan my office container project perfectly."
+  }
+};
+
+// Service schema
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Custom Container Modification",
+  "description": "Professional custom modification services for shipping containers including offices, retail spaces, and specialty applications",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "LC Container"
+  },
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 32.6429,
+      "longitude": -96.7139
+    },
+    "geoRadius": "200 miles"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Custom Container Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Container Office Builds",
+          "description": "Custom office spaces from shipping containers"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Container Retail Builds",
+          "description": "Custom retail spaces from shipping containers"
+        }
+      }
+    ]
+  }
+};
+
+// FAQ schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What areas do you serve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We serve a 200-mile radius around Dallas, including Houston, Austin, San Antonio, and all areas in between."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a custom build take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom builds typically take 4-8 weeks depending on complexity. We'll provide a detailed timeline during consultation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide delivery and installation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we provide full delivery and installation services throughout our service area."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of custom modifications do you offer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer offices, retail spaces, living spaces, specialty applications, and any custom modification you can imagine."
+      }
+    }
+  ]
+};
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://lccontainer.com"
+    }
+  ]
+};
+
+// Get the appropriate schema based on type
+let schema;
+switch (type) {
+  case 'organization':
+    schema = { ...organizationSchema, ...data };
+    break;
+  case 'localBusiness':
+    schema = { ...localBusinessSchema, ...data };
+    break;
+  case 'product':
+    schema = { ...productSchema, ...data };
+    break;
+  case 'service':
+    schema = { ...serviceSchema, ...data };
+    break;
+  case 'faq':
+    schema = { ...faqSchema, ...data };
+    break;
+  case 'breadcrumb':
+    schema = { ...breadcrumbSchema, ...data };
+    break;
+  default:
+    schema = data;
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

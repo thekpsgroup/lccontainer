@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ScrollAnimation from '../components/ScrollAnimation.astro';
+import ImageGallery from '../components/ImageGallery.astro';
+import StorySection from '../components/StorySection.astro';
+import { yardAndStorage, featuredCustomImages } from '../data/images';
+---
+
+<BaseLayout
+  title="About LC Container - Texas' Premier Container Supplier Since 2003"
+  description="Learn about LC Container's 20+ years of excellence in the Texas container industry. Family-owned business serving DFW and statewide with quality containers and custom builds."
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-600 to-primary-700 text-white py-20">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+          About LC Container
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 animate-slide-up">
+          Texas' Premier Container Supplier Since 2003
+        </p>
+        <div class="flex flex-wrap justify-center gap-6 text-lg">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+            <span class="font-bold">20+ Years</span> in Business
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+            <span class="font-bold">10,000+</span> Containers Delivered
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+            <span class="font-bold">4.8★</span> Customer Rating
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <StorySection 
+    title="Our Journey"
+    subtitle="From a small family operation to Texas' premier container supplier"
+    storyContent={[
+      {
+        year: "2003",
+        title: "The Beginning",
+        description: "Founded by Eric Leger with a simple mission: provide quality shipping containers at fair prices with exceptional service. What started as a small family operation in Hutchins, Texas."
+      },
+      {
+        year: "2008",
+        title: "Expanding Services",
+        description: "Recognizing the growing demand for custom solutions, we began offering container modifications and custom builds. Our first custom office project marked the beginning of our transformation journey."
+      },
+      {
+        year: "2015",
+        title: "Statewide Growth",
+        description: "Expanded our service area to cover the entire state of Texas. Built our reputation as the go-to source for quality containers and custom modifications across the Lone Star State."
+      },
+      {
+        year: "2023",
+        title: "Industry Leader",
+        description: "Celebrated 20 years of excellence with over 10,000 containers delivered. Established as Texas' most trusted container supplier with unmatched expertise in custom builds."
+      }
+    ]}
+  />
+
+  <!-- Why Choose Us Section -->
+  <section class="py-16 bg-accent-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+          Why Choose LC Container?
+        </h2>
+        <p class="text-xl text-accent-600 max-w-2xl mx-auto">
+          We've earned our reputation through decades of consistent quality and service
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Experience</h3>
+          <p class="text-accent-600 text-center">
+            Over 20 years in the container industry means we understand the market, anticipate challenges, and deliver solutions that work.
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Customer Focus</h3>
+          <p class="text-accent-600 text-center">
+            Every customer is important to us. We take the time to understand your needs and provide personalized solutions.
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Quality Guarantee</h3>
+          <p class="text-accent-600 text-center">
+            We stand behind every container we sell. Our quality guarantee ensures you get exactly what you expect.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+          Meet Our Team
+        </h2>
+        <p class="text-xl text-accent-600 max-w-2xl mx-auto">
+          The dedicated professionals behind LC Container's success
+        </p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-8 md:p-12">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="text-center md:text-left">
+              <h3 class="text-3xl font-bold text-secondary-900 mb-4">
+                Eric Leger
+              </h3>
+              <p class="text-xl text-primary-600 mb-4">Founder & CEO</p>
+              <p class="text-accent-700 mb-6">
+                With over 20 years of experience in the container industry, Eric has built LC Container from the ground up. His vision and dedication have made us Texas' most trusted container supplier.
+              </p>
+              <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                                 <div class="bg-white rounded-lg px-4 py-2 text-sm font-semibold text-accent-700">
+                   Industry Expert
+                 </div>
+                 <div class="bg-white rounded-lg px-4 py-2 text-sm font-semibold text-accent-700">
+                   Customer Advocate
+                 </div>
+                 <div class="bg-white rounded-lg px-4 py-2 text-sm font-semibold text-accent-700">
+                   Problem Solver
+                 </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-8 text-center">
+              <div class="w-32 h-32 bg-primary-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-16 h-16 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+              </div>
+              <p class="text-accent-600">
+                "Our success is measured by our customers' satisfaction. Every container we deliver represents our commitment to quality and service."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Facility Gallery -->
+  <section class="py-16 bg-accent-50">
+    <ScrollAnimation delay="200">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Our Professional Facility
+          </h2>
+          <p class="text-xl text-accent-600 max-w-3xl mx-auto">
+            Our extensive container yard and professional facility ensures quality control, 
+            secure storage, and efficient project management for all our customers.
+          </p>
+        </div>
+        
+        <ImageGallery 
+          images={yardAndStorage}
+          columns={3}
+          showTitles={true}
+          class="mb-12"
+        />
+      </div>
+    </ScrollAnimation>
+  </section>
+
+  <!-- Sample Custom Work -->
+  <section class="py-16 bg-white">
+    <ScrollAnimation delay="200">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Sample Custom Modifications
+          </h2>
+          <p class="text-xl text-accent-600 max-w-3xl mx-auto">
+            See examples of our custom container modifications. Each project showcases 
+            our expertise in transforming standard containers into specialized spaces.
+          </p>
+        </div>
+        
+        <ImageGallery 
+          images={featuredCustomImages}
+          columns={3}
+          showTitles={true}
+          class="mb-12"
+        />
+        
+        <div class="text-center">
+          <a href="/services/custom-builds" class="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+            View All Custom Work
+          </a>
+        </div>
+      </div>
+    </ScrollAnimation>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold mb-6">
+        Ready to Get Started?
+      </h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Join thousands of satisfied customers who trust LC Container for their shipping and storage needs.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:2145244168" class="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-secondary-50 transition-colors">
+          Call (214) 524-4168
+        </a>
+        <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-600 transition-colors">
+          Get Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+// Container gallery with proper dimensions and new card component
+import ContainerCard from './ContainerCard.astro';
+---
+
+<section class="py-16 bg-slate-50 dark:bg-slate-900">
+  <div class="content-wrap">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
+        Our Containers
+      </h2>
+      <p class="text-slate-700 dark:text-slate-200 max-w-[68ch] mx-auto">
+        Quality containers ready for delivery across Texas
+      </p>
+    </div>
+
+    <!-- Container Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- 20ft Container -->
+      <ContainerCard
+        title="20ft Container"
+        image="/photos/container/standard/20ft_1.jpg"
+        description="Compact, versatile container for storage, job sites, or small offices."
+        dimensions="20′ × 8′ × 8′6″"
+        bullets={[
+          "Perfect for storage & small projects",
+          "New one-trip units available",
+          "Delivery in 3-5 days across DFW"
+        ]}
+        ctaHref="/contact"
+      />
+
+      <!-- 40ft Container -->
+      <ContainerCard
+        title="40ft Container"
+        image="/photos/container/standard/40ft_1.jpg"
+        description="Ideal for large storage needs, workshops, or multi-purpose spaces."
+        dimensions="40′ × 8′ × 8′6″"
+        bullets={[
+          "Ideal for large storage needs",
+          "High cube options available",
+          "Statewide delivery service"
+        ]}
+        ctaHref="/contact"
+      />
+
+      <!-- Custom Builds -->
+      <ContainerCard
+        title="Custom Builds"
+        image="/photos/container/custom/custom-modification-2.jpg"
+        description="Transform your vision into reality with custom modifications."
+        bullets={[
+          "Offices & Workspaces",
+          "Retail & Food Service",
+          "Complete turnkey solutions"
+        ]}
+        ctaHref="/contact"
+      />
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,535 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Container Delivery - Statewide Service | LC Container"
+  description="Professional container delivery service across Texas. We deliver to construction sites, businesses, and residential locations with our specialized equipment and experienced team."
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-600 to-primary-700 text-white py-20">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+          Container Delivery
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 animate-slide-up">
+          Professional Delivery Service Across Texas
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+          <div class="text-4xl mb-4">🚛</div>
+          <p class="text-lg mb-4">
+            From our yard to your location with precision and care
+          </p>
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <div class="bg-white/20 rounded-lg px-3 py-1">✓ Statewide Service</div>
+            <div class="bg-white/20 rounded-lg px-3 py-1">✓ Specialized Equipment</div>
+            <div class="bg-white/20 rounded-lg px-3 py-1">✓ Experienced Team</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery Services -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Our Delivery Services
+          </h2>
+          <p class="text-xl text-secondary-600">
+            Professional delivery for all types of locations and requirements
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-accent-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Commercial Delivery</h3>
+            <ul class="space-y-3 text-secondary-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Business locations
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Industrial sites
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Warehouse facilities
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Office complexes
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-accent-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Construction Sites</h3>
+            <ul class="space-y-3 text-secondary-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                New construction
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Renovation projects
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Infrastructure projects
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Remote locations
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-accent-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Residential Delivery</h3>
+            <ul class="space-y-3 text-secondary-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Private residences
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Rural properties
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Suburban homes
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Urban locations
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="py-16 bg-accent-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+          Service Areas
+        </h2>
+        <p class="text-xl text-secondary-600">
+          We deliver containers throughout Texas and surrounding areas
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-secondary-900 mb-2">DFW Metroplex</h3>
+          <p class="text-secondary-600 text-sm">Dallas, Fort Worth, Arlington, Plano, Irving, and surrounding areas</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-secondary-900 mb-2">Central Texas</h3>
+          <p class="text-secondary-600 text-sm">Austin, San Antonio, Waco, Temple, and surrounding areas</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-secondary-900 mb-2">East Texas</h3>
+          <p class="text-secondary-600 text-sm">Tyler, Longview, Marshall, and surrounding areas</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-secondary-900 mb-2">Statewide</h3>
+          <p class="text-secondary-600 text-sm">We deliver to all areas of Texas with specialized equipment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery Equipment -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Our Delivery Equipment
+          </h2>
+          <p class="text-xl text-secondary-600">
+            Specialized equipment for safe and efficient container delivery
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-accent-50 rounded-2xl p-8">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Container Trucks</h3>
+            <ul class="space-y-3 text-secondary-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Specialized flatbed trucks
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Hydraulic lift systems
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Secure tie-down systems
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                GPS tracking
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-accent-50 rounded-2xl p-8">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-secondary-900 mb-4 text-center">Crane Services</h3>
+            <ul class="space-y-3 text-secondary-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Mobile crane units
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Precise positioning
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Tight space access
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Safety certified operators
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery Process -->
+  <section class="py-16 bg-accent-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Our Delivery Process
+          </h2>
+          <p class="text-xl text-secondary-600">
+            From order to placement, we handle everything with care
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-primary-600">1</span>
+            </div>
+            <h3 class="text-xl font-bold text-secondary-900 mb-2">Site Assessment</h3>
+            <p class="text-secondary-600">We evaluate your location for access, space, and placement requirements</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-primary-600">2</span>
+            </div>
+            <h3 class="text-xl font-bold text-secondary-900 mb-2">Scheduling</h3>
+            <p class="text-secondary-600">We schedule delivery at a time that works best for your schedule</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-primary-600">3</span>
+            </div>
+            <h3 class="text-xl font-bold text-secondary-900 mb-2">Delivery</h3>
+            <p class="text-secondary-600">Our experienced team delivers and positions your container precisely</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-primary-600">4</span>
+            </div>
+            <h3 class="text-xl font-bold text-secondary-900 mb-2">Verification</h3>
+            <p class="text-secondary-600">We ensure everything is properly positioned and secure before leaving</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery Requirements -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Delivery Requirements
+          </h2>
+          <p class="text-xl text-secondary-600">
+            What we need to ensure safe and successful delivery
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-accent-50 rounded-2xl p-8">
+            <h3 class="text-2xl font-bold text-secondary-900 mb-6">Site Requirements</h3>
+            <ul class="space-y-4 text-secondary-600">
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Access:</strong> Clear path for delivery truck (minimum 12' width)
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Space:</strong> Adequate area for container placement and equipment
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Surface:</strong> Level, stable ground for container placement
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Utilities:</strong> Clear of overhead power lines and underground utilities
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-accent-50 rounded-2xl p-8">
+            <h3 class="text-2xl font-bold text-secondary-900 mb-6">Customer Responsibilities</h3>
+            <ul class="space-y-4 text-secondary-600">
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Site Preparation:</strong> Clear the delivery area of obstacles
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Access:</strong> Ensure gates are unlocked and access is available
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Contact:</strong> Be available for delivery coordination
+                </div>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-primary-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div>
+                  <strong class="text-secondary-900">Inspection:</strong> Inspect container upon delivery and note any issues
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-accent-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-secondary-900 mb-3">
+              How much does delivery cost?
+            </h3>
+            <p class="text-secondary-600">
+              Delivery costs vary based on distance, location accessibility, and equipment needed. We provide detailed quotes for all deliveries.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-secondary-900 mb-3">
+              How long does delivery take?
+            </h3>
+            <p class="text-secondary-600">
+              Most deliveries are completed within 1-2 hours on-site. We'll provide a specific time window for your delivery.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-secondary-900 mb-3">
+              Do you deliver to rural areas?
+            </h3>
+            <p class="text-secondary-600">
+              Yes! We have specialized equipment to handle rural deliveries, including areas with limited access.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-secondary-900 mb-3">
+              What if my site has limited access?
+            </h3>
+            <p class="text-secondary-600">
+              We'll assess your site and recommend the best delivery method. We can use cranes or specialized equipment for challenging locations.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-secondary-900 mb-3">
+              Can you deliver multiple containers at once?
+            </h3>
+            <p class="text-secondary-600">
+              Yes! We can coordinate delivery of multiple containers. Contact us to discuss your specific needs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold mb-6">
+        Ready for Delivery?
+      </h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Contact us today to schedule professional container delivery to your location.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-secondary-50 transition-colors">
+          Get Delivery Quote
+        </a>
+        <a href="tel:(214) 524-4168" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-600 transition-colors">
+          Call (214) 524-4168
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

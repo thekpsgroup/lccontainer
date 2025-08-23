@@ -1,0 +1,106 @@
+---
+// SalesOptimizer component for enhanced conversion rates
+---
+
+<!-- Social Proof Ticker -->
+<div class="bg-slate-50 dark:bg-slate-800 py-3 overflow-hidden">
+  <div class="animate-scroll flex space-x-8 text-sm text-slate-700 dark:text-slate-200">
+    <span>✅ John D. from Dallas saved $12,000 on custom office build</span>
+    <span>✅ Sarah M. from Houston completed project 2 weeks early</span>
+    <span>✅ Mike R. from Austin got financing approved in 24 hours</span>
+    <span>✅ Lisa K. from San Antonio loves her new retail space</span>
+    <span>✅ David P. from Fort Worth recommends us to everyone</span>
+  </div>
+</div>
+
+<!-- Trust Badges -->
+<div class="bg-white dark:bg-slate-900 py-4 border-b border-slate-200 dark:border-slate-700">
+  <div class="content-wrap">
+    <div class="flex flex-wrap justify-center items-center space-x-8 text-slate-600 dark:text-slate-300 text-sm">
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <span>Licensed & Insured</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <span>5-Year Warranty</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <span>Free Delivery</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <span>200-Mile Service Area</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+  
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+</style>
+
+<script>
+  // Sales optimization functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    let scrollDepth = 0;
+    
+    // Track scroll depth
+    window.addEventListener('scroll', function() {
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      scrollDepth = Math.max(scrollDepth, scrollPercent);
+    });
+    
+    // Progressive disclosure for pricing
+    const pricingElements = document.querySelectorAll('.pricing-info');
+    pricingElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add('opacity-100');
+        element.classList.remove('opacity-0');
+      }, index * 200);
+    });
+  });
+  
+  // Track micro-conversions
+  function trackMicroConversion(type, value) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'micro_conversion', {
+        'event_category': 'Engagement',
+        'event_label': type,
+        'value': value
+      });
+    }
+    
+    if (typeof va !== 'undefined') {
+      va('event', 'micro_conversion', {
+        type: type,
+        value: value,
+        page: window.location.pathname
+      });
+    }
+  }
+  
+  // Expose tracking function globally
+  window.trackMicroConversion = trackMicroConversion;
+</script>
+

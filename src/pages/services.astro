@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContainerGallery from '../components/ContainerGallery.astro';
+---
+
+<BaseLayout 
+  title="Container Services - Buy, Lease, or Custom Build | LC Container Texas"
+  description="Choose from our three container services: Buy quality containers, Lease flexible solutions, or Custom Build your perfect container. Serving Texas with 20+ years experience. Call (214) 524-4168."
+>
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-12 bg-primary-50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+        Container Services
+      </h1>
+      <p class="text-lg text-primary-200 mb-8">
+        Three ways to get the perfect container solution for your needs
+      </p>
+    </div>
+  </section>
+
+  <!-- Three Tier Services -->
+  <section class="py-12 bg-primary-50">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Buy Container Card -->
+        <div class="bg-primary-100 rounded-lg p-6">
+          <div class="text-center mb-4">
+            <h3 class="text-xl font-bold text-white mb-2">Buy a Container</h3>
+            <p class="text-primary-200 text-sm">Own your container outright</p>
+          </div>
+          
+          <div class="space-y-2 mb-4 text-sm text-primary-200">
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Complete ownership and control</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>No monthly payments</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Customize freely</span>
+            </div>
+          </div>
+          
+          <a href="/services/buy" class="block w-full bg-secondary-500 text-white text-center py-2 px-3 rounded-lg font-semibold hover:bg-secondary-400 transition-colors text-sm">
+            Learn More
+          </a>
+        </div>
+
+        <!-- Lease Container Card -->
+        <div class="bg-primary-100 rounded-lg p-6">
+          <div class="text-center mb-4">
+            <h3 class="text-xl font-bold text-white mb-2">Lease a Container</h3>
+            <p class="text-primary-200 text-sm">Flexible leasing options</p>
+          </div>
+          
+          <div class="space-y-2 mb-4 text-sm text-primary-200">
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Low upfront costs</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Flexible terms</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Easy upgrade options</span>
+            </div>
+          </div>
+          
+          <a href="/services/lease" class="block w-full bg-secondary-500 text-white text-center py-2 px-3 rounded-lg font-semibold hover:bg-secondary-400 transition-colors text-sm">
+            Learn More
+          </a>
+        </div>
+
+        <!-- Custom Build Card -->
+        <div class="bg-primary-100 rounded-lg p-6">
+          <div class="text-center mb-4">
+            <h3 class="text-xl font-bold text-white mb-2">Custom Build</h3>
+            <p class="text-primary-200 text-sm">Transform your vision into reality</p>
+          </div>
+          
+          <div class="space-y-2 mb-4 text-sm text-primary-200">
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Complete custom design</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Professional systems</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-1.5 h-1.5 bg-secondary-500 rounded-full mr-2"></span>
+              <span>Turnkey delivery</span>
+            </div>
+          </div>
+          
+          <a href="/services/custom-builds" class="block w-full bg-secondary-500 text-white text-center py-2 px-3 rounded-lg font-semibold hover:bg-secondary-400 transition-colors text-sm">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Container Gallery -->
+  <ContainerGallery />
+
+  <Footer />
+</BaseLayout>

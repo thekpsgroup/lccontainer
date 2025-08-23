@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ContainerGallery from '../../components/ContainerGallery.astro';
+---
+
+<BaseLayout
+  title="Buy Shipping Containers in Texas | Quality 20ft & 40ft Containers | LC Container"
+  description="Buy quality shipping containers in Texas. 20ft and 40ft containers available for immediate delivery. Competitive pricing, fast delivery, and expert service. Call (214) 524-4168 for quotes."
+>
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-12 bg-primary-50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold text-primary-600 mb-4">
+        Buy Quality Containers in Texas
+      </h1>
+      <p class="text-lg text-primary-400 mb-8">
+        Own your container outright with our quality selection of 20ft and 40ft containers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-12 bg-primary-50">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-primary-600 mb-2">Complete Ownership</h3>
+          <p class="text-primary-400 text-sm">No monthly payments or contracts. You own it outright.</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-primary-600 mb-2">Customize Freely</h3>
+          <p class="text-primary-400 text-sm">Modify, paint, or customize without restrictions.</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-primary-600 mb-2">Fast Delivery</h3>
+          <p class="text-primary-400 text-sm">Most containers available for immediate delivery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Container Gallery -->
+  <ContainerGallery />
+
+  <Footer />
+</BaseLayout>

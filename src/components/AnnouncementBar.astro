@@ -1,0 +1,43 @@
+---
+// AnnouncementBar component with dismissible functionality
+---
+
+<script>
+  // Client-side script for dismiss functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const announcementBar = document.getElementById('announcement-bar');
+    const dismissButton = document.getElementById('dismiss-announcement');
+    
+    // Check if already dismissed
+    if (localStorage.getItem('lc-annc-1') === 'dismissed') {
+      announcementBar?.remove();
+      return;
+    }
+    
+    // Handle dismiss
+    dismissButton?.addEventListener('click', function() {
+      localStorage.setItem('lc-annc-1', 'dismissed');
+      announcementBar?.remove();
+    });
+  });
+</script>
+
+<div id="announcement-bar" class="w-full bg-slate-900 text-white text-sm py-2 relative z-50">
+  <div class="content-wrap flex items-center justify-between">
+    <div class="flex-1 text-center">
+      <span class="font-medium">Summer offer:</span> Free consult + 10% off custom builds. 
+      <a href="tel:(214) 524-4168" class="underline decoration-2 underline-offset-2 hover:decoration-white/60">
+        Call (214) 524-4168
+      </a>
+    </div>
+    <button
+      id="dismiss-announcement"
+      aria-label="Dismiss announcement"
+      class="ml-4 p-1 hover:bg-white/10 rounded transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+</div>

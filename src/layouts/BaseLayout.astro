@@ -1,0 +1,324 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string;
+}
+
+import CookieBanner from '../components/CookieBanner.astro';
+import Analytics from '../components/Analytics.astro';
+import PerformanceOptimizer from '../components/PerformanceOptimizer.astro';
+import BackToTop from '../components/BackToTop.astro';
+import SalesOptimizer from '../components/SalesOptimizer.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+
+
+const { title, description, image = '/photos/logos/lccontainer-logo-transparent-800.png', canonical } = Astro.props;
+const canonicalURL = canonical ? new URL(canonical, Astro.site) : Astro.url;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="LC Container" />
+    <meta name="keywords" content="custom container builds, shipping containers, storage containers, Texas containers, container modifications, custom offices, retail containers, DFW containers, container delivery, custom builds" />
+    <meta name="geo.region" content="US-TX" />
+    <meta name="geo.placename" content="Hutchins, Texas" />
+    <meta name="geo.position" content="32.6429;-96.7139" />
+    <meta name="ICBM" content="32.6429, -96.7139" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#dc2626" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="LC Container" />
+    <link rel="manifest" href="/manifest.json" />
+    
+         <!-- Apple Touch Icons -->
+     <link rel="apple-touch-icon" href="/photos/logos/lccontainer-logo-transparent-400.png" />
+     <link rel="apple-touch-icon" sizes="400x400" href="/photos/logos/lccontainer-logo-transparent-400.png" />
+     <link rel="apple-touch-icon" sizes="800x800" href="/photos/logos/lccontainer-logo-transparent-800.png" />
+    
+    <!-- Performance & Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+         <!-- Preload critical resources -->
+     <link rel="preload" href="/photos/logos/lccontainer-logo-transparent-400.png" as="image" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="LC Container" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+    
+    <!-- Enhanced SEO Meta Tags -->
+    <meta name="google-site-verification" content="your-google-verification-code" />
+    <meta name="msvalidate.01" content="your-bing-verification-code" />
+    <meta name="yandex-verification" content="your-yandex-verification-code" />
+    
+    <!-- Advanced Performance Meta Tags -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Enhanced Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com;" />
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "LC Container",
+        "description": "Texas' premier custom shipping container builder and supplier since 2003. Specializing in custom container modifications, offices, retail spaces, and specialty builds across Dallas-Fort Worth and 200-mile radius.",
+        "url": "https://lccontainer.com",
+        "telephone": "(214) 524-4168",
+        "email": "info@lccontainer.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1211 E Fulghum Rd",
+          "addressLocality": "Hutchins",
+          "addressRegion": "TX",
+          "postalCode": "75141",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 32.6429,
+          "longitude": -96.7139
+        },
+        "openingHours": [
+          "Mo-Fr 08:00-17:00",
+          "Sa 09:00-15:00"
+        ],
+        "priceRange": "$$",
+        "foundingDate": "2003",
+                 "image": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-800.png",
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 32.6429,
+            "longitude": -96.7139
+          },
+          "geoRadius": "200 miles"
+        },
+        "serviceArea": {
+          "@type": "Place",
+          "name": "Dallas-Fort Worth Metroplex and surrounding areas",
+          "description": "Serving Dallas, Fort Worth, Houston, Austin, San Antonio, and all areas within 200 miles of Hutchins, Texas"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Custom Container Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom Container Offices",
+                "description": "Professional office spaces built from shipping containers"
+              }
+            },
+            {
+              "@type": "Offer", 
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom Container Retail Spaces",
+                "description": "Retail stores and commercial spaces from containers"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom Container Living Spaces",
+                "description": "Residential and hospitality container modifications"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Specialty Container Builds",
+                "description": "Custom modifications for any industry or application"
+              }
+            }
+          ]
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "150",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Sarah M."
+            },
+            "reviewBody": "The custom build guide saved me thousands! I was able to plan my office container project perfectly."
+          }
+        ]
+      }
+    </script>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50">
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Announcement Bar -->
+    <AnnouncementBar />
+    
+    <!-- Sales Optimizer -->
+    <SalesOptimizer />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+    <!-- Performance Optimizer -->
+    <PerformanceOptimizer />
+    
+    <!-- Cookie Banner -->
+    <CookieBanner />
+    
+    <!-- Analytics -->
+    <Analytics />
+    
+    <!-- Back to Top Button -->
+    <BackToTop />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Typography improvements */
+  h1 { line-height: 1.1; }
+  h2 { line-height: 1.15; }
+  h3 { line-height: 1.2; }
+  p { line-height: 1.7; }
+  
+  /* Focus ring styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+  
+  /* Skip to main content link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #dc2626;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 100;
+  }
+  
+  .skip-link:focus {
+    top: 6px;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #e94560;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f39c12;
+  }
+  
+  /* Reduced motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --tw-bg-opacity: 1;
+      --tw-text-opacity: 1;
+    }
+  }
+</style>
