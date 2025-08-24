@@ -53,6 +53,7 @@ self.addEventListener('install', (event) => {
     caches.open(STATIC_CACHE).then((cache) => {
       return cache.addAll([
         '/',
+        '/styles/global.css',
         '/photos/logos/lccontainer-logo-transparent-400.png',
         '/photos/container/standard/20ft_5.jpg'
       ]);
@@ -108,7 +109,6 @@ self.addEventListener('sync', (event) => {
 });
 
 async function doBackgroundSync() {
-  // Handle background sync tasks
   // Background sync completed
 }
 
@@ -144,3 +144,4 @@ self.addEventListener('notificationclick', (event) => {
       })
   );
 });
+
