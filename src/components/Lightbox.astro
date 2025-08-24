@@ -1,5 +1,6 @@
 ---
-const { id = "lb", alt = "" } = Astro.props;
+const id = Astro.props.id ?? "lb";
+const alt = Astro.props.alt ?? "";
 ---
 
 <dialog id={id} class="backdrop:bg-black/80 p-0 rounded-2xl w-[min(92vw,1000px)]">
@@ -25,7 +26,7 @@ const { id = "lb", alt = "" } = Astro.props;
   window.openLightbox = (data) => {
     if(!dialog || !img) return;
     img.src = data.src || "";
-    img.alt = data.alt || "";
+    img.alt = data.alt || data.title || "";
     if (titleEl) titleEl.textContent = data.title || "";
     if (capEl) capEl.textContent = data.caption || "";
     dialog.showModal();

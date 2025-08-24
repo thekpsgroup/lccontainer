@@ -177,8 +177,9 @@ const aspectRatio = height / width * 100;
                 const link = document.createElement('link');
                 link.rel = 'preload';
                 link.as = 'image';
-                link.hrefset = source.srcset;
-                link.sizes = source.sizes || '';
+                link.href = source.srcset;
+                link.imagesrcset = source.srcset;
+                link.imagesizes = source.sizes || '';
                 document.head.appendChild(link);
               }
             });
