@@ -1,0 +1,42 @@
+{
+  "name": "LC Container - Custom Container Builder",
+  "short_name": "LC Container",
+  "description": "Texas' premier custom shipping container builder since 2003. Specializing in custom offices, retail spaces, and specialty builds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "categories": ["business", "construction", "industrial"],
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/photos/logos/lccontainer-logo-transparent-400.png",
+      "sizes": "400x400",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/photos/logos/lccontainer-logo-transparent-800.png", 
+      "sizes": "800x800",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Get Quote",
+      "short_name": "Quote",
+      "description": "Get a free custom container quote",
+      "url": "/contact",
+      "icons": [{ "src": "/photos/logos/lccontainer-logo-transparent-400.png", "sizes": "400x400" }]
+    },
+    {
+      "name": "Free Guide",
+      "short_name": "Guide", 
+      "description": "Download free custom container guide",
+      "url": "/lead-magnet",
+      "icons": [{ "src": "/photos/logos/lccontainer-logo-transparent-400.png", "sizes": "400x400" }]
+    }
+  ]
+}
