@@ -17,7 +17,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     <p class="text-ink-muted mt-2">Our Hutchins yard carries hundreds of units. Filter by size, height, and condition. Transparent pricing; exact quote in 24 hours.</p>
 
     <!-- Filters -->
-    <div class="glass p-4 mt-6">
+    <div class="glass p-4 mt-6 fade-in">
       <form id="filters" class="grid sm:grid-cols-3 gap-3 text-sm">
         <label class="block">Size
           <select name="size" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line">
@@ -42,7 +42,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     </div>
 
     <!-- Grid -->
-    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
       {INVENTORY.map(item => (
         <article class="glass p-0 flex flex-col overflow-hidden hover-lift">
           <div class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)]">

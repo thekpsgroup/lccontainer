@@ -17,7 +17,7 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
     <p class="text-ink-muted mt-2">From simple cut-ins to turnkey office conversions. Real work, real photos from our Hutchins, TX yard.</p>
 
     <!-- Filters -->
-    <div class="glass p-4 mt-6">
+    <div class="glass p-4 mt-6 fade-in">
       <form id="filters" class="flex flex-wrap gap-2 text-sm">
         <button type="button" data-tag="" class="px-3 py-2 rounded-xl border border-brand-line hover:bg-white/5" aria-pressed="true">All</button>
         {TAGS.map(t => (
@@ -28,7 +28,7 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
     </div>
 
     <!-- Grid -->
-    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
       {CUSTOM_BUILDS.map(item => (
         <article class="glass overflow-hidden hover-lift">
                       <button
@@ -89,12 +89,12 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
     let active = "";
 
     function render(items){
-      grid.innerHTML = items.map(item => `
-        <article class="glass overflow-hidden" id="${item.id}">
-          <button class="block relative aspect-[4/3] w-full text-left" aria-label="Open ${item.title}"
-            onclick='openLightbox(${JSON.stringify({ src: item.photo, title: item.title, caption: item.caption })})'>
-            <img src="${item.photo}" alt="${item.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-          </button>
+             grid.innerHTML = items.map(item => `
+         <article class="glass overflow-hidden hover-lift" id="${item.id}">
+                     <button class="block relative aspect-[4/3] w-full text-left image-overlay" aria-label="Open ${item.title}"
+             onclick='openLightbox(${JSON.stringify({ src: item.photo, title: item.title, caption: item.caption })})'>
+             <img src="${item.photo}" alt="${item.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+           </button>
           <div class="p-4">
             <h2 class="text-lg font-semibold">${item.title}</h2>
             <p class="text-sm text-ink-muted mt-1">${item.caption}</p>
