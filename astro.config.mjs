@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://lccontainer.com',
   compressHTML: true,
-  integrations: [tailwind()],
+  integrations: [tailwind({ config: './tailwind.config.mjs' })],
   build: {
     inlineStylesheets: 'auto',
   },
