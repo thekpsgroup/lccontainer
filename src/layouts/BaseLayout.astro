@@ -7,7 +7,6 @@ export interface Props {
 
 const { title, description, ogImage = "/photos/logos/lccontainer-logo-transparent-400.png" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-import "../styles/global.css";
 ---
 
 <!DOCTYPE html>
@@ -17,10 +16,7 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-
+    
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -34,98 +30,66 @@ import "../styles/global.css";
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
     
-    <title>{title}</title>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/styles/tokens.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/styles/tokens.css"></noscript>
     
-    <!-- Critical CSS for above-the-fold content -->
-    <link rel="stylesheet" href="/styles/critical.css">
-
-    <!-- Global styles -->
-    <link rel="stylesheet" href="/styles/global.css">
-
-    <!-- Self-hosted Inter font via @fontsource -->
-
-    <!-- DNS prefetch for external domains -->
-    <link rel="dns-prefetch" href="https://lccontainer.com">
-    <link rel="dns-prefetch" href="https://thekpsgroup.com">
-    <link rel="dns-prefetch" href="https://modernconsulting.co">
-    <link rel="dns-prefetch" href="https://modernbrands.co">
+    <!-- DNS prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    
+    <!-- Font optimization -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+    
+    <!-- Critical CSS inline -->
+    <style>
+      body{background:#0B0B0B;color:#FFFFFF;font-family:system-ui,-apple-system,sans-serif;margin:0;padding:0}
+      .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:12px}
+      .bg-brand-red{background-color:#B22222}
+      .text-brand-red{color:#B22222}
+      .text-ink{color:#FFFFFF}
+      .text-ink-muted{color:rgba(255,255,255,0.7)}
+      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+      .fade-in{opacity:0;transform:translateY(10px);transition:opacity 0.4s ease,transform 0.4s ease}
+      .fade-in.visible{opacity:1;transform:translateY(0)}
+      @media (prefers-reduced-motion: reduce){.fade-in{transition:none}}
+    </style>
+    
+    <title>{title}</title>
   </head>
   <body class="bg-brand-black text-ink pb-16 md:pb-0">
-    <!-- Skip to content link for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-red text-white px-4 py-2 rounded z-50">
-      Skip to main content
-    </a>
-
-    <main id="main-content">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-red text-white px-4 py-2 rounded">Skip to content</a>
+    
+    <slot name="header" />
+    
+    <main id="main">
       <slot />
     </main>
-
-    <!-- Optimized JavaScript loading -->
+    
+    <slot name="footer" />
+    
+    <!-- Minimal JavaScript for essential functionality -->
     <script>
-      // Performance monitoring
-      if ('PerformanceObserver' in window) {
-        const observer = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries()) {
-            if (entry.entryType === 'largest-contentful-paint') {
-              if (import.meta.env.DEV) {
-                console.log('LCP:', entry.startTime);
-              }
-            }
-          }
-        });
-        observer.observe({ entryTypes: ['largest-contentful-paint'] });
-      }
-
-      // Service worker registration
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-              if (import.meta.env.DEV) {
-                console.log('SW registered');
-              }
-            })
-            .catch(error => {
-              if (import.meta.env.DEV) {
-                console.log('SW registration failed');
-              }
-            });
-        });
-      }
-
-      // Intersection Observer for fade-in animations
-      if ('IntersectionObserver' in window) {
+      // Simple fade-in animation
+      document.addEventListener('DOMContentLoaded', function() {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
             }
           });
         }, { threshold: 0.1 });
-
-        document.addEventListener('DOMContentLoaded', () => {
-          const fadeElements = document.querySelectorAll('.fade-in');
-          fadeElements.forEach(el => observer.observe(el));
+        
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+      });
+      
+      // Service worker registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
         });
       }
-
-      // Image loading optimization
-      document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        if ('IntersectionObserver' in window) {
-          const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src || img.src;
-                imageObserver.unobserve(img);
-              }
-            });
-          });
-          images.forEach(img => imageObserver.observe(img));
-        }
-      });
     </script>
   </body>
 </html>
