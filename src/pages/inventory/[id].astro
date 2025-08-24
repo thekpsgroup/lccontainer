@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
+import Lightbox from "../../components/Lightbox.astro";
 import DeliveryEstimator from "../../components/DeliveryEstimator.astro";
 import { INVENTORY, type Item } from "../../data/inventory";
 
@@ -28,9 +29,16 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
       <!-- Gallery -->
       <div class="glass p-0 overflow-hidden">
         <div id="carousel" class="relative aspect-[4/3] bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)]">
-          <img id="cimg" src={item.photos[0]} alt={item.title} class="h-full w-full object-cover" loading="eager" onerror="this.style.display='none'" />
-          <button id="prev" class="absolute left-3 top-1/2 -translate-y-1/2 px-3 py-2 rounded-xl bg-white/10 border border-brand-line">‹</button>
-          <button id="next" class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-2 rounded-xl bg-white/10 border border-brand-line">›</button>
+          <button 
+            id="cimg-btn"
+            class="absolute inset-0 w-full h-full cursor-pointer image-overlay"
+            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})`}
+            aria-label={`Enlarge ${item.title} image`}
+          >
+            <img id="cimg" src={item.photos[0]} alt={item.title} class="h-full w-full object-cover" loading="eager" onerror="this.style.display='none'" />
+          </button>
+          <button id="prev" class="absolute left-3 top-1/2 -translate-y-1/2 px-3 py-2 rounded-xl bg-white/10 border border-brand-line z-10">‹</button>
+          <button id="next" class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-2 rounded-xl bg-white/10 border border-brand-line z-10">›</button>
         </div>
         <div class="grid grid-cols-4 gap-2 p-3">
           {item.photos.map((p,idx) => (
@@ -83,6 +91,8 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
     </div>
   </section>
 
+  <Lightbox id="lb" />
+
   <!-- Product schema -->
   <script type="application/ld+json">
   {
@@ -109,7 +119,19 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
     const prev = document.getElementById('prev');
     const next = document.getElementById('next');
     const thumbs = Array.from(document.querySelectorAll('.grid .group img'));
-    function show(i){ idx = (i+photos.length)%photos.length; if(cimg) cimg.src = photos[idx] || ""; }
+    function show(i){ 
+      idx = (i+photos.length)%photos.length; 
+      if(cimg) cimg.src = photos[idx] || ""; 
+      // Update lightbox button onclick
+      const cimgBtn = document.getElementById('cimg-btn');
+      if(cimgBtn) {
+        cimgBtn.onclick = () => openLightbox({
+          src: photos[idx] || "",
+          title: document.querySelector('h1')?.textContent || "",
+          caption: document.querySelector('.text-ink-muted')?.textContent || ""
+        });
+      }
+    }
     prev?.addEventListener('click', ()=> show(idx-1));
     next?.addEventListener('click', ()=> show(idx+1));
     thumbs.forEach((t,i)=> t.parentElement?.addEventListener('click', ()=> show(i)));

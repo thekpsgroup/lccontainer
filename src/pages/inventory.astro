@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
+import Lightbox from "../components/Lightbox.astro";
 import { INVENTORY, type Item } from "../data/inventory";
 
 const sizes = ["20'","40'"];
@@ -14,7 +15,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
 
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
     <h1 class="text-3xl md:text-4xl font-semibold">Inventory</h1>
-    <p class="text-ink-muted mt-2">Our Hutchins yard carries hundreds of units. Filter by size, height, and condition. Transparent pricing; exact quote in 24 hours.</p>
+    <p class="text-ink-muted mt-2">Our 10-acre Hutchins yard carries <strong class="text-brand-red">1,000's of containers</strong> in stock. Filter by size, height, and condition. Transparent pricing; exact quote in 24 hours.</p>
 
     <!-- Filters -->
     <div class="glass p-4 mt-6 fade-in">
@@ -45,9 +46,13 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
       {INVENTORY.map(item => (
         <article class="glass p-0 flex flex-col overflow-hidden hover-lift">
-          <div class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)]">
+          <button 
+            class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer"
+            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})`}
+            aria-label={`Enlarge ${item.title} image`}
+          >
             <img src={item.photos[0]} alt={item.title} class="h-full w-full object-cover" loading="lazy" onerror="this.style.display='none'"/>
-          </div>
+          </button>
           <div class="p-6">
             <div class="flex items-center justify-between">
               <h2 class="text-lg font-semibold">{item.title}</h2>
@@ -65,6 +70,8 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     </div>
   </section>
 
+  <Lightbox id="lb" />
+
   <script>
     const ALL = JSON.parse(String.raw`{ "items": ${JSON.stringify(INVENTORY)} }`).items;
     const f = document.getElementById('filters');
@@ -73,9 +80,13 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     function render(items){
       grid.innerHTML = items.map(item => `
         <article class="glass p-0 flex flex-col overflow-hidden hover-lift">
-          <div class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)]">
+          <button 
+            class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer"
+            onclick='openLightbox(${JSON.stringify({ src: item.photos?.[0] ?? '', title: item.title, caption: item.blurb })})'
+            aria-label="Enlarge ${item.title} image"
+          >
             <img src="${item.photos?.[0] ?? ''}" alt="${item.title}" class="h-full w-full object-cover" loading="lazy" onerror="this.style.display='none'"/>
-          </div>
+          </button>
           <div class="p-6">
             <div class="flex items-center justify-between">
               <h2 class="text-lg font-semibold">${item.title}</h2>
