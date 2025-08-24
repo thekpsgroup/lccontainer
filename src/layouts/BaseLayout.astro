@@ -7,6 +7,7 @@ export interface Props {
 
 const { title, description, ogImage = "/photos/logos/lccontainer-logo-transparent-400.png" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+import "../styles/global.css";
 ---
 
 <!DOCTYPE html>
@@ -47,9 +48,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       @media (prefers-reduced-motion: reduce){.fade-in{transition:none}}
     </style>
 
-    <!-- Non-critical CSS loaded asynchronously -->
-    <link rel="stylesheet" href="/styles/tokens.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/styles/tokens.css"></noscript>
 
     <!-- Font optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
