@@ -51,12 +51,16 @@ export class EmailService {
             return result;
           }
         } catch (error) {
-          console.warn('Email method failed, trying next:', error);
+          if (import.meta.env.DEV) {
+            console.warn('Email method failed, trying next:', error);
+          }
         }
       }
 
       // If all methods fail, log the data for manual follow-up
-      console.error('All email methods failed. Form data:', data);
+      if (import.meta.env.DEV) {
+        console.error('All email methods failed. Form data:', data);
+      }
       
       // Store in localStorage as backup
       this.storeFormData('contact', data);
@@ -67,7 +71,9 @@ export class EmailService {
       };
 
     } catch (error) {
-      console.error('Email service error:', error);
+      if (import.meta.env.DEV) {
+        console.error('Email service error:', error);
+      }
       return {
         success: false,
         message: 'There was an issue sending your message. Please try again or call us directly.'
@@ -98,12 +104,16 @@ export class EmailService {
             return result;
           }
         } catch (error) {
-          console.warn('Email method failed, trying next:', error);
+          if (import.meta.env.DEV) {
+            console.warn('Email method failed, trying next:', error);
+          }
         }
       }
 
       // If all methods fail, log the data for manual follow-up
-      console.error('All email methods failed. Lead data:', data);
+      if (import.meta.env.DEV) {
+        console.error('All email methods failed. Lead data:', data);
+      }
       
       // Store in localStorage as backup
       this.storeFormData('lead', data);
@@ -114,7 +124,9 @@ export class EmailService {
       };
 
     } catch (error) {
-      console.error('Email service error:', error);
+      if (import.meta.env.DEV) {
+        console.error('Email service error:', error);
+      }
       return {
         success: false,
         message: 'There was an issue processing your request. Please try again.'
