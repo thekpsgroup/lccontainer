@@ -155,10 +155,10 @@
     @apply py-8 md:py-12 lg:py-16;
   }
 
-  /* Content wrappers */
-  .content-wrap {
-    @apply max-wrap;
-  }
+    /* Content wrappers */
+    .content-wrap {
+      @apply max-w-[1200px] mx-auto px-5;
+    }
 
   .copy-wrap {
     @apply max-w-[68ch] space-y-6;
