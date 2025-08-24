@@ -32,25 +32,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     
     <title>{title}</title>
     
-    <!-- Critical CSS inline for above-the-fold content -->
-    <style>
-      /* Critical CSS for above-the-fold content */
-      body{background:#0B0B0B;color:#FFFFFF;font-family:system-ui,-apple-system,sans-serif;margin:0;padding:0}
-      .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:12px}
-      .bg-brand-red{background-color:#B22222}
-      .text-brand-red{color:#B22222}
-      .text-ink{color:#FFFFFF}
-      .text-ink-muted{color:rgba(255,255,255,0.7)}
-      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-      .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
-      .fade-in.visible{opacity:1;transform:translateY(0)}
-      @media (prefers-reduced-motion: reduce){.fade-in{transition:none}}
-    </style>
+    <!-- Critical CSS for above-the-fold content -->
+    <link rel="stylesheet" href="/styles/critical.css">
 
     <!-- Global styles -->
     <link rel="stylesheet" href="/styles/global.css">
-    <link rel="stylesheet" href="/styles/tokens.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/styles/tokens.css"></noscript>
 
     <!-- Font optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

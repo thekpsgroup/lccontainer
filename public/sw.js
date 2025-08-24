@@ -53,7 +53,8 @@ self.addEventListener('install', (event) => {
     caches.open(STATIC_CACHE).then((cache) => {
       return cache.addAll([
         '/',
-        '/styles/tokens.css',
+        '/styles/critical.css',
+        '/styles/global.css',
         '/photos/logos/lccontainer-logo-transparent-400.png',
         '/photos/container/standard/20ft_5.jpg'
       ]);
