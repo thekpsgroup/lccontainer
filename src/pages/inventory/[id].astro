@@ -32,7 +32,7 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
           <button 
             id="cimg-btn"
             class="absolute inset-0 w-full h-full cursor-pointer image-overlay"
-            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})`}
+            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb })})`}
             aria-label={`Enlarge ${item.title} image`}
           >
             <img id="cimg" src={item.photos[0]} alt={item.title} class="h-full w-full object-cover" loading="eager" onerror="this.style.display='none'" />
@@ -91,7 +91,7 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
     </div>
   </section>
 
-  <Lightbox id="lb" />
+  <Lightbox id="lb" alt="Expanded inventory photo" />
 
   <!-- Product schema -->
   <script type="application/ld+json">
@@ -127,6 +127,7 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
       if(cimgBtn) {
         cimgBtn.onclick = () => openLightbox({
           src: photos[idx] || "",
+          alt: document.querySelector('h1')?.textContent || "",
           title: document.querySelector('h1')?.textContent || "",
           caption: document.querySelector('.text-ink-muted')?.textContent || ""
         });

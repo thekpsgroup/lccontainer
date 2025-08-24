@@ -33,7 +33,7 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
         <article class="glass overflow-hidden hover-lift">
                       <button
               class="block relative aspect-[4/3] w-full text-left image-overlay"
-              onClick={`openLightbox(${JSON.stringify({ src: item.photo, title: item.title, caption: item.caption })})`}
+              onClick={`openLightbox(${JSON.stringify({ src: item.photo, alt: item.title, title: item.title, caption: item.caption })})`}
               aria-label={`Open ${item.title}`}
             >
               <img src={item.photo} alt={item.title} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
@@ -61,7 +61,7 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
     </div>
   </section>
 
-  <Lightbox id="lb" />
+  <Lightbox id="lb" alt="Expanded custom build image" />
 
   <!-- SEO: ItemList for the gallery -->
   <script type="application/ld+json">
@@ -92,7 +92,7 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
              grid.innerHTML = items.map(item => `
          <article class="glass overflow-hidden hover-lift" id="${item.id}">
                      <button class="block relative aspect-[4/3] w-full text-left image-overlay" aria-label="Open ${item.title}"
-             onclick='openLightbox(${JSON.stringify({ src: item.photo, title: item.title, caption: item.caption })})'>
+             onclick='openLightbox(${JSON.stringify({ src: item.photo, alt: item.title, title: item.title, caption: item.caption })})'>
              <img src="${item.photo}" alt="${item.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
            </button>
           <div class="p-4">

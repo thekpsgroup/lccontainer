@@ -61,7 +61,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
         <article class="glass p-0 flex flex-col overflow-hidden hover-lift" role="article">
           <button 
             class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer overflow-hidden"
-            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})`}
+            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb })})`}
             aria-label={`Enlarge ${item.title} image`}
           >
             <OptimizedImage 
@@ -92,7 +92,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     </div>
   </section>
 
-  <Lightbox id="lb" />
+  <Lightbox id="lb" alt="Expanded inventory item image" />
 
   <script>
     // Performance optimization: Debounce function
@@ -158,7 +158,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
         article.innerHTML = `
           <button 
             class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer overflow-hidden"
-            onClick="openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})"
+            onClick="openLightbox(${JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb })})"
             aria-label="Enlarge ${item.title} image"
           >
             <div class="optimized-image-container h-full w-full">
