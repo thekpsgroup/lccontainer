@@ -13,7 +13,7 @@ export default defineConfig({
     domains: ['lccontainer.com'],
     remotePatterns: [{ protocol: 'https' }],
     // Advanced image optimization
-    quality: 80, // Optimize quality vs file size
+    quality: 85, // Optimize quality vs file size
     format: ['webp', 'avif', 'jpeg'], // Modern formats with fallbacks
     densities: [1, 2], // Generate 1x and 2x for retina displays
     // Responsive image sizes
@@ -27,6 +27,13 @@ export default defineConfig({
   vite: {
     build: { 
       cssMinify: true,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
       rollupOptions: {
         output: {
           // Optimize chunk splitting for better caching

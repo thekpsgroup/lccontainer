@@ -9,7 +9,7 @@ const {
 } = Astro.props;
 const site = "https://lccontainer.com";
 const url = canonical ?? site + Astro.url.pathname;
-const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG later
+const ogImage = "/photos/logos/lccontainer-logo-transparent-400.png";
 ---
 <html lang="en">
   <head>
@@ -24,16 +24,35 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
     <meta name="theme-color" content="#B22222">
     <meta name="color-scheme" content="dark light">
     
+    <!-- Critical CSS inline -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      body{background:#0B0B0B;color:#FFFFFF;font-family:system-ui,-apple-system,sans-serif;margin:0;padding:0}
+      .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:12px}
+      .bg-brand-red{background-color:#B22222}
+      .text-brand-red{color:#B22222}
+      .text-ink{color:#FFFFFF}
+      .text-ink-muted{color:rgba(255,255,255,0.7)}
+      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+      .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+      .fade-in.visible{opacity:1;transform:translateY(0)}
+      @media (prefers-reduced-motion: reduce){.fade-in{transition:none}}
+    </style>
+    
     <!-- Preload critical resources -->
-    <link rel="preload" href="/styles/tokens.css" as="style">
-    <link rel="preload" href="/photos/lccontainer-dark.png" as="image" type="image/png">
+    <link rel="preload" href="/styles/tokens.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/styles/tokens.css"></noscript>
+    
+    <!-- Preload hero image with proper sizing -->
+    <link rel="preload" href="/photos/container/standard/background.png" as="image" type="image/png" fetchpriority="high">
+    
+    <!-- DNS prefetch and preconnect -->
     <link rel="dns-prefetch" href="https://lccontainer.com">
     <link rel="preconnect" href="https://lccontainer.com" crossorigin>
     
-    <!-- Image optimization hints -->
-    <link rel="preload" href="/photos/lccontainer-dark.png?w=400&h=300&f=webp" as="image" type="image/webp">
-    <link rel="preload" href="/photos/lccontainer-dark.png?w=800&h=600&f=webp" as="image" type="image/webp" media="(min-width: 768px)">
-    <link rel="preload" href="/photos/lccontainer-dark.png?w=1200&h=900&f=webp" as="image" type="image/webp" media="(min-width: 1024px)">
+    <!-- Font optimization -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -59,12 +78,25 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
     <meta name="business:contact_data:country_name" content="USA">
     <meta name="business:contact_data:phone_number" content="+1-214-524-4168">
     
-    <!-- Optional GA4 datalayer bootstrap -->
-    <script>window.dataLayer = window.dataLayer || [];</script>
+    <!-- Performance monitoring -->
+    <script>
+      // Performance monitoring
+      window.addEventListener('load', () => {
+        if ('performance' in window) {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          if (perfData) {
+            console.log('LCP:', perfData.loadEventEnd - perfData.loadEventStart);
+            console.log('FID:', perfData.domInteractive - perfData.domContentLoadedEventStart);
+          }
+        }
+      });
+      
+      // GA4 datalayer
+      window.dataLayer = window.dataLayer || [];
+    </script>
   </head>
   <body class="bg-brand-black text-ink font-sans antialiased pb-16 md:pb-0">
     <a href="#main-content" class="sr-only focus:not-sr-only absolute top-4 left-4 z-50 px-4 py-2 rounded bg-brand-red text-white font-semibold transition-all duration-200 hover:bg-red-700">Skip to content</a>
-    <link rel="stylesheet" href="/styles/tokens.css" />
     <main id="main-content">
       <slot />
     </main>
@@ -73,16 +105,20 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
   </body>
 
   <script>
-    // Performance optimizations
+    // Service Worker registration with performance optimization
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {
-          // Silent fail for service worker
-        });
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(registration => {
+            console.log('SW registered:', registration);
+          })
+          .catch(error => {
+            console.log('SW registration failed:', error);
+          });
       });
     }
 
-    // Intersection Observer for fade-in animations with performance optimization
+    // Optimized Intersection Observer for animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -92,33 +128,42 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Stop observing once visible
+          observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    // Observe all fade-in elements with performance optimization
-    document.addEventListener('DOMContentLoaded', () => {
+    // DOM ready with performance optimization
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPerformance);
+    } else {
+      initPerformance();
+    }
+
+    function initPerformance() {
+      // Observe fade-in elements
       const fadeElements = document.querySelectorAll('.fade-in');
       fadeElements.forEach(el => observer.observe(el));
       
-      // Optimize for reduced motion preference
+      // Optimize for reduced motion
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('reduce-motion');
       }
-    });
 
-    // Optimize for mobile performance
-    if ('ontouchstart' in window) {
-      document.documentElement.classList.add('touch-device');
+      // Touch device optimization
+      if ('ontouchstart' in window) {
+        document.documentElement.classList.add('touch-device');
+      }
+
+      // Image loading optimization
+      optimizeImages();
     }
 
-    // Image loading optimization
-    document.addEventListener('DOMContentLoaded', () => {
-      // Preload critical images
+    function optimizeImages() {
+      // Critical images preloading
       const criticalImages = document.querySelectorAll('img[fetchpriority="high"], img[loading="eager"]');
       criticalImages.forEach(img => {
-        if (img.src) {
+        if (img.src && !img.complete) {
           const link = document.createElement('link');
           link.rel = 'preload';
           link.as = 'image';
@@ -127,7 +172,7 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
         }
       });
 
-      // Optimize lazy loading
+      // Lazy loading with Intersection Observer
       if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
@@ -136,6 +181,7 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
               if (img.dataset.src) {
                 img.src = img.dataset.src;
                 img.removeAttribute('data-src');
+                img.classList.add('loaded');
               }
               imageObserver.unobserve(img);
             }
@@ -148,6 +194,22 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
         const lazyImages = document.querySelectorAll('img[loading="lazy"]');
         lazyImages.forEach(img => imageObserver.observe(img));
       }
-    });
+    }
+
+    // Performance monitoring
+    if ('PerformanceObserver' in window) {
+      const perfObserver = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.entryType === 'largest-contentful-paint') {
+            console.log('LCP:', entry.startTime);
+          }
+          if (entry.entryType === 'first-input') {
+            console.log('FID:', entry.processingStart - entry.startTime);
+          }
+        }
+      });
+      
+      perfObserver.observe({ entryTypes: ['largest-contentful-paint', 'first-input'] });
+    }
   </script>
 </html>
