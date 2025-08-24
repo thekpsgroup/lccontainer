@@ -4,14 +4,14 @@ const sub = "10-acre yard in Hutchins, TX with <strong class='text-brand-red'>1,
 ---
 <section class="relative overflow-hidden">
   <div class="absolute inset-0">
-    <img src="/photos/container/standard/yard-overview.jpg" alt="" class="h-full w-full object-cover opacity-25" loading="eager" />
+    <img src="/photos/container/standard/yard-overview.jpg" alt="LC Container yard with thousands of containers in stock" class="h-full w-full object-cover opacity-25" loading="eager" />
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)]"></div>
   </div>
 
   <div class="relative max-w-[1200px] mx-auto px-5 py-20 md:py-28">
     <div class="glass p-6 md:p-10 max-w-2xl">
       <h1 class="text-3xl md:text-5xl font-semibold leading-tight">{headline}</h1>
-      <p class="mt-4 text-ink-muted">{sub}</p>
+      <p class="mt-4 text-ink-muted" set:html={sub}></p>
       <div class="mt-6 flex flex-wrap items-center gap-3">
         <a href="/contact" data-astro-prefetch class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
         <a href="tel:12145244168" class="px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5">Call (214) 524-4168</a>
