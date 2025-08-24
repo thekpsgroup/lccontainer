@@ -19,6 +19,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       return new Response(JSON.stringify({ ok:false, error:"Too many requests. Try again shortly." }), { status: 429 });
     }
     recentIps.set(ip, now);
+    // Remove this IP after the throttle window to avoid unbounded growth
+    setTimeout(() => recentIps.delete(ip), THROTTLE_MS);
 
     const raw = await request.json();
     const parsed = leadSchema.safeParse(raw);
