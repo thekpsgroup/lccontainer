@@ -2,79 +2,174 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 ---
-<BaseLayout title="About — LC Container" description="Texas' trusted container supplier since 2003. 10-acre yard in Hutchins, family-owned, licensed & insured.">
+
+<BaseLayout title="About LC Container - Texas' Trusted Container Supplier Since 2003" description="Learn about LC Container's 20+ years serving Texas with quality shipping containers, custom builds, and exceptional service from our Hutchins yard.">
   <Header />
-
+  
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
-    <h1 class="text-3xl md:text-4xl font-semibold">About LC Container</h1>
-    <p class="text-ink-muted mt-2">Founded in 2003, LC Container supplies new and used shipping containers across Texas. We operate a 10-acre yard in Hutchins, TX and deliver statewide with trusted drivers.</p>
+    <div class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-semibold mb-4">About LC Container</h1>
+      <p class="text-ink-muted max-w-3xl mx-auto">
+        Texas' trusted container supplier since 2003, delivering modern solutions for businesses across the state with cutting-edge technology and industry expertise.
+      </p>
+    </div>
 
-    <div class="mt-8 grid lg:grid-cols-3 gap-6">
-      <div class="glass p-6">
-        <h3 class="text-lg font-semibold">What we do</h3>
-        <p class="text-sm text-ink-muted mt-2">Buy and lease containers in 20' and 40' (Standard & High Cube). We also handle custom builds — doors, windows, insulation, paint, power, HVAC — and we deliver.</p>
+    <!-- Story Section -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+      <div>
+        <h2 class="text-2xl font-semibold mb-6">Our Story</h2>
+        <div class="space-y-4 text-ink-muted">
+          <p>
+            Founded in 2003, LC Container has grown from a small family operation to Texas' premier shipping container supplier. Our journey began with a simple mission: provide quality containers with exceptional service.
+          </p>
+          <p>
+            Today, our 10-acre Hutchins yard houses thousands of containers, serving businesses across Texas with modern logistics solutions and innovative container modifications. We've built our reputation on trust, quality, and the expertise that comes from decades in the industry.
+          </p>
+          <p>
+            Our team combines traditional values with modern business practices, leveraging the latest technology to deliver efficient, reliable container solutions. From small businesses to large corporations, we provide the same level of personalized service that made us successful.
+          </p>
+        </div>
       </div>
-      <div class="glass p-6">
-        <h3 class="text-lg font-semibold">How we work</h3>
-        <p class="text-sm text-ink-muted mt-2">Straight answers and transparent pricing. We quote quickly, confirm availability, and schedule delivery. Our team is local and reachable.</p>
-      </div>
-      <div class="glass p-6">
-        <h3 class="text-lg font-semibold">Why customers stay</h3>
-        <p class="text-sm text-ink-muted mt-2">Reliable stock, on-time delivery, and builds that match the spec. We've served thousands of Texas customers over two decades.</p>
+      <div class="glass p-0 overflow-hidden">
+        <img src="/photos/container/standard/yard-overview.jpg" alt="LC Container yard overview" class="w-full h-64 object-cover" loading="lazy" />
       </div>
     </div>
 
-    <div class="mt-10 glass p-6">
-      <h2 class="text-xl font-semibold">Timeline</h2>
-      <ul class="text-sm text-ink-muted mt-2 space-y-2">
-        <li><span class="font-semibold">2003:</span> LC Container founded in the DFW area</li>
-        <li><span class="font-semibold">2010s:</span> Yard expanded; statewide delivery network established</li>
-        <li><span class="font-semibold">Today:</span> 10-acre yard in Hutchins, custom builds and leasing added</li>
-      </ul>
+    <!-- Timeline -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-semibold text-center mb-8">Our Journey</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-6 text-center">
+          <div class="text-3xl font-bold text-brand-red mb-2">2003</div>
+          <h3 class="font-semibold mb-2">Founded</h3>
+          <p class="text-sm text-ink-muted">Started as a family business with a vision for modern container solutions</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <div class="text-3xl font-bold text-brand-red mb-2">2010</div>
+          <h3 class="font-semibold mb-2">Expansion</h3>
+          <p class="text-sm text-ink-muted">Expanded to 10-acre yard with thousands of containers in stock</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <div class="text-3xl font-bold text-brand-red mb-2">2024</div>
+          <h3 class="font-semibold mb-2">Innovation</h3>
+          <p class="text-sm text-ink-muted">Leading Texas with modern technology and comprehensive container services</p>
+        </div>
+      </div>
     </div>
 
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="glass p-3"><div class="aspect-[4/3] bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] overflow-hidden rounded-lg"><img src="/photos/lccontainer-dark.png" alt="LC Container yard" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'"/></div></div>
-      <div class="glass p-3"><div class="aspect-[4/3] bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] overflow-hidden rounded-lg"><img src="/photos/lccontainer-dark.png" alt="40' container at yard" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'"/></div></div>
-      <div class="glass p-3"><div class="aspect-[4/3] bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] overflow-hidden rounded-lg"><img src="/photos/lccontainer-dark.png" alt="20' container" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'"/></div></div>
+    <!-- Values -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-semibold text-center mb-8">Our Values</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Quality</h3>
+          <p class="text-sm text-ink-muted">Every container meets our high standards for condition and reliability</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Service</h3>
+          <p class="text-sm text-ink-muted">Personalized attention and modern customer service excellence</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Innovation</h3>
+          <p class="text-sm text-ink-muted">Cutting-edge solutions and modern business practices</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Trust</h3>
+          <p class="text-sm text-ink-muted">20+ years of building lasting relationships with Texas businesses</p>
+        </div>
+      </div>
     </div>
 
-    <div class="mt-10 glass p-6">
-      <h2 class="text-xl font-semibold">Visit the Yard</h2>
-      <p class="text-sm text-ink-muted">1211 E Fulghum Rd, Hutchins, TX 75141</p>
-      <div class="mt-3 rounded-xl overflow-hidden aspect-video">
-        <iframe class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=1211+E+Fulghum+Rd,+Hutchins,+TX+75141&output=embed"></iframe>
+    <!-- Map Section -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-semibold text-center mb-8">Visit Our Yard</h2>
+      <div class="glass p-6">
+        <div class="aspect-video bg-brand-black/20 rounded-lg mb-4 flex items-center justify-center">
+          <div class="text-center">
+            <p class="text-ink-muted mb-2">📍 1211 E Fulghum Rd, Hutchins, TX 75141</p>
+            <p class="text-sm text-ink-muted">Open Monday-Friday 8AM-5PM</p>
+            <p class="text-sm text-ink-muted">Modern facility with thousands of containers</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="/contact" class="inline-block px-6 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Schedule a Visit</a>
+        </div>
       </div>
-      <div class="mt-3 text-sm">
-        <div><span class="text-ink-muted">Phone:</span> <a class="hover:underline" href="tel:12145244168">(214) 524-4168</a></div>
-        <div><span class="text-ink-muted">Email:</span> <a class="hover:underline" href="mailto:info@lccontainer.com">info@lccontainer.com</a></div>
-        <div><span class="text-ink-muted">Hours:</span> Mon–Fri 8–5</div>
-      </div>
-      <div class="mt-4">
-        <a href="/contact" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
+    </div>
+
+    <!-- Team Section -->
+    <div class="text-center">
+      <h2 class="text-2xl font-semibold mb-6">Meet Our Team</h2>
+      <p class="text-ink-muted max-w-2xl mx-auto mb-8">
+        Our experienced team combines traditional industry knowledge with modern business expertise. From sales to delivery, every team member is committed to providing exceptional service and innovative solutions for your container needs.
+      </p>
+      <div class="glass p-8">
+        <p class="text-ink-muted">
+          <strong class="text-ink">Eric Leger</strong> - Founder & Owner<br>
+          <span class="text-sm">20+ years of container industry experience</span>
+        </p>
       </div>
     </div>
   </section>
-
-  <!-- LocalBusiness schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "LC Container",
-    "image": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-400.png",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "1211 E Fulghum Rd",
-      "addressLocality": "Hutchins",
-      "addressRegion": "TX",
-      "postalCode": "75141",
-      "addressCountry": "US"
-    },
-    "telephone": "+1-214-524-4168",
-    "url": "https://lccontainer.com",
-    "areaServed": "Texas",
-    "openingHours": "Mo-Fr 08:00-17:00"
-  }
-  </script>
 </BaseLayout>
+
+<!-- LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "LC Container",
+  "description": "Texas' trusted container supplier since 2003, providing modern solutions and exceptional service",
+  "url": "https://lccontainer.com",
+  "telephone": "+1-214-524-4168",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1211 E Fulghum Rd",
+    "addressLocality": "Hutchins",
+    "addressRegion": "TX",
+    "postalCode": "75141",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "32.6429",
+    "longitude": "-96.7139"
+  },
+  "openingHours": "Mo-Fr 08:00-17:00",
+  "image": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-400.png",
+  "foundingDate": "2003",
+  "numberOfEmployees": "10-50",
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "State",
+    "name": "Texas"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Container Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Shipping Container Sales"
+        }
+      },
+      {
+        "@type": "Offer", 
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Container Leasing"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service", 
+          "name": "Custom Container Modifications"
+        }
+      }
+    ]
+  }
+}
+</script>

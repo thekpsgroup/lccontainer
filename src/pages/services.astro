@@ -3,131 +3,134 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import FAQ from "../components/FAQ.astro";
 ---
-<BaseLayout title="Services — LC Container" description="Buy, lease, or customize shipping containers. Delivery statewide from our Hutchins yard. Quotes in 24 hours.">
+
+<BaseLayout title="Container Services - Buy, Lease & Custom Builds | LC Container" description="Comprehensive container services: buy new/used containers, flexible leasing, and custom modifications. Modern solutions for Texas businesses with expert consultation.">
   <Header />
-
+  
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
-    <h1 class="text-3xl md:text-4xl font-semibold">Services</h1>
-    <p class="text-ink-muted mt-2">Texas' trusted container supplier since 2003. Transparent pricing, quick delivery, and custom builds done right.</p>
+    <div class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-semibold mb-4">Container Services</h1>
+      <p class="text-ink-muted max-w-3xl mx-auto">
+        Modern solutions for all your container needs. From simple storage to complex custom builds, we provide comprehensive services backed by decades of industry expertise and cutting-edge technology.
+      </p>
+    </div>
 
-    <!-- BUY -->
-    <article id="buy" class="mt-10 grid lg:grid-cols-2 gap-6 items-start fade-in">
-      <div class="glass hover-lift">
-        <h2 class="text-2xl font-semibold">Buy Containers</h2>
-        <p class="text-ink-muted mt-2">New (One-Trip) and Used (WWT) in 20' and 40', plus High Cube. Every unit is yard-inspected.</p>
-        <ul class="mt-4 text-sm text-ink-muted list-disc pl-5 space-y-1">
-          <li>New (One-Trip): clean interiors, sharp presentation</li>
-          <li>Used (WWT): budget-friendly, rugged, wind & water tight</li>
-          <li>High Cube: 9'6" height for extra volume or build-outs</li>
-          <li>Lock boxes, vents, paint options</li>
-        </ul>
-        <div class="mt-5 flex gap-2">
-          <a href="/inventory" class="px-4 py-2 rounded-xl border border-brand-line hover:bg-white/5 text-sm">Browse Inventory</a>
-          <a href="/contact?interest=Buy%20containers" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
+    <!-- Buy Containers -->
+    <div id="buy" class="mb-16">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-2xl font-semibold mb-6">Buy Containers</h2>
+          <div class="space-y-4 text-ink-muted mb-6">
+            <p>
+              Own your container outright with our comprehensive selection of new and used containers. Our modern inventory management system ensures you get exactly what you need, when you need it.
+            </p>
+            <p>
+              We offer 20' and 40' containers in both standard and high-cube configurations. All containers are wind and water tight, with detailed condition reports and transparent pricing. Our expert team provides personalized consultation to help you choose the perfect container for your project.
+            </p>
+            <p>
+              With thousands of containers in stock at our Hutchins yard, we can typically deliver within 24-48 hours across Texas. Our modern logistics network ensures reliable, on-time delivery to your location.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="/inventory" class="px-6 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Browse Inventory</a>
+            <a href="/contact?interest=Buy%20containers" class="px-6 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5">Get Quote</a>
+          </div>
+        </div>
+        <div class="glass p-0 overflow-hidden">
+          <img src="/photos/container/standard/20ft_1.jpg" alt="Shipping containers for sale" class="w-full h-64 object-cover" loading="lazy" />
         </div>
       </div>
-      <div class="glass hover-lift">
-        <h3 class="text-lg font-semibold">How buying works</h3>
-        <ol class="mt-2 text-sm text-ink-muted list-decimal pl-5 space-y-1">
-          <li>Tell us size/condition + delivery ZIP</li>
-          <li>We confirm availability and price</li>
-          <li>Schedule delivery (1–5 business days typical)</li>
-          <li>Driver drops and levels where accessible</li>
-        </ol>
-      </div>
-    </article>
+    </div>
 
-    <!-- LEASE -->
-    <article id="lease" class="mt-10 grid lg:grid-cols-2 gap-6 items-start fade-in">
-      <div class="glass hover-lift">
-        <h2 class="text-2xl font-semibold">Lease Containers</h2>
-        <p class="text-ink-muted mt-2">Flexible short- and long-term leases with simple terms.</p>
-        <ul class="mt-4 text-sm text-ink-muted list-disc pl-5 space-y-1">
-          <li>Popular for construction and seasonal storage</li>
-          <li>Pickup at end of term — we handle logistics</li>
-          <li>20' Standard, 40' Standard, and select High Cube</li>
-        </ul>
-        <div class="mt-5">
-          <a href="/contact?interest=Lease%20containers" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Request Lease Quote</a>
+    <!-- Lease Containers -->
+    <div id="lease" class="mb-16">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="lg:order-2">
+          <h2 class="text-2xl font-semibold mb-6">Lease Containers</h2>
+          <div class="space-y-4 text-ink-muted mb-6">
+            <p>
+              Flexible leasing solutions for businesses that need containers without the commitment of ownership. Our modern leasing programs adapt to your business needs, whether you need containers for a few months or several years.
+            </p>
+            <p>
+              We offer both short-term and long-term leases with competitive rates and transparent terms. Our expert team works with you to develop a leasing strategy that maximizes your operational efficiency while minimizing costs.
+            </p>
+            <p>
+              All leased containers include delivery and pickup services. When your lease ends, we handle the pickup and return process, making it hassle-free for your business. Our modern tracking system ensures you always know where your containers are.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact?interest=Lease%20containers" class="px-6 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">See Lease Plans</a>
+            <a href="tel:12145244168" class="px-6 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5">Call (214) 524-4168</a>
+          </div>
+        </div>
+        <div class="lg:order-1 glass p-0 overflow-hidden">
+          <img src="/photos/container/standard/40ft_1.jpg" alt="Container leasing services" class="w-full h-64 object-cover" loading="lazy" />
         </div>
       </div>
-      <div class="glass hover-lift">
-        <h3 class="text-lg font-semibold">Lease basics</h3>
-        <ul class="mt-2 text-sm text-ink-muted list-disc pl-5 space-y-1">
-          <li>Billing monthly, delivery and pickup as separate line items</li>
-          <li>Damage waiver available; site access must be maintained</li>
-          <li>Faster turnaround for repeat customers</li>
-        </ul>
-      </div>
-    </article>
+    </div>
 
-    <!-- CUSTOM -->
-    <article id="custom" class="mt-10 grid lg:grid-cols-2 gap-6 items-start fade-in">
-      <div class="glass hover-lift">
-        <h2 class="text-2xl font-semibold">Custom Builds</h2>
-        <p class="text-ink-muted mt-2">From simple cut-ins to turn-key office/storage conversions.</p>
-        <ul class="mt-4 text-sm text-ink-muted list-disc pl-5 space-y-1">
-          <li>Doors: personnel & roll-up</li>
-          <li>Windows, security bars, lock boxes</li>
-          <li>Insulation (spray or panel), interior finish</li>
-          <li>Electrical & HVAC, exterior paint/branding</li>
-        </ul>
-        <div class="mt-5 flex gap-2">
-          <a href="/inventory" data-astro-prefetch class="px-4 py-2 rounded-xl border border-brand-line hover:bg-white/5 text-sm">See Base Units</a>
-          <a href="/custom-builds" data-astro-prefetch class="px-4 py-2 rounded-xl border border-brand-line hover:bg-white/5 text-sm">See examples</a>
-          <a href="/contact?interest=Custom%20build" data-astro-prefetch class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Scope a Build</a>
+    <!-- Custom Builds -->
+    <div id="custom" class="mb-16">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-2xl font-semibold mb-6">Custom Builds</h2>
+          <div class="space-y-4 text-ink-muted mb-6">
+            <p>
+              Transform standard containers into specialized solutions with our comprehensive custom build services. Our modern fabrication facility and expert team can create virtually any modification you need.
+            </p>
+            <p>
+              We specialize in doors, windows, insulation, paint, power systems, HVAC, and branding. Our team combines traditional craftsmanship with modern technology to deliver custom solutions that meet your exact specifications.
+            </p>
+            <p>
+              From concept to completion, we provide full-service custom builds with detailed project management and quality control. Our modern facility ensures consistent quality and timely delivery of your custom container solutions.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="/custom-builds" class="px-6 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">View Examples</a>
+            <a href="/contact?interest=Custom%20build" class="px-6 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5">Start Project</a>
+          </div>
+        </div>
+        <div class="glass p-0 overflow-hidden">
+          <img src="/photos/container/custom/custom-modification-2.jpg" alt="Custom container modifications" class="w-full h-64 object-cover" loading="lazy" />
         </div>
       </div>
-      <div class="glass hover-lift">
-        <h3 class="text-lg font-semibold">Build process</h3>
-        <ol class="mt-2 text-sm text-ink-muted list-decimal pl-5 space-y-1">
-          <li>Share sketch or requirements (doors, windows, finishes)</li>
-          <li>We confirm spec & ETA</li>
-          <li>Build at yard with QA checkpoints</li>
-          <li>Deliver and set on site</li>
-        </ol>
-      </div>
-    </article>
+    </div>
 
-    <!-- Delivery & Prep -->
-    <article class="mt-10 glass hover-lift fade-in">
-      <h2 class="text-xl font-semibold">Delivery & Site Prep</h2>
-      <div class="grid md:grid-cols-2 gap-4 text-sm text-ink-muted mt-2">
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Tilt-bed: plan ~120' straight line for a 40' drop</li>
-          <li>Level pad: crushed concrete, asphalt, or compacted gravel</li>
-          <li>Blocks/shims available on request</li>
-        </ul>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Crane set available for tight access</li>
-          <li>We'll call ahead with ETA</li>
-          <li>Photos of access help us quote accurately</li>
-        </ul>
+    <!-- Why Choose Us -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-semibold text-center mb-8">Why Choose LC Container</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Modern Technology</h3>
+          <p class="text-sm text-ink-muted">Cutting-edge inventory management and logistics systems for efficient service delivery</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Expert Consultation</h3>
+          <p class="text-sm text-ink-muted">Professional guidance from experienced team members with deep industry knowledge</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Quality Assurance</h3>
+          <p class="text-sm text-ink-muted">Rigorous quality control processes ensuring every container meets our high standards</p>
+        </div>
+        <div class="glass p-6 text-center">
+          <h3 class="font-semibold mb-2">Reliable Service</h3>
+          <p class="text-sm text-ink-muted">20+ years of delivering consistent, dependable service to Texas businesses</p>
+        </div>
       </div>
-    </article>
+    </div>
 
-    <!-- FAQ inline -->
-    <div class="mt-10 fade-in">
-      <h2 class="text-2xl font-semibold">Frequently Asked Questions</h2>
-      <div class="mt-4">
-        <FAQ />
-      </div>
-      <div class="mt-4">
-        <a href="/contact" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Still have questions? Get a Free Quote</a>
+    <!-- CTA Section -->
+    <div class="glass p-8 text-center">
+      <h2 class="text-2xl font-semibold mb-4">Ready to Get Started?</h2>
+      <p class="text-ink-muted mb-6 max-w-2xl mx-auto">
+        Our modern solutions and expert team are ready to help you find the perfect container solution. Get a free quote today and experience the difference that decades of industry expertise and cutting-edge technology can make.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="px-8 py-4 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Get Free Quote</a>
+        <a href="tel:12145244168" class="px-8 py-4 rounded-xl border border-brand-line text-ink hover:bg-white/5">Call (214) 524-4168</a>
       </div>
     </div>
   </section>
 
-  <!-- FAQPage schema for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      { "@type": "Question", "name": "Do you deliver statewide?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We deliver across Texas with tilt-bed and crane options where needed." } },
-      { "@type": "Question", "name": "What's the difference between Standard and High Cube?", "acceptedAnswer": { "@type": "Answer", "text": "High Cube containers are 9'6\" tall — about 1 foot taller than Standard." } },
-      { "@type": "Question", "name": "Used vs New (One-Trip) — which should I pick?", "acceptedAnswer": { "@type": "Answer", "text": "Used (WWT) are rugged & cost-effective; New (One-Trip) are cleaner and present better." } }
-    ]
-  }
-  </script>
+  <FAQ />
 </BaseLayout>
