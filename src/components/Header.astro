@@ -56,17 +56,28 @@ const nav = [
 <script>
   // Header scroll blur effect
   const header = document.getElementById('header');
-  let lastScrollY = window.scrollY;
-  
-  window.addEventListener('scroll', () => {
+  let ticking = false;
+
+  const updateHeader = () => {
     const currentScrollY = window.scrollY;
-    
+
     if (currentScrollY > 30) {
       header?.classList.add('bg-brand-black/95', 'backdrop-blur-md');
     } else {
       header?.classList.remove('bg-brand-black/95', 'backdrop-blur-md');
     }
-    
-    lastScrollY = currentScrollY;
-  });
+
+    ticking = false;
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 </script>
