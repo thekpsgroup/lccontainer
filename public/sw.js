@@ -110,7 +110,7 @@ self.addEventListener('sync', (event) => {
 
 async function doBackgroundSync() {
   // Handle background sync tasks
-  console.log('Background sync completed');
+  // Background sync completed
 }
 
 // Push notifications (if needed in the future)

@@ -221,7 +221,9 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
         msg.textContent = "Couldn't send. Please call (214) 524-4168.";
       }
     } catch (error) {
-      console.error('Form submission error:', error);
+      if (import.meta.env.DEV) {
+        console.error('Form submission error:', error);
+      }
       msg.textContent = "Network error. Please call (214) 524-4168.";
     } finally {
       setLoading(false);
@@ -243,6 +245,8 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
       zipEl.value = params.get('zip'); 
     }
   } catch (error) {
-    console.error('URL parameter parsing error:', error);
+    if (import.meta.env.DEV) {
+      console.error('URL parameter parsing error:', error);
+    }
   }
 </script>

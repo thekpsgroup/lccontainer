@@ -80,7 +80,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         const observer = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
             if (entry.entryType === 'largest-contentful-paint') {
-              console.log('LCP:', entry.startTime);
+              if (import.meta.env.DEV) {
+                console.log('LCP:', entry.startTime);
+              }
             }
           }
         });
@@ -91,8 +93,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
-            .then(registration => console.log('SW registered'))
-            .catch(error => console.log('SW registration failed'));
+            .then(registration => {
+              if (import.meta.env.DEV) {
+                console.log('SW registered');
+              }
+            })
+            .catch(error => {
+              if (import.meta.env.DEV) {
+                console.log('SW registration failed');
+              }
+            });
         });
       }
 
