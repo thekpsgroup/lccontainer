@@ -17,23 +17,33 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
     <h1 class="text-3xl md:text-4xl font-semibold">Inventory</h1>
     <p class="text-ink-muted mt-2">Our 10-acre Hutchins yard carries <strong class="text-brand-red">1,000's of containers</strong> in stock. Filter by size, height, and condition. Transparent pricing; exact quote in 24 hours.</p>
 
-    <!-- Filters -->
+    <!-- Search & Filters -->
     <div class="glass p-4 mt-6 fade-in">
-      <form id="filters" class="grid sm:grid-cols-3 gap-3 text-sm">
+      <form id="filters" class="grid gap-3 text-sm">
+        <!-- Search -->
+        <label class="block sm:col-span-3">Search
+          <input 
+            type="search" 
+            id="search" 
+            placeholder="Search containers..." 
+            class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200"
+          />
+        </label>
+        <!-- Filters -->
         <label class="block">Size
-          <select name="size" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line">
+          <select name="size" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
             <option value="">Any</option>
             {sizes.map(s => <option value={s}>{s}</option>)}
           </select>
         </label>
         <label class="block">Height
-          <select name="height" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line">
+          <select name="height" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
             <option value="">Any</option>
             {heights.map(h => <option value={h}>{h}</option>)}
           </select>
         </label>
         <label class="block">Condition
-          <select name="condition" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line">
+          <select name="condition" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
             <option value="">Any</option>
             {conditions.map(c => <option value={c}>{c}</option>)}
           </select>
@@ -75,8 +85,32 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
   <script>
     const ALL = JSON.parse(String.raw`{ "items": ${JSON.stringify(INVENTORY)} }`).items;
     const f = document.getElementById('filters');
+    const search = document.getElementById('search');
     const grid = document.getElementById('grid');
     const count = document.getElementById('count');
+    
+    function filterItems() {
+      const searchTerm = search.value.toLowerCase();
+      const size = f.elements.namedItem('size').value;
+      const height = f.elements.namedItem('height').value;
+      const condition = f.elements.namedItem('condition').value;
+      
+      const filtered = ALL.filter(item => {
+        const matchesSearch = !searchTerm || 
+          item.title.toLowerCase().includes(searchTerm) ||
+          item.blurb.toLowerCase().includes(searchTerm) ||
+          item.specs.some(spec => spec.toLowerCase().includes(searchTerm));
+        const matchesSize = !size || item.size === size;
+        const matchesHeight = !height || item.height === height;
+        const matchesCondition = !condition || item.condition === condition;
+        
+        return matchesSearch && matchesSize && matchesHeight && matchesCondition;
+      });
+      
+      render(filtered);
+      count.textContent = `Showing ${filtered.length} of ${ALL.length} items`;
+    }
+    
     function render(items){
       grid.innerHTML = items.map(item => `
         <article class="glass p-0 flex flex-col overflow-hidden hover-lift">
@@ -94,27 +128,22 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
             </div>
             <p class="text-sm text-ink-muted mt-1">${item.blurb}</p>
             <p class="text-sm text-ink-muted mt-1">From $${Number(item.priceFrom).toLocaleString()}</p>
-                       <div class="mt-4 flex gap-2">
-             <a href="/inventory/${item.id}" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5">View details</a>
-             <a href="/contact?interest=${encodeURIComponent(item.title)}" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
-           </div>
+            <div class="mt-4 flex gap-2">
+              <a href="/inventory/${item.id}" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200">View details</a>
+              <a href="/contact?interest=${encodeURIComponent(item.title)}" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Get Free Quote</a>
+            </div>
           </div>
         </article>
       `).join('');
-      count.textContent = `Showing ${items.length} item${items.length===1 ? "" : "s"}`;
+      count.textContent = `Showing ${items.length} of ${ALL.length} items`;
     }
-    function apply(){
-      const data = new FormData(f);
-      const size = data.get('size') || "";
-      const height = data.get('height') || "";
-      const condition = data.get('condition') || "";
-      let items = ALL;
-      if(size) items = items.filter(i => i.size === size);
-      if(height) items = items.filter(i => i.height === height);
-      if(condition) items = items.filter(i => i.condition === condition);
-      render(items);
-    }
-    f?.addEventListener('change', apply);
-    apply();
+    
+    // Event listeners
+    search.addEventListener('input', filterItems);
+    f.elements.namedItem('size').addEventListener('change', filterItems);
+    f.elements.namedItem('height').addEventListener('change', filterItems);
+    f.elements.namedItem('condition').addEventListener('change', filterItems);
+    
+    render(ALL);
   </script>
 </BaseLayout>

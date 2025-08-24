@@ -22,20 +22,20 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     <!-- Step 1 -->
     <fieldset class="step" data-step="1">
       <label class="block text-sm">Full Name
-        <input name="name" required autocomplete="name" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+        <input name="name" required autocomplete="name" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200" />
       </label>
       <label class="block text-sm">Email
-        <input name="email" type="email" required autocomplete="email" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+        <input name="email" type="email" required autocomplete="email" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200" />
       </label>
       <label class="block text-sm">Phone
-        <input name="phone" required autocomplete="tel" inputmode="tel" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+        <input name="phone" required autocomplete="tel" inputmode="tel" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200" />
       </label>
     </fieldset>
 
     <!-- Step 2 -->
     <fieldset class="step hidden" data-step="2">
       <label class="block text-sm">What do you need?
-        <select name="interest" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line">
+        <select name="interest" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
           {interests.map(i => <option value={i}>{i}</option>)}
         </select>
       </label>
@@ -44,10 +44,10 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     <!-- Step 3 -->
     <fieldset class="step hidden" data-step="3">
       <label class="block text-sm">Delivery ZIP
-        <input name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+        <input name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200" />
       </label>
       <label class="block text-sm">Notes (optional)
-        <textarea name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60"></textarea>
+        <textarea name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200"></textarea>
       </label>
     </fieldset>
 
@@ -58,9 +58,12 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
     <!-- Controls -->
     <div class="flex gap-3 mt-1">
-      <button type="button" id="prevBtn" class="hidden px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5">Back</button>
-      <button type="button" id="nextBtn" class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Next</button>
-      <button type="submit" id="submitBtn" class="hidden px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Submit</button>
+      <button type="button" id="prevBtn" class="hidden px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5 transition-colors duration-200">Back</button>
+      <button type="button" id="nextBtn" class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200">Next</button>
+      <button type="submit" id="submitBtn" class="hidden px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200">
+        <span id="submitText">Submit</span>
+        <span id="submitLoading" class="hidden">Sending...</span>
+      </button>
     </div>
 
     <p id="formMsg" class="text-sm text-ink-muted mt-1" role="status" aria-live="polite"></p>
@@ -74,6 +77,8 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   const nextBtn = document.getElementById('nextBtn');
   const prevBtn = document.getElementById('prevBtn');
   const submitBtn = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const submitLoading = document.getElementById('submitLoading');
   const form = /** @type {HTMLFormElement} */(document.getElementById('quoteForm'));
   const msg = document.getElementById('formMsg');
   const startedAt = document.getElementById('startedAt');
@@ -89,6 +94,22 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     steps[i].querySelector('input,select,textarea')?.focus();
   }
   showStep(current);
+
+  function setLoading(loading) {
+    if (loading) {
+      submitText.classList.add('hidden');
+      submitLoading.classList.remove('hidden');
+      submitBtn.disabled = true;
+      nextBtn.disabled = true;
+      prevBtn.disabled = true;
+    } else {
+      submitText.classList.remove('hidden');
+      submitLoading.classList.add('hidden');
+      submitBtn.disabled = false;
+      nextBtn.disabled = false;
+      prevBtn.disabled = false;
+    }
+  }
 
   function validateStep(i){
     // quick client-side checks
@@ -113,6 +134,7 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
+    setLoading(true);
     msg.textContent = "Sending…";
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
@@ -135,6 +157,8 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
       }
     } catch {
       msg.textContent = "Network error. Please call (214) 524-4168.";
+    } finally {
+      setLoading(false);
     }
   });
 
