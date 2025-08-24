@@ -1,220 +1,107 @@
 // Service Worker for LC Container - Image Optimization & Caching
 const CACHE_NAME = 'lccontainer-v1';
-const IMAGE_CACHE_NAME = 'lccontainer-images-v1';
+const STATIC_CACHE = 'static-v1';
+const IMAGE_CACHE = 'images-v1';
 
 // Cache strategies
-const CACHE_STRATEGIES = {
-  // Cache first for static assets
-  CACHE_FIRST: 'cache-first',
-  // Network first for API calls
-  NETWORK_FIRST: 'network-first',
-  // Stale while revalidate for images
-  STALE_WHILE_REVALIDATE: 'stale-while-revalidate'
+const cacheFirst = async (request) => {
+  const cache = await caches.open(STATIC_CACHE);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  
+  try {
+    const response = await fetch(request);
+    if (response.status === 200) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch (error) {
+    return new Response('Network error', { status: 503 });
+  }
 };
 
-// Assets to cache immediately
-const STATIC_ASSETS = [
-  '/',
-  '/styles/tokens.css',
-  '/photos/lccontainer-dark.png',
-  '/inventory',
-  '/contact',
-  '/about'
-];
+const networkFirst = async (request) => {
+  try {
+    const response = await fetch(request);
+    const cache = await caches.open(STATIC_CACHE);
+    cache.put(request, response.clone());
+    return response;
+  } catch (error) {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    throw error;
+  }
+};
 
-// Install event - cache static assets
+const staleWhileRevalidate = async (request) => {
+  const cache = await caches.open(IMAGE_CACHE);
+  const cached = await cache.match(request);
+  
+  const fetchPromise = fetch(request).then(response => {
+    if (response.status === 200) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  });
+  
+  return cached || fetchPromise;
+};
+
+// Install event
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(STATIC_ASSETS);
-      })
-      .then(() => {
-        return self.skipWaiting();
-      })
+    caches.open(STATIC_CACHE).then((cache) => {
+      return cache.addAll([
+        '/',
+        '/styles/tokens.css',
+        '/photos/logos/lccontainer-logo-transparent-400.png',
+        '/photos/container/standard/20ft_5.jpg'
+      ]);
+    })
   );
+  self.skipWaiting();
 });
 
-// Activate event - clean up old caches
+// Activate event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_NAME && cacheName !== IMAGE_CACHE_NAME) {
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-      .then(() => {
-        return self.clients.claim();
-      })
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== STATIC_CACHE && cacheName !== IMAGE_CACHE) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
   );
+  self.clients.claim();
 });
 
-// Fetch event - handle different types of requests
+// Fetch event
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
   // Skip non-GET requests
-  if (request.method !== 'GET') {
-    return;
-  }
+  if (request.method !== 'GET') return;
 
-  // Handle different types of requests
-  if (isImageRequest(request)) {
-    event.respondWith(handleImageRequest(request));
-  } else if (isAPIRequest(request)) {
-    event.respondWith(handleAPIRequest(request));
-  } else if (isStaticAsset(request)) {
-    event.respondWith(handleStaticAsset(request));
+  // Skip chrome-extension and other non-http requests
+  if (!url.protocol.startsWith('http')) return;
+
+  // Cache strategy based on request type
+  if (url.pathname.startsWith('/photos/')) {
+    event.respondWith(staleWhileRevalidate(request));
+  } else if (url.pathname.startsWith('/styles/') || url.pathname.startsWith('/_astro/')) {
+    event.respondWith(cacheFirst(request));
+  } else if (url.pathname === '/' || url.pathname.endsWith('.html')) {
+    event.respondWith(networkFirst(request));
   } else {
-    event.respondWith(handleDefaultRequest(request));
+    event.respondWith(networkFirst(request));
   }
 });
 
-// Check if request is for an image
-function isImageRequest(request) {
-  return request.destination === 'image' || 
-         request.url.includes('/photos/') ||
-         /\.(jpg|jpeg|png|webp|avif|gif|svg)$/i.test(request.url);
-}
-
-// Check if request is for API
-function isAPIRequest(request) {
-  return request.url.includes('/api/') || 
-         request.url.includes('lead') ||
-         request.url.includes('email');
-}
-
-// Check if request is for static asset
-function isStaticAsset(request) {
-  return request.destination === 'style' ||
-         request.destination === 'script' ||
-         request.url.includes('/styles/') ||
-         request.url.includes('/_astro/');
-}
-
-// Handle image requests with stale-while-revalidate strategy
-async function handleImageRequest(request) {
-  const imageCache = await caches.open(IMAGE_CACHE_NAME);
-  
-  // Try to get from cache first
-  const cachedResponse = await imageCache.match(request);
-  
-  if (cachedResponse) {
-    // Return cached version immediately
-    const fetchPromise = fetch(request)
-      .then((response) => {
-        if (response.ok) {
-          // Update cache with fresh version
-          imageCache.put(request, response.clone());
-        }
-        return response;
-      })
-      .catch(() => {
-        // If network fails, keep using cached version
-        return cachedResponse;
-      });
-    
-    return cachedResponse;
-  } else {
-    // No cache, fetch from network
-    try {
-      const response = await fetch(request);
-      if (response.ok) {
-        // Cache the response
-        imageCache.put(request, response.clone());
-      }
-      return response;
-    } catch (error) {
-      // Return a placeholder image if network fails
-      return new Response(
-        `<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100%" height="100%" fill="#f0f0f0"/>
-          <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#666" font-family="Arial" font-size="16">
-            Image not available
-          </text>
-        </svg>`,
-        {
-          headers: { 'Content-Type': 'image/svg+xml' }
-        }
-      );
-    }
-  }
-}
-
-// Handle API requests with network-first strategy
-async function handleAPIRequest(request) {
-  try {
-    // Try network first
-    const response = await fetch(request);
-    if (response.ok) {
-      return response;
-    }
-    throw new Error('Network response not ok');
-  } catch (error) {
-    // Fall back to cache if network fails
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    // Return error response
-    return new Response(
-      JSON.stringify({ error: 'Service unavailable' }),
-      {
-        status: 503,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
-  }
-}
-
-// Handle static assets with cache-first strategy
-async function handleStaticAsset(request) {
-  const cache = await caches.open(CACHE_NAME);
-  const cachedResponse = await cache.match(request);
-  
-  if (cachedResponse) {
-    return cachedResponse;
-  }
-  
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      cache.put(request, response.clone());
-    }
-    return response;
-  } catch (error) {
-    return new Response('Asset not available', { status: 404 });
-  }
-}
-
-// Handle default requests
-async function handleDefaultRequest(request) {
-  const cache = await caches.open(CACHE_NAME);
-  const cachedResponse = await cache.match(request);
-  
-  if (cachedResponse) {
-    return cachedResponse;
-  }
-  
-  try {
-    const response = await fetch(request);
-    if (response.ok && response.type === 'basic') {
-      cache.put(request, response.clone());
-    }
-    return response;
-  } catch (error) {
-    return new Response('Page not available', { status: 404 });
-  }
-}
-
-// Background sync for offline form submissions
+// Background sync for offline functionality
 self.addEventListener('sync', (event) => {
   if (event.tag === 'background-sync') {
     event.waitUntil(doBackgroundSync());
@@ -222,13 +109,8 @@ self.addEventListener('sync', (event) => {
 });
 
 async function doBackgroundSync() {
-  // Handle any pending background tasks
-  const clients = await self.clients.matchAll();
-  clients.forEach(client => {
-    client.postMessage({
-      type: 'background-sync-complete'
-    });
-  });
+  // Handle background sync tasks
+  console.log('Background sync completed');
 }
 
 // Push notifications (if needed in the future)
