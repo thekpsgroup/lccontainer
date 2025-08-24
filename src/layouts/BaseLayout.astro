@@ -19,6 +19,17 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
     <meta name="description" content={description} />
     <link rel="canonical" href={url} />
 
+    <!-- Performance & Security -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="theme-color" content="#B22222">
+    <meta name="color-scheme" content="dark light">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/styles/tokens.css" as="style">
+    <link rel="preload" href="/photos/lccontainer-dark.png" as="image">
+    <link rel="dns-prefetch" href="https://lccontainer.com">
+    <link rel="preconnect" href="https://lccontainer.com" crossorigin>
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -26,50 +37,75 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
     <meta property="og:url" content={url} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content="LC Container" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:site" content="@lccontainer" />
 
-    <!-- Perf nits -->
-    <link rel="preconnect" href="https://lccontainer.com" crossorigin>
-    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <!-- Business & Contact -->
+    <meta name="business:contact_data:street_address" content="1211 E Fulghum Rd">
+    <meta name="business:contact_data:locality" content="Hutchins">
+    <meta name="business:contact_data:region" content="TX">
+    <meta name="business:contact_data:postal_code" content="75141">
+    <meta name="business:contact_data:country_name" content="USA">
+    <meta name="business:contact_data:phone_number" content="+1-214-524-4168">
     
     <!-- Optional GA4 datalayer bootstrap -->
     <script>window.dataLayer = window.dataLayer || [];</script>
   </head>
-            <body class="bg-brand-black text-ink font-sans antialiased pb-16 md:pb-0">
-            <a href="#main-content" class="sr-only focus:not-sr-only absolute top-4 left-4 z-50 px-4 py-2 rounded bg-brand-red text-white">Skip to content</a>
-            <style> :root{ color-scheme:dark light } </style>
-            <link rel="stylesheet" href="/styles/tokens.css" />
-            <main id="main-content">
-              <slot />
-            </main>
-            <StickyCTA />
-            <Footer />
-          </body>
+  <body class="bg-brand-black text-ink font-sans antialiased pb-16 md:pb-0">
+    <a href="#main-content" class="sr-only focus:not-sr-only absolute top-4 left-4 z-50 px-4 py-2 rounded bg-brand-red text-white font-semibold transition-all duration-200 hover:bg-red-700">Skip to content</a>
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <main id="main-content">
+      <slot />
+    </main>
+    <StickyCTA />
+    <Footer />
+  </body>
 
-          <script>
-            // Intersection Observer for fade-in animations
-            const observerOptions = {
-              threshold: 0.1,
-              rootMargin: '0px 0px -50px 0px'
-            };
+  <script>
+    // Performance optimizations
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+          // Silent fail for service worker
+        });
+      });
+    }
 
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('visible');
-                }
-              });
-            }, observerOptions);
+    // Intersection Observer for fade-in animations with performance optimization
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-            // Observe all fade-in elements
-            document.addEventListener('DOMContentLoaded', () => {
-              const fadeElements = document.querySelectorAll('.fade-in');
-              fadeElements.forEach(el => observer.observe(el));
-            });
-          </script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Stop observing once visible
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements with performance optimization
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(el => observer.observe(el));
+      
+      // Optimize for reduced motion preference
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reduce-motion');
+      }
+    });
+
+    // Optimize for mobile performance
+    if ('ontouchstart' in window) {
+      document.documentElement.classList.add('touch-device');
+    }
+  </script>
 </html>

@@ -19,7 +19,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
 
     <!-- Search & Filters -->
     <div class="glass p-4 mt-6 fade-in">
-      <form id="filters" class="grid gap-3 text-sm">
+      <form id="filters" class="grid gap-3 text-sm" role="search">
         <!-- Search -->
         <label class="block sm:col-span-3">Search
           <input 
@@ -27,7 +27,9 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
             id="search" 
             placeholder="Search containers..." 
             class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200"
+            aria-describedby="search-help"
           />
+          <div id="search-help" class="sr-only">Search by container type, specifications, or features</div>
         </label>
         <!-- Filters -->
         <label class="block">Size
@@ -49,13 +51,13 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
           </select>
         </label>
       </form>
-      <p id="count" class="text-xs text-ink-muted mt-2">Showing {INVENTORY.length} items</p>
+      <p id="count" class="text-xs text-ink-muted mt-2" aria-live="polite">Showing {INVENTORY.length} items</p>
     </div>
 
     <!-- Grid -->
-    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in" role="region" aria-label="Container inventory">
       {INVENTORY.map(item => (
-        <article class="glass p-0 flex flex-col overflow-hidden hover-lift">
+        <article class="glass p-0 flex flex-col overflow-hidden hover-lift" role="article">
           <button 
             class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer"
             onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})`}
@@ -71,8 +73,8 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
             <p class="text-sm text-ink-muted mt-1">{item.blurb}</p>
             <p class="text-sm text-ink-muted mt-1">From ${item.priceFrom.toLocaleString()}</p>
             <div class="mt-4 flex gap-2">
-              <a href={`/inventory/${item.id}`} data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5">View details</a>
-              <a href={`/contact?interest=${encodeURIComponent(item.title)}`} data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
+              <a href={`/inventory/${item.id}`} data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View details</a>
+              <a href={`/contact?interest=${encodeURIComponent(item.title)}`} data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
             </div>
           </div>
         </article>
@@ -83,17 +85,37 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
   <Lightbox id="lb" />
 
   <script>
+    // Performance optimization: Debounce function
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
     const ALL = JSON.parse(String.raw`{ "items": ${JSON.stringify(INVENTORY)} }`).items;
     const f = document.getElementById('filters');
     const search = document.getElementById('search');
     const grid = document.getElementById('grid');
     const count = document.getElementById('count');
     
+    // Cache DOM elements for better performance
+    const filterElements = {
+      size: f.elements.namedItem('size'),
+      height: f.elements.namedItem('height'),
+      condition: f.elements.namedItem('condition')
+    };
+    
     function filterItems() {
-      const searchTerm = search.value.toLowerCase();
-      const size = f.elements.namedItem('size').value;
-      const height = f.elements.namedItem('height').value;
-      const condition = f.elements.namedItem('condition').value;
+      const searchTerm = search.value.toLowerCase().trim();
+      const size = filterElements.size.value;
+      const height = filterElements.height.value;
+      const condition = filterElements.condition.value;
       
       const filtered = ALL.filter(item => {
         const matchesSearch = !searchTerm || 
@@ -111,39 +133,63 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
       count.textContent = `Showing ${filtered.length} of ${ALL.length} items`;
     }
     
+    // Debounced filter function for better performance
+    const debouncedFilter = debounce(filterItems, 300);
+    
     function render(items){
-      grid.innerHTML = items.map(item => `
-        <article class="glass p-0 flex flex-col overflow-hidden hover-lift">
+      // Performance optimization: Use DocumentFragment for batch DOM updates
+      const fragment = document.createDocumentFragment();
+      
+      items.forEach(item => {
+        const article = document.createElement('article');
+        article.className = 'glass p-0 flex flex-col overflow-hidden hover-lift';
+        article.setAttribute('role', 'article');
+        
+        article.innerHTML = `
           <button 
             class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer"
-            onclick='openLightbox(${JSON.stringify({ src: item.photos?.[0] ?? '', title: item.title, caption: item.blurb })})'
+            onClick="openLightbox(${JSON.stringify({ src: item.photos[0], title: item.title, caption: item.blurb })})"
             aria-label="Enlarge ${item.title} image"
           >
-            <img src="${item.photos?.[0] ?? ''}" alt="${item.title}" class="h-full w-full object-cover" loading="lazy" onerror="this.style.display='none'"/>
+            <img src="${item.photos[0]}" alt="${item.title}" class="h-full w-full object-cover" loading="lazy" onerror="this.style.display='none'"/>
           </button>
           <div class="p-6">
             <div class="flex items-center justify-between">
               <h2 class="text-lg font-semibold">${item.title}</h2>
-              ${item.badge ? `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">${item.badge}</span>` : ``}
+              ${item.badge ? `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">${item.badge}</span>` : ''}
             </div>
             <p class="text-sm text-ink-muted mt-1">${item.blurb}</p>
             <p class="text-sm text-ink-muted mt-1">From $${Number(item.priceFrom).toLocaleString()}</p>
             <div class="mt-4 flex gap-2">
-              <a href="/inventory/${item.id}" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200">View details</a>
-              <a href="/contact?interest=${encodeURIComponent(item.title)}" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Get Free Quote</a>
+              <a href="/inventory/${item.id}" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View details</a>
+              <a href="/contact?interest=${encodeURIComponent(item.title)}" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
             </div>
           </div>
-        </article>
-      `).join('');
-      count.textContent = `Showing ${items.length} of ${ALL.length} items`;
+        `;
+        
+        fragment.appendChild(article);
+      });
+      
+      // Clear and append in one operation
+      grid.innerHTML = '';
+      grid.appendChild(fragment);
     }
     
-    // Event listeners
-    search.addEventListener('input', filterItems);
-    f.elements.namedItem('size').addEventListener('change', filterItems);
-    f.elements.namedItem('height').addEventListener('change', filterItems);
-    f.elements.namedItem('condition').addEventListener('change', filterItems);
+    // Event listeners with performance optimizations
+    search.addEventListener('input', debouncedFilter);
+    filterElements.size.addEventListener('change', filterItems);
+    filterElements.height.addEventListener('change', filterItems);
+    filterElements.condition.addEventListener('change', filterItems);
     
+    // Initialize
     render(ALL);
+    
+    // Keyboard navigation for search
+    search.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        search.value = '';
+        filterItems();
+      }
+    });
   </script>
 </BaseLayout>

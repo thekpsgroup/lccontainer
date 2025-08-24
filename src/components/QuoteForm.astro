@@ -58,9 +58,9 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
     <!-- Controls -->
     <div class="flex gap-3 mt-1">
-      <button type="button" id="prevBtn" class="hidden px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5 transition-colors duration-200">Back</button>
-      <button type="button" id="nextBtn" class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200">Next</button>
-      <button type="submit" id="submitBtn" class="hidden px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200">
+      <button type="button" id="prevBtn" class="hidden px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">Back</button>
+      <button type="button" id="nextBtn" class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Next</button>
+      <button type="submit" id="submitBtn" class="hidden px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">
         <span id="submitText">Submit</span>
         <span id="submitLoading" class="hidden">Sending...</span>
       </button>
@@ -71,6 +71,19 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 </div>
 
 <script>
+  // Performance optimization: Debounce function
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
   // init
   const steps = /** @type {NodeListOf<HTMLElement>} */(document.querySelectorAll('.step'));
   const labels = [1,2,3,4].map(i => document.getElementById('label-'+i));
@@ -82,8 +95,11 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   const form = /** @type {HTMLFormElement} */(document.getElementById('quoteForm'));
   const msg = document.getElementById('formMsg');
   const startedAt = document.getElementById('startedAt');
+  
+  // Initialize form
   startedAt.value = String(Date.now());
   let current = 0;
+  let isSubmitting = false;
 
   function showStep(i) {
     steps.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i));
@@ -91,11 +107,17 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     prevBtn.classList.toggle('hidden', i===0);
     nextBtn.classList.toggle('hidden', i===steps.length-1);
     submitBtn.classList.toggle('hidden', i!==steps.length-1);
-    steps[i].querySelector('input,select,textarea')?.focus();
+    
+    // Focus management for accessibility
+    const focusableElement = steps[i].querySelector('input,select,textarea');
+    if (focusableElement) {
+      setTimeout(() => focusableElement.focus(), 100);
+    }
   }
   showStep(current);
 
   function setLoading(loading) {
+    isSubmitting = loading;
     if (loading) {
       submitText.classList.add('hidden');
       submitLoading.classList.remove('hidden');
@@ -112,62 +134,115 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   }
 
   function validateStep(i){
-    // quick client-side checks
+    // Enhanced validation with better error messages
     if(i===0){
-      const name = form.elements.namedItem('name'); const email = form.elements.namedItem('email'); const phone = form.elements.namedItem('phone');
-      if(!name.value || !email.value || !phone.value) return "Please fill name, email, and phone.";
-      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) return "Enter a valid email.";
+      const name = form.elements.namedItem('name'); 
+      const email = form.elements.namedItem('email'); 
+      const phone = form.elements.namedItem('phone');
+      
+      if(!name.value || !email.value || !phone.value) return "Please fill in all required fields.";
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) return "Please enter a valid email address.";
+      if(!/^[\+]?[1-9][\d]{0,15}$/.test(phone.value.replace(/\D/g,''))) return "Please enter a valid phone number.";
     }
     if(i===2){
       const zip = form.elements.namedItem('zip');
-      if(!/^\d{5}$/.test(zip.value)) return "ZIP must be 5 digits.";
+      if(!/^\d{5}$/.test(zip.value)) return "Please enter a valid 5-digit ZIP code.";
     }
     return null;
   }
 
+  // Debounced error clearing
+  const clearError = debounce(() => {
+    if (msg.textContent && !msg.textContent.includes('Thanks!')) {
+      msg.textContent = '';
+    }
+  }, 3000);
+
   nextBtn.addEventListener('click', ()=>{
+    if (isSubmitting) return;
+    
     const err = validateStep(current);
-    if(err){ msg.textContent = err; return; }
-    if(current < steps.length-1){ current++; showStep(current); msg.textContent=""; }
+    if(err){ 
+      msg.textContent = err; 
+      clearError();
+      return; 
+    }
+    if(current < steps.length-1){ 
+      current++; 
+      showStep(current); 
+      msg.textContent=""; 
+    }
   });
-  prevBtn.addEventListener('click', ()=>{ if(current>0){ current--; showStep(current); msg.textContent=""; } });
+  
+  prevBtn.addEventListener('click', ()=>{
+    if (isSubmitting) return;
+    
+    if(current>0){ 
+      current--; 
+      showStep(current); 
+      msg.textContent=""; 
+    } 
+  });
 
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
+    if (isSubmitting) return;
+    
     setLoading(true);
     msg.textContent = "Sending…";
+    
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
+    
     try{
       const res = await fetch('/api/lead', {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify(payload)
       });
+      
       const j = await res.json();
       if(j.ok){
         msg.textContent = "Thanks! We'll call you within 24h.";
-        form.reset(); startedAt.value = String(Date.now());
-        current = 0; showStep(current);
-        // Basic GA4 event hook
+        form.reset(); 
+        startedAt.value = String(Date.now());
+        current = 0; 
+        showStep(current);
+        
+        // Enhanced analytics tracking
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "quote_submit", interest: payload.interest, zip: payload.zip });
+        window.dataLayer.push({ 
+          event: "quote_submit", 
+          interest: payload.interest, 
+          zip: payload.zip,
+          timestamp: Date.now()
+        });
       } else {
         msg.textContent = "Couldn't send. Please call (214) 524-4168.";
       }
-    } catch {
+    } catch (error) {
+      console.error('Form submission error:', error);
       msg.textContent = "Network error. Please call (214) 524-4168.";
     } finally {
       setLoading(false);
     }
   });
 
-  // Prefill from URL (?interest=...&zip=...)
-  const params = new URLSearchParams(location.search);
-  const interestEl = form?.elements?.namedItem?.('interest');
-  const zipEl = form?.elements?.namedItem?.('zip');
-  if (interestEl && params.get('interest')) {
-    [...interestEl.options].forEach(o => { if (o.value === params.get('interest')) o.selected = true; });
+  // Prefill from URL with error handling
+  try {
+    const params = new URLSearchParams(location.search);
+    const interestEl = form?.elements?.namedItem?.('interest');
+    const zipEl = form?.elements?.namedItem?.('zip');
+    
+    if (interestEl && params.get('interest')) {
+      [...interestEl.options].forEach(o => { 
+        if (o.value === params.get('interest')) o.selected = true; 
+      });
+    }
+    if (zipEl && params.get('zip')) { 
+      zipEl.value = params.get('zip'); 
+    }
+  } catch (error) {
+    console.error('URL parameter parsing error:', error);
   }
-  if (zipEl && params.get('zip')) { zipEl.value = params.get('zip'); }
 </script>
