@@ -55,7 +55,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         html
       });
     } else {
-      console.log("Lead (no RESEND_API_KEY set)", { ...data, ip });
+      if (import.meta.env.DEV) {
+        console.log("Lead (no RESEND_API_KEY set)", { ...data, ip });
+      }
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
