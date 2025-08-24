@@ -26,9 +26,14 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
     
     <!-- Preload critical resources -->
     <link rel="preload" href="/styles/tokens.css" as="style">
-    <link rel="preload" href="/photos/lccontainer-dark.png" as="image">
+    <link rel="preload" href="/photos/lccontainer-dark.png" as="image" type="image/png">
     <link rel="dns-prefetch" href="https://lccontainer.com">
     <link rel="preconnect" href="https://lccontainer.com" crossorigin>
+    
+    <!-- Image optimization hints -->
+    <link rel="preload" href="/photos/lccontainer-dark.png?w=400&h=300&f=webp" as="image" type="image/webp">
+    <link rel="preload" href="/photos/lccontainer-dark.png?w=800&h=600&f=webp" as="image" type="image/webp" media="(min-width: 768px)">
+    <link rel="preload" href="/photos/lccontainer-dark.png?w=1200&h=900&f=webp" as="image" type="image/webp" media="(min-width: 1024px)">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -107,5 +112,42 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
     if ('ontouchstart' in window) {
       document.documentElement.classList.add('touch-device');
     }
+
+    // Image loading optimization
+    document.addEventListener('DOMContentLoaded', () => {
+      // Preload critical images
+      const criticalImages = document.querySelectorAll('img[fetchpriority="high"], img[loading="eager"]');
+      criticalImages.forEach(img => {
+        if (img.src) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = img.src;
+          document.head.appendChild(link);
+        }
+      });
+
+      // Optimize lazy loading
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+              }
+              imageObserver.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '50px 0px',
+          threshold: 0.01
+        });
+
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        lazyImages.forEach(img => imageObserver.observe(img));
+      }
+    });
   </script>
 </html>
