@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Lightbox from "../components/Lightbox.astro";
+import { CUSTOM_BUILDS, type Tag } from "../data/customBuilds";
+
+const title = "Custom Builds — LC Container";
+const desc = "Doors, windows, insulation, paint, power, HVAC, and structural cut-ins. See real custom containers built at our Hutchins yard.";
+const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC","Security","Ventilation","Cut & Frame"];
+---
+
+<BaseLayout title={title} description={desc} canonical="https://lccontainer.com/custom-builds">
+  <Header />
+
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <h1 class="text-3xl md:text-4xl font-semibold">Custom Builds</h1>
+    <p class="text-ink-muted mt-2">From simple cut-ins to turnkey office conversions. Real work, real photos from our Hutchins, TX yard.</p>
+
+    <!-- Filters -->
+    <div class="glass p-4 mt-6">
+      <form id="filters" class="flex flex-wrap gap-2 text-sm">
+        <button type="button" data-tag="" class="px-3 py-2 rounded-xl border border-brand-line hover:bg-white/5" aria-pressed="true">All</button>
+        {TAGS.map(t => (
+          <button type="button" data-tag={t} class="px-3 py-2 rounded-xl border border-brand-line hover:bg-white/5">{t}</button>
+        ))}
+      </form>
+      <p id="count" class="text-xs text-ink-muted mt-2">Showing {CUSTOM_BUILDS.length} items</p>
+    </div>
+
+    <!-- Grid -->
+    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {CUSTOM_BUILDS.map(item => (
+        <article class="glass overflow-hidden">
+          <button
+            class="block relative aspect-[4/3] w-full text-left"
+            onClick={`openLightbox(${JSON.stringify({ src: item.photo, title: item.title, caption: item.caption })})`}
+            aria-label={`Open ${item.title}`}
+          >
+            <img src={item.photo} alt={item.title} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          </button>
+          <div class="p-4">
+            <h2 class="text-lg font-semibold">{item.title}</h2>
+            <p class="text-sm text-ink-muted mt-1">{item.caption}</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {item.tags.map(tag => <span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{tag}</span>)}
+            </div>
+            <div class="mt-4">
+              <a href={`/contact?interest=${encodeURIComponent("Custom build: " + item.title)}`} data-astro-prefetch class="inline-flex px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Scope this build</a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Trust -->
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+      <div class="glass p-3 text-center"><div class="font-semibold">Licensed & Insured</div></div>
+      <div class="glass p-3 text-center"><div class="font-semibold">Quotes in 24h</div></div>
+      <div class="glass p-3 text-center"><div class="font-semibold">10-Acre Yard</div></div>
+      <div class="glass p-3 text-center"><div class="font-semibold">200-Mile Service</div></div>
+    </div>
+  </section>
+
+  <Lightbox id="lb" />
+
+  <!-- SEO: ItemList for the gallery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "LC Container Custom Builds",
+    "itemListElement": [
+      ${CUSTOM_BUILDS.map((i, idx) => `{
+        "@type": "ListItem",
+        "position": ${idx + 1},
+        "url": "https://lccontainer.com/custom-builds#${i.id}",
+        "name": "${i.title}",
+        "image": "https://lccontainer.com${i.photo}"
+      }`).join(",")}
+    ]
+  }
+  </script>
+
+  <script define:vars={{ CUSTOM_BUILDS }}>
+    const ALL = CUSTOM_BUILDS;
+    const grid = document.getElementById('grid');
+    const count = document.getElementById('count');
+    const filterBar = document.getElementById('filters');
+    let active = "";
+
+    function render(items){
+      grid.innerHTML = items.map(item => `
+        <article class="glass overflow-hidden" id="${item.id}">
+          <button class="block relative aspect-[4/3] w-full text-left" aria-label="Open ${item.title}"
+            onclick='openLightbox(${JSON.stringify({ src: item.photo, title: item.title, caption: item.caption })})'>
+            <img src="${item.photo}" alt="${item.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          </button>
+          <div class="p-4">
+            <h2 class="text-lg font-semibold">${item.title}</h2>
+            <p class="text-sm text-ink-muted mt-1">${item.caption}</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              ${item.tags.map(t => `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">${t}</span>`).join("")}
+            </div>
+            <div class="mt-4">
+              <a href="/contact?interest=${encodeURIComponent("Custom build: " + item.title)}" data-astro-prefetch class="inline-flex px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Scope this build</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+      count.textContent = `Showing ${items.length} item${items.length === 1 ? "" : "s"}`;
+    }
+
+    function apply(tag){
+      active = tag;
+      const items = !tag ? ALL : ALL.filter(i => i.tags.includes(tag));
+      [...filterBar.querySelectorAll('[data-tag]')].forEach(b => {
+        b.setAttribute('aria-pressed', String(b.dataset.tag === tag));
+      });
+      render(items);
+    }
+
+    filterBar?.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('[data-tag]');
+      if(!btn) return;
+      apply(btn.getAttribute('data-tag') || "");
+    });
+
+    apply(""); // default All
+  </script>
+</BaseLayout>

@@ -1,0 +1,18 @@
+:root{
+  --bg:#0B0B0B; --ink:#E6EAF2; --ink-muted:#B8C0CF;
+  --red:#B22222; --silver:#C0C0C0; --gold:#C9A75A;
+  --line:rgba(255,255,255,.18); --glass:rgba(255,255,255,.06);
+  --r-xl:24px; --r-2xl:32px;
+}
+html,body{ background:var(--bg); color:var(--ink); }
+.max-wrap{ max-width:1200px; margin:0 auto; padding:0 20px; }
+
+/* Glassmorphism utility */
+.glass{
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid var(--line);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 8px 30px rgba(2,6,23,.35);
+  border-radius:var(--r-xl);
+}
+.text-muted{ color:var(--ink-muted); }

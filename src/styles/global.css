@@ -1,95 +1,37 @@
+/* Fonts - Local hosting for performance */
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens and utility patterns */
+/* Industrial Premium Design System */
 @layer base {
-  :root {
-    --bg: #ffffff;
-    --text: #1e293b;
-    --muted: #475569;
-    --primary: #1e293b;
-    --primary-foreground: #ffffff;
-    --accent: #2563eb;
-    --accent-foreground: #ffffff;
-    --accent-light: #3b82f6;
-    --accent-dark: #1d4ed8;
-    --success: #059669;
-    --warning: #d97706;
-    --error: #dc2626;
-    --card-bg: #ffffff;
-    --card-border: #e2e8f0;
-    --text-muted: #64748b;
-  }
-
-  .dark {
-    --bg: #0f172a;
-    --text: #f1f5f9;
-    --muted: #cbd5e1;
-    --primary: #f1f5f9;
-    --primary-foreground: #0f172a;
-    --accent: #3b82f6;
-    --accent-foreground: #ffffff;
-    --accent-light: #60a5fa;
-    --accent-dark: #2563eb;
-    --card-bg: #1e293b;
-    --card-border: #334155;
-    --text-muted: #94a3b8;
-  }
-
   html {
-    font-size: 16px;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
   }
 
   body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     letter-spacing: 0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
   }
 
-  /* Enhanced Typography scale */
-  h1 {
-    font-size: 2.25rem; /* text-4xl */
-    line-height: 1.1;
-    font-weight: 700;
-    letter-spacing: -0.025em;
+  /* Ensure swap behavior and prevent font synthesis */
+  :root { 
+    font-synthesis-weight: none; 
   }
 
-  h2 {
-    font-size: 1.875rem; /* text-3xl */
-    line-height: 1.15;
-    font-weight: 600;
-  }
-
-  h3 {
-    font-size: 1.5rem; /* text-2xl */
-    line-height: 1.2;
-    font-weight: 600;
-  }
-
-  @media (min-width: 768px) {
-    h1 {
-      font-size: 3.75rem; /* text-6xl */
-    }
-    
-    h2 {
-      font-size: 2.5rem; /* text-4xl */
-    }
-    
-    h3 {
-      font-size: 1.875rem; /* text-3xl */
-    }
-  }
-
-  /* Focus ring styles for accessibility */
+  /* Focus states for accessibility */
   *:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid #C0C0C0;
     outline-offset: 2px;
     border-radius: 0.375rem;
   }
@@ -99,8 +41,8 @@
     position: absolute;
     top: -40px;
     left: 6px;
-    background: var(--accent);
-    color: var(--accent-foreground);
+    background: #B22222;
+    color: #E6EAF2;
     padding: 8px 12px;
     text-decoration: none;
     border-radius: 6px;
@@ -123,87 +65,29 @@
       scroll-behavior: auto !important;
     }
   }
-
-  /* High contrast mode support */
-  @media (prefers-contrast: high) {
-    :root {
-      --bg: #ffffff;
-      --text: #000000;
-      --muted: #333333;
-      --primary: #000000;
-      --primary-foreground: #ffffff;
-      --accent: #0000ff;
-      --accent-foreground: #ffffff;
-    }
-  }
 }
 
 @layer components {
-  /* Enhanced utility patterns */
-  .content-wrap {
-    @apply mx-auto max-w-7xl px-4 md:px-6 lg:px-8;
-  }
-
-  .copy-wrap {
-    @apply max-w-[68ch] space-y-6;
-  }
-
-  .card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300 dark:bg-slate-800 dark:border-slate-700;
-  }
-
-  .card-hover {
-    @apply hover:scale-[1.02] hover:shadow-2xl transition-all duration-300;
-  }
-
-  .on-image {
-    @apply relative overflow-hidden rounded-2xl;
-  }
-
-  .on-image img {
-    @apply absolute inset-0 h-full w-full object-cover transition-transform duration-500;
-  }
-
-  .on-image:hover img {
-    @apply scale-105;
-  }
-
-  .on-image .overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent;
-  }
-
-  .on-image .text-container {
-    @apply relative z-10 text-white;
-  }
-
-  /* Enhanced Button styles with better contrast */
+  /* Button styles with industrial design */
   .btn-primary {
-    @apply bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transform hover:scale-105;
+    @apply bg-brand-red text-ink px-8 py-4 rounded-xl font-semibold hover:opacity-90 shadow-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-brand-silver/60 transform;
   }
 
   .btn-secondary {
-    @apply border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply border-2 border-brand-silver text-brand-silver px-8 py-4 rounded-xl font-semibold hover:bg-brand-silver hover:text-brand-black transition-all duration-300 focus-visible:ring-2 focus-visible:ring-brand-silver/60 transform;
   }
 
   .btn-ghost {
-    @apply text-slate-700 dark:text-slate-200 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-700 px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    @apply text-ink hover:text-brand-red hover:bg-glass px-4 py-2 rounded-xl font-medium transition-all duration-200;
   }
 
-  /* Enhanced Prose styles with better contrast */
-  .prose {
-    @apply space-y-6;
+  /* Glassmorphism components */
+  .glass-card {
+    @apply glass p-6;
   }
 
-  .prose p {
-    @apply text-slate-800 dark:text-slate-100 leading-7 md:leading-8 text-lg;
-  }
-
-  .prose h1, .prose h2, .prose h3 {
-    @apply text-slate-900 dark:text-slate-50 font-semibold;
-  }
-
-  .prose a {
-    @apply text-blue-600 underline decoration-2 underline-offset-2 hover:decoration-blue-600/60 transition-colors duration-200;
+  .glass-nav {
+    @apply glass backdrop-blur-14;
   }
 
   /* Section styles - Compact for fast transactional business */
@@ -215,47 +99,24 @@
     @apply py-8 md:py-12 lg:py-16;
   }
 
-  /* Gradient backgrounds with better contrast */
-  .gradient-bg {
-    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900;
+  /* Content wrappers */
+  .content-wrap {
+    @apply max-wrap;
   }
 
-  .gradient-bg-light {
-    @apply bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800;
-  }
-
-  /* Glass effect with better contrast */
-  .glass {
-    @apply bg-white/20 backdrop-blur-md border border-white/30;
-  }
-
-  /* Floating Action Button for quick contact */
-  .fab {
-    @apply fixed bottom-6 right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-2xl hover:bg-green-700 hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-500/50;
-  }
-
-  .fab-phone {
-    @apply bg-green-600 hover:bg-green-700;
-  }
-
-  .fab-quote {
-    @apply bg-blue-600 hover:bg-blue-700;
+  .copy-wrap {
+    @apply max-w-[68ch] space-y-6;
   }
 
   /* Animation utilities */
   .fade-in {
-    @apply opacity-0 animate-pulse;
+    @apply opacity-0;
     animation: fadeIn 0.7s ease-out forwards;
   }
 
   .slide-up {
     @apply opacity-0;
     animation: slideUp 0.7s ease-out forwards;
-  }
-
-  .scale-in {
-    @apply opacity-0;
-    animation: scaleIn 0.7s ease-out forwards;
   }
 
   @keyframes fadeIn {
@@ -268,13 +129,6 @@
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes scaleIn {
-    to {
-      opacity: 1;
-      transform: scale(1);
     }
   }
 }

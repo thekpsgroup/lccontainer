@@ -1,38 +1,13 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import ContainerGallery from '../components/ContainerGallery.astro';
-import Services from '../components/Services.astro';
-import TrustBadges from '../components/TrustBadges.astro';
-import TrustStrip from '../components/TrustStrip.astro';
-import FloatingActionButton from '../components/FloatingActionButton.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import ServicesTeaser from "../components/ServicesTeaser.astro";
+import Testimonials from "../components/Testimonials.astro";
 ---
-
-<BaseLayout
-  title="LC Container - Quality Shipping Containers | Dallas-Fort Worth & Texas"
-  description="Quality new & used shipping containers for sale or lease. Serving DFW, Houston, Austin & 200-mile radius. Fast delivery, competitive pricing. Call (214) 524-4168 for quotes."
->
+<BaseLayout title="LC Container — Texas Shipping Containers" description="Buy, lease, or customize shipping containers. Established 2003. 10-acre yard in Hutchins. Fast statewide delivery.">
   <Header />
-
-  <!-- Hero Section -->
   <Hero />
-
-  <!-- Trust Strip -->
-  <TrustStrip />
-
-  <!-- About & Services Section -->
-  <ContainerGallery />
-
-  <!-- Pricing & Services Section -->
-  <Services />
-
-  <!-- Trust Badges -->
-  <TrustBadges />
-
-  <!-- Floating Action Button -->
-  <FloatingActionButton />
-
-  <Footer />
+  <ServicesTeaser />
+  <Testimonials />
 </BaseLayout>

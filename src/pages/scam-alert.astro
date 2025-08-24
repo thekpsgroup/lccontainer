@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+---
+<BaseLayout title="Scam Alert — LC Container" description="How to avoid container purchase scams.">
+  <Header />
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <h1 class="text-3xl md:text-4xl font-semibold">Scam Alert</h1>
+    <div class="glass p-6 mt-4">
+      <p class="text-sm text-ink-muted">There's only one LC Container at <b>1211 E Fulghum Rd, Hutchins, TX 75141</b>. We've served Texas since 2003 and never ask you to wire funds to a personal account.</p>
+      <ul class="text-sm text-ink-muted list-disc pl-5 mt-3 space-y-1">
+        <li>Verify the phone: <a href="tel:12145244168" class="hover:underline">(214) 524-4168</a></li>
+        <li>Quotes come from <code>@lccontainer.com</code> emails</li>
+        <li>Visit the yard if unsure — we're happy to show inventory</li>
+      </ul>
+      <a href="/contact" class="mt-4 inline-flex px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Report a suspicious listing</a>
+    </div>
+  </section>
+</BaseLayout>

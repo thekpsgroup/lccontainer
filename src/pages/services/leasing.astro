@@ -2,465 +2,62 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ContainerGallery from '../../components/ContainerGallery.astro';
 ---
 
 <BaseLayout
-  title="Container Leasing - Flexible Solutions | LC Container"
-  description="Flexible container leasing options for short-term and long-term needs. No upfront costs, maintenance included, and easy upgrades. Perfect for temporary storage and projects."
+  title="Container Leasing - Flexible Solutions | LC Container Texas"
+  description="Flexible container leasing solutions for businesses and individuals. Short-term and long-term leases available with delivery included. Serving Texas with competitive rates. Call (214) 524-4168."
 >
   <Header />
-  
+
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary-600 to-primary-700 text-white py-20">
-    <div class="absolute inset-0 bg-black/20"></div>
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-          Container Leasing
-        </h1>
-        <p class="text-xl md:text-2xl mb-8 animate-slide-up">
-          Flexible Solutions Without the Commitment
-        </p>
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
-          <div class="text-4xl mb-4">📋</div>
-          <p class="text-lg mb-4">
-            Perfect for temporary storage, construction projects, and seasonal needs
-          </p>
-          <div class="flex flex-wrap justify-center gap-4 text-sm">
-            <div class="bg-white/20 rounded-lg px-3 py-1">✓ No Upfront Costs</div>
-            <div class="bg-white/20 rounded-lg px-3 py-1">✓ Flexible Terms</div>
-            <div class="bg-white/20 rounded-lg px-3 py-1">✓ Maintenance Included</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leasing Benefits -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
-            Why Choose Container Leasing?
-          </h2>
-          <p class="text-xl text-secondary-600">
-            The smart alternative to buying containers
-          </p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">No Upfront Costs</h3>
-            <p class="text-secondary-600">Start using containers immediately without large capital investment</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Flexible Terms</h3>
-            <p class="text-secondary-600">Short-term or long-term leases to match your project timeline</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Maintenance Included</h3>
-            <p class="text-secondary-600">We handle all maintenance and repairs during your lease</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Easy Upgrades</h3>
-            <p class="text-secondary-600">Upgrade to larger containers or different types as your needs change</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Delivery Included</h3>
-            <p class="text-secondary-600">We deliver and pick up containers at your location</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Insurance Options</h3>
-            <p class="text-secondary-600">Comprehensive insurance coverage available for your leased containers</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leasing Options -->
-  <section class="py-16 bg-accent-50">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-secondary-900 mb-4">
-          Leasing Options
-        </h2>
-        <p class="text-xl text-secondary-600">
-          Choose the plan that works best for your needs
-        </p>
-      </div>
-      
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Short-Term Leasing -->
-        <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-secondary-900 mb-2">Short-Term</h3>
-            <p class="text-secondary-600">1-6 months</p>
-          </div>
-          
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Perfect for temporary projects</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Construction site storage</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Seasonal storage needs</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Event and festival storage</span>
-            </li>
-          </ul>
-
-          <a 
-            href="/contact" 
-            class="block w-full bg-primary-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
-          >
-            Get Short-Term Quote
-          </a>
-        </div>
-
-        <!-- Long-Term Leasing -->
-        <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-2 border-primary-600">
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-secondary-900 mb-2">Long-Term</h3>
-            <p class="text-secondary-600">6+ months</p>
-            <div class="bg-primary-100 text-primary-800 text-sm font-semibold px-3 py-1 rounded-full mt-2 inline-block">
-              Most Popular
-            </div>
-          </div>
-          
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Lower monthly rates</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Business storage solutions</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Equipment and inventory storage</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Flexible renewal options</span>
-            </li>
-          </ul>
-
-          <a 
-            href="/contact" 
-            class="block w-full bg-primary-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
-          >
-            Get Long-Term Quote
-          </a>
-        </div>
-
-        <!-- Custom Leasing -->
-        <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-secondary-900 mb-2">Custom Solutions</h3>
-            <p class="text-secondary-600">Tailored to your needs</p>
-          </div>
-          
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Multiple container leases</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Custom modifications</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Specialized equipment</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-secondary-600">Volume discounts</span>
-            </li>
-          </ul>
-
-          <a 
-            href="/contact" 
-            class="block w-full bg-primary-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
-          >
-            Discuss Custom Needs
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Common Use Cases -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-secondary-900 mb-4">
-          Common Leasing Use Cases
-        </h2>
-        <p class="text-xl text-secondary-600">
-          See how businesses and individuals use our leasing services
-        </p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-accent-50 rounded-2xl p-6 text-center">
-          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-secondary-900 mb-2">Construction</h3>
-          <p class="text-secondary-600 text-sm">Tool storage, material storage, and temporary offices on job sites</p>
-        </div>
-
-        <div class="bg-accent-50 rounded-2xl p-6 text-center">
-          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-secondary-900 mb-2">Retail</h3>
-          <p class="text-secondary-600 text-sm">Seasonal inventory storage and overflow storage for busy periods</p>
-        </div>
-
-        <div class="bg-accent-50 rounded-2xl p-6 text-center">
-          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-secondary-900 mb-2">Manufacturing</h3>
-          <p class="text-secondary-600 text-sm">Raw material storage, finished product storage, and equipment storage</p>
-        </div>
-
-        <div class="bg-accent-50 rounded-2xl p-6 text-center">
-          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-secondary-900 mb-2">Residential</h3>
-          <p class="text-secondary-600 text-sm">Moving storage, renovation storage, and seasonal item storage</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leasing Process -->
-  <section class="py-16 bg-accent-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
-            Simple Leasing Process
-          </h2>
-          <p class="text-xl text-secondary-600">
-            Get started with container leasing in just a few steps
-          </p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-primary-600">1</span>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Contact Us</h3>
-            <p class="text-secondary-600">Call or fill out our form to discuss your leasing needs</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-primary-600">2</span>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Get Quote</h3>
-            <p class="text-secondary-600">We provide a detailed quote based on your requirements</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-primary-600">3</span>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Sign Agreement</h3>
-            <p class="text-secondary-600">Review and sign the lease agreement</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-primary-600">4</span>
-            </div>
-            <h3 class="text-xl font-bold text-secondary-900 mb-2">Delivery</h3>
-            <p class="text-secondary-600">We deliver your containers to your location</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-secondary-900 mb-4">
-            Frequently Asked Questions
-          </h2>
-        </div>
-        
-        <div class="space-y-6">
-          <div class="bg-accent-50 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-secondary-900 mb-3">
-              What's included in the lease?
-            </h3>
-            <p class="text-secondary-600">
-              Your lease includes the container, delivery, pickup, and basic maintenance. Insurance is available as an add-on.
-            </p>
-          </div>
-          
-          <div class="bg-accent-50 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-secondary-900 mb-3">
-              Can I extend my lease?
-            </h3>
-            <p class="text-secondary-600">
-              Yes! You can extend your lease at any time. We offer flexible renewal options to accommodate your changing needs.
-            </p>
-          </div>
-          
-          <div class="bg-accent-50 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-secondary-900 mb-3">
-              What happens if the container gets damaged?
-            </h3>
-            <p class="text-secondary-600">
-              We handle all repairs and maintenance. If damage occurs, contact us immediately and we'll arrange for repairs.
-            </p>
-          </div>
-          
-          <div class="bg-accent-50 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-secondary-900 mb-3">
-              Can I upgrade to a larger container?
-            </h3>
-            <p class="text-secondary-600">
-              Absolutely! You can upgrade to a larger container or different type at any time during your lease.
-            </p>
-          </div>
-          
-          <div class="bg-accent-50 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-secondary-900 mb-3">
-              Is there a minimum lease term?
-            </h3>
-            <p class="text-secondary-600">
-              Our minimum lease term is 1 month for short-term leases. Long-term leases start at 6 months with better rates.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16 bg-primary-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-bold mb-6">
-        Ready to Start Leasing?
-      </h2>
-      <p class="text-xl mb-8 max-w-2xl mx-auto">
-        Get flexible container solutions without the commitment. Contact us today for a free quote.
+  <section class="pt-32 pb-12 bg-primary-50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+        Container Leasing Solutions
+      </h1>
+      <p class="text-lg text-white mb-8">
+        Flexible leasing options for businesses and individuals. No upfront costs, flexible terms, and delivery included.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-secondary-50 transition-colors">
-          Get Leasing Quote
-        </a>
-        <a href="tel:(214) 524-4168" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-600 transition-colors">
-          Call (214) 524-4168
-        </a>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-12 bg-primary-50">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">No Upfront Costs</h3>
+          <p class="text-white text-sm">Start using containers immediately without large capital investment</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Flexible Terms</h3>
+          <p class="text-white text-sm">Short-term or long-term leases to match your project timeline</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Maintenance Included</h3>
+          <p class="text-white text-sm">We handle all maintenance and repairs during your lease</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Easy Upgrades</h3>
+          <p class="text-white text-sm">Upgrade to larger containers or different types as your needs change</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Delivery Included</h3>
+          <p class="text-white text-sm">We deliver and pick up containers at your location</p>
+        </div>
+        <div class="bg-primary-100 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Insurance Options</h3>
+          <p class="text-white text-sm">Comprehensive insurance coverage available for your leased containers</p>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Container Gallery -->
+  <ContainerGallery />
 
   <Footer />
 </BaseLayout>
+

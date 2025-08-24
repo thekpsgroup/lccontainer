@@ -1,0 +1,98 @@
+export type Condition = "New (One-Trip)" | "Used (WWT)";
+export type Size = "20'" | "40'";
+export type Height = "Standard" | "High Cube";
+
+export interface Item {
+  id: string;          // slug
+  title: string;
+  size: Size;
+  height: Height;
+  condition: Condition;
+  badge?: "Popular" | "Best Value" | "New" | "Tall";
+  priceFrom: number;   // container only (no delivery)
+  blurb: string;
+  photos: string[];    // paths in /public/photos
+  specs: string[];
+  inStock: boolean;
+}
+
+export const INVENTORY: Item[] = [
+  {
+    id: "20std-used",
+    title: "20' Standard — Used (WWT)",
+    size: "20'",
+    height: "Standard",
+    condition: "Used (WWT)",
+    badge: "Popular",
+    priceFrom: 2400,
+    blurb: "Solid floors, cargo doors, wind/water tight.",
+    photos: ["/photos/20std-1.jpg", "/photos/20std-2.jpg"],
+    specs: ["Interior length ~19'4\"", "Width 7'8\"", "Height 7'10\"", "Approx. 2.2K–5K lbs"],
+    inStock: true,
+  },
+  {
+    id: "40std-used",
+    title: "40' Standard — Used (WWT)",
+    size: "40'",
+    height: "Standard",
+    condition: "Used (WWT)",
+    badge: "Best Value",
+    priceFrom: 3200,
+    blurb: "Great storage footprint. Multiple colors.",
+    photos: ["/photos/40std-1.jpg", "/photos/40std-2.jpg"],
+    specs: ["Interior length ~39'5\"", "Width 7'8\"", "Height 7'10\"", "Approx. 8K–9K lbs"],
+    inStock: true,
+  },
+  {
+    id: "40hc-used",
+    title: "40' High Cube — Used (WWT)",
+    size: "40'",
+    height: "High Cube",
+    condition: "Used (WWT)",
+    badge: "Tall",
+    priceFrom: 3600,
+    blurb: "9'6\" height for extra cubic capacity.",
+    photos: ["/photos/40hc-1.jpg", "/photos/40hc-2.jpg"],
+    specs: ["Interior height 8'10\"", "Width 7'8\"", "Length ~39'5\""],
+    inStock: true,
+  },
+  {
+    id: "20std-new",
+    title: "20' Standard — New (One-Trip)",
+    size: "20'",
+    height: "Standard",
+    condition: "New (One-Trip)",
+    badge: "New",
+    priceFrom: 4800,
+    blurb: "Like-new condition, clean interior.",
+    photos: ["/photos/20new-1.jpg", "/photos/20new-2.jpg"],
+    specs: ["Ventilated", "Marine-grade floors", "Lockbox-ready"],
+    inStock: true,
+  },
+  {
+    id: "40std-new",
+    title: "40' Standard — New (One-Trip)",
+    size: "40'",
+    height: "Standard",
+    condition: "New (One-Trip)",
+    badge: "New",
+    priceFrom: 6900,
+    blurb: "Sharp presentation, long service life.",
+    photos: ["/photos/40new-1.jpg", "/photos/40new-2.jpg"],
+    specs: ["Factory fresh", "Multiple colors", "CSC plated"],
+    inStock: true,
+  },
+  {
+    id: "40hc-new",
+    title: "40' High Cube — New (One-Trip)",
+    size: "40'",
+    height: "High Cube",
+    condition: "New (One-Trip)",
+    badge: "New",
+    priceFrom: 7500,
+    blurb: "Extra height + pristine condition.",
+    photos: ["/photos/40hcnew-1.jpg", "/photos/40hcnew-2.jpg"],
+    specs: ["9'6\" external height", "Lockbox", "Fresh gaskets"],
+    inStock: true,
+  },
+];

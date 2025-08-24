@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { CITIES } from "../data/cities";
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site) {
@@ -38,6 +39,12 @@ export const GET: APIRoute = async ({ site }) => {
     },
     {
       url: '/services/custom-builds',
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.9
+    },
+    {
+      url: '/custom-builds',
       lastmod: new Date().toISOString(),
       changefreq: 'weekly',
       priority: 0.9
@@ -96,12 +103,40 @@ export const GET: APIRoute = async ({ site }) => {
       lastmod: new Date().toISOString(),
       changefreq: 'yearly',
       priority: 0.4
+    },
+    {
+      url: '/inventory',
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.9
+    },
+    {
+      url: '/faq',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.7
+    },
+    {
+      url: '/city',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.8
     }
   ];
 
+  // Add city pages
+  const cityPages = CITIES.map(city => ({
+    url: `/city/${city.slug}`,
+    lastmod: new Date().toISOString(),
+    changefreq: 'monthly' as const,
+    priority: 0.8
+  }));
+
+  const allPages = [...pages, ...cityPages];
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(page => `
+${allPages.map(page => `
   <url>
     <loc>${site}${page.url}</loc>
     <lastmod>${page.lastmod}</lastmod>

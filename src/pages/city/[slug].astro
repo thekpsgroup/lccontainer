@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import FAQ from "../../components/FAQ.astro";
+import { CITIES, type CityInfo } from "../../data/cities";
+
+export async function getStaticPaths() {
+  return CITIES.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const city = CITIES.find(c => c.slug === slug) as CityInfo | undefined;
+if (!city) { throw new Error("City not found"); }
+
+const title = `Shipping Containers in ${city.name} — LC Container`;
+const desc  = `${city.name}, ${city.metro}: ${city.blurb} Quotes in 24h. Delivery from Hutchins yard with clear ETAs.`;
+const canonical = `https://lccontainer.com/city/${city.slug}`;
+---
+<BaseLayout title={title} description={desc} canonical={canonical}>
+  <Header />
+
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <nav class="text-sm text-ink-muted mb-4">
+      <a href="/" data-astro-prefetch class="hover:underline">Home</a> / <span class="text-ink">{city.name}</span>
+    </nav>
+
+    <h1 class="text-3xl md:text-4xl font-semibold">Shipping Containers — {city.name}, TX</h1>
+    <p class="text-ink-muted mt-2">{city.blurb}</p>
+
+    <div class="mt-6 grid lg:grid-cols-3 gap-6">
+      <article class="glass p-6">
+        <h2 class="text-xl font-semibold">Buy</h2>
+        <p class="text-sm text-ink-muted mt-1">20' & 40' · Standard & High Cube · New (One-Trip) & Used (WWT)</p>
+        <a href="/inventory" data-astro-prefetch class="inline-flex mt-3 px-4 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5">Browse Inventory</a>
+      </article>
+
+      <article class="glass p-6">
+        <h2 class="text-xl font-semibold">Lease</h2>
+        <p class="text-sm text-ink-muted mt-1">Short/long-term with pickup at end of term. Transparent delivery.</p>
+        <a href="/contact?interest=Lease%20containers" data-astro-prefetch class="inline-flex mt-3 px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Request Lease Quote</a>
+      </article>
+
+      <article class="glass p-6">
+        <h2 class="text-xl font-semibold">Custom Builds</h2>
+        <p class="text-sm text-ink-muted mt-1">Doors, windows, insulation, paint, power, HVAC, and more.</p>
+        <a href="/contact?interest=Custom%20build" data-astro-prefetch class="inline-flex mt-3 px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Scope a Build</a>
+      </article>
+    </div>
+
+    <div class="mt-8 glass p-6">
+      <h2 class="text-xl font-semibold">Delivery & Coverage — {city.metro}</h2>
+      <p class="text-sm text-ink-muted mt-1">{city.distanceNote}</p>
+      <p class="text-sm text-ink-muted mt-2">Common ZIPs: <span class="font-mono">{city.zipHint}</span> (example). Enter your ZIP on a product page for a ballpark delivery range.</p>
+      <div class="mt-3 text-xs text-ink-muted">Neighborhoods: {city.neighborhoods.join(", ")}</div>
+      <div class="mt-4">
+        <a href={`/contact?interest=Containers%20in%20${encodeURIComponent(city.name)}`} data-astro-prefetch class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold">FAQ — {city.name}</h2>
+      <div class="mt-4">
+        <FAQ />
+      </div>
+    </div>
+  </section>
+
+  <!-- Local SEO schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Shipping Container Sales and Delivery",
+    "areaServed": {
+      "@type": "City",
+      "name": {city.name},
+      "address": { "@type": "PostalAddress", "addressRegion": "TX", "addressCountry": "US" }
+    },
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "LC Container",
+      "address": { "@type": "PostalAddress", "streetAddress": "1211 E Fulghum Rd", "addressLocality": "Hutchins", "addressRegion": "TX", "postalCode": "75141", "addressCountry": "US" },
+      "telephone": "+1-214-524-4168",
+      "url": "https://lccontainer.com"
+    },
+    "url": {canonical},
+    "description": {desc}
+  }
+  </script>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import FAQ from "../components/FAQ.astro";
+---
+<BaseLayout title="FAQ — LC Container" description="Answers to common container questions: sizes, delivery, site prep, new vs used, and more.">
+  <Header />
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <h1 class="text-3xl md:text-4xl font-semibold">Frequently Asked Questions</h1>
+    <p class="text-ink-muted mt-2">If it helps you buy faster and smarter, it belongs here.</p>
+    <div class="mt-6">
+      <FAQ />
+    </div>
+    <div class="mt-6">
+      <a href="/contact" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Still need help? Get a Free Quote</a>
+    </div>
+  </section>
+
+  <!-- FAQPage schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do you deliver statewide?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, across Texas with tilt-bed and crane options." } },
+      { "@type": "Question", "name": "Standard vs High Cube?", "acceptedAnswer": { "@type": "Answer", "text": "High Cube is 9'6\" tall — about 1' taller than Standard." } },
+      { "@type": "Question", "name": "Used vs New (One-Trip)?", "acceptedAnswer": { "@type": "Answer", "text": "Used are WWT and cost-effective; New present cleaner and last longer." } }
+    ]
+  }
+  </script>
+</BaseLayout>

@@ -1,0 +1,149 @@
+---
+const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom Build","Not sure"];
+---
+
+<div class="glass p-6 md:p-8" role="form" aria-labelledby="quote-title">
+  <h2 id="quote-title" class="text-2xl font-semibold mb-2">Get a Free Quote</h2>
+  <p class="text-sm text-ink-muted">We'll reply within 24 hours. No hidden fees.</p>
+
+  <form id="quoteForm" class="grid gap-4 mt-4" novalidate>
+    <!-- honeypot + timer -->
+    <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+    <input type="hidden" name="startedAt" id="startedAt" />
+
+    <!-- stepper -->
+    <ol class="flex items-center gap-2 text-xs" aria-label="Progress">
+      <li id="label-1" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line">1. Contact</li>
+      <li id="label-2" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line opacity-60">2. Need</li>
+      <li id="label-3" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line opacity-60">3. Delivery</li>
+      <li id="label-4" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line opacity-60">4. Confirm</li>
+    </ol>
+
+    <!-- Step 1 -->
+    <fieldset class="step" data-step="1">
+      <label class="block text-sm">Full Name
+        <input name="name" required autocomplete="name" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+      </label>
+      <label class="block text-sm">Email
+        <input name="email" type="email" required autocomplete="email" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+      </label>
+      <label class="block text-sm">Phone
+        <input name="phone" required autocomplete="tel" inputmode="tel" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+      </label>
+    </fieldset>
+
+    <!-- Step 2 -->
+    <fieldset class="step hidden" data-step="2">
+      <label class="block text-sm">What do you need?
+        <select name="interest" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line">
+          {interests.map(i => <option value={i}>{i}</option>)}
+        </select>
+      </label>
+    </fieldset>
+
+    <!-- Step 3 -->
+    <fieldset class="step hidden" data-step="3">
+      <label class="block text-sm">Delivery ZIP
+        <input name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60" />
+      </label>
+      <label class="block text-sm">Notes (optional)
+        <textarea name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- Step 4 -->
+    <section class="step hidden" data-step="4">
+      <div class="text-sm text-ink-muted">We'll review your info and send a quote within 24 hours.</div>
+    </section>
+
+    <!-- Controls -->
+    <div class="flex gap-3 mt-1">
+      <button type="button" id="prevBtn" class="hidden px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5">Back</button>
+      <button type="button" id="nextBtn" class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Next</button>
+      <button type="submit" id="submitBtn" class="hidden px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90">Submit</button>
+    </div>
+
+    <p id="formMsg" class="text-sm text-ink-muted mt-1" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<script>
+  // init
+  const steps = /** @type {NodeListOf<HTMLElement>} */(document.querySelectorAll('.step'));
+  const labels = [1,2,3,4].map(i => document.getElementById('label-'+i));
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const form = /** @type {HTMLFormElement} */(document.getElementById('quoteForm'));
+  const msg = document.getElementById('formMsg');
+  const startedAt = document.getElementById('startedAt');
+  startedAt.value = String(Date.now());
+  let current = 0;
+
+  function showStep(i) {
+    steps.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i));
+    labels.forEach((l,idx)=> l?.classList.toggle('opacity-60', idx>i));
+    prevBtn.classList.toggle('hidden', i===0);
+    nextBtn.classList.toggle('hidden', i===steps.length-1);
+    submitBtn.classList.toggle('hidden', i!==steps.length-1);
+    steps[i].querySelector('input,select,textarea')?.focus();
+  }
+  showStep(current);
+
+  function validateStep(i){
+    // quick client-side checks
+    if(i===0){
+      const name = form.elements.namedItem('name'); const email = form.elements.namedItem('email'); const phone = form.elements.namedItem('phone');
+      if(!name.value || !email.value || !phone.value) return "Please fill name, email, and phone.";
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) return "Enter a valid email.";
+    }
+    if(i===2){
+      const zip = form.elements.namedItem('zip');
+      if(!/^\d{5}$/.test(zip.value)) return "ZIP must be 5 digits.";
+    }
+    return null;
+  }
+
+  nextBtn.addEventListener('click', ()=>{
+    const err = validateStep(current);
+    if(err){ msg.textContent = err; return; }
+    if(current < steps.length-1){ current++; showStep(current); msg.textContent=""; }
+  });
+  prevBtn.addEventListener('click', ()=>{ if(current>0){ current--; showStep(current); msg.textContent=""; } });
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    msg.textContent = "Sending…";
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
+    try{
+      const res = await fetch('/api/lead', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const j = await res.json();
+      if(j.ok){
+        msg.textContent = "Thanks! We'll call you within 24h.";
+        form.reset(); startedAt.value = String(Date.now());
+        current = 0; showStep(current);
+        // Basic GA4 event hook
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "quote_submit", interest: payload.interest, zip: payload.zip });
+      } else {
+        msg.textContent = "Couldn't send. Please call (214) 524-4168.";
+      }
+    } catch {
+      msg.textContent = "Network error. Please call (214) 524-4168.";
+    }
+  });
+
+  // Prefill from URL (?interest=...&zip=...)
+  const params = new URLSearchParams(location.search);
+  const interestEl = form?.elements?.namedItem?.('interest');
+  const zipEl = form?.elements?.namedItem?.('zip');
+  if (interestEl && params.get('interest')) {
+    [...interestEl.options].forEach(o => { if (o.value === params.get('interest')) o.selected = true; });
+  }
+  if (zipEl && params.get('zip')) { zipEl.value = params.get('zip'); }
+</script>

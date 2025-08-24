@@ -1,0 +1,52 @@
+---
+const itemTitle = Astro.props.itemTitle as string | undefined;
+// Base ZIP for Hutchins, TX
+const BASE_ZIP = "75141";
+// Simple in-state prefixes for TX
+const TX_PREFIXES = ["75","76","77","78","79","733"];
+function estimate(zip) {
+  const s = String(zip || "");
+  const tx = TX_PREFIXES.some(p => s.startsWith(p));
+  if (!/^\d{5}$/.test(s)) return { ok:false, msg:"ZIP must be 5 digits." };
+  if (tx) {
+    // rough bracket only; delivery varies with exact miles/site conditions
+    return { ok:true, range:"$250–$600", note:"Within typical service radius", cta:`/contact?interest=${encodeURIComponent(itemTitle ?? "Quote")}&zip=${s}` };
+  }
+  return { ok:true, range:"Call for quote", note:"Outside typical radius", cta:`/contact?interest=${encodeURIComponent(itemTitle ?? "Quote")}&zip=${s}` };
+}
+---
+<div class="glass p-4">
+  <h3 class="text-lg font-semibold">Delivery Estimator</h3>
+  <p class="text-sm text-ink-muted">Enter your ZIP for a ballpark delivery range. Exact pricing on the quote.</p>
+  <form id="est" class="mt-3 flex gap-2">
+    <input name="zip" inputmode="numeric" pattern="\\d{5}" maxlength="5" placeholder="ZIP (e.g., 75141)" class="flex-1 px-3 py-2 rounded-xl bg-white/5 border border-brand-line" />
+    <button class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90" type="submit">Estimate</button>
+  </form>
+  <p id="est-msg" class="text-sm text-ink-muted mt-2"></p>
+  <div id="est-cta" class="mt-2 hidden">
+    <a id="est-link" class="inline-flex px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
+  </div>
+</div>
+
+<script>
+  const f = document.getElementById('est');
+  const m = document.getElementById('est-msg');
+  const cta = document.getElementById('est-cta');
+  const link = document.getElementById('est-link');
+  f?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const zip = new FormData(f).get('zip') || "";
+    function est(zip){
+      const s = String(zip);
+      const tx = ["75","76","77","78","79","733"].some(p=> s.startsWith(p));
+      if(!/^\d{5}$/.test(s)) return { ok:false, msg:"ZIP must be 5 digits." };
+      if(tx) return { ok:true, range:"$250–$600", note:"Within typical service radius", cta:`/contact?interest=${encodeURIComponent("${itemTitle ?? 'Quote'}")}&zip=${s}` };
+      return { ok:true, range:"Call for quote", note:"Outside typical radius", cta:`/contact?interest=${encodeURIComponent("${itemTitle ?? 'Quote'}")}&zip=${s}` };
+    }
+    const r = est(zip);
+    if(!r.ok){ m.textContent = r.msg; cta.classList.add('hidden'); return; }
+    m.textContent = `Est. Delivery: ${r.range} · ${r.note}`;
+    link.href = r.cta;
+    cta.classList.remove('hidden');
+  });
+</script>

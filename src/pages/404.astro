@@ -1,71 +1,17 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
 ---
-
-<BaseLayout title="Page Not Found - LC Container">
-  <main class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-    <div class="content-wrap text-center">
-      <!-- 404 Icon -->
-      <div class="w-32 h-32 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-        <svg class="w-16 h-16 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
-        </svg>
-      </div>
-
-      <!-- 404 Text -->
-      <h1 class="text-6xl md:text-8xl font-bold text-blue-600 dark:text-blue-400 mb-4">404</h1>
-      <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 dark:text-white mb-4">
-        Page Not Found
-      </h2>
-      <p class="text-lg text-slate-700 dark:text-slate-200 mb-8 max-w-md mx-auto">
-        The page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
-      </p>
-
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-        <a 
-          href="/" 
-          class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors"
-        >
-          Go Home
-        </a>
-        <a 
-          href="/contact" 
-          class="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-colors"
-        >
-          Contact Us
-        </a>
-      </div>
-
-      <!-- Popular Pages -->
-      <div class="max-w-2xl mx-auto">
-        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-6">
-          Popular Pages
-        </h3>
-        <div class="grid md:grid-cols-3 gap-4">
-          <a 
-            href="/services" 
-            class="block p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-left"
-          >
-            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">Our Services</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-300">Container sales, leasing, and custom builds</p>
-          </a>
-          <a 
-            href="/about" 
-            class="block p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-left"
-          >
-            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">About Us</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-300">Learn about our company and mission</p>
-          </a>
-          <a 
-            href="/contact" 
-            class="block p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-left"
-          >
-            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">Get Quote</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-300">Contact us for a free consultation</p>
-          </a>
-        </div>
+<BaseLayout title="Not Found — LC Container" description="We couldn't find that page.">
+  <Header />
+  <section class="max-w-[900px] mx-auto px-5 py-20 text-center">
+    <div class="glass p-8 inline-block">
+      <h1 class="text-4xl font-semibold">404</h1>
+      <p class="text-ink-muted mt-2">That page rolled off the yard.</p>
+      <div class="mt-4 flex justify-center gap-2">
+        <a href="/inventory" class="px-4 py-2 rounded-xl border border-brand-line hover:bg-white/5 text-sm">Browse Inventory</a>
+        <a href="/contact" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
       </div>
     </div>
-  </main>
+  </section>
 </BaseLayout>
