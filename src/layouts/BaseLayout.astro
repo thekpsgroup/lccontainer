@@ -1,6 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
-import StickyActions from "../components/StickyActions.astro";
+import StickyCTA from "../components/StickyCTA.astro";
 
 const { 
   title = "LC Container", 
@@ -43,8 +43,32 @@ const ogImage = "/photos/lccontainer-dark.png"; // replace with a richer OG late
             <body class="bg-brand-black text-ink font-sans antialiased pb-16 md:pb-0">
             <style> :root{ color-scheme:dark light } </style>
             <link rel="stylesheet" href="/styles/tokens.css" />
-            <slot />
-            <StickyActions />
+            <main id="main-content">
+              <slot />
+            </main>
+            <StickyCTA />
             <Footer />
           </body>
+
+          <script>
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+              threshold: 0.1,
+              rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                }
+              });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.addEventListener('DOMContentLoaded', () => {
+              const fadeElements = document.querySelectorAll('.fade-in');
+              fadeElements.forEach(el => observer.observe(el));
+            });
+          </script>
 </html>

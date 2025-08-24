@@ -7,7 +7,7 @@ const nav = [
   { href: "/contact", label: "Contact" }
 ];
 ---
-<header class="sticky top-0 z-50 border-b border-brand-line/40 bg-brand-black/80 backdrop-blur">
+<header class="sticky top-0 z-50 border-b border-brand-line/40 bg-brand-black/80 backdrop-blur transition-all duration-300" id="header">
   <div class="max-w-[1200px] mx-auto px-5 flex h-16 items-center justify-between">
     <a href="/" class="flex items-center gap-3">
       <img src="/photos/lccontainer-dark.png" alt="LC Container" class="h-9 w-auto" />
@@ -52,3 +52,21 @@ const nav = [
     </details>
   </div>
 </header>
+
+<script>
+  // Header scroll blur effect
+  const header = document.getElementById('header');
+  let lastScrollY = window.scrollY;
+  
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > 30) {
+      header?.classList.add('bg-brand-black/95', 'backdrop-blur-md');
+    } else {
+      header?.classList.remove('bg-brand-black/95', 'backdrop-blur-md');
+    }
+    
+    lastScrollY = currentScrollY;
+  });
+</script>

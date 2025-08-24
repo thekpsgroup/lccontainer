@@ -12,7 +12,7 @@ const items: QA[] = Astro.props.items ?? [
 <section>
   <div class="grid gap-3">
     {items.map((item, idx) => (
-      <details class="glass p-4 group" { ...(idx===0?{open:true}:{}) }>
+      <details class="glass hover-lift group" { ...(idx===0?{open:true}:{}) }>
         <summary class="cursor-pointer list-none flex items-start justify-between gap-3">
           <h3 class="text-base md:text-lg font-semibold">{item.q}</h3>
           <span class="ml-auto text-ink-muted">+</span>
