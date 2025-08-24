@@ -38,8 +38,7 @@
       document.head.appendChild(link);
     }
 
-    // Preload critical CSS and fonts
-    preloadResource('/fonts/inter-var.woff2', 'font');
+    // Preload critical resources
     preloadResource('/photos/logos/lccontainer-logo-transparent-400.png', 'image');
 
     // Optimize scroll performance
@@ -89,18 +88,6 @@
       });
     });
 
-    // Service Worker registration with error handling
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
-          .then(function(registration) {
-            console.log('SW registered: ', registration);
-          })
-          .catch(function(registrationError) {
-            console.log('SW registration failed: ', registrationError);
-          });
-      });
-    }
 
     // Optimize animations for users who prefer reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
