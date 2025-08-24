@@ -34,12 +34,12 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
     <!-- Step 2 -->
     <fieldset class="step hidden" data-step="2">
-      <label class="block text-sm">What do you need?
-        <select name="interest" class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
-          {interests.map(i => <option value={i}>{i}</option>)}
-        </select>
-      </label>
-    </fieldset>
+        <label class="block text-sm">What do you need?
+          <select name="interest" required class="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
+            {interests.map(i => <option value={i}>{i}</option>)}
+          </select>
+        </label>
+      </fieldset>
 
     <!-- Step 3 -->
     <fieldset class="step hidden" data-step="3">
@@ -133,9 +133,9 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     }
   }
 
-  function validateStep(i){
-    // Enhanced validation with better error messages
-    if(i===0){
+    function validateStep(i){
+      // Enhanced validation with better error messages
+      if(i===0){
       const name = form.elements.namedItem('name'); 
       const email = form.elements.namedItem('email'); 
       const phone = form.elements.namedItem('phone');
@@ -143,12 +143,16 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
       if(!name.value || !email.value || !phone.value) return "Please fill in all required fields.";
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) return "Please enter a valid email address.";
       if(!/^[\+]?[1-9][\d]{0,15}$/.test(phone.value.replace(/\D/g,''))) return "Please enter a valid phone number.";
-    }
-    if(i===2){
-      const zip = form.elements.namedItem('zip');
-      if(!/^\d{5}$/.test(zip.value)) return "Please enter a valid 5-digit ZIP code.";
-    }
-    return null;
+      }
+      if(i===1){
+        const interest = form.elements.namedItem('interest');
+        if(!interest.value) return "Please select what you need.";
+      }
+      if(i===2){
+        const zip = form.elements.namedItem('zip');
+        if(!/^\d{5}$/.test(zip.value)) return "Please enter a valid 5-digit ZIP code.";
+      }
+      return null;
   }
 
   // Debounced error clearing
