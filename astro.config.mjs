@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://lccontainer.com',
+  viewTransitions: true,
   integrations: [
     tailwind(),
   ],
