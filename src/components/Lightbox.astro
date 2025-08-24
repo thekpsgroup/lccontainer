@@ -1,5 +1,6 @@
 ---
 const id = Astro.props.id ?? "lb";
+const alt = Astro.props.alt ?? "";
 ---
 
 <dialog id={id} class="backdrop:bg-black/80 p-0 rounded-2xl w-[min(92vw,1000px)]">
@@ -7,7 +8,7 @@ const id = Astro.props.id ?? "lb";
     <button class="px-3 py-2 rounded-lg bg-white/10 text-white border border-brand-line hover:bg-white/20" aria-label="Close lightbox">✕</button>
   </form>
   <div class="relative">
-    <img id={`${id}-img`} alt="" class="w-full h-auto block max-h-[80vh] object-contain bg-black/40" />
+    <img id={`${id}-img`} alt={alt} class="w-full h-auto block max-h-[80vh] object-contain bg-black/40" />
     <div class="p-4 text-sm text-ink-muted bg-brand-black/80 border-t border-brand-line">
       <div id={`${id}-title`} class="text-ink font-semibold"></div>
       <div id={`${id}-caption`} class=""></div>
@@ -21,11 +22,11 @@ const id = Astro.props.id ?? "lb";
   const titleEl = document.getElementById({id:JSON.stringify(id + "-title")});
   const capEl = document.getElementById({id:JSON.stringify(id + "-caption")});
   
-  // Public API: window.openLightbox({ src, title, caption })
+  // Public API: window.openLightbox({ src, alt, title, caption })
   window.openLightbox = (data) => {
     if(!dialog || !img) return;
     img.src = data.src || "";
-    img.alt = data.title || "";
+    img.alt = data.alt || data.title || "";
     if (titleEl) titleEl.textContent = data.title || "";
     if (capEl) capEl.textContent = data.caption || "";
     dialog.showModal();

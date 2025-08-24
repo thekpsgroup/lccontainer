@@ -93,7 +93,7 @@ self.addEventListener('fetch', (event) => {
   // Cache strategy based on request type
   if (url.pathname.startsWith('/photos/')) {
     event.respondWith(staleWhileRevalidate(request));
-  } else if (url.pathname.startsWith('/styles/') || url.pathname.startsWith('/_astro/')) {
+  } else if (url.pathname.startsWith('/_astro/')) {
     event.respondWith(cacheFirst(request));
   } else if (url.pathname === '/' || url.pathname.endsWith('.html')) {
     event.respondWith(networkFirst(request));
@@ -110,8 +110,7 @@ self.addEventListener('sync', (event) => {
 });
 
 async function doBackgroundSync() {
-  // Handle background sync tasks
-  console.log('Background sync completed');
+  // Background sync completed
 }
 
 // Push notifications (if needed in the future)
@@ -146,3 +145,4 @@ self.addEventListener('notificationclick', (event) => {
       })
   );
 });
+
