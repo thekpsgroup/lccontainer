@@ -1,22 +1,22 @@
 // Service Worker for LC Container - Image Optimization & Caching
-const CACHE_NAME = 'lccontainer-v2';
-const STATIC_CACHE = 'static-v2';
+const CACHE_NAME = 'lccontainer-v3';
+const STATIC_CACHE = 'static-v3';
 
 // Cache strategies
-const cacheFirst = async (request) => {
+// Stale-while-revalidate for static assets
+const staleWhileRevalidate = async (request) => {
   const cache = await caches.open(STATIC_CACHE);
   const cached = await cache.match(request);
-  if (cached) return cached;
-  
-  try {
-    const response = await fetch(request);
-    if (response.status === 200) {
-      cache.put(request, response.clone());
-    }
-    return response;
-  } catch (error) {
-    return new Response('Network error', { status: 503 });
-  }
+  const networkPromise = fetch(request)
+    .then((response) => {
+      if (response && response.status === 200) {
+        cache.put(request, response.clone());
+      }
+      return response;
+    })
+    .catch(() => undefined);
+
+  return cached || networkPromise || new Response('Network error', { status: 503 });
 };
 
 const networkFirst = async (request) => {
@@ -34,17 +34,8 @@ const networkFirst = async (request) => {
 
 // Install event
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => {
-      return cache.addAll([
-        '/',
-        '/styles/tokens.css',
-        '/photos/logos/lccontainer-logo-transparent-400.png',
-        '/photos/container/standard/20ft_5.jpg'
-      ]);
-    })
-  );
-  self.skipWaiting();
+  // Do not precache dynamic HTML or large images; keep install fast.
+  event.waitUntil(self.skipWaiting());
 });
 
 // Activate event
@@ -74,11 +65,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache static assets with cache-first strategy
+  // Cache static assets with stale-while-revalidate strategy
   if (request.destination === 'style' || 
       request.destination === 'script' || 
       request.destination === 'image') {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(staleWhileRevalidate(request));
     return;
   }
 

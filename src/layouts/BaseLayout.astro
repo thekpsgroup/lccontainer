@@ -7,6 +7,8 @@ export interface Props {
 
 const { title, description, ogImage = "/photos/logos/lccontainer-logo-transparent-400.png" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Ensure global styles are bundled and loaded on all devices
+import "../styles/global.css";
 ---
 
 <!DOCTYPE html>
@@ -30,17 +32,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/styles/tokens.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/styles/tokens.css"></noscript>
+    <!-- Global stylesheet (bundled by Astro) -->
     
-    <!-- DNS prefetch -->
+    
+    <!-- DNS prefetch / preconnect for fonts -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     
-    <!-- Font optimization -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+    <!-- Load fonts stylesheet (Safari/iOS-safe) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     
     <!-- Critical CSS inline -->
     <style>
