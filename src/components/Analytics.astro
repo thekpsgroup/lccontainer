@@ -1,28 +1,10 @@
 ---
 // Analytics component for privacy-first tracking
+import { Analytics } from '@vercel/analytics/react';
 ---
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID', {
-    page_title: document.title,
-    page_location: window.location.href,
-    custom_map: {
-      'custom_parameter_1': 'project_type',
-      'custom_parameter_2': 'service_area'
-    }
-  });
-</script>
-
-<!-- Vercel Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Analytics Component -->
+<Analytics />
 
 <!-- Enhanced Conversion Tracking -->
 <script>
@@ -31,15 +13,7 @@
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
       form.addEventListener('submit', function(e) {
-        // Track form submission
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_submit', {
-            'event_category': 'Lead Generation',
-            'event_label': form.getAttribute('data-form-type') || 'Contact Form'
-          });
-        }
-        
-        // Track with Vercel Analytics
+        // Track form submission with Vercel Analytics
         if (typeof va !== 'undefined') {
           va('event', 'form_submit', {
             form_type: form.getAttribute('data-form-type') || 'contact',
@@ -53,13 +27,7 @@
     const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
     phoneLinks.forEach(link => {
       link.addEventListener('click', function() {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'phone_click', {
-            'event_category': 'Contact',
-            'event_label': 'Phone Call'
-          });
-        }
-        
+        // Track phone clicks with Vercel Analytics
         if (typeof va !== 'undefined') {
           va('event', 'phone_click', {
             phone_number: this.href.replace('tel:', ''),
@@ -75,13 +43,7 @@
       button.addEventListener('click', function() {
         const ctaType = this.getAttribute('data-cta') || 'general';
         
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'cta_click', {
-            'event_category': 'Conversion',
-            'event_label': ctaType
-          });
-        }
-        
+        // Track CTA clicks with Vercel Analytics
         if (typeof va !== 'undefined') {
           va('event', 'cta_click', {
             cta_type: ctaType,
@@ -98,33 +60,33 @@
       if (scrollPercent > maxScroll) {
         maxScroll = scrollPercent;
         
-        // Track at 25%, 50%, 75%, 100%
+        // Track scroll depth with Vercel Analytics
         if (maxScroll >= 25 && maxScroll < 50) {
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'scroll_depth', {
-              'event_category': 'Engagement',
-              'event_label': '25%'
+          if (typeof va !== 'undefined') {
+            va('event', 'scroll_depth', {
+              depth: '25%',
+              page: window.location.pathname
             });
           }
         } else if (maxScroll >= 50 && maxScroll < 75) {
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'scroll_depth', {
-              'event_category': 'Engagement',
-              'event_label': '50%'
+          if (typeof va !== 'undefined') {
+            va('event', 'scroll_depth', {
+              depth: '50%',
+              page: window.location.pathname
             });
           }
         } else if (maxScroll >= 75 && maxScroll < 100) {
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'scroll_depth', {
-              'event_category': 'Engagement',
-              'event_label': '75%'
+          if (typeof va !== 'undefined') {
+            va('event', 'scroll_depth', {
+              depth: '75%',
+              page: window.location.pathname
             });
           }
         } else if (maxScroll >= 100) {
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'scroll_depth', {
-              'event_category': 'Engagement',
-              'event_label': '100%'
+          if (typeof va !== 'undefined') {
+            va('event', 'scroll_depth', {
+              depth: '100%',
+              page: window.location.pathname
             });
           }
         }
@@ -136,13 +98,7 @@
     window.addEventListener('beforeunload', function() {
       const timeOnPage = Math.round((Date.now() - startTime) / 1000);
       
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'time_on_page', {
-          'event_category': 'Engagement',
-          'value': timeOnPage
-        });
-      }
-      
+      // Track time on page with Vercel Analytics
       if (typeof va !== 'undefined') {
         va('event', 'time_on_page', {
           duration: timeOnPage,
