@@ -1,10 +1,13 @@
 ---
 // Analytics component for privacy-first tracking
-import { Analytics } from '@vercel/analytics/react';
 ---
 
-<!-- Vercel Analytics Component -->
-<Analytics />
+<!-- Vercel Analytics Script -->
+<script>
+  // Vercel Analytics
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Enhanced Conversion Tracking -->
 <script>
