@@ -1,36 +1,121 @@
 ---
 const cards = [
   { 
-    title:"Buy Containers", 
-    copy:"Own outright. New, used, and high-cube. Wind & water tight or one-trip new. <strong class='text-brand-red'>1,000's in stock</strong>. Transparent pricing.", 
-    cta:"Browse Options", 
-    href:"/services#buy" 
+    title: "Buy Containers", 
+    copy: "Own outright. New, used, and high-cube containers. Wind & water tight or one-trip new. <strong class='text-brand-red'>1,000's in stock</strong>. Transparent pricing.",
+    cta: "Browse Options", 
+    href: "/services#buy",
+    icon: "📦",
+    features: ["New & Used", "High Cube", "Wind & Water Tight", "Transparent Pricing"]
   },
   { 
-    title:"Lease Containers", 
-    copy:"Flexible short and long-term leases. Pickup at end of term. Delivery included.", 
-    cta:"See Lease Plans", 
-    href:"/services#lease" 
+    title: "Lease Containers", 
+    copy: "Flexible short and long-term leases. Pickup at end of term. Delivery included. Perfect for temporary storage needs.",
+    cta: "See Lease Plans", 
+    href: "/services#lease",
+    icon: "⏱️",
+    features: ["Short Term", "Long Term", "Delivery Included", "Flexible Terms"]
   },
   { 
-    title:"Custom Builds", 
-    copy:"Turnkey modifications: paint, insulation, roll-up doors, HVAC, power, branding.", 
-    cta:"Start a Custom Build", 
-    href:"/services#custom" 
+    title: "Custom Builds", 
+    copy: "Turnkey modifications: paint, insulation, roll-up doors, HVAC, power, branding. Your vision, our expertise.",
+    cta: "Start a Custom Build", 
+    href: "/services#custom",
+    icon: "🔧",
+    features: ["Paint & Branding", "Insulation", "HVAC Systems", "Power & Lighting"]
   },
+  { 
+    title: "Fast Delivery", 
+    copy: "Statewide delivery within 24-48 hours. Professional delivery team. Site preparation assistance available.",
+    cta: "Get Delivery Quote", 
+    href: "/services/delivery",
+    icon: "🚚",
+    features: ["24-48 Hour Delivery", "Statewide Service", "Professional Team", "Site Prep Help"]
+  },
+  { 
+    title: "Container Sales", 
+    copy: "Specialized containers for every need: office, storage, retail, events, and more. Custom solutions for unique applications.",
+    cta: "View Specialized Options", 
+    href: "/inventory",
+    icon: "🏢",
+    features: ["Office Containers", "Storage Solutions", "Retail Spaces", "Event Venues"]
+  },
+  { 
+    title: "Expert Support", 
+    copy: "20+ years of experience. Licensed and insured. BBB accredited. Your trusted partner for all container needs.",
+    cta: "Contact Our Team", 
+    href: "/contact",
+    icon: "👨‍💼",
+    features: ["20+ Years Experience", "Licensed & Insured", "BBB Accredited", "Expert Guidance"]
+  }
 ];
 ---
-<section class="max-w-[1200px] mx-auto px-5 py-14">
-  <h2 class="text-2xl md:text-3xl font-semibold text-center">What do you need today?</h2>
-  <div class="mt-6 grid md:grid-cols-3 gap-6">
+<section class="max-w-[1200px] mx-auto px-5 py-16">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">What do you need today?</h2>
+    <p class="text-lg text-ink-muted max-w-2xl mx-auto">
+      From simple storage to complex custom builds, we have the expertise and inventory to meet your container needs.
+    </p>
+  </div>
+  
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     {cards.map(c => (
-      <div class="glass hover-lift">
-        <h3 class="text-xl font-semibold">{c.title}</h3>
-        <p class="text-sm text-ink-muted mt-2" set:html={c.copy}></p>
-        <a href={c.href} data-astro-prefetch class="inline-flex mt-4 px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">
-          {c.cta}
-        </a>
+      <div class="glass p-6 hover-lift group transition-all duration-300 border border-brand-line/20 hover:border-brand-red/30">
+        <div class="flex items-start gap-4">
+          <div class="text-3xl">{c.icon}</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold mb-3 group-hover:text-brand-red transition-colors">{c.title}</h3>
+            <p class="text-sm text-ink-muted mb-4 leading-relaxed" set:html={c.copy}></p>
+            
+            <div class="mb-4">
+              <div class="flex flex-wrap gap-2">
+                {c.features.map(feature => (
+                  <span class="text-xs px-2 py-1 rounded-full bg-brand-red/10 text-brand-red border border-brand-red/20">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <a 
+              href={c.href} 
+              data-astro-prefetch 
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-all duration-200 group-hover:scale-105"
+            >
+              {c.cta}
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     ))}
+  </div>
+  
+  <!-- Trust Indicators -->
+  <div class="mt-16 text-center">
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="glass p-4">
+        <div class="text-2xl mb-2">🏆</div>
+        <h4 class="font-semibold">20+ Years Experience</h4>
+        <p class="text-sm text-ink-muted">Established 2003</p>
+      </div>
+      <div class="glass p-4">
+        <div class="text-2xl mb-2">📦</div>
+        <h4 class="font-semibold">1,000+ Containers</h4>
+        <p class="text-sm text-ink-muted">In Stock</p>
+      </div>
+      <div class="glass p-4">
+        <div class="text-2xl mb-2">🚚</div>
+        <h4 class="font-semibold">Statewide Delivery</h4>
+        <p class="text-sm text-ink-muted">24-48 Hours</p>
+      </div>
+      <div class="glass p-4">
+        <div class="text-2xl mb-2">✅</div>
+        <h4 class="font-semibold">Licensed & Insured</h4>
+        <p class="text-sm text-ink-muted">BBB Accredited</p>
+      </div>
+    </div>
   </div>
 </section>

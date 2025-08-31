@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
 import ServicesTeaser from "../components/ServicesTeaser.astro";
+import FeaturedServices from "../components/FeaturedServices.astro";
+import StatsSection from "../components/StatsSection.astro";
 import Testimonials from "../components/Testimonials.astro";
 ---
 <BaseLayout title="LC Container — Texas Shipping Containers" description="Buy, lease, or customize shipping containers. Established 2003. 10-acre yard in Hutchins. Fast statewide delivery.">
@@ -11,5 +14,8 @@ import Testimonials from "../components/Testimonials.astro";
   <div class="fade-in">
     <ServicesTeaser />
   </div>
+  <FeaturedServices />
+  <StatsSection />
   <Testimonials />
+  <Footer />
 </BaseLayout>
