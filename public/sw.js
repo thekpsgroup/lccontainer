@@ -73,11 +73,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For API calls, use network-only
-  if (url.pathname.startsWith('/api/')) {
-    event.respondWith(fetch(request));
-    return;
-  }
+  // No API endpoints needed - all forms use FormSubmit
 });
 
 // Background sync for offline functionality

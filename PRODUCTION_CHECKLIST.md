@@ -60,15 +60,12 @@
 
 ### Required Environment Variables
 ```bash
-# Email functionality (Resend)
-RESEND_API_KEY=your_resend_api_key_here
+# Email functionality (FormSubmit)
+# No API keys needed - FormSubmit handles email delivery automatically
 
-# Alternative email setup (SMTP)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
-FROM_EMAIL=noreply@lccontainer.com
+# Email delivery is handled automatically by FormSubmit
+# No additional configuration needed
+# FROM_EMAIL is not needed - FormSubmit handles this automatically
 ```
 
 ### Vercel Deployment Steps
@@ -90,7 +87,7 @@ FROM_EMAIL=noreply@lccontainer.com
 ## 🚨 CRITICAL ISSUES TO ADDRESS
 
 ### Before Production
-1. **Set RESEND_API_KEY** - Required for email functionality
+1. **FormSubmit Setup** - Forms automatically use FormSubmit for email delivery
 2. **Test email delivery** - Verify leads are received
 3. **Monitor error logs** - Check for any console errors
 4. **Performance testing** - Run Lighthouse audit

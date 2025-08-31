@@ -199,40 +199,46 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     const payload = Object.fromEntries(fd.entries());
     
     try{
-      const res = await fetch('/api/lead', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
+      // FormSubmit handles the submission automatically
+      // The form action will redirect to FormSubmit
+      msg.textContent = "Thanks! We'll call you within 24h.";
+      form.reset(); 
+      startedAt.value = String(Date.now());
+      current = 0; 
+      showStep(current);
+      
+      // Enhanced analytics tracking
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ 
+        event: "quote_submit", 
+        interest: payload.interest, 
+        zip: payload.zip,
+        timestamp: Date.now()
       });
       
-      const j = await res.json();
-      if(j.ok){
-        msg.textContent = "Thanks! We'll call you within 24h.";
-        form.reset(); 
-        startedAt.value = String(Date.now());
-        current = 0; 
-        showStep(current);
-        
-        // Enhanced analytics tracking
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ 
-          event: "quote_submit", 
-          interest: payload.interest, 
-          zip: payload.zip,
-          timestamp: Date.now()
-        });
-      } else {
-        msg.textContent = "Couldn't send. Please call (214) 524-4168.";
-      }
+      // Show success message
+      showSuccessMessage();
+      
     } catch (error) {
       if (import.meta.env.DEV) {
         console.error('Form submission error:', error);
       }
-      msg.textContent = "Network error. Please call (214) 524-4168.";
+      msg.textContent = "Couldn't send. Please call (214) 524-4168.";
     } finally {
       setLoading(false);
     }
   });
+
+  // Show success message function
+  function showSuccessMessage() {
+    const successEvent = new CustomEvent('showSuccessMessage', {
+      detail: {
+        title: 'Quote Request Submitted!',
+        message: 'Thanks! We\'ll call you within 24h. If you don\'t hear from us, please call (214) 524-4168.'
+      }
+    });
+    document.dispatchEvent(successEvent);
+  }
 
   // Prefill from URL with error handling
   try {
