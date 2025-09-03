@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 
 // Generate optimized image URLs
-const baseUrl = src.startsWith('http') ? src : `https://lccontainer.com${src}`;
+const baseUrl = src.startsWith('http') ? src : src;
 const imageId = src.split('/').pop()?.split('.')[0] || 'image';
 
 // Responsive image sizes

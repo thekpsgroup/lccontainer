@@ -9,80 +9,80 @@ export interface ContainerImage {
 export const customModifications: ContainerImage[] = [
   {
     src: '/photos/container/custom/custom-modification-2.jpg',
-    alt: 'Custom container modification with interior finishing',
-    title: 'Interior Finishing',
+    alt: '20-foot container with roll-up door cut-in for fast site access',
+    title: 'Roll-Up Door Access',
     category: 'Custom Modification',
-    description: 'Professional interior finishing for office spaces'
+    description: '20-foot unit with roll-up door cut-in for fast site access'
   },
   {
     src: '/photos/container/custom/custom-modification-3.jpg',
-    alt: 'Custom container with electrical and plumbing installation',
-    title: 'Electrical & Plumbing',
+    alt: 'Dual roll-up configuration for drive-through access',
+    title: 'Dual Roll-Ups',
     category: 'Custom Modification',
-    description: 'Complete electrical and plumbing systems'
+    description: 'Dual roll-up configuration for drive-through access'
   },
   {
     src: '/photos/container/custom/custom-modification-4.jpg',
-    alt: 'Custom container office with windows and doors',
-    title: 'Windows & Doors',
+    alt: 'Side personnel door with framed window for light',
+    title: 'Personnel Door + Window',
     category: 'Custom Modification',
-    description: 'Custom window and door installations'
+    description: 'Side personnel door with framed window for light'
   },
   {
     src: '/photos/container/custom/custom-modification-5.jpg',
-    alt: 'Custom container with HVAC system installation',
-    title: 'HVAC Systems',
+    alt: 'Exterior refinished for clean, branded presentation',
+    title: 'Fresh Paint & Branding',
     category: 'Custom Modification',
-    description: 'Climate control and ventilation systems'
+    description: 'Exterior refinished for clean, branded presentation'
   },
   {
     src: '/photos/container/custom/custom-modification-6.jpg',
-    alt: 'Custom container with insulation and wall finishing',
-    title: 'Insulation & Walls',
+    alt: 'Insulated panel interior ready for finish-out',
+    title: 'Insulated Interior',
     category: 'Custom Modification',
-    description: 'Professional insulation and wall systems'
+    description: 'Insulated panel interior—ready for finish-out'
   },
   {
     src: '/photos/container/custom/custom-modification-7.jpg',
-    alt: 'Custom container with flooring installation',
-    title: 'Flooring Systems',
+    alt: 'Security lockbox with added passive ventilation',
+    title: 'Vents & Lockbox',
     category: 'Custom Modification',
-    description: 'Durable flooring solutions for any use'
+    description: 'Security lockbox with added passive ventilation'
   },
   {
     src: '/photos/container/custom/custom-modification-8.jpg',
-    alt: 'Custom container with lighting installation',
-    title: 'Lighting Systems',
+    alt: 'QA checkpoint and paint touch-ups at the yard',
+    title: 'QC + Paint Detail',
     category: 'Custom Modification',
-    description: 'Professional lighting design and installation'
+    description: 'QA checkpoint and paint touch-ups at the yard'
   },
   {
     src: '/photos/container/custom/custom-modification-10.jpg',
-    alt: 'Custom container with bathroom facilities',
-    title: 'Bathroom Facilities',
+    alt: 'Clean structural framing for doors/windows',
+    title: 'Cut & Frame Openings',
     category: 'Custom Modification',
-    description: 'Complete bathroom and plumbing systems'
+    description: 'Clean structural framing for doors/windows'
   },
   {
     src: '/photos/container/custom/custom-modification-11.jpg',
-    alt: 'Custom container with kitchen facilities',
-    title: 'Kitchen Facilities',
+    alt: 'Shop staging before final install saves onsite time',
+    title: 'Shop Prep',
     category: 'Custom Modification',
-    description: 'Full kitchen installations and equipment'
+    description: 'Shop staging before final install—saves onsite time'
   },
   {
     src: '/photos/container/custom/custom-modification-15.jpg',
-    alt: 'Custom container with security features',
-    title: 'Security Features',
+    alt: 'HVAC prep for comfort in office conversions',
+    title: 'HVAC Ready',
     category: 'Custom Modification',
-    description: 'Advanced security and access control systems'
+    description: 'HVAC prep for comfort in office conversions'
   },
   {
     src: '/photos/container/custom/custom-modification-16.jpg',
-    alt: 'Custom container with specialized equipment',
-    title: 'Specialized Equipment',
+    alt: 'Framed window with proper trim and sealing',
+    title: 'Window Trim',
     category: 'Custom Modification',
-    description: 'Custom equipment and machinery installations'
+    description: 'Framed window with proper trim and sealing'
   }
 ];
 

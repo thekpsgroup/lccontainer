@@ -6,10 +6,16 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   <h2 id="quote-title" class="text-2xl font-semibold mb-2">Get a Free Quote</h2>
   <p class="text-sm text-ink-muted">We'll reply within 24 hours. No hidden fees.</p>
 
-  <form id="quoteForm" class="grid gap-4 mt-4" novalidate>
+  <form id="quoteForm" class="grid gap-4 mt-4" action="https://formsubmit.co/info@lccontainer.com" method="POST" novalidate>
     <!-- honeypot + timer -->
     <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
     <input type="hidden" name="startedAt" id="startedAt" />
+
+    <!-- FormSubmit configuration -->
+    <input type="hidden" name="_subject" value="New Quote Request from LC Container Website" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_next" value="https://lccontainer.com/contact?submitted=true" />
 
     <!-- stepper -->
     <ol class="flex items-center gap-2 text-xs" aria-label="Progress">
@@ -189,44 +195,27 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   });
 
   form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    if (isSubmitting) return;
-    
+    // Don't prevent default - let FormSubmit handle the submission
+    if (isSubmitting) {
+      e.preventDefault();
+      return;
+    }
+
     setLoading(true);
     msg.textContent = "Sending…";
-    
+
+    // Enhanced analytics tracking
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
-    
-    try{
-      // FormSubmit handles the submission automatically
-      // The form action will redirect to FormSubmit
-      msg.textContent = "Thanks! We'll call you within 24h.";
-      form.reset(); 
-      startedAt.value = String(Date.now());
-      current = 0; 
-      showStep(current);
-      
-      // Enhanced analytics tracking
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ 
-        event: "quote_submit", 
-        interest: payload.interest, 
-        zip: payload.zip,
-        timestamp: Date.now()
-      });
-      
-      // Show success message
-      showSuccessMessage();
-      
-    } catch (error) {
-      if (import.meta.env.DEV) {
-        console.error('Form submission error:', error);
-      }
-      msg.textContent = "Couldn't send. Please call (214) 524-4168.";
-    } finally {
-      setLoading(false);
-    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "quote_submit",
+      interest: payload.interest,
+      zip: payload.zip,
+      timestamp: Date.now()
+    });
+
+    // FormSubmit will handle the redirect and success messaging
   });
 
   // Show success message function
