@@ -4,10 +4,23 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://lccontainer.com',
   compressHTML: true,
-  integrations: [tailwind({ config: './tailwind.config.mjs' })],
+  output: 'static',
+  integrations: [
+    tailwind({ config: './tailwind.config.mjs' })
+  ],
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport'
+  },
   build: {
     inlineStylesheets: 'auto',
     assets: '_astro',
+  },
+  image: {
+    // Enable image optimization
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
   },
   vite: {
     build: {
@@ -24,18 +37,28 @@ export default defineConfig({
       },
       rollupOptions: {
         output: {
-          manualChunks: undefined,
+          manualChunks: {
+            vendor: ['astro'],
+            ui: ['@astrojs/prefetch', '@vercel/analytics'],
+          },
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js',
         },
       },
+      cssCodeSplit: true,
+      sourcemap: false,
+      reportCompressedSize: false,
     },
     css: {
       devSourcemap: false,
+      postcss: {},
     },
     optimizeDeps: {
-      include: [],
+      include: ['@fontsource/inter/400.css', '@fontsource/inter/500.css', '@fontsource/inter/600.css', '@fontsource/inter/700.css'],
     },
     ssr: {
-      noExternal: [],
+      noExternal: ['@fontsource/inter'],
     },
   },
 });

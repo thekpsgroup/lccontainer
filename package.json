@@ -12,7 +12,6 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@astrojs/prefetch": "^0.4.1",
     "@astrojs/tailwind": "^6.0.2",
     "@fontsource/inter": "^5.2.6",
     "@vercel/analytics": "^1.5.0",

@@ -5,7 +5,7 @@ const alt = Astro.props.alt ?? "";
 
 <dialog id={id} class="backdrop:bg-black/80 p-0 rounded-2xl w-[min(92vw,1000px)]">
   <form method="dialog" class="absolute right-2 top-2 z-10">
-    <button class="px-3 py-2 rounded-lg bg-white/10 text-white border border-brand-line hover:bg-white/20" aria-label="Close lightbox">✕</button>
+    <button class="px-3 py-2 rounded-lg bg-white/10 text-white border border-brand-line hover:bg-white/20" aria-label="Close lightbox">×</button>
   </form>
   <div class="relative">
     <img id={`${id}-img`} alt={alt} class="w-full h-auto block max-h-[80vh] object-contain bg-black/40" />

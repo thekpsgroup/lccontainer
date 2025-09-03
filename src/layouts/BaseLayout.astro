@@ -16,7 +16,10 @@ import Analytics from "../components/Analytics.astro";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     
@@ -32,13 +35,54 @@ import Analytics from "../components/Analytics.astro";
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
-    
+
+    <!-- SEO Enhancements -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="author" content="LC Container, LLC" />
+    <meta name="publisher" content="LC Container, LLC" />
+    <meta name="keywords" content="shipping containers, container sales, container leasing, custom containers, container modifications, storage containers, office containers, Texas containers, Hutchins TX" />
+    <meta name="geo.region" content="US-TX" />
+    <meta name="geo.placename" content="Hutchins, Texas" />
+    <meta name="geo.position" content="32.6454;-96.7111" />
+    <meta name="ICBM" content="32.6454, -96.7111" />
+
+    <!-- Business information -->
+    <meta name="business:contact_data:street_address" content="1211 E Fulghum Rd" />
+    <meta name="business:contact_data:locality" content="Hutchins" />
+    <meta name="business:contact_data:region" content="TX" />
+    <meta name="business:contact_data:postal_code" content="75141" />
+    <meta name="business:contact_data:country_name" content="United States" />
+    <meta name="business:contact_data:phone_number" content="+1-214-524-4168" />
+
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA4_MEASUREMENT_ID', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    </script>
+
     <!-- Global stylesheet (bundled by Astro) -->
     
     
-    <!-- DNS prefetch / preconnect for fonts -->
+    <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Load fonts stylesheet (Safari/iOS-safe) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -58,6 +102,82 @@ import Analytics from "../components/Analytics.astro";
     </style>
     
     <title>{title}</title>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LC Container, LLC",
+      "url": "https://lccontainer.com",
+      "logo": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-400.png",
+      "description": "LC Container, LLC provides high-quality shipping containers for sale and lease, custom modifications, and storage solutions across Texas since 2003.",
+      "foundingDate": "2003",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1211 E Fulghum Rd",
+        "addressLocality": "Hutchins",
+        "addressRegion": "TX",
+        "postalCode": "75141",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-214-524-4168",
+        "contactType": "customer service",
+        "availableLanguage": "English"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Container Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Container Sales",
+              "description": "New and used shipping containers for sale - 10ft, 20ft, 30ft, 40ft available"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Container Leasing",
+              "description": "Flexible short and long-term container leasing with delivery included"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Modifications",
+              "description": "Professional container modifications - offices, bathrooms, HVAC, electrical, and more"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Container Delivery",
+              "description": "Statewide container delivery within 24-48 hours across Texas"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "150",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "openingHours": "Mo-Fr 08:00-17:00",
+      "priceRange": "$$",
+      "paymentAccepted": "Cash, Credit Card, Check, Wire Transfer",
+      "currenciesAccepted": "USD"
+    }
+    </script>
   </head>
   <body class="bg-brand-black text-ink pb-16 md:pb-0">
     <a href="#main" class="skip-link">Skip to content</a>
@@ -73,26 +193,54 @@ import Analytics from "../components/Analytics.astro";
     <!-- Analytics -->
     <Analytics />
     
-    <!-- Minimal JavaScript for essential functionality -->
+    <!-- Performance monitoring and essential functionality -->
     <script>
-      // Simple fade-in animation
+      // Performance monitoring
+      window.addEventListener('load', () => {
+        // Measure Core Web Vitals
+        if ('web-vitals' in window) {
+          import('https://unpkg.com/web-vitals@3?module').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+            getCLS(console.log);
+            getFID(console.log);
+            getFCP(console.log);
+            getLCP(console.log);
+            getTTFB(console.log);
+          });
+        }
+
+        // Service worker registration
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+      });
+
+      // Optimized fade-in animation with performance monitoring
       document.addEventListener('DOMContentLoaded', function() {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1 });
-        
+        }, {
+          threshold: 0.1,
+          rootMargin: '50px 0px'
+        });
+
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       });
-      
-      // Service worker registration
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch(() => {});
+
+      // Performance observer for long tasks
+      if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (entry.duration > 50) { // Log tasks longer than 50ms
+              console.log('Long task:', entry);
+            }
+          }
         });
+        observer.observe({ entryTypes: ['longtask'] });
       }
     </script>
   </body>

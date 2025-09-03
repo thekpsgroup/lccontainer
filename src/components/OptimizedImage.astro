@@ -23,40 +23,14 @@ const {
   placeholder = 'none'
 } = Astro.props;
 
-// Generate optimized image URLs
-const baseUrl = src.startsWith('http') ? src : src;
-const imageId = src.split('/').pop()?.split('.')[0] || 'image';
-
-// Responsive image sizes
-const responsiveSizes = [
-  { width: 400, height: 300 },
-  { width: 800, height: 600 },
-  { width: 1200, height: 900 },
-  { width: 1600, height: 1200 }
-];
-
-// Generate srcset for different formats
-const generateSrcSet = (format: string) => {
-  return responsiveSizes
-    .map(size => `${baseUrl}?w=${size.width}&h=${size.height}&f=${format} ${size.width}w`)
-    .join(', ');
-};
-
-// Generate picture element with multiple formats
-const webpSrcSet = generateSrcSet('webp');
-const avifSrcSet = generateSrcSet('avif');
-const jpegSrcSet = generateSrcSet('jpeg');
+// Simple image URL
+const imageUrl = src.startsWith('http') ? src : src;
 
 // Lazy loading optimization
 const loadingAttr = priority ? 'eager' : loading;
 const fetchPriority = priority ? 'high' : 'auto';
 
-// Generate placeholder
-const placeholderUrl = placeholder === 'blur' 
-  ? `${baseUrl}?w=20&h=20&f=webp&q=10&blur=10`
-  : '';
-
-// CSS for aspect ratio and loading optimization
+// CSS for aspect ratio
 const aspectRatio = height / width * 100;
 ---
 
@@ -71,15 +45,6 @@ const aspectRatio = height / width * 100;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease;
-  }
-  
-  .optimized-image.loading {
-    opacity: 0;
-  }
-  
-  .optimized-image.loaded {
-    opacity: 1;
   }
   
   .placeholder {
@@ -107,48 +72,18 @@ const aspectRatio = height / width * 100;
 
 <div class={`optimized-image-container ${className}`}>
   <div class="image-wrapper" style={`padding-bottom: ${aspectRatio}%`}>
-    {placeholder === 'blur' && placeholderUrl && (
-      <img 
-        src={placeholderUrl} 
-        alt="" 
-        class="optimized-image placeholder" 
-        aria-hidden="true"
-        loading="eager"
-      />
-    )}
-    
-    <picture>
-      <!-- AVIF format (best compression) -->
-      <source 
-        type="image/avif" 
-        srcset={avifSrcSet}
-        sizes={sizes}
-      />
-      
-      <!-- WebP format (good compression) -->
-      <source 
-        type="image/webp" 
-        srcset={webpSrcSet}
-        sizes={sizes}
-      />
-      
-      <!-- JPEG fallback -->
-      <img 
-        src={baseUrl}
-        srcset={jpegSrcSet}
-        sizes={sizes}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={loadingAttr}
-        fetchpriority={fetchPriority}
-        class="optimized-image loading"
-        decoding="async"
-        onload="this.classList.remove('loading'); this.classList.add('loaded');"
-        onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';"
-      />
-    </picture>
-    
+    <img
+      src={imageUrl}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loadingAttr}
+      fetchpriority={fetchPriority}
+      class="optimized-image"
+      decoding="async"
+      onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';"
+    />
+
     <!-- Fallback for failed images -->
     <div class="placeholder" style="display: none;">
       <div class="flex items-center justify-center h-full text-ink-muted">
@@ -161,58 +96,13 @@ const aspectRatio = height / width * 100;
 </div>
 
 <script>
-  // Intersection Observer for lazy loading optimization
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          const picture = img.closest('picture');
-          
-          // Preload the image
-          if (picture) {
-            const sources = picture.querySelectorAll('source');
-            sources.forEach(source => {
-              if (source.srcset) {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'image';
-                link.href = source.srcset;
-                link.imagesrcset = source.srcset;
-                link.imagesizes = source.sizes || '';
-                document.head.appendChild(link);
-              }
-            });
-          }
-          
-          // Load the image
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          
-          observer.unobserve(img);
-        }
-      });
-    }, {
-      rootMargin: '50px 0px',
-      threshold: 0.01
-    });
-    
-    // Observe all lazy images
-    document.addEventListener('DOMContentLoaded', () => {
-      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-      lazyImages.forEach(img => imageObserver.observe(img));
-    });
-  }
-  
-  // Preload critical images
+  // Simple critical image preloading
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', preloadCriticalImages);
   } else {
     preloadCriticalImages();
   }
-  
+
   function preloadCriticalImages() {
     const criticalImages = document.querySelectorAll('img[fetchpriority="high"]');
     criticalImages.forEach(img => {

@@ -37,19 +37,56 @@ const nav = [
       </a>
     </div>
 
-    <!-- Mobile -->
-    <details class="md:hidden">
-      <summary class="p-2 rounded-lg hover:bg-white/5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-silver/60">☰</summary>
-      <div class="absolute right-4 mt-2 w-64 glass p-4">
-        <nav class="grid gap-2">
-          {nav.map(i => <a class="py-2 rounded-lg hover:bg-white/5" href={i.href} data-astro-prefetch>{i.label}</a>)}
+    <!-- Mobile Menu -->
+    <div class="md:hidden">
+      <button
+        id="mobile-menu-button"
+        class="p-3 rounded-lg hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-brand-silver/60"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+      >
+        <span class="block w-5 h-0.5 bg-white mb-1"></span>
+        <span class="block w-5 h-0.5 bg-white mb-1"></span>
+        <span class="block w-5 h-0.5 bg-white"></span>
+      </button>
+
+      <div
+        id="mobile-menu"
+        class="hidden absolute right-4 mt-3 w-72 glass p-6 shadow-2xl"
+        role="menu"
+        aria-labelledby="mobile-menu-button"
+      >
+        <nav class="space-y-1" role="none">
+          {nav.map(i => (
+            <a
+              class="block py-3 px-4 rounded-lg hover:bg-white/5 text-ink focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors"
+              href={i.href}
+              data-astro-prefetch
+              role="menuitem"
+            >
+              {i.label}
+            </a>
+          ))}
         </nav>
-        <div class="mt-3 grid gap-2">
-          <a href="tel:12145244168" class="text-sm text-ink-muted hover:text-ink">Call (214) 524-4168</a>
-          <a href="/contact" data-astro-prefetch class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold text-center">Get Free Quote</a>
+        <div class="mt-6 pt-4 border-t border-white/10 space-y-3">
+          <a
+            href="tel:12145244168"
+            class="block text-sm text-ink-muted hover:text-ink py-2"
+            role="menuitem"
+          >
+            Call (214) 524-4168
+          </a>
+          <a
+            href="/contact"
+            data-astro-prefetch
+            class="block w-full py-3 px-4 rounded-xl bg-brand-red text-white text-sm font-semibold text-center hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-all"
+            role="menuitem"
+          >
+            Get Free Quote
+          </a>
         </div>
       </div>
-    </details>
+    </div>
   </div>
 </header>
 
@@ -80,4 +117,48 @@ const nav = [
     },
     { passive: true }
   );
+
+  // Mobile menu functionality
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    let isOpen = false;
+
+    const toggleMenu = () => {
+      isOpen = !isOpen;
+      mobileMenu.classList.toggle('hidden', !isOpen);
+      mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
+
+      // Close menu when clicking outside
+      if (isOpen) {
+        const closeMenu = (e) => {
+          if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+            isOpen = false;
+            document.removeEventListener('click', closeMenu);
+            document.removeEventListener('keydown', handleEscape);
+          }
+        };
+
+        const handleEscape = (e) => {
+          if (e.key === 'Escape') {
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+            isOpen = false;
+            document.removeEventListener('click', closeMenu);
+            document.removeEventListener('keydown', handleEscape);
+          }
+        };
+
+        setTimeout(() => {
+          document.addEventListener('click', closeMenu);
+          document.addEventListener('keydown', handleEscape);
+        }, 10);
+      }
+    };
+
+    mobileMenuButton.addEventListener('click', toggleMenu);
+  }
 </script>

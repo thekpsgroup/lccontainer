@@ -163,11 +163,7 @@ const desc = "Browse shipping containers: 20', 40', Standard and High Cube. New 
           >
             <div class="optimized-image-container h-full w-full">
               <div class="image-wrapper" style="padding-bottom: 75%;">
-                <picture>
-                  <source type="image/avif" srcset="${item.photos[0]}?w=400&h=300&f=avif 400w, ${item.photos[0]}?w=800&h=600&f=avif 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw">
-                  <source type="image/webp" srcset="${item.photos[0]}?w=400&h=300&f=webp 400w, ${item.photos[0]}?w=800&h=600&f=webp 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw">
-                  <img src="${item.photos[0]}" alt="${item.title}" class="optimized-image loading h-full w-full object-cover" loading="lazy" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-                </picture>
+                <img src="${item.photos[0]}" alt="${item.title}" class="optimized-image loading h-full w-full object-cover" loading="lazy" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
                 <div class="placeholder" style="display: none;">
                   <div class="flex items-center justify-center h-full text-ink-muted">
                     <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">

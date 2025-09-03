@@ -88,6 +88,20 @@ export const customModifications: ContainerImage[] = [
 
 export const standardContainers: ContainerImage[] = [
   {
+    src: '/photos/container/standard/10-ft.jpg',
+    alt: '10-foot shipping container perfect for small storage needs',
+    title: '10ft Compact Container',
+    category: 'Standard Container',
+    description: 'Compact 10-foot containers ideal for small storage and tight spaces'
+  },
+  {
+    src: '/photos/container/standard/10-ft-hc.jpg',
+    alt: '10-foot high cube shipping container with extra height',
+    title: '10ft High Cube Container',
+    category: 'Standard Container',
+    description: '10-foot high cube containers with extra interior height for bulky items'
+  },
+  {
     src: '/photos/container/standard/20ft_1.jpg',
     alt: '20-foot shipping container in excellent condition',
     title: '20ft Standard Container',
@@ -142,6 +156,20 @@ export const standardContainers: ContainerImage[] = [
     title: '20ft Easy Access Container',
     category: 'Standard Container',
     description: 'Easy access design for convenient loading'
+  },
+  {
+    src: '/photos/container/standard/30-ft.jpg',
+    alt: '30-foot shipping container for medium-sized storage needs',
+    title: '30ft Medium Container',
+    category: 'Standard Container',
+    description: 'Versatile 30-foot containers perfect for medium-sized storage and transport'
+  },
+  {
+    src: '/photos/container/standard/40-ft.jpg',
+    alt: '40-foot shipping container for large storage needs',
+    title: '40ft Standard Container',
+    category: 'Standard Container',
+    description: 'High-capacity 40-foot containers for maximum storage space'
   },
   {
     src: '/photos/container/standard/40ft_1.jpg',

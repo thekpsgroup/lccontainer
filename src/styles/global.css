@@ -1,8 +1,45 @@
-/* Fonts - Local hosting for performance */
+/* Fonts - Optimized local hosting with font-display swap */
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
+
+/* Font optimization */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter Regular'), local('Inter-Regular'),
+       url('/fonts/inter-v12-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Inter Medium'), local('Inter-Medium'),
+       url('/fonts/inter-v12-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Inter SemiBold'), local('Inter-SemiBold'),
+       url('/fonts/inter-v12-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Inter Bold'), local('Inter-Bold'),
+       url('/fonts/inter-v12-latin-700.woff2') format('woff2');
+}
 
 @tailwind base;
 @tailwind components;
@@ -36,9 +73,11 @@
     @apply text-xl md:text-2xl font-semibold;
   }
 
-  /* Consistent Section Spacing */
+  /* Performance optimized sections */
   section {
     @apply py-8 md:py-12 lg:py-16;
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
   }
 
   /* Consistent Card Padding */
@@ -63,22 +102,27 @@
     border-radius: 0.375rem;
   }
 
-  /* Micro-interactions and animations */
+  /* Performance optimized micro-interactions */
   .hover-lift {
-    @apply transition-all duration-200 ease-out;
-  }
-  
-  .hover-lift:hover {
-    @apply scale-[1.02] shadow-xl;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    will-change: transform;
   }
 
-  /* Fade-in animation for sections */
-  .fade-in {
-    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  .hover-lift:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
-  
+
+  /* Performance optimized fade-in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: opacity, transform;
+  }
+
   .fade-in.visible {
-    @apply opacity-100 translate-y-0;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Image overlay treatment */
@@ -118,6 +162,36 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+  }
+
+  /* Mobile-first optimizations */
+  @media (max-width: 768px) {
+    /* Touch-friendly button sizes */
+    button, .btn, a[role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Better touch targets */
+    input, select, textarea {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    /* Mobile navigation improvements */
+    nav a {
+      padding: 12px 16px;
+      display: block;
+    }
+
+    /* Mobile form improvements */
+    form {
+      gap: 16px;
+    }
+
+    input, select, textarea {
+      padding: 12px 16px;
+      border-radius: 8px;
     }
   }
 }
@@ -163,21 +237,12 @@
     @apply max-w-[68ch] space-y-6;
   }
 
-  /* Animation utilities */
-  .fade-in {
-    @apply opacity-0;
-    animation: fadeIn 0.7s ease-out forwards;
-  }
-
+  /* Optimized animation utilities with hardware acceleration */
   .slide-up {
-    @apply opacity-0;
+    opacity: 0;
+    transform: translateY(20px);
     animation: slideUp 0.7s ease-out forwards;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
+    will-change: opacity, transform;
   }
 
   @keyframes slideUp {
