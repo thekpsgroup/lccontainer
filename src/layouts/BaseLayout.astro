@@ -59,16 +59,14 @@ import Analytics from "../components/Analytics.astro";
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_MEASUREMENT_ID"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNQJTQFJYB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'YOUR_GA4_MEASUREMENT_ID', {
-        page_title: document.title,
-        page_location: window.location.href
-      });
+
+      gtag('config', 'G-NNQJTQFJYB');
     </script>
 
     <!-- Global stylesheet (bundled by Astro) -->
