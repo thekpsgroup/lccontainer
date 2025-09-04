@@ -63,7 +63,7 @@ const desc = "Browse our container inventory: 20', 30', 40' shipping containers.
         <article class="glass p-0 flex flex-col overflow-hidden hover-lift" role="article">
           <button
             class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer overflow-hidden"
-            onClick={`openLightbox(${JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb })})`}
+            onClick={`openLightbox(\${JSON.stringify({ src: '${item.photos[0]}', alt: '${item.title}', title: '${item.title}', caption: '${item.blurb}' })})`}
             aria-label={`View larger image of ${item.title} - ${item.blurb}`}
             role="button"
             tabindex="0"
@@ -160,14 +160,14 @@ const desc = "Browse our container inventory: 20', 30', 40' shipping containers.
         article.setAttribute('role', 'article');
         
         article.innerHTML = `
-          <button 
+          <button
             class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer overflow-hidden"
-            onClick="openLightbox(${JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb })})"
-            aria-label="View larger image of ${item.title} - ${item.blurb}"
+            onClick="openLightbox(` + JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb }) + `)"
+            aria-label="View larger image of ` + item.title + ` - ` + item.blurb + `"
           >
             <div class="optimized-image-container h-full w-full">
               <div class="image-wrapper" style="padding-bottom: 75%;">
-                <img src="${item.photos[0]}" alt="${item.title} - ${item.size} ${item.height} ${item.condition} container" class="optimized-image loading h-full w-full object-cover" loading="lazy" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+                <img src="` + item.photos[0] + `" alt="` + item.title + ` - ` + item.size + ` ` + item.height + ` ` + item.condition + ` container" class="optimized-image loading h-full w-full object-cover" loading="lazy" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
                 <div class="placeholder" style="display: none;">
                   <div class="flex items-center justify-center h-full text-ink-muted">
                     <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -180,14 +180,14 @@ const desc = "Browse our container inventory: 20', 30', 40' shipping containers.
           </button>
           <div class="p-6">
             <div class="flex items-center justify-between">
-              <h2 class="text-lg font-semibold">${item.title}</h2>
-              ${item.badge ? `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">${item.badge}</span>` : ''}
+              <h2 class="text-lg font-semibold">` + item.title + `</h2>
+              ` + (item.badge ? `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">` + item.badge + `</span>` : '') + `
             </div>
-            <p class="text-sm text-ink-muted mt-1">${item.blurb}</p>
-            <p class="text-sm text-ink-muted mt-1">From $${Number(item.priceFrom).toLocaleString()}</p>
+            <p class="text-sm text-ink-muted mt-1">` + item.blurb + `</p>
+            <p class="text-sm text-ink-muted mt-1">From $` + Number(item.priceFrom).toLocaleString() + `</p>
             <div class="mt-4 flex gap-2">
-              <a href="/inventory/${item.id}" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View details</a>
-              <a href="/contact?interest=${encodeURIComponent(item.title)}" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
+              <a href="/inventory/` + item.id + `" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View details</a>
+              <a href="/contact?interest=` + encodeURIComponent(item.title) + `" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
             </div>
           </div>
         `;
