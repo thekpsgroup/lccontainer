@@ -1,0 +1,170 @@
+---
+import { INVENTORY } from "../data/inventory";
+
+// Create a map of all images and their usage
+const imageUsage = new Map();
+INVENTORY.forEach(container => {
+  container.photos.forEach(photo => {
+    if (!imageUsage.has(photo)) {
+      imageUsage.set(photo, []);
+    }
+    imageUsage.get(photo).push({
+      id: container.id,
+      title: container.title,
+      size: container.size
+    });
+  });
+});
+
+// Find duplicates
+const duplicates = new Map();
+const uniqueImages = new Set();
+
+imageUsage.forEach((containers, photo) => {
+  if (containers.length > 1) {
+    duplicates.set(photo, containers);
+  }
+  uniqueImages.add(photo);
+});
+
+// Group duplicates by filename for better organization
+const duplicateGroups = new Map();
+duplicates.forEach((containers, photo) => {
+  const filename = photo.split('/').pop();
+  if (!duplicateGroups.has(filename)) {
+    duplicateGroups.set(filename, new Map());
+  }
+  duplicateGroups.get(filename).set(photo, containers);
+});
+
+// Get unique image stats
+const totalImages = uniqueImages.size;
+const duplicateImages = duplicates.size;
+const uniqueOnlyImages = totalImages - duplicateImages;
+---
+
+<div class="max-w-[1400px] mx-auto px-5 py-8">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold mb-4">Duplicate Image Analysis</h2>
+    <p class="text-lg text-ink-muted">
+      Checking for duplicate photos across containers
+    </p>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="grid md:grid-cols-4 gap-6 mb-8">
+    <div class="glass p-6 text-center">
+      <div class="text-4xl font-bold text-brand-red">{totalImages}</div>
+      <div class="text-ink-muted">Total Images</div>
+    </div>
+    <div class="glass p-6 text-center">
+      <div class="text-4xl font-bold text-green-600">{uniqueOnlyImages}</div>
+      <div class="text-ink-muted">Unique Images</div>
+    </div>
+    <div class="glass p-6 text-center">
+      <div class="text-4xl font-bold text-yellow-600">{duplicateImages}</div>
+      <div class="text-ink-muted">Duplicate Images</div>
+    </div>
+    <div class="glass p-6 text-center">
+      <div class="text-4xl font-bold text-blue-600">{INVENTORY.length}</div>
+      <div class="text-ink-muted">Total Containers</div>
+    </div>
+  </div>
+
+  {duplicateImages > 0 ? (
+    <>
+      <!-- Warning Alert -->
+      <div class="mb-8 glass p-6 border-l-4 border-yellow-500">
+        <div class="flex items-center gap-3">
+          <div class="text-yellow-500 text-2xl">⚠️</div>
+          <div>
+            <h3 class="font-bold text-yellow-700 dark:text-yellow-300">Duplicate Images Detected</h3>
+            <p class="text-ink-muted">
+              {duplicateImages} images are being used by multiple containers. This may cause confusion for customers.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplicate Images List -->
+      <div class="space-y-6">
+        {Array.from(duplicateGroups.entries()).map(([filename, paths]) => (
+          <div class="glass p-6">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="text-xl font-bold text-yellow-600">🔄</div>
+              <div>
+                <h3 class="text-lg font-semibold">{filename}</h3>
+                <p class="text-sm text-ink-muted">Used by {Array.from(paths.values()).flat().length} containers</p>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              {Array.from(paths.entries()).map(([path, containers]) => (
+                <div class="bg-white/5 p-4 rounded-lg">
+                  <div class="text-sm text-ink-muted mb-2 break-all">{path}</div>
+                  <div class="space-y-1">
+                    {containers.map(container => (
+                      <div class="flex items-center justify-between text-sm">
+                        <span class="font-medium">{container.title}</span>
+                        <span class="text-xs bg-brand-red/20 text-brand-red px-2 py-1 rounded">
+                          {container.size}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
+    <!-- Success Alert -->
+    <div class="glass p-6 border-l-4 border-green-500">
+      <div class="flex items-center gap-3">
+        <div class="text-green-500 text-2xl">✅</div>
+        <div>
+          <h3 class="font-bold text-green-700 dark:text-green-300">All Images Are Unique!</h3>
+          <p class="text-ink-muted">
+            Every photo is uniquely assigned to specific containers. No duplicates found.
+          </p>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Detailed Breakdown -->
+  <div class="mt-8">
+    <h3 class="text-xl font-bold mb-4">Image Usage Details</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      {INVENTORY.map(container => (
+        <div class="glass p-4">
+          <h4 class="font-semibold mb-3">{container.title}</h4>
+          <div class="space-y-2">
+            {container.photos.map((photo, index) => {
+              const filename = photo.split('/').pop();
+              const isDuplicate = imageUsage.get(photo).length > 1;
+              const isPrimary = index === 0;
+
+              return (
+                <div class="flex items-center gap-3 p-2 rounded bg-white/5">
+                  <div class="text-sm">
+                    {isDuplicate ? '🔄' : '✅'}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="text-sm font-medium truncate">{filename}</div>
+                    <div class="text-xs text-ink-muted">
+                      {isPrimary ? 'PRIMARY' : 'Gallery'} •
+                      {isDuplicate ? `Used by ${imageUsage.get(photo).length} containers` : 'Unique'}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

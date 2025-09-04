@@ -1,0 +1,67 @@
+---
+import { INVENTORY } from "../data/inventory";
+
+const allImages = INVENTORY.flatMap(item => item.photos);
+const uniqueImages = [...new Set(allImages)];
+---
+
+<section class="max-w-[1200px] mx-auto px-5 py-16">
+  <h2 class="text-3xl font-bold mb-8">Image Verification</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {uniqueImages.map((imagePath, index) => (
+      <div class="glass p-4">
+        <div class="text-sm text-ink-muted mb-2 break-all">{imagePath}</div>
+        <div class="relative h-32 bg-gray-100 rounded overflow-hidden">
+          <img
+            src={imagePath}
+            alt={`Container image ${index + 1}`}
+            class="w-full h-full object-cover"
+            loading="lazy"
+            onerror={`console.error('Failed to load image:', '${imagePath}'); this.style.display='none'; this.nextElementSibling.style.display='block';`}
+          />
+          <div class="absolute inset-0 flex items-center justify-center text-red-500 text-xs bg-red-50 hidden">
+            Failed to load
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-8 p-4 glass">
+    <h3 class="text-lg font-semibold mb-4">Verification Results</h3>
+    <p class="text-sm text-ink-muted">
+      Total unique images: {uniqueImages.length}<br>
+      All images should display above. If any show "Failed to load", check the browser console for errors.
+    </p>
+  </div>
+</section>
+
+<script>
+  // Add client-side verification
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img[alt^="Container image"]');
+    let loadedCount = 0;
+    let failedCount = 0;
+
+    images.forEach(img => {
+      img.addEventListener('load', () => {
+        loadedCount++;
+        console.log(`✅ Image loaded: ${img.src}`);
+      });
+
+      img.addEventListener('error', () => {
+        failedCount++;
+        console.error(`❌ Failed to load: ${img.src}`);
+      });
+    });
+
+    // Log summary after a delay to allow images to load
+    setTimeout(() => {
+      console.log(`Image verification complete:`);
+      console.log(`- Loaded: ${loadedCount}`);
+      console.log(`- Failed: ${failedCount}`);
+      console.log(`- Total: ${images.length}`);
+    }, 3000);
+  });
+</script>

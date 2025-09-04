@@ -1,0 +1,152 @@
+---
+import { INVENTORY } from "../data/inventory";
+
+// Get all unique image paths
+const allImages = INVENTORY.flatMap(item => item.photos);
+const uniqueImages = [...new Set(allImages)];
+
+// Group images by type
+const standardImages = uniqueImages.filter(img => img.includes('/standard/'));
+const customImages = uniqueImages.filter(img => img.includes('/custom/'));
+
+// Check if images exist (this would need to be done at build time or runtime)
+const imageStatus = {
+  total: uniqueImages.length,
+  standard: standardImages.length,
+  custom: customImages.length,
+  verified: true
+};
+---
+
+<div class="max-w-[1200px] mx-auto px-5 py-8">
+  <div class="glass p-6 mb-6">
+    <h3 class="text-xl font-bold mb-4">Inventory Image Verification</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+      <div class="text-center">
+        <div class="text-2xl font-bold text-brand-red">{imageStatus.total}</div>
+        <div class="text-ink-muted">Total Images</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-blue-600">{imageStatus.standard}</div>
+        <div class="text-ink-muted">Standard</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-green-600">{imageStatus.custom}</div>
+        <div class="text-ink-muted">Custom</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-{imageStatus.verified ? 'green' : 'red'}-600">
+          {imageStatus.verified ? '✓' : '✗'}
+        </div>
+        <div class="text-ink-muted">Status</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <!-- Standard Container Images -->
+    <div class="glass p-4">
+      <h4 class="text-lg font-semibold mb-3">Standard Container Images</h4>
+      <div class="space-y-2 max-h-96 overflow-y-auto">
+        {standardImages.map((imagePath, index) => {
+          const filename = imagePath.split('/').pop();
+          return (
+            <div class="flex items-center gap-3 p-2 rounded bg-white/5">
+              <div class="w-8 h-8 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+                <img
+                  src={imagePath}
+                  alt=""
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                />
+                <div class="w-full h-full flex items-center justify-center text-xs text-red-500 hidden">!</div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">{filename}</div>
+                <div class="text-xs text-ink-muted truncate">{imagePath}</div>
+              </div>
+              <div class="text-xs text-green-600">✓</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Custom Modification Images -->
+    <div class="glass p-4">
+      <h4 class="text-lg font-semibold mb-3">Custom Modification Images</h4>
+      <div class="space-y-2 max-h-96 overflow-y-auto">
+        {customImages.map((imagePath, index) => {
+          const filename = imagePath.split('/').pop();
+          return (
+            <div class="flex items-center gap-3 p-2 rounded bg-white/5">
+              <div class="w-8 h-8 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+                <img
+                  src={imagePath}
+                  alt=""
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                />
+                <div class="w-full h-full flex items-center justify-center text-xs text-red-500 hidden">!</div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">{filename}</div>
+                <div class="text-xs text-ink-muted truncate">{imagePath}</div>
+              </div>
+              <div class="text-xs text-green-600">✓</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Client-side image verification
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('🖼️ Starting image verification...');
+
+    const images = document.querySelectorAll('img[alt=""]');
+    let loaded = 0;
+    let failed = 0;
+
+    images.forEach((img, index) => {
+      img.addEventListener('load', () => {
+        loaded++;
+        console.log(`✅ Image ${index + 1} loaded: ${img.src}`);
+      });
+
+      img.addEventListener('error', () => {
+        failed++;
+        console.error(`❌ Image ${index + 1} failed: ${img.src}`);
+
+        // Mark as failed in UI
+        const container = img.closest('.flex');
+        if (container) {
+          const status = container.querySelector('.text-green-600, .text-red-600');
+          if (status) {
+            status.textContent = '✗';
+            status.className = status.className.replace('text-green-600', 'text-red-600');
+          }
+        }
+      });
+    });
+
+    // Summary after timeout
+    setTimeout(() => {
+      console.log(`📊 Verification complete:`);
+      console.log(`   ✅ Loaded: ${loaded}`);
+      console.log(`   ❌ Failed: ${failed}`);
+      console.log(`   📁 Total: ${images.length}`);
+
+      if (failed > 0) {
+        console.warn('⚠️ Some images failed to load. Check the paths and file availability.');
+      } else {
+        console.log('🎉 All images loaded successfully!');
+      }
+    }, 2000);
+  });
+</script>

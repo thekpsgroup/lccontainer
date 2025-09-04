@@ -23,8 +23,8 @@ const {
   placeholder = 'none'
 } = Astro.props;
 
-// Simple image URL
-const imageUrl = src.startsWith('http') ? src : src;
+// Simple image URL with base path handling
+const imageUrl = src.startsWith('http') ? src : (src.startsWith('/') ? src : `/${src}`);
 
 // Lazy loading optimization
 const loadingAttr = priority ? 'eager' : loading;
@@ -81,21 +81,35 @@ const aspectRatio = height / width * 100;
       fetchpriority={fetchPriority}
       class="optimized-image"
       decoding="async"
-      onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';"
+      onerror="handleImageError(this)"
     />
 
     <!-- Fallback for failed images -->
     <div class="placeholder" style="display: none;">
       <div class="flex items-center justify-center h-full text-ink-muted">
-        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
         </svg>
+        <div class="sr-only">Image failed to load</div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+  // Image error handling function
+  function handleImageError(img) {
+    console.warn('Image failed to load:', img.src);
+    img.style.display = 'none';
+    const placeholder = img.parentElement?.querySelector('.placeholder');
+    if (placeholder) {
+      placeholder.style.display = 'block';
+    }
+  }
+
+  // Make function globally available
+  window.handleImageError = handleImageError;
+
   // Simple critical image preloading
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', preloadCriticalImages);

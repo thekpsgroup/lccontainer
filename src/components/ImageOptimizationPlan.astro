@@ -1,0 +1,247 @@
+---
+import { INVENTORY } from "../data/inventory";
+
+// Analyze current state and create optimization plan
+const analysis = {
+  totalImages: 0,
+  sharedImages: new Map(),
+  sizeSpecific: new Map(['10\'', '20\'', '30\'', '40\''].map(size => [size, []]))
+};
+
+// Collect all data
+INVENTORY.forEach(container => {
+  container.photos.forEach(photo => {
+    analysis.totalImages++;
+
+    const filename = photo.split('/').pop();
+    if (!analysis.sharedImages.has(filename)) {
+      analysis.sharedImages.set(filename, {
+        path: photo,
+        containers: [],
+        sizes: new Set(),
+        types: new Set()
+      });
+    }
+
+    const imgData = analysis.sharedImages.get(filename);
+    imgData.containers.push(container.title);
+    imgData.sizes.add(container.size);
+    imgData.types.add(container.condition);
+  });
+});
+
+// Categorize images
+const recommendations = {
+  keepSharing: [],
+  makeSizeSpecific: [],
+  reviewNeeded: []
+};
+
+analysis.sharedImages.forEach((data, filename) => {
+  const sizes = Array.from(data.sizes);
+  const isCustom = data.path.includes('/custom/');
+  const isStandard = data.path.includes('/standard/');
+
+  if (isStandard && sizes.length === 1) {
+    // Size-specific standard image - this is perfect
+    recommendations.keepSharing.push({ filename, data, reason: 'Size-specific standard image' });
+  } else if (isStandard && sizes.length > 1) {
+    // Standard image shared across sizes - generally OK
+    recommendations.keepSharing.push({ filename, data, reason: 'Standard image shared appropriately' });
+  } else if (isCustom && sizes.length === 1) {
+    // Size-specific custom image - perfect
+    recommendations.keepSharing.push({ filename, data, reason: 'Size-specific custom image' });
+  } else if (isCustom && sizes.length > 1) {
+    // Custom image shared across sizes - needs review
+    recommendations.reviewNeeded.push({ filename, data, reason: 'Custom image shared across sizes' });
+  }
+});
+---
+
+<div class="max-w-[1400px] mx-auto px-5 py-8">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold mb-4">🧠 Smart Image Optimization Plan</h2>
+    <p class="text-lg text-ink-muted">
+      Practical recommendations for your image sharing strategy
+    </p>
+  </div>
+
+  <!-- Current State Summary -->
+  <div class="grid md:grid-cols-4 gap-6 mb-8">
+    <div class="glass p-6 text-center">
+      <div class="text-3xl mb-2">📸</div>
+      <div class="text-2xl font-bold text-brand-red">{analysis.totalImages}</div>
+      <div class="text-sm text-ink-muted">Total Images</div>
+    </div>
+
+    <div class="glass p-6 text-center">
+      <div class="text-3xl mb-2">✅</div>
+      <div class="text-2xl font-bold text-green-600">{recommendations.keepSharing.length}</div>
+      <div class="text-sm text-ink-muted">Keep Sharing</div>
+    </div>
+
+    <div class="glass p-6 text-center">
+      <div class="text-3xl mb-2">🤔</div>
+      <div class="text-2xl font-bold text-yellow-600">{recommendations.reviewNeeded.length}</div>
+      <div class="text-sm text-ink-muted">Needs Review</div>
+    </div>
+
+    <div class="glass p-6 text-center">
+      <div class="text-3xl mb-2">🎯</div>
+      <div class="text-2xl font-bold text-blue-600">{INVENTORY.length}</div>
+      <div class="text-sm text-ink-muted">Containers</div>
+    </div>
+  </div>
+
+  <!-- Action Plan -->
+  <div class="space-y-6">
+    <!-- Keep Current Sharing -->
+    <div class="glass p-6">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="text-2xl">✅</div>
+        <div>
+          <h3 class="text-xl font-semibold text-green-600">Keep Current Sharing</h3>
+          <p class="text-ink-muted">{recommendations.keepSharing.length} images are optimally shared</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {recommendations.keepSharing.slice(0, 6).map(({ filename, data, reason }) => (
+          <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+            <div class="text-sm font-medium mb-1">{filename}</div>
+            <div class="text-xs text-green-600 mb-2">{reason}</div>
+            <div class="text-xs text-ink-muted">
+              Used by: {data.containers.length} containers
+            </div>
+            <div class="text-xs text-ink-muted">
+              Sizes: {Array.from(data.sizes).join(', ')}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {recommendations.keepSharing.length > 6 && (
+        <p class="text-sm text-ink-muted mt-4">
+          ... and {recommendations.keepSharing.length - 6} more optimally shared images
+        </p>
+      )}
+    </div>
+
+    <!-- Needs Review -->
+    {recommendations.reviewNeeded.length > 0 && (
+      <div class="glass p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="text-2xl">🤔</div>
+          <div>
+            <h3 class="text-xl font-semibold text-yellow-600">Needs Strategic Review</h3>
+            <p class="text-ink-muted">{recommendations.reviewNeeded.length} custom images shared across sizes</p>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg mb-4">
+          <h4 class="font-medium text-yellow-700 dark:text-yellow-300 mb-2">Decision Point:</h4>
+          <p class="text-sm text-yellow-700 dark:text-yellow-300">
+            These custom modification images appear for containers of different sizes.
+            Consider whether this helps or hurts customer understanding.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          {recommendations.reviewNeeded.map(({ filename, data, reason }) => (
+            <div class="bg-white/5 p-4 rounded-lg border border-yellow-200 dark:border-yellow-800">
+              <div class="text-sm font-medium mb-2">{filename}</div>
+              <div class="text-xs text-yellow-600 mb-2">{reason}</div>
+              <div class="text-xs text-ink-muted mb-1">
+                <strong>Used by:</strong> {data.containers.slice(0, 2).join(', ')}
+                {data.containers.length > 2 && ` +${data.containers.length - 2} more`}
+              </div>
+              <div class="text-xs text-ink-muted">
+                <strong>Sizes:</strong> {Array.from(data.sizes).join(', ')}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Strategic Recommendations -->
+    <div class="glass p-6">
+      <h3 class="text-xl font-semibold mb-4">🎯 Strategic Recommendations</h3>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <h4 class="font-semibold text-green-600">If You Want Maximum Clarity:</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 mt-1">•</span>
+              <span>Create size-specific custom modification photos</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 mt-1">•</span>
+              <span>Show customers exactly what modifications look like on their size</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 mt-1">•</span>
+              <span>Reduce potential confusion about container dimensions</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-semibold text-blue-600">If You Want Content Efficiency:</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Keep current sharing for storage efficiency</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Show variety of modification options across sizes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Add clear size labels in image captions</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Quick Implementation -->
+      <div class="mt-6 p-4 bg-brand-red/10 rounded-lg">
+        <h4 class="font-semibold mb-2">🚀 Quick Implementation:</h4>
+        <p class="text-sm mb-3">
+          If you want to improve clarity without major changes, add size indicators to your image captions:
+        </p>
+        <code class="text-xs bg-black/20 p-2 rounded block">
+          "Custom office conversion on 30' container"
+        </code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Line -->
+  <div class="mt-8 glass p-6">
+    <div class="text-center">
+      <h3 class="text-xl font-bold mb-4">💭 Bottom Line</h3>
+      <p class="text-lg text-ink-muted mb-4">
+        Your current setup isn't "broken" - it's a strategic choice between clarity vs efficiency
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">Go with Clarity</h4>
+          <p class="text-sm text-green-600 dark:text-green-400">
+            Create dedicated images for each size. Customers see exactly what they're getting.
+          </p>
+        </div>
+
+        <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Stick with Efficiency</h4>
+          <p class="text-sm text-blue-600 dark:text-blue-400">
+            Keep sharing, add size labels. Shows more variety with less maintenance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

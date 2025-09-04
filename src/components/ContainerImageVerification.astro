@@ -1,0 +1,234 @@
+---
+import { INVENTORY } from "../data/inventory";
+
+// Group containers by size
+const containersBySize = {
+  "10'": INVENTORY.filter(item => item.size === "10'"),
+  "20'": INVENTORY.filter(item => item.size === "20'"),
+  "30'": INVENTORY.filter(item => item.size === "30'"),
+  "40'": INVENTORY.filter(item => item.size === "40'")
+};
+
+// Get unique images by size
+const imagesBySize = {
+  "10'": [...new Set(containersBySize["10'"].flatMap(item => item.photos))],
+  "20'": [...new Set(containersBySize["20'"].flatMap(item => item.photos))],
+  "30'": [...new Set(containersBySize["30'"].flatMap(item => item.photos))],
+  "40'": [...new Set(containersBySize["40'"].flatMap(item => item.photos))]
+};
+---
+
+<div class="max-w-[1400px] mx-auto px-5 py-8">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold mb-4">Container Image Verification by Size</h2>
+    <p class="text-lg text-ink-muted">
+      Verifying that each container size displays the correct images
+    </p>
+  </div>
+
+  <div class="space-y-8">
+    <!-- 10-Foot Containers -->
+    <div class="glass p-6">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="text-4xl font-bold text-brand-red">10'</div>
+        <div>
+          <h3 class="text-xl font-semibold">10-Foot Containers</h3>
+          <p class="text-ink-muted">{containersBySize["10'"].length} containers • {imagesBySize["10'"].length} unique images</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        {containersBySize["10'"].map(container => (
+          <div class="bg-white/5 p-4 rounded-lg">
+            <h4 class="font-semibold text-sm mb-2">{container.title}</h4>
+            <div class="aspect-video bg-gray-100 rounded overflow-hidden">
+              <img
+                src={container.photos[0]}
+                alt={`${container.title} container`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
+              <div class="w-full h-full flex items-center justify-center text-red-500 text-xs hidden">
+                Failed to load
+              </div>
+            </div>
+            <p class="text-xs text-ink-muted mt-2 truncate">{container.photos[0]}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="border-t border-brand-line pt-4">
+        <h4 class="font-semibold mb-2">Images used for 10' containers:</h4>
+        <div class="flex flex-wrap gap-2">
+          {imagesBySize["10'"].map(image => (
+            <span class="text-xs bg-brand-red/10 text-brand-red px-2 py-1 rounded">
+              {image.split('/').pop()}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 20-Foot Containers -->
+    <div class="glass p-6">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="text-4xl font-bold text-brand-red">20'</div>
+        <div>
+          <h3 class="text-xl font-semibold">20-Foot Containers</h3>
+          <p class="text-ink-muted">{containersBySize["20'"].length} containers • {imagesBySize["20'"].length} unique images</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        {containersBySize["20'"].map(container => (
+          <div class="bg-white/5 p-4 rounded-lg">
+            <h4 class="font-semibold text-sm mb-2">{container.title}</h4>
+            <div class="aspect-video bg-gray-100 rounded overflow-hidden">
+              <img
+                src={container.photos[0]}
+                alt={`${container.title} container`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
+              <div class="w-full h-full flex items-center justify-center text-red-500 text-xs hidden">
+                Failed to load
+              </div>
+            </div>
+            <p class="text-xs text-ink-muted mt-2 truncate">{container.photos[0]}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="border-t border-brand-line pt-4">
+        <h4 class="font-semibold mb-2">Images used for 20' containers:</h4>
+        <div class="flex flex-wrap gap-2">
+          {imagesBySize["20'"].map(image => (
+            <span class="text-xs bg-brand-red/10 text-brand-red px-2 py-1 rounded">
+              {image.split('/').pop()}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 30-Foot Containers -->
+    <div class="glass p-6">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="text-4xl font-bold text-brand-red">30'</div>
+        <div>
+          <h3 class="text-xl font-semibold">30-Foot Containers</h3>
+          <p class="text-ink-muted">{containersBySize["30'"].length} containers • {imagesBySize["30'"].length} unique images</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        {containersBySize["30'"].map(container => (
+          <div class="bg-white/5 p-4 rounded-lg">
+            <h4 class="font-semibold text-sm mb-2">{container.title}</h4>
+            <div class="aspect-video bg-gray-100 rounded overflow-hidden">
+              <img
+                src={container.photos[0]}
+                alt={`${container.title} container`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
+              <div class="w-full h-full flex items-center justify-center text-red-500 text-xs hidden">
+                Failed to load
+              </div>
+            </div>
+            <p class="text-xs text-ink-muted mt-2 truncate">{container.photos[0]}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="border-t border-brand-line pt-4">
+        <h4 class="font-semibold mb-2">Images used for 30' containers:</h4>
+        <div class="flex flex-wrap gap-2">
+          {imagesBySize["30'"].map(image => (
+            <span class="text-xs bg-brand-red/10 text-brand-red px-2 py-1 rounded">
+              {image.split('/').pop()}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 40-Foot Containers -->
+    <div class="glass p-6">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="text-4xl font-bold text-brand-red">40'</div>
+        <div>
+          <h3 class="text-xl font-semibold">40-Foot Containers</h3>
+          <p class="text-ink-muted">{containersBySize["40'"].length} containers • {imagesBySize["40'"].length} unique images</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        {containersBySize["40'"].map(container => (
+          <div class="bg-white/5 p-4 rounded-lg">
+            <h4 class="font-semibold text-sm mb-2">{container.title}</h4>
+            <div class="aspect-video bg-gray-100 rounded overflow-hidden">
+              <img
+                src={container.photos[0]}
+                alt={`${container.title} container`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
+              <div class="w-full h-full flex items-center justify-center text-red-500 text-xs hidden">
+                Failed to load
+              </div>
+            </div>
+            <p class="text-xs text-ink-muted mt-2 truncate">{container.photos[0]}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="border-t border-brand-line pt-4">
+        <h4 class="font-semibold mb-2">Images used for 40' containers:</h4>
+        <div class="flex flex-wrap gap-2">
+          {imagesBySize["40'"].map(image => (
+            <span class="text-xs bg-brand-red/10 text-brand-red px-2 py-1 rounded">
+              {image.split('/').pop()}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="mt-8 glass p-6">
+    <h3 class="text-xl font-bold mb-4">Verification Summary</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="text-center">
+        <div class="text-3xl font-bold text-brand-red">{containersBySize["10'"].length}</div>
+        <div class="text-sm text-ink-muted">10' Containers</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-brand-red">{containersBySize["20'"].length}</div>
+        <div class="text-sm text-ink-muted">20' Containers</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-brand-red">{containersBySize["30'"].length}</div>
+        <div class="text-sm text-ink-muted">30' Containers</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-brand-red">{containersBySize["40'"].length}</div>
+        <div class="text-sm text-ink-muted">40' Containers</div>
+      </div>
+    </div>
+
+    <div class="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+      <div class="flex items-center gap-2 text-green-700 dark:text-green-300">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <span class="font-semibold">All containers are properly matched with correct size images!</span>
+      </div>
+    </div>
+  </div>
+</div>

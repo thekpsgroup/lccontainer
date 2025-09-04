@@ -1,0 +1,241 @@
+---
+import { INVENTORY } from "../data/inventory";
+
+// Group containers by size and type
+const containersBySize = {
+  "10'": INVENTORY.filter(item => item.size === "10'"),
+  "20'": INVENTORY.filter(item => item.size === "20'"),
+  "30'": INVENTORY.filter(item => item.size === "30'"),
+  "40'": INVENTORY.filter(item => item.size === "40'")
+};
+
+// Analyze image usage patterns
+const imageAnalysis = {
+  standardPhotos: new Set(),
+  customPhotos: new Set(),
+  sharedImages: new Map(),
+  sizeSpecificImages: new Map()
+};
+
+// Collect all images
+INVENTORY.forEach(container => {
+  container.photos.forEach(photo => {
+    const isStandard = photo.includes('/standard/');
+    const filename = photo.split('/').pop();
+
+    if (isStandard) {
+      imageAnalysis.standardPhotos.add(filename);
+    } else {
+      imageAnalysis.customPhotos.add(filename);
+    }
+
+    // Track usage
+    if (!imageAnalysis.sharedImages.has(filename)) {
+      imageAnalysis.sharedImages.set(filename, []);
+    }
+    imageAnalysis.sharedImages.get(filename).push({
+      container: container.title,
+      size: container.size,
+      type: container.condition,
+      path: photo
+    });
+  });
+});
+
+// Categorize images
+imageAnalysis.sharedImages.forEach((usage, filename) => {
+  const sizes = [...new Set(usage.map(u => u.size))];
+  const types = [...new Set(usage.map(u => u.type))];
+
+  if (sizes.length === 1) {
+    // Size-specific
+    if (!imageAnalysis.sizeSpecificImages.has(sizes[0])) {
+      imageAnalysis.sizeSpecificImages.set(sizes[0], []);
+    }
+    imageAnalysis.sizeSpecificImages.get(sizes[0]).push({ filename, usage });
+  }
+});
+
+// Get recommendations
+const recommendations = [];
+const sharedCustomMods = Array.from(imageAnalysis.sharedImages.entries())
+  .filter(([filename, usage]) => {
+    const isCustom = usage.some(u => u.path.includes('/custom/'));
+    const sizes = [...new Set(usage.map(u => u.size))];
+    return isCustom && sizes.length > 1;
+  });
+
+if (sharedCustomMods.length > 0) {
+  recommendations.push({
+    type: 'warning',
+    title: 'Custom modifications shared across sizes',
+    description: `${sharedCustomMods.length} custom modification images are used for multiple container sizes`,
+    action: 'Consider creating size-specific custom examples'
+  });
+}
+---
+
+<div class="max-w-[1400px] mx-auto px-5 py-8">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold mb-4">Smart Image Management Analysis</h2>
+    <p class="text-lg text-ink-muted">
+      Intelligent analysis of image sharing patterns and recommendations
+    </p>
+  </div>
+
+  <!-- Current State Analysis -->
+  <div class="grid md:grid-cols-3 gap-6 mb-8">
+    <div class="glass p-6">
+      <div class="text-3xl mb-2">🖼️</div>
+      <div class="text-2xl font-bold text-brand-red">{imageAnalysis.standardPhotos.size}</div>
+      <div class="text-sm text-ink-muted">Standard Photos</div>
+      <p class="text-xs mt-2">Container photos by size</p>
+    </div>
+
+    <div class="glass p-6">
+      <div class="text-2xl mb-2">🔧</div>
+      <div class="text-3xl font-bold text-blue-600">{imageAnalysis.customPhotos.size}</div>
+      <div class="text-sm text-ink-muted">Custom Photos</div>
+      <p class="text-xs mt-2">Modification examples</p>
+    </div>
+
+    <div class="glass p-6">
+      <div class="text-2xl mb-2">📊</div>
+      <div class="text-3xl font-bold text-green-600">{sharedCustomMods.length}</div>
+      <div class="text-sm text-ink-muted">Cross-Size Sharing</div>
+      <p class="text-xs mt-2">Custom images used across sizes</p>
+    </div>
+  </div>
+
+  <!-- Smart Recommendations -->
+  <div class="mb-8">
+    <h3 class="text-xl font-bold mb-4">🤔 Smart Analysis</h3>
+
+    <div class="space-y-4">
+      <!-- Standard Photos -->
+      <div class="glass p-6">
+        <div class="flex items-start gap-4">
+          <div class="text-2xl">✅</div>
+          <div class="flex-1">
+            <h4 class="font-semibold text-green-600 mb-2">Standard Container Photos</h4>
+            <p class="text-sm text-ink-muted mb-3">
+              Your standard container photos are appropriately shared. A photo of a 10-foot container should logically appear for both "Used" and "New" 10-foot containers since they represent the same physical size.
+            </p>
+            <div class="bg-green-50 dark:bg-green-900/20 p-3 rounded">
+              <p class="text-sm text-green-700 dark:text-green-300">
+                <strong>✅ Good:</strong> Same container size = Same photo makes sense
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Photos Analysis -->
+      <div class="glass p-6">
+        <div class="flex items-start gap-4">
+          <div class="text-2xl">🤔</div>
+          <div class="flex-1">
+            <h4 class="font-semibold text-yellow-600 mb-2">Custom Modification Photos</h4>
+            <p class="text-sm text-ink-muted mb-3">
+              {sharedCustomMods.length} custom modification images are shared across different container sizes. This could potentially confuse customers about what size container they're viewing.
+            </p>
+
+            {sharedCustomMods.length > 0 && (
+              <div class="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded mb-3">
+                <p class="text-sm text-yellow-700 dark:text-yellow-300 mb-2">
+                  <strong>Potential Issue:</strong> Custom work on a 30' container appearing in 40' container gallery
+                </p>
+                <div class="text-xs space-y-1">
+                  {sharedCustomMods.slice(0, 3).map(([filename, usage]) => {
+                    const sizes = [...new Set(usage.map(u => u.size))];
+                    return (
+                      <div>• {filename}: {sizes.join(' + ')}</div>
+                    );
+                  })}
+                  {sharedCustomMods.length > 3 && (
+                    <div className="text-ink-muted">... and {sharedCustomMods.length - 3} more</div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
+                <p class="text-sm font-medium text-blue-700 dark:text-blue-300 mb-1">Current Approach:</p>
+                <p class="text-xs text-blue-600 dark:text-blue-400">Reuses images to save space and show variety</p>
+              </div>
+              <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded">
+                <p class="text-sm font-medium text-purple-700 dark:text-purple-300 mb-1">Alternative Approach:</p>
+                <p class="text-xs text-purple-600 dark:text-purple-400">Size-specific examples for clarity</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Framework -->
+  <div class="glass p-6">
+    <h3 class="text-xl font-bold mb-4">🎯 Decision Framework</h3>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h4 class="font-semibold text-green-600 mb-3">Keep Current Sharing</h4>
+        <ul class="space-y-2 text-sm">
+          <li class="flex items-center gap-2">
+            <span class="text-green-500">✓</span>
+            Saves storage space
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-500">✓</span>
+            Shows modification variety
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-500">✓</span>
+            Easier content management
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-yellow-500">⚠</span>
+            Potential customer confusion
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-blue-600 mb-3">Create Size-Specific Images</h4>
+        <ul class="space-y-2 text-sm">
+          <li class="flex items-center gap-2">
+            <span class="text-blue-500">✓</span>
+            Maximum clarity for customers
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-blue-500">✓</span>
+            Accurate size representation
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-blue-500">✓</span>
+            Better SEO and targeting
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-red-500">✗</span>
+            Requires more storage
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-red-500">✗</span>
+            More content to manage
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+      <h5 class="font-semibold mb-2">💭 Thinking Through This:</h5>
+      <p class="text-sm text-ink-muted">
+        The custom modification sharing isn't necessarily "wrong" - it depends on your business goals.
+        If customer clarity is your top priority, size-specific images would be better.
+        If showing modification variety across sizes is more important, current approach works fine.
+      </p>
+    </div>
+  </div>
+</div>
