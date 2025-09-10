@@ -1,5 +1,5 @@
 export type Condition = "New (One-Trip)" | "Used (WWT)";
-export type Size = "20'" | "40'";
+export type Size = "10'" | "20'" | "40'";
 export type Height = "Standard" | "High Cube";
 
 export interface Item {
@@ -27,7 +27,6 @@ export const INVENTORY: Item[] = [
     blurb: "Compact storage. Easy placement in tight spaces.",
     photos: [
       "/photos/container/standard/10-ft.jpg",
-      "/photos/container/standard/10-ft-hc.jpg",
       "/photos/container/custom/custom-modification-10.jpg",
       "/photos/container/custom/custom-modification-11.jpg",
       "/photos/container/custom/custom-modification-15.jpg",
@@ -46,49 +45,11 @@ export const INVENTORY: Item[] = [
     blurb: "Like-new mini container for small-footprint storage.",
     photos: [
       "/photos/container/standard/10-ft.jpg",
-      "/photos/container/standard/10-ft-hc.jpg",
       "/photos/container/custom/custom-modification-16.jpg",
       "/photos/container/custom/custom-modification-8.jpg",
       "/photos/container/custom/custom-modification-7.jpg",
     ],
     specs: ["Ventilated", "Marine-grade floors", "Lockbox-ready"],
-    inStock: true,
-  },
-  {
-    id: "30std-used",
-    title: "30' Standard — Used (WWT)",
-    size: "30'",
-    height: "Standard",
-    condition: "Used (WWT)",
-    priceFrom: 2900,
-    blurb: "Mid-size footprint, great balance of capacity and space.",
-    photos: [
-      "/photos/container/standard/30-ft.jpg",
-      "/photos/container/custom/custom-modification-2.jpg",
-      "/photos/container/custom/custom-modification-3.jpg",
-      "/photos/container/custom/custom-modification-4.jpg",
-      "/photos/container/custom/custom-modification-5.jpg",
-    ],
-    specs: ["Interior length ~29'4\"", "Width 7'8\"", "Height 7'10\""],
-    inStock: true,
-  },
-  {
-    id: "30std-new",
-    title: "30' Standard — New (One-Trip)",
-    size: "30'",
-    height: "Standard",
-    condition: "New (One-Trip)",
-    badge: "New",
-    priceFrom: 5600,
-    blurb: "Clean presentation with versatile storage volume.",
-    photos: [
-      "/photos/container/standard/30-ft.jpg",
-      "/photos/container/custom/custom-modification-6.jpg",
-      "/photos/container/custom/custom-modification-7.jpg",
-      "/photos/container/custom/custom-modification-8.jpg",
-      "/photos/container/custom/custom-modification-10.jpg",
-    ],
-    specs: ["Ventilated", "Marine-grade floors", "CSC plated"],
     inStock: true,
   },
   {

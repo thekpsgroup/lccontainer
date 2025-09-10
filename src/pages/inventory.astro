@@ -2,19 +2,40 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Lightbox from "../components/Lightbox.astro";
-import OptimizedImage from "../components/OptimizedImage.astro";
+import SquareImage from "../components/SquareImage.astro";
 import SEOEnhancer from "../components/SEOEnhancer.astro";
 import { INVENTORY, type Item } from "../data/inventory";
 
 const sizes = ["20'","40'"];
 const heights = ["Standard","High Cube"];
 const conditions = ["New (One-Trip)","Used (WWT)"];
-const title = "Container Inventory — LC Container Texas | 20' 40' Containers for Sale";
-const desc = "Browse our container inventory: 20', 30', 40' shipping containers. New & used. Standard & High Cube. In stock in Hutchins, TX. Fast delivery across Texas.";
+const title = "Container Inventory — LC Container Texas | 10' 20' 40' Containers for Sale";
+const desc = "Browse our container inventory: 10', 20', 40' shipping containers. New & used. Standard & High Cube. In stock in Hutchins, TX. Fast delivery across Texas.";
 ---
 <BaseLayout title={title} description={desc}>
   <SEOEnhancer pageType="inventory" focusKeyword="container inventory Texas" />
   <Header />
+
+  <style>
+    .square-image-container {
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
+      position: relative;
+      overflow: hidden;
+      background: rgba(178, 34, 34, 0.1);
+    }
+
+    .square-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  </style>
 
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
     <h1 class="text-3xl md:text-4xl font-semibold">Inventory</h1>
@@ -68,15 +89,10 @@ const desc = "Browse our container inventory: 20', 30', 40' shipping containers.
             role="button"
             tabindex="0"
           >
-            <OptimizedImage
+            <SquareImage
               src={item.photos[0]}
               alt={`${item.title} - ${item.size} ${item.height} ${item.condition} container`}
-              width={400}
-              height={300}
-              loading="lazy"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              placeholder="blur"
-              class="h-full w-full"
+              size={400}
             />
           </button>
           <div class="p-6">
@@ -161,21 +177,12 @@ const desc = "Browse our container inventory: 20', 30', 40' shipping containers.
         
         article.innerHTML = `
           <button
-            class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer overflow-hidden"
+            class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] cursor-pointer overflow-hidden"
             onClick="openLightbox(` + JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb }) + `)"
             aria-label="View larger image of ` + item.title + ` - ` + item.blurb + `"
           >
-            <div class="optimized-image-container h-full w-full">
-              <div class="image-wrapper" style="padding-bottom: 75%;">
-                <img src="` + item.photos[0] + `" alt="` + item.title + ` - ` + item.size + ` ` + item.height + ` ` + item.condition + ` container" class="optimized-image loading h-full w-full object-cover" loading="lazy" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-                <div class="placeholder" style="display: none;">
-                  <div class="flex items-center justify-center h-full text-ink-muted">
-                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+            <div class="square-image-container">
+              <img src="` + item.photos[0] + `" alt="` + item.title + ` - ` + item.size + ` ` + item.height + ` ` + item.condition + ` container" class="square-image" loading="lazy" decoding="async">
             </div>
           </button>
           <div class="p-6">
