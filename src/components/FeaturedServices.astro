@@ -1,5 +1,4 @@
 ---
-import SmartImage from './SmartImage.astro';
 import CTAButton from './CTAButton.astro';
 ---
 
@@ -80,7 +79,7 @@ const featuredServices = [
             variant="primary"
             size="md"
             href={service.href}
-            data-cta={`featured_${service.title.toLowerCase().replace(/\s+/g, '_')}`}
+            data-cta={`featured_${service.title.toLowerCase().replace(' ', '_')}`}
             fullWidth={true}
             class="group-hover:scale-105"
           >
