@@ -47,15 +47,11 @@ const featuredServices = [
     {featuredServices.map(service => (
       <div class="glass overflow-hidden hover-lift group transition-all duration-300">
         <div class="relative h-48 overflow-hidden">
-          <SmartImage
+          <img
             src={service.image}
             alt={service.title}
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             loading="lazy"
-            quality={80}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 400px, 600px"
-            aspectRatio="4/3"
-            placeholder="blur"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div class="absolute bottom-4 left-4 right-4">

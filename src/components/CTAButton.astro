@@ -31,20 +31,21 @@ const {
 
 // Size configurations using typography system
 const sizeClasses = {
-  sm: 'px-4 py-2 btn-text',
-  md: 'px-6 py-3 btn-text',
-  lg: 'px-8 py-4 btn-text-lg'
+  sm: 'px-6 py-3 btn-text',
+  md: 'px-8 py-4 btn-text',
+  lg: 'px-10 py-5 btn-text-lg'
 };
 
 // Variant configurations with AA compliance
 const variantClasses = {
   primary: `
-    bg-brand-red text-white
-    hover:bg-brand-red-700
+    bg-brand-red text-blue-900
+    hover:bg-brand-red-700 hover:text-white
     focus:ring-brand-red-300
     shadow-lg hover:shadow-xl
     transform hover:scale-105
     active:scale-95
+    min-w-[160px]
   `,
   secondary: `
     bg-transparent border-2 border-brand-red text-brand-red
