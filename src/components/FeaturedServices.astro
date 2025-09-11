@@ -30,8 +30,9 @@ const featuredServices = [
     price: "From $150/month",
     cta: "See Lease Plans",
     href: "/services#lease"
-  },
+  }
 ];
+
 ---
 
 <section class="max-w-[1200px] mx-auto px-16 md:px-24 lg:px-32 py-64 md:py-80">
@@ -62,13 +63,13 @@ const featuredServices = [
             <p class="text-on-image card-description">{service.description}</p>
           </div>
         </div>
-        
+
         <div class="p-8">
           <div class="flex items-center justify-between mb-4">
             <span class="card-price">{service.price}</span>
             <div class="caption text-muted">Starting price</div>
           </div>
-          
+
           <div class="mb-4">
             <div class="flex flex-wrap gap-2">
               {service.features.map(feature => (
@@ -78,7 +79,7 @@ const featuredServices = [
               ))}
             </div>
           </div>
-          
+
           <CTAButton
             variant="primary"
             size="md"
@@ -97,3 +98,17 @@ const featuredServices = [
     ))}
   </div>
 </section>
+
+<style>
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+</style>
