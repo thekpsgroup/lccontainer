@@ -1,0 +1,15 @@
+---
+import type { Row } from '../lib/seo/rows';
+const { row } = Astro.props as { row: Row };
+---
+<MetaHead title={row.title_tag} description={row.meta_description} canonical={row.url_slug} robots={row.priority === 1 ? 'index,follow' : 'noindex,follow'} />
+<PageHero h1={row.h1} city={row.city} />
+<section class="prose max-w-3xl mx-auto my-8">
+  <p>{row.meta_description}</p>
+  <slot name="feature-explainer" />
+  <slot name="gallery" />
+  <slot name="lead-time" />
+  <slot name="warranty" />
+</section>
+<QuoteCTA city={row.city} />
+<RelatedLinks links={row.internal_links} />

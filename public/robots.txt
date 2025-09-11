@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://lccontainer.com/sitemap.xml
+Sitemap: https://lccontainer.com/sitemap-loc.xml

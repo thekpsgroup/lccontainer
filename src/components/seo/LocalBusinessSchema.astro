@@ -1,0 +1,30 @@
+---
+export interface Props {
+  city: string;
+}
+const { city } = Astro.props;
+---
+<script type="application/ld+json">
+{JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'LC Container',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1211 E Fulghum Rd',
+    addressLocality: city,
+    addressRegion: 'TX',
+    postalCode: '75141',
+    addressCountry: 'US',
+  },
+  telephone: '(214) 524-4168',
+  url: 'https://lccontainer.com',
+  image: 'https://lccontainer.com/photos/lccontainer-dark.png',
+  priceRange: '$$',
+  openingHours: 'Mo-Fr 08:00-17:00',
+  sameAs: [
+    'https://www.facebook.com/lccontainer',
+    'https://www.instagram.com/lccontainer',
+  ],
+})}
+</script>

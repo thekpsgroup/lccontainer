@@ -1,0 +1,19 @@
+---
+export interface Props {
+  faqs: string;
+}
+const { faqs } = Astro.props;
+---
+{faqs && (
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.split('\n').filter(Boolean).map(q => ({
+        '@type': 'Question',
+        name: q.split('|')[0],
+        acceptedAnswer: { '@type': 'Answer', text: q.split('|')[1] || '' },
+      })),
+    })}
+  </script>
+)}

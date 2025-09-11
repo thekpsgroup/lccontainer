@@ -1,0 +1,24 @@
+---
+import type { Row } from '../../lib/seo/rows';
+export interface Props {
+  row: Row;
+}
+const { row } = Astro.props;
+---
+<script type="application/ld+json">
+{JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: row.h1,
+  brand: 'LC Container',
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStoreOnly',
+    price: undefined,
+    priceCurrency: 'USD',
+    url: `https://lccontainer.com${row.url_slug}`,
+  },
+  description: row.meta_description,
+  image: `https://lccontainer.com/photos/dfw/${row.city.toLowerCase().replace(/\s+/g,'-')}-container.jpg`,
+})}
+</script>

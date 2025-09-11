@@ -1,10 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Lightbox from "../components/Lightbox.astro";
-import SquareImage from "../components/SquareImage.astro";
 import SEOEnhancer from "../components/SEOEnhancer.astro";
-import { INVENTORY, type Item } from "../data/inventory";
+import { INVENTORY } from "../data/inventory";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const sizes = ["20'","40'"];
 const heights = ["Standard","High Cube"];
@@ -37,191 +36,59 @@ const desc = "Browse our container inventory: 10', 20', 40' shipping containers.
     }
   </style>
 
+
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
-    <h1 class="text-3xl md:text-4xl font-semibold">Inventory</h1>
-    <p class="text-ink-muted mt-2">Our 10-acre Hutchins yard carries <strong class="text-brand-red">1,000's of containers</strong> in stock. Filter by size, height, and condition. Transparent pricing; exact quote in 24 hours.</p>
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Container Inventory</h1>
+    <p class="text-lg text-ink-muted mb-8">Browse our <span class="text-brand-red font-bold">in-stock containers</span> in Hutchins, TX. Transparent pricing, fast delivery, and expert support. <span class="font-semibold">Call or request a quote for best pricing.</span></p>
 
-    <!-- Search & Filters -->
-    <div class="glass p-4 mt-6 fade-in">
-      <form id="filters" class="grid gap-3 text-sm" role="search">
-        <!-- Search -->
-        <label class="block sm:col-span-3">Search
-          <input 
-            type="search" 
-            id="search" 
-            placeholder="Search containers..." 
-            class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200"
-            aria-describedby="search-help"
-          />
-          <div id="search-help" class="sr-only">Search by container type, specifications, or features</div>
-        </label>
-        <!-- Filters -->
-        <label class="block">Size
-          <select name="size" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
-            <option value="">Any</option>
-            {sizes.map(s => <option value={s}>{s}</option>)}
-          </select>
-        </label>
-        <label class="block">Height
-          <select name="height" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
-            <option value="">Any</option>
-            {heights.map(h => <option value={h}>{h}</option>)}
-          </select>
-        </label>
-        <label class="block">Condition
-          <select name="condition" class="mt-1 w-full px-3 py-2 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200">
-            <option value="">Any</option>
-            {conditions.map(c => <option value={c}>{c}</option>)}
-          </select>
-        </label>
-      </form>
-      <p id="count" class="text-xs text-ink-muted mt-2" aria-live="polite">Showing {INVENTORY.length} items</p>
-    </div>
-
-    <!-- Grid -->
-    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in" role="region" aria-label="Container inventory">
+    <!-- Modern Inventory Grid -->
+    <div class="modern-gallery-bg grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {INVENTORY.map(item => (
-        <article class="glass p-0 flex flex-col overflow-hidden hover-lift" role="article">
-          <button
-            class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] image-overlay cursor-pointer overflow-hidden"
-            onClick={`openLightbox(\${JSON.stringify({ src: '${item.photos[0]}', alt: '${item.title}', title: '${item.title}', caption: '${item.blurb}' })})`}
-            aria-label={`View larger image of ${item.title} - ${item.blurb}`}
-            role="button"
-            tabindex="0"
-          >
-            <SquareImage
+        <article class="group relative overflow-hidden rounded-4xl shadow-xl hover:shadow-blue-400/40 transition-all duration-500 transform hover:scale-105 bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 backdrop-blur-xl flex flex-col">
+          <div class="relative aspect-[4/3] overflow-hidden">
+            <img
               src={item.photos[0]}
               alt={`${item.title} - ${item.size} ${item.height} ${item.condition} container`}
-              size={400}
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+              loading="lazy"
+              width="600"
+              height="400"
             />
-          </button>
-          <div class="p-6">
-            <div class="flex items-center justify-between">
-              <h2 class="text-lg font-semibold">{item.title}</h2>
-              {item.badge && <span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{item.badge}</span>}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-sm"></div>
+            {item.badge && (
+              <div class="absolute top-5 left-5 px-4 py-1 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-full text-xs font-bold text-blue-700 dark:text-blue-200 border border-blue-200 dark:border-blue-700/40 shadow-md">
+                {item.badge}
+              </div>
+            )}
+            <div class="absolute top-5 right-5 w-11 h-11 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-110 transition-all duration-300 shadow-md">
+              <svg class="w-6 h-6 text-blue-700 dark:text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              </svg>
             </div>
-            <p class="text-sm text-ink-muted mt-1">{item.blurb}</p>
-            <p class="text-sm text-ink-muted mt-1">From ${item.priceFrom.toLocaleString()}</p>
-            <div class="mt-4 flex gap-2">
-              <a href={`/inventory/${item.id}`} data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View details</a>
-              <a href={`/contact?interest=${encodeURIComponent(item.title)}`} data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <h2 class="text-2xl font-bold mb-2 text-brand-black dark:text-white group-hover:text-blue-600 transition-colors duration-300 leading-tight">{item.title}</h2>
+            <p class="text-base text-ink-muted mb-2">{item.blurb}</p>
+            <p class="text-base text-ink-muted mb-4">From <span class="font-bold text-brand-red">${item.priceFrom.toLocaleString()}</span></p>
+            <div class="mt-auto flex gap-2">
+              <a href={`/inventory/${item.id}`} data-astro-prefetch class="px-5 py-3 rounded-xl border border-brand-line text-base font-semibold hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View Details</a>
+              <a href={`/contact?interest=${encodeURIComponent(item.title)}`} data-astro-prefetch class="px-5 py-3 rounded-xl bg-blue-600 text-white text-base font-bold hover:bg-blue-700 shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400">Get Free Quote</a>
             </div>
           </div>
         </article>
       ))}
     </div>
+
+    <!-- Sticky CTA for mobile -->
+    <div class="md:hidden mt-10">
+      <div class="fixed bottom-0 inset-x-0 z-50">
+        <div class="flex">
+          <a href="tel:214-524-4168" class="flex-1 py-4 text-center text-base font-bold bg-green-600 text-white hover:bg-green-700 transition-all">Call Now</a>
+          <a href="/contact" class="flex-1 py-4 text-center text-base font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all">Get Free Quote</a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <Lightbox id="lb" alt="Expanded inventory item image" />
-
-  <script>
-    // Performance optimization: Debounce function
-    function debounce(func, wait) {
-      let timeout;
-      return function executedFunction(...args) {
-        const later = () => {
-          clearTimeout(timeout);
-          func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-      };
-    }
-
-    const ALL = JSON.parse(String.raw`{ "items": ${JSON.stringify(INVENTORY)} }`).items;
-    const f = document.getElementById('filters');
-    const search = document.getElementById('search');
-    const grid = document.getElementById('grid');
-    const count = document.getElementById('count');
-    
-    // Cache DOM elements for better performance
-    const filterElements = {
-      size: f.elements.namedItem('size'),
-      height: f.elements.namedItem('height'),
-      condition: f.elements.namedItem('condition')
-    };
-    
-    function filterItems() {
-      const searchTerm = search.value.toLowerCase().trim();
-      const size = filterElements.size.value;
-      const height = filterElements.height.value;
-      const condition = filterElements.condition.value;
-      
-      const filtered = ALL.filter(item => {
-        const matchesSearch = !searchTerm || 
-          item.title.toLowerCase().includes(searchTerm) ||
-          item.blurb.toLowerCase().includes(searchTerm) ||
-          item.specs.some(spec => spec.toLowerCase().includes(searchTerm));
-        const matchesSize = !size || item.size === size;
-        const matchesHeight = !height || item.height === height;
-        const matchesCondition = !condition || item.condition === condition;
-        
-        return matchesSearch && matchesSize && matchesHeight && matchesCondition;
-      });
-      
-      render(filtered);
-      count.textContent = `Showing ${filtered.length} of ${ALL.length} items`;
-    }
-    
-    // Debounced filter function for better performance
-    const debouncedFilter = debounce(filterItems, 300);
-    
-    function render(items){
-      // Performance optimization: Use DocumentFragment for batch DOM updates
-      const fragment = document.createDocumentFragment();
-      
-      items.forEach(item => {
-        const article = document.createElement('article');
-        article.className = 'glass p-0 flex flex-col overflow-hidden hover-lift';
-        article.setAttribute('role', 'article');
-        
-        article.innerHTML = `
-          <button
-            class="relative h-44 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)] cursor-pointer overflow-hidden"
-            onClick="openLightbox(` + JSON.stringify({ src: item.photos[0], alt: item.title, title: item.title, caption: item.blurb }) + `)"
-            aria-label="View larger image of ` + item.title + ` - ` + item.blurb + `"
-          >
-            <div class="square-image-container">
-              <img src="` + item.photos[0] + `" alt="` + item.title + ` - ` + item.size + ` ` + item.height + ` ` + item.condition + ` container" class="square-image" loading="lazy" decoding="async">
-            </div>
-          </button>
-          <div class="p-6">
-            <div class="flex items-center justify-between">
-              <h2 class="text-lg font-semibold">` + item.title + `</h2>
-              ` + (item.badge ? `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">` + item.badge + `</span>` : '') + `
-            </div>
-            <p class="text-sm text-ink-muted mt-1">` + item.blurb + `</p>
-            <p class="text-sm text-ink-muted mt-1">From $` + Number(item.priceFrom).toLocaleString() + `</p>
-            <div class="mt-4 flex gap-2">
-              <a href="/inventory/` + item.id + `" data-astro-prefetch class="px-3 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60">View details</a>
-              <a href="/contact?interest=` + encodeURIComponent(item.title) + `" data-astro-prefetch class="px-3 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60">Get Free Quote</a>
-            </div>
-          </div>
-        `;
-        
-        fragment.appendChild(article);
-      });
-      
-      // Clear and append in one operation
-      grid.innerHTML = '';
-      grid.appendChild(fragment);
-    }
-    
-    // Event listeners with performance optimizations
-    search.addEventListener('input', debouncedFilter);
-    filterElements.size.addEventListener('change', filterItems);
-    filterElements.height.addEventListener('change', filterItems);
-    filterElements.condition.addEventListener('change', filterItems);
-    
-    // Initialize
-    render(ALL);
-    
-    // Keyboard navigation for search
-    search.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        search.value = '';
-        filterItems();
-      }
-    });
-  </script>
 </BaseLayout>

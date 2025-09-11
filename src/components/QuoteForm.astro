@@ -92,9 +92,9 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
 <script>
   // Performance optimization: Debounce function
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
+  function debounce(func: (...args: any[]) => any, wait: number) {
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    return function executedFunction(...args: any[]) {
       const later = () => {
         clearTimeout(timeout);
         func(...args);
@@ -107,59 +107,64 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   // init
   const steps = /** @type {NodeListOf<HTMLElement>} */(document.querySelectorAll('.step'));
   const labels = [1,2,3,4].map(i => document.getElementById('label-'+i));
-  const nextBtn = document.getElementById('nextBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const submitBtn = document.getElementById('submitBtn');
-  const submitText = document.getElementById('submitText');
-  const submitLoading = document.getElementById('submitLoading');
+  const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
+  const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
+  const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+  const submitText = document.getElementById('submitText') as HTMLElement;
+  const submitLoading = document.getElementById('submitLoading') as HTMLElement;
   const form = /** @type {HTMLFormElement} */(document.getElementById('quoteForm'));
-  const msg = document.getElementById('formMsg');
-  const startedAt = document.getElementById('startedAt');
-  
+  const msg = document.getElementById('formMsg') as HTMLElement;
+  const startedAt = document.getElementById('startedAt') as HTMLInputElement;
+
   // Initialize form
-  startedAt.value = String(Date.now());
+  if (startedAt) {
+    startedAt.value = String(Date.now());
+  }
   let current = 0;
   let isSubmitting = false;
 
-  function showStep(i) {
+  function showStep(i: number) {
     steps.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i));
     labels.forEach((l,idx)=> l?.classList.toggle('opacity-60', idx>i));
     prevBtn.classList.toggle('hidden', i===0);
     nextBtn.classList.toggle('hidden', i===steps.length-1);
     submitBtn.classList.toggle('hidden', i!==steps.length-1);
-    
+
     // Focus management for accessibility
-    const focusableElement = steps[i].querySelector('input,select,textarea');
+    const focusableElement = steps[i].querySelector('input,select,textarea') as HTMLElement;
     if (focusableElement) {
       setTimeout(() => focusableElement.focus(), 100);
     }
   }
   showStep(current);
 
-  function setLoading(loading) {
+  function setLoading(loading: boolean) {
     isSubmitting = loading;
     if (loading) {
-      submitText.classList.add('hidden');
-      submitLoading.classList.remove('hidden');
-      submitBtn.disabled = true;
-      nextBtn.disabled = true;
-      prevBtn.disabled = true;
+      if (submitText) submitText.classList.add('hidden');
+      if (submitLoading) submitLoading.classList.remove('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = true;
+      if (prevBtn) prevBtn.disabled = true;
     } else {
-      submitText.classList.remove('hidden');
-      submitLoading.classList.add('hidden');
-      submitBtn.disabled = false;
-      nextBtn.disabled = false;
-      prevBtn.disabled = false;
+      if (submitText) submitText.classList.remove('hidden');
+      if (submitLoading) submitLoading.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = false;
+      if (nextBtn) nextBtn.disabled = false;
+      if (prevBtn) prevBtn.disabled = false;
     }
   }
 
-    function validateStep(i){
+    function validateStep(i: number){
+      // Check if form exists
+      if (!form) return "Form not found";
+
       // Enhanced validation with better error messages
       if(i===0){
-      const name = form.elements.namedItem('name'); 
-      const email = form.elements.namedItem('email'); 
+      const name = form.elements.namedItem('name');
+      const email = form.elements.namedItem('email');
       const phone = form.elements.namedItem('phone');
-      
+
       if(!name.value || !email.value || !phone.value) return "Please fill in all required fields.";
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) return "Please enter a valid email address.";
       if(!/^[\+]?[1-9][\d]{0,15}$/.test(phone.value.replace(/\D/g,''))) return "Please enter a valid phone number.";
@@ -184,28 +189,28 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
   nextBtn.addEventListener('click', ()=>{
     if (isSubmitting) return;
-    
+
     const err = validateStep(current);
-    if(err){ 
-      msg.textContent = err; 
+    if(err){
+      msg.textContent = err;
       clearError();
-      return; 
+      return;
     }
-    if(current < steps.length-1){ 
-      current++; 
-      showStep(current); 
-      msg.textContent=""; 
+    if(current < steps.length-1){
+      current++;
+      showStep(current);
+      msg.textContent="";
     }
   });
-  
+
   prevBtn.addEventListener('click', ()=>{
     if (isSubmitting) return;
-    
-    if(current>0){ 
-      current--; 
-      showStep(current); 
-      msg.textContent=""; 
-    } 
+
+    if(current>0){
+      current--;
+      showStep(current);
+      msg.textContent="";
+    }
   });
 
   form.addEventListener('submit', async (e)=>{
@@ -248,14 +253,14 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     const params = new URLSearchParams(location.search);
     const interestEl = form?.elements?.namedItem?.('interest');
     const zipEl = form?.elements?.namedItem?.('zip');
-    
+
     if (interestEl && params.get('interest')) {
-      [...interestEl.options].forEach(o => { 
-        if (o.value === params.get('interest')) o.selected = true; 
+      [...interestEl.options].forEach(o => {
+        if (o.value === params.get('interest')) o.selected = true;
       });
     }
-    if (zipEl && params.get('zip')) { 
-      zipEl.value = params.get('zip'); 
+    if (zipEl && params.get('zip')) {
+      zipEl.value = params.get('zip');
     }
   } catch (error) {
     if (import.meta.env.DEV) {

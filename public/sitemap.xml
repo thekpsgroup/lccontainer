@@ -80,4 +80,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Local SEO Content Sitemap -->
+  <sitemap>
+    <loc>https://lccontainer.com/sitemap-loc.xml</loc>
+    <lastmod>2024-12-01</lastmod>
+  </sitemap>
 </urlset>
