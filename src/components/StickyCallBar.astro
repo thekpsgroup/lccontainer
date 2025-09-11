@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 
 // Format phone number for display
-const formattedPhone = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+const formattedPhone = phoneNumber.replace(/^1?(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3');
 const telLink = `tel:${phoneNumber}`;
 
 // Track phone clicks
