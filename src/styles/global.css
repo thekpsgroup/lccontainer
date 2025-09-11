@@ -4,6 +4,10 @@
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
 
+/* Design System Tokens */
+@import "./tokens.css";
+@import "./typography.css";
+
 /* Font optimization */
 @font-face {
   font-family: 'Inter';
@@ -53,24 +57,39 @@
   }
 
   body {
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    letter-spacing: 0.01em;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--text-color-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
   }
 
-  /* Consistent Typography Scale */
+  /* Typography Hierarchy using new system */
   h1 {
-    @apply text-3xl md:text-4xl font-semibold;
+    @apply heading-1;
   }
-  
+
   h2 {
-    @apply text-2xl md:text-3xl font-semibold;
+    @apply heading-2;
   }
-  
+
   h3 {
-    @apply text-xl md:text-2xl font-semibold;
+    @apply heading-3;
+  }
+
+  h4 {
+    @apply heading-4;
+  }
+
+  h5 {
+    @apply heading-5;
+  }
+
+  h6 {
+    @apply heading-6;
   }
 
   /* Performance optimized sections */
@@ -95,11 +114,32 @@
     font-synthesis-weight: none; 
   }
 
-  /* Focus states for accessibility */
+  /* Enhanced focus states for WCAG 2.2 compliance */
   *:focus-visible {
-    outline: 2px solid #C0C0C0;
+    outline: 3px solid var(--color-focus-ring);
     outline-offset: 2px;
     border-radius: 0.375rem;
+    box-shadow: 0 0 0 1px var(--color-focus-ring-offset);
+  }
+
+  /* Specific focus styles for buttons and links */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 1px var(--color-focus-ring-offset),
+                0 0 0 5px rgba(220, 38, 38, 0.2);
+  }
+
+  /* Link hover and focus states */
+  a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
   }
 
   /* Performance optimized micro-interactions */
@@ -125,14 +165,198 @@
     transform: translateY(0);
   }
 
+  /* Subtle pulse animation for CTAs */
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+
+  /* Enhanced shadow utilities */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ==========================================================================
+     8-Point Spacing System
+     Consistent spacing scale for visual rhythm
+     ========================================================================== */
+
+    .space-2 { margin: 2px; }
+    .space-4 { margin: 4px; }
+    .space-8 { margin: 8px; }
+    .space-12 { margin: 12px; }
+    .space-16 { margin: 16px; }
+    .space-20 { margin: 20px; }
+    .space-24 { margin: 24px; }
+    .space-32 { margin: 32px; }
+    .space-40 { margin: 40px; }
+    .space-48 { margin: 48px; }
+    .space-56 { margin: 56px; }
+    .space-64 { margin: 64px; }
+    .space-72 { margin: 72px; }
+    .space-80 { margin: 80px; }
+    .space-96 { margin: 96px; }
+
+    /* Padding utilities */
+    .p-2 { padding: 2px; }
+    .p-4 { padding: 4px; }
+    .p-8 { padding: 8px; }
+    .p-12 { padding: 12px; }
+    .p-16 { padding: 16px; }
+    .p-20 { padding: 20px; }
+    .p-24 { padding: 24px; }
+    .p-32 { padding: 32px; }
+    .p-40 { padding: 40px; }
+    .p-48 { padding: 48px; }
+    .p-56 { padding: 56px; }
+    .p-64 { padding: 64px; }
+    .p-72 { padding: 72px; }
+    .p-80 { padding: 80px; }
+    .p-96 { padding: 96px; }
+
+    /* Directional spacing */
+    .py-2 { padding-top: 2px; padding-bottom: 2px; }
+    .py-4 { padding-top: 4px; padding-bottom: 4px; }
+    .py-8 { padding-top: 8px; padding-bottom: 8px; }
+    .py-12 { padding-top: 12px; padding-bottom: 12px; }
+    .py-16 { padding-top: 16px; padding-bottom: 16px; }
+    .py-20 { padding-top: 20px; padding-bottom: 20px; }
+    .py-24 { padding-top: 24px; padding-bottom: 24px; }
+    .py-32 { padding-top: 32px; padding-bottom: 32px; }
+    .py-40 { padding-top: 40px; padding-bottom: 40px; }
+    .py-48 { padding-top: 48px; padding-bottom: 48px; }
+    .py-56 { padding-top: 56px; padding-bottom: 56px; }
+    .py-64 { padding-top: 64px; padding-bottom: 64px; }
+    .py-72 { padding-top: 72px; padding-bottom: 72px; }
+    .py-80 { padding-top: 80px; padding-bottom: 80px; }
+    .py-96 { padding-top: 96px; padding-bottom: 96px; }
+
+    .px-2 { padding-left: 2px; padding-right: 2px; }
+    .px-4 { padding-left: 4px; padding-right: 4px; }
+    .px-8 { padding-left: 8px; padding-right: 8px; }
+    .px-12 { padding-left: 12px; padding-right: 12px; }
+    .px-16 { padding-left: 16px; padding-right: 16px; }
+    .px-20 { padding-left: 20px; padding-right: 20px; }
+    .px-24 { padding-left: 24px; padding-right: 24px; }
+    .px-32 { padding-left: 32px; padding-right: 32px; }
+    .px-40 { padding-left: 40px; padding-right: 40px; }
+    .px-48 { padding-left: 48px; padding-right: 48px; }
+    .px-56 { padding-left: 56px; padding-right: 56px; }
+    .px-64 { padding-left: 64px; padding-right: 64px; }
+    .px-72 { padding-left: 72px; padding-right: 72px; }
+    .px-80 { padding-left: 80px; padding-right: 80px; }
+    .px-96 { padding-left: 96px; padding-right: 96px; }
+
+    /* Margin utilities */
+    .my-2 { margin-top: 2px; margin-bottom: 2px; }
+    .my-4 { margin-top: 4px; margin-bottom: 4px; }
+    .my-8 { margin-top: 8px; margin-bottom: 8px; }
+    .my-12 { margin-top: 12px; margin-bottom: 12px; }
+    .my-16 { margin-top: 16px; margin-bottom: 16px; }
+    .my-20 { margin-top: 20px; margin-bottom: 20px; }
+    .my-24 { margin-top: 24px; margin-bottom: 24px; }
+    .my-32 { margin-top: 32px; margin-bottom: 32px; }
+    .my-40 { margin-top: 40px; margin-bottom: 40px; }
+    .my-48 { margin-top: 48px; margin-bottom: 48px; }
+    .my-56 { margin-top: 56px; margin-bottom: 56px; }
+    .my-64 { margin-top: 64px; margin-bottom: 64px; }
+    .my-72 { margin-top: 72px; margin-bottom: 72px; }
+    .my-80 { margin-top: 80px; margin-bottom: 80px; }
+    .my-96 { margin-top: 96px; margin-bottom: 96px; }
+
+    .mx-2 { margin-left: 2px; margin-right: 2px; }
+    .mx-4 { margin-left: 4px; margin-right: 4px; }
+    .mx-8 { margin-left: 8px; margin-right: 8px; }
+    .mx-12 { margin-left: 12px; margin-right: 12px; }
+    .mx-16 { margin-left: 16px; margin-right: 16px; }
+    .mx-20 { margin-left: 20px; margin-right: 20px; }
+    .mx-24 { margin-left: 24px; margin-right: 24px; }
+    .mx-32 { margin-left: 32px; margin-right: 32px; }
+    .mx-40 { margin-left: 40px; margin-right: 40px; }
+    .mx-48 { margin-left: 48px; margin-right: 48px; }
+    .mx-56 { margin-left: 56px; margin-right: 56px; }
+    .mx-64 { margin-left: 64px; margin-right: 64px; }
+    .mx-72 { margin-left: 72px; margin-right: 72px; }
+    .mx-80 { margin-left: 80px; margin-right: 80px; }
+    .mx-96 { margin-left: 96px; margin-right: 96px; }
+
+    /* Gap utilities for flexbox/grid */
+    .gap-2 { gap: 2px; }
+    .gap-4 { gap: 4px; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-20 { gap: 20px; }
+    .gap-24 { gap: 24px; }
+    .gap-32 { gap: 32px; }
+    .gap-40 { gap: 40px; }
+    .gap-48 { gap: 48px; }
+    .gap-56 { gap: 56px; }
+    .gap-64 { gap: 64px; }
+    .gap-72 { gap: 72px; }
+    .gap-80 { gap: 80px; }
+    .gap-96 { gap: 96px; }
+
+  /* Safe area utilities for mobile */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
   /* Image overlay treatment */
   .image-overlay {
     @apply relative overflow-hidden rounded-xl;
   }
-  
+
   .image-overlay::after {
     content: '';
     @apply absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none;
+  }
+
+  /* Text on image with adaptive scrim for AA contrast compliance */
+  .text-on-image {
+    position: relative;
+    color: var(--color-text-inverse);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-on-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-inverse);
+    opacity: 0.65;
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  /* Light image variant */
+  .text-on-image-light::before {
+    background: var(--color-bg-primary);
+    opacity: 0.85;
+  }
+
+  /* Dark image variant */
+  .text-on-image-dark::before {
+    background: var(--color-bg-inverse);
+    opacity: 0.65;
+  }
+
+  /* Strong scrim for low contrast images */
+  .text-on-image-strong::before {
+    opacity: 0.8;
+  }
+
+  /* Minimal scrim for high contrast images */
+  .text-on-image-minimal::before {
+    opacity: 0.4;
   }
 
   /* Skip to main content link */

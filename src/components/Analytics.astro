@@ -40,21 +40,56 @@
       });
     });
 
-    // Track CTA button clicks
-    const ctaButtons = document.querySelectorAll('.cta-button, .btn-primary, [data-cta]');
+    // Track CTA button clicks with more detail
+    const ctaButtons = document.querySelectorAll('a[href="/contact"], .cta-button, .btn-primary, [data-cta]');
     ctaButtons.forEach(button => {
       button.addEventListener('click', function() {
-        const ctaType = this.getAttribute('data-cta') || 'general';
-        
-        // Track CTA clicks with Vercel Analytics
+        const ctaText = this.textContent?.trim() || 'Unknown CTA';
+        const ctaLocation = this.closest('[data-section]')?.getAttribute('data-section') ||
+                           this.closest('header, footer, nav')?.tagName.toLowerCase() ||
+                           'body';
+        const ctaType = this.getAttribute('data-cta') || 'quote_form';
+
+        // Track CTA clicks with detailed info
         if (typeof va !== 'undefined') {
           va('event', 'cta_click', {
             cta_type: ctaType,
-            page: window.location.pathname
+            cta_text: ctaText,
+            cta_location: ctaLocation,
+            page: window.location.pathname,
+            href: this.getAttribute('href') || ''
+          });
+        }
+
+        // Also track with Google Analytics if available
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'click', {
+            event_category: 'cta',
+            event_label: `${ctaLocation}_${ctaType}`,
+            value: 1
           });
         }
       });
     });
+
+    // Track sticky mobile CTA specifically
+    const stickyCTA = document.querySelector('.fixed.bottom-0');
+    if (stickyCTA) {
+      const stickyButtons = stickyCTA.querySelectorAll('a');
+      stickyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const buttonType = this.href?.includes('tel:') ? 'phone' : 'quote';
+
+          if (typeof va !== 'undefined') {
+            va('event', 'sticky_cta_click', {
+              button_type: buttonType,
+              cta_text: this.textContent?.trim(),
+              page: window.location.pathname
+            });
+          }
+        });
+      });
+    }
 
     // Track scroll depth
     let maxScroll = 0;

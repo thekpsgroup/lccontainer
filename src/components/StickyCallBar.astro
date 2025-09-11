@@ -1,0 +1,233 @@
+---
+export interface Props {
+  phoneNumber?: string;
+  callText?: string;
+  quoteText?: string;
+  quoteHref?: string;
+  visible?: boolean;
+  class?: string;
+}
+
+const {
+  phoneNumber = '12145244168',
+  callText = '📞 Call Now',
+  quoteText = 'Get Free Quote',
+  quoteHref = '/contact',
+  visible = true,
+  class: className = ''
+} = Astro.props;
+
+// Format phone number for display
+const formattedPhone = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+const telLink = `tel:${phoneNumber}`;
+
+// Track phone clicks
+const handlePhoneClick = () => {
+  if (typeof window !== 'undefined') {
+    if (window.va) {
+      window.va('event', 'phone_click', {
+        phone_number: phoneNumber,
+        location: 'sticky_bar',
+        page: window.location.pathname
+      });
+    }
+
+    if (window.gtag) {
+      window.gtag('event', 'click', {
+        event_category: 'phone',
+        event_label: 'sticky_bar',
+        value: 1
+      });
+    }
+  }
+};
+
+// Track quote clicks
+const handleQuoteClick = () => {
+  if (typeof window !== 'undefined') {
+    if (window.va) {
+      window.va('event', 'cta_click', {
+        cta_type: 'quote_form',
+        location: 'sticky_bar',
+        page: window.location.pathname,
+        href: quoteHref
+      });
+    }
+
+    if (window.gtag) {
+      window.gtag('event', 'click', {
+        event_category: 'cta',
+        event_label: 'sticky_quote',
+        value: 1
+      });
+    }
+  }
+};
+---
+
+{
+  visible && (
+    <div
+      class={`sticky-call-bar fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-4 border-brand-red shadow-2xl pb-safe ${className}`}
+      role="complementary"
+      aria-label="Contact options"
+    >
+      <div class="flex">
+        <!-- Phone Button -->
+        <a
+          href={telLink}
+          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px]"
+          onclick={handlePhoneClick}
+          role="button"
+          aria-label={`Call us now at ${formattedPhone}`}
+        >
+          <span class="text-xl">📞</span>
+          <span class="text-sm font-normal leading-tight">
+            Call Now<br/>
+            <span class="text-xs opacity-90">{formattedPhone}</span>
+          </span>
+        </a>
+
+        <!-- Quote Button -->
+        <a
+          href={quoteHref}
+          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px]"
+          onclick={handleQuoteClick}
+          role="button"
+          aria-label="Get your free quote now"
+          data-cta="sticky_quote"
+        >
+          <span class="text-xl">💬</span>
+          <span class="text-sm font-normal leading-tight">
+            Get Free Quote<br/>
+            <span class="text-xs opacity-90">24h Response</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Accessibility: Skip link for sticky bar -->
+      <a
+        href="#main"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:right-2 focus:z-10 bg-white text-brand-red px-3 py-1 rounded-md text-sm font-semibold shadow-md"
+      >
+        Skip to content
+      </a>
+    </div>
+  )
+}
+
+<style>
+  .sticky-call-bar {
+    /* Safe area support for modern mobile devices */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+  }
+
+  /* Enhanced touch targets */
+  .sticky-call-bar a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(220, 38, 38, 0.2);
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .sticky-call-bar {
+      border-top-width: 6px;
+      background: white;
+    }
+
+    .sticky-call-bar a {
+      border: 2px solid black;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .sticky-call-bar a {
+      transition: opacity 0.2s ease;
+      transform: none !important;
+    }
+
+    .sticky-call-bar a:active {
+      transform: none !important;
+    }
+  }
+
+  /* Landscape orientation adjustments */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .sticky-call-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px; /* Slightly shorter in landscape */
+    }
+
+    .sticky-call-bar a {
+      min-height: 56px;
+      py-2;
+    }
+  }
+
+  /* Extra small screens */
+  @media (max-width: 375px) {
+    .sticky-call-bar a {
+      font-size: 14px;
+      padding: 8px 4px;
+    }
+
+    .sticky-call-bar a span:first-child {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<script>
+  // Enhanced mobile interaction handling
+  document.addEventListener('DOMContentLoaded', () => {
+    const stickyBar = document.querySelector('.sticky-call-bar');
+
+    if (stickyBar) {
+      // Prevent body scroll when interacting with sticky bar
+      const buttons = stickyBar.querySelectorAll('a');
+      buttons.forEach(button => {
+        button.addEventListener('touchstart', (e) => {
+          // Prevent ghost clicks and improve responsiveness
+          e.preventDefault();
+
+          // Add visual feedback
+          button.classList.add('touch-active');
+
+          // Trigger click after a short delay for better UX
+          setTimeout(() => {
+            button.click();
+            button.classList.remove('touch-active');
+          }, 50);
+        }, { passive: false });
+
+        button.addEventListener('touchend', () => {
+          button.classList.remove('touch-active');
+        });
+      });
+
+      // Handle viewport changes (keyboard, etc.)
+      const handleViewportChange = () => {
+        const viewportHeight = window.visualViewport?.height || window.innerHeight;
+        const windowHeight = window.innerHeight;
+
+        if (viewportHeight < windowHeight * 0.8) {
+          // Keyboard is likely open, hide sticky bar
+          stickyBar.style.transform = 'translateY(100%)';
+        } else {
+          // Keyboard closed, show sticky bar
+          stickyBar.style.transform = 'translateY(0)';
+        }
+      };
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleViewportChange);
+      }
+    }
+  });
+</script>

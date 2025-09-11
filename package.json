@@ -9,7 +9,13 @@
     "preview": "astro preview",
     "astro": "astro",
     "run": "npm run build && astro preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:a11y": "playwright test tests/a11y.spec.ts",
+    "lighthouse": "lhci autorun",
+    "baseline": "npm run lighthouse && npm run test:a11y",
+    "test:cta": "playwright test tests/cta.spec.ts",
+    "baseline:desktop": "lhci autorun --config=.lighthouserc.json",
+    "baseline:mobile": "lhci autorun --config=.lighthouserc.json --preset=mobile"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
@@ -19,9 +25,15 @@
     "lightningcss": "^1.30.1"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.55.0",
     "@types/csv-parse": "^1.1.12",
     "@types/node": "^20.0.0",
+    "axe-core": "^4.10.3",
+    "axe-playwright": "^2.2.1",
     "jsdom": "^26.1.0",
+    "lighthouse": "^12.8.2",
+    "playwright": "^1.55.0",
     "tailwindcss": "^3.4.17",
     "terser": "^5.43.1",
     "ts-node": "^10.9.2",

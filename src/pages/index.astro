@@ -7,24 +7,78 @@ import SEOEnhancer from "../components/SEOEnhancer.astro";
 import ServicesTeaser from "../components/ServicesTeaser.astro";
 import StatsSection from "../components/StatsSection.astro";
 import Testimonials from "../components/Testimonials.astro";
+import StickyCallBar from "../components/StickyCallBar.astro";
+import CTAButton from "../components/CTAButton.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="LC Container — Texas Shipping Containers | Buy, Lease, Custom" description="Buy, lease, or customize shipping containers in Texas. 10-acre yard in Hutchins. 10', 20', 40' containers. Fast delivery statewide. Established 2003.">
   <SEOEnhancer pageType="home" focusKeyword="shipping containers Texas" />
   <Header />
   <Hero />
-  <!-- Sticky CTA for mobile -->
-  <div class="md:hidden">
-    <div class="fixed bottom-0 inset-x-0 z-50">
-      <div class="flex">
-        <a href="tel:214-524-4168" class="flex-1 py-4 text-center text-base font-bold bg-green-600 text-white hover:bg-green-700 transition-all">Call Now</a>
-        <a href="/contact" class="flex-1 py-4 text-center text-base font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all">Get Free Quote</a>
-      </div>
-    </div>
-  </div>
+  <!-- Sticky Call Bar for mobile -->
+  <StickyCallBar client:load />
   <div class="fade-in">
     <ServicesTeaser />
   </div>
+
+  <!-- Mid-page CTA Banner -->
+  <section class="max-w-[1200px] mx-auto px-5 py-12">
+    <div class="glass p-8 md:p-12 text-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-blue-600/10"></div>
+      <div class="relative">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 text-brand-black dark:text-white">
+          Ready to Get Started?
+        </h2>
+        <p class="text-lg text-ink-muted mb-8 max-w-2xl mx-auto">
+          Join thousands of satisfied Texas businesses. Get your personalized quote in 24 hours with no obligation.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <CTAButton
+            variant="primary"
+            size="lg"
+            href="/contact"
+            data-cta="mid_page_quote"
+            aria-label="Get started with your free quote"
+            class="animate-pulse-subtle"
+          >
+            Start Your Project
+          </CTAButton>
+
+          <CTAButton
+            variant="secondary"
+            size="lg"
+            href="tel:12145244168"
+            data-cta="mid_page_phone"
+            aria-label="Call us for immediate assistance"
+            icon="📞"
+          >
+            Call (214) 524-4168
+          </CTAButton>
+        </div>
+        <div class="mt-6 flex flex-wrap justify-center gap-6 text-sm text-ink-muted">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            Free Consultation
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            24h Response
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            No Obligation
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <FeaturedServices />
   <StatsSection />
   <Testimonials />

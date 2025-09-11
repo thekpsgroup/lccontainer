@@ -1,0 +1,326 @@
+---
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/inventory", label: "Inventory" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" }
+];
+---
+
+<!-- Mobile Menu Button -->
+<button
+  id="mobile-menu-button"
+  class="md:hidden p-3 rounded-xl bg-white/70 dark:bg-brand-black/80 shadow hover:bg-white/90 dark:hover:bg-brand-black/90 focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-white transition-all"
+  aria-label="Toggle mobile menu"
+  aria-expanded="false"
+  aria-controls="mobile-menu"
+>
+  <span class="block w-6 h-0.5 bg-brand-black dark:bg-white mb-1 rounded transition-transform duration-200" id="hamburger-1"></span>
+  <span class="block w-6 h-0.5 bg-brand-black dark:bg-white mb-1 rounded transition-opacity duration-200" id="hamburger-2"></span>
+  <span class="block w-6 h-0.5 bg-brand-black dark:bg-white rounded transition-transform duration-200" id="hamburger-3"></span>
+</button>
+
+<!-- Mobile Menu Panel -->
+<div
+  id="mobile-menu"
+  class="hidden fixed inset-0 z-50 md:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="mobile-menu-title"
+  aria-describedby="mobile-menu-description"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    id="mobile-menu-backdrop"
+  ></div>
+
+  <!-- Menu Panel -->
+  <div
+    class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white dark:bg-brand-black shadow-2xl transform transition-transform duration-300 ease-out"
+    id="mobile-menu-panel"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+      <h2 id="mobile-menu-title" class="heading-6 text-primary">
+        Menu
+      </h2>
+      <button
+        id="mobile-menu-close"
+        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 transition-colors"
+        aria-label="Close mobile menu"
+      >
+        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="px-6 py-4" role="navigation" aria-label="Mobile navigation">
+      <p id="mobile-menu-description" class="sr-only">
+        Navigate through the website sections using the links below.
+      </p>
+
+      <ul class="space-y-2">
+        {nav.map(item => (
+          <li>
+            <a
+              href={item.href}
+              data-astro-prefetch
+              class={`block px-4 py-3 rounded-lg body transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-white ${
+                currentPath === item.href
+                  ? 'bg-brand-red text-white'
+                  : 'text-primary hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Contact Section -->
+    <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="space-y-3">
+        <a
+          href="tel:12145244168"
+          class="flex items-center gap-3 w-full px-4 py-3 rounded-lg bg-brand-red text-white font-semibold hover:bg-brand-red-700 focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-white transition-colors"
+          aria-label="Call us at (214) 524-4168"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+          </svg>
+          <span class="body font-semibold">Call (214) 524-4168</span>
+        </a>
+
+        <a
+          href="/contact"
+          data-astro-prefetch
+          class="flex items-center gap-3 w-full px-4 py-3 rounded-lg border-2 border-brand-red text-brand-red font-semibold hover:bg-brand-red hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-white transition-colors"
+          aria-label="Get your free quote"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          <span class="body font-semibold">Get Free Quote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  class MobileMenu {
+    constructor() {
+      this.isOpen = false;
+      this.menuButton = document.getElementById('mobile-menu-button');
+      this.menuPanel = document.getElementById('mobile-menu');
+      this.menuBackdrop = document.getElementById('mobile-menu-backdrop');
+      this.closeButton = document.getElementById('mobile-menu-close');
+      this.panel = document.getElementById('mobile-menu-panel');
+      this.hamburgerLines = [
+        document.getElementById('hamburger-1'),
+        document.getElementById('hamburger-2'),
+        document.getElementById('hamburger-3')
+      ];
+
+      this.focusableElements = [];
+      this.firstFocusableElement = null;
+      this.lastFocusableElement = null;
+
+      this.init();
+    }
+
+    init() {
+      if (!this.menuButton || !this.menuPanel) return;
+
+      // Event listeners
+      this.menuButton.addEventListener('click', () => this.toggle());
+      this.closeButton?.addEventListener('click', () => this.close());
+      this.menuBackdrop?.addEventListener('click', () => this.close());
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+      // Close on escape
+      this.menuPanel.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.close();
+        }
+      });
+
+      // Prevent body scroll when menu is open
+      this.updateBodyScroll();
+    }
+
+    toggle() {
+      this.isOpen ? this.close() : this.open();
+    }
+
+    open() {
+      if (this.isOpen) return;
+
+      this.isOpen = true;
+      this.menuPanel.classList.remove('hidden');
+      this.menuButton.setAttribute('aria-expanded', 'true');
+
+      // Animate hamburger to X
+      setTimeout(() => {
+        if (this.hamburgerLines[0]) this.hamburgerLines[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+        if (this.hamburgerLines[1]) this.hamburgerLines[1].style.opacity = '0';
+        if (this.hamburgerLines[2]) this.hamburgerLines[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+      }, 50);
+
+      // Slide in animation
+      setTimeout(() => {
+        if (this.panel) this.panel.style.transform = 'translateX(0)';
+      }, 100);
+
+      // Setup focus trap
+      this.setupFocusTrap();
+
+      // Update body scroll
+      this.updateBodyScroll();
+
+      // Analytics
+      this.trackMenuOpen();
+    }
+
+    close() {
+      if (!this.isOpen) return;
+
+      this.isOpen = false;
+      this.menuButton.setAttribute('aria-expanded', 'false');
+
+      // Reset hamburger
+      if (this.hamburgerLines[0]) this.hamburgerLines[0].style.transform = '';
+      if (this.hamburgerLines[1]) this.hamburgerLines[1].style.opacity = '';
+      if (this.hamburgerLines[2]) this.hamburgerLines[2].style.transform = '';
+
+      // Slide out animation
+      if (this.panel) this.panel.style.transform = 'translateX(100%)';
+
+      // Hide after animation
+      setTimeout(() => {
+        this.menuPanel.classList.add('hidden');
+        if (this.panel) this.panel.style.transform = '';
+      }, 300);
+
+      // Return focus to button
+      this.menuButton.focus();
+
+      // Update body scroll
+      this.updateBodyScroll();
+
+      // Analytics
+      this.trackMenuClose();
+    }
+
+    setupFocusTrap() {
+      // Get all focusable elements
+      this.focusableElements = Array.from(
+        this.menuPanel.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+
+      if (this.focusableElements.length > 0) {
+        this.firstFocusableElement = this.focusableElements[0];
+        this.lastFocusableElement = this.focusableElements[this.focusableElements.length - 1];
+
+        // Focus first element
+        setTimeout(() => {
+          this.firstFocusableElement?.focus();
+        }, 100);
+      }
+    }
+
+    handleKeydown(e) {
+      if (!this.isOpen) return;
+
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === this.firstFocusableElement) {
+            e.preventDefault();
+            this.lastFocusableElement?.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === this.lastFocusableElement) {
+            e.preventDefault();
+            this.firstFocusableElement?.focus();
+          }
+        }
+      }
+    }
+
+    updateBodyScroll() {
+      if (this.isOpen) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.paddingRight = this.getScrollbarWidth() + 'px';
+      } else {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+    }
+
+    getScrollbarWidth() {
+      const scrollDiv = document.createElement('div');
+      scrollDiv.style.width = '100px';
+      scrollDiv.style.height = '100px';
+      scrollDiv.style.overflow = 'scroll';
+      scrollDiv.style.position = 'absolute';
+      scrollDiv.style.top = '-9999px';
+
+      document.body.appendChild(scrollDiv);
+      const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+      document.body.removeChild(scrollDiv);
+
+      return scrollbarWidth;
+    }
+
+    trackMenuOpen() {
+      if (typeof window !== 'undefined') {
+        if (window.va) {
+          window.va('event', 'mobile_menu_open', {
+            page: window.location.pathname
+          });
+        }
+
+        if (window.gtag) {
+          window.gtag('event', 'click', {
+            event_category: 'navigation',
+            event_label: 'mobile_menu_open',
+            value: 1
+          });
+        }
+      }
+    }
+
+    trackMenuClose() {
+      if (typeof window !== 'undefined') {
+        if (window.va) {
+          window.va('event', 'mobile_menu_close', {
+            page: window.location.pathname
+          });
+        }
+      }
+    }
+  }
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    new MobileMenu();
+  });
+</script>

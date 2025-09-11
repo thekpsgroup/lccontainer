@@ -1,0 +1,67 @@
+---
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/inventory", label: "Inventory" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" }
+];
+---
+
+<nav
+  class="hidden md:flex items-center gap-16"
+  role="navigation"
+  aria-label="Main navigation"
+>
+      {nav.map(item => (
+    <a
+      href={item.href}
+      data-astro-prefetch
+      class={`nav-link ${
+        currentPath === item.href ? 'nav-link[aria-current="page"]' : ''
+      }`}
+      aria-current={currentPath === item.href ? 'page' : undefined}
+    >
+      {item.label}
+    </a>
+  ))}
+</nav>
+
+<script>
+  // Enhanced navigation analytics
+  document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('nav a[data-astro-prefetch]');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        const text = link.textContent?.trim();
+
+        // Track navigation clicks
+        if (typeof window !== 'undefined') {
+          if (window.va) {
+            window.va('event', 'nav_click', {
+              nav_item: text,
+              href: href,
+              page: window.location.pathname
+            });
+          }
+
+          if (window.gtag) {
+            window.gtag('event', 'click', {
+              event_category: 'navigation',
+              event_label: text,
+              value: 1
+            });
+          }
+        }
+      });
+    });
+  });
+</script>

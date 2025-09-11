@@ -1,0 +1,275 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  aspectRatio?: string;
+  priority?: boolean;
+  quality?: number;
+  class?: string;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  blurDataURL?: string;
+  placeholder?: 'blur' | 'empty';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  aspectRatio,
+  priority = false,
+  quality = 80,
+  class: className,
+  sizes = '100vw',
+  loading = 'lazy',
+  decoding = 'async',
+  fetchpriority,
+  blurDataURL,
+  placeholder = 'empty'
+} = Astro.props;
+
+// Generate responsive image sources
+const generateSources = (originalSrc: string) => {
+  const sources = [];
+  const baseName = originalSrc.replace(/\.[^/.]+$/, '');
+  const extension = originalSrc.split('.').pop()?.toLowerCase();
+
+  // WebP sources (preferred modern format)
+  if (extension !== 'webp') {
+    sources.push({
+      type: 'image/webp',
+      srcset: `
+        ${baseName}-320.webp 320w,
+        ${baseName}-640.webp 640w,
+        ${baseName}-960.webp 960w,
+        ${baseName}-1280.webp 1280w,
+        ${baseName}-1920.webp 1920w
+      `.trim()
+    });
+  }
+
+  // AVIF sources (best compression, if supported)
+  if (extension !== 'avif') {
+    sources.push({
+      type: 'image/avif',
+      srcset: `
+        ${baseName}-320.avif 320w,
+        ${baseName}-640.avif 640w,
+        ${baseName}-960.avif 960w,
+        ${baseName}-1280.avif 1280w,
+        ${baseName}-1920.avif 1920w
+      `.trim()
+    });
+  }
+
+  // Original format fallback
+  sources.push({
+    type: `image/${extension}`,
+    srcset: `
+      ${baseName}-320.${extension} 320w,
+      ${baseName}-640.${extension} 640w,
+      ${baseName}-960.${extension} 960w,
+      ${baseName}-1280.${extension} 1280w,
+      ${originalSrc} 1920w
+    `.trim()
+  });
+
+  return sources;
+};
+
+// Generate blur placeholder
+const generateBlurPlaceholder = () => {
+  if (blurDataURL) return blurDataURL;
+
+  // Simple SVG blur placeholder based on aspect ratio
+  const aspectRatioValue = aspectRatio || (width && height ? `${width}/${height}` : '16/9');
+  const [w, h] = aspectRatioValue.split('/').map(Number);
+
+  return `data:image/svg+xml;base64,${btoa(`
+    <svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="blur">
+          <feGaussianBlur stdDeviation="10"/>
+        </filter>
+      </defs>
+      <rect width="100%" height="100%" fill="#f3f4f6" filter="url(#blur)"/>
+    </svg>
+  `)}`;
+};
+
+// Determine loading strategy
+const isPriority = priority || fetchpriority === 'high';
+const actualLoading = isPriority ? 'eager' : loading;
+const actualFetchPriority = fetchpriority || (isPriority ? 'high' : 'auto');
+
+// Generate style for aspect ratio
+const style = aspectRatio ? `--aspect-ratio: ${aspectRatio};` : '';
+
+const sources = generateSources(src);
+const blurPlaceholder = placeholder === 'blur' ? generateBlurPlaceholder() : null;
+---
+
+<picture class:list={['smart-image', className]}>
+  {sources.map((source, index) => (
+    <source
+      srcset={source.srcset}
+      sizes={sizes}
+      type={source.type}
+      key={index}
+    />
+  ))}
+
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={actualLoading}
+    decoding={decoding}
+    fetchpriority={actualFetchPriority}
+    style={style}
+    class:list={[
+      'smart-image__img',
+      {
+        'aspect-ratio-box': aspectRatio,
+        'blur-placeholder': placeholder === 'blur'
+      }
+    ]}
+    data-blur-src={blurPlaceholder}
+  />
+</picture>
+
+<style>
+  .smart-image {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .smart-image__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Aspect ratio container */
+  .aspect-ratio-box {
+    aspect-ratio: var(--aspect-ratio, auto);
+    object-fit: cover;
+  }
+
+  /* Blur placeholder effect */
+  .blur-placeholder {
+    filter: blur(10px);
+    transform: scale(1.1);
+  }
+
+  .blur-placeholder.loaded {
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  /* Intersection Observer for lazy loading */
+  .smart-image[data-observer] .smart-image__img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .smart-image[data-observer].visible .smart-image__img {
+    opacity: 1;
+  }
+
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    .smart-image__img,
+    .blur-placeholder {
+      transition: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .blur-placeholder {
+      filter: none;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for enhanced lazy loading
+  class SmartImageObserver {
+    constructor() {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const picture = entry.target as HTMLElement;
+              const img = picture.querySelector('img');
+
+              if (img) {
+                // Add visible class for smooth transition
+                picture.classList.add('visible');
+
+                // Handle blur placeholder
+                if (img.classList.contains('blur-placeholder')) {
+                  img.classList.add('loaded');
+                }
+              }
+
+              // Stop observing this element
+              this.observer.unobserve(picture);
+            }
+          });
+        },
+        {
+          rootMargin: '50px',
+          threshold: 0.1
+        }
+      );
+    }
+
+    observe(element: HTMLElement) {
+      element.setAttribute('data-observer', 'true');
+      this.observer.observe(element);
+    }
+  }
+
+  // Initialize observers for lazy-loaded images
+  document.addEventListener('DOMContentLoaded', () => {
+    const smartImages = document.querySelectorAll('.smart-image:not([data-observer])');
+
+    if (smartImages.length > 0) {
+      const observer = new SmartImageObserver();
+
+      smartImages.forEach((img) => {
+        // Only observe images that aren't already priority loaded
+        if (!img.querySelector('img[loading="eager"]')) {
+            observer.observe(img as HTMLElement);
+        }
+      });
+    }
+  });
+
+  // Performance monitoring
+  if ('PerformanceObserver' in window) {
+    try {
+      const observer = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (entry.entryType === 'largest-contentful-paint') {
+            console.log('LCP:', entry.startTime);
+          }
+        });
+      });
+      observer.observe({ entryTypes: ['largest-contentful-paint'] });
+    } catch (e) {
+      // Performance observer not supported
+    }
+  }
+</script>

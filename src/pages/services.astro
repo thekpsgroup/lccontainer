@@ -1,4 +1,5 @@
 ---
+import SmartImage from "../components/SmartImage.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import FAQ from "../components/FAQ.astro";
@@ -37,7 +38,7 @@ import FAQ from "../components/FAQ.astro";
           </div>
         </div>
         <div class="glass p-0 overflow-hidden">
-          <img src="/photos/container/standard/20ft_1.jpg" alt="Shipping containers for sale" class="w-full h-64 object-cover" loading="lazy" />
+          <SmartImage src="/photos/container/standard/20ft_1.jpg" alt="Shipping containers for sale" class="w-full h-64 object-cover" loading="lazy" quality={80} sizes="(max-width: 768px) 100vw, 600px" aspectRatio="16/9" />
         </div>
       </div>
     </div>
@@ -64,7 +65,7 @@ import FAQ from "../components/FAQ.astro";
           </div>
         </div>
         <div class="lg:order-1 glass p-0 overflow-hidden">
-          <img src="/photos/container/standard/40ft_1.jpg" alt="Container leasing services" class="w-full h-64 object-cover" loading="lazy" />
+          <SmartImage src="/photos/container/standard/40ft_1.jpg" alt="Container leasing services" class="w-full h-64 object-cover" loading="lazy" quality={80} sizes="(max-width: 768px) 100vw, 600px" aspectRatio="16/9" />
         </div>
       </div>
     </div>
@@ -91,7 +92,7 @@ import FAQ from "../components/FAQ.astro";
           </div>
         </div>
         <div class="glass p-0 overflow-hidden">
-          <img src="/photos/container/custom/custom-modification-2.jpg" alt="Custom container modifications" class="w-full h-64 object-cover" loading="lazy" />
+          <SmartImage src="/photos/container/custom/custom-modification-2.jpg" alt="Custom container modifications" class="w-full h-64 object-cover" loading="lazy" quality={80} sizes="(max-width: 768px) 100vw, 600px" aspectRatio="16/9" />
         </div>
       </div>
     </div>

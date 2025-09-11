@@ -1,0 +1,182 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'link';
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  icon?: string;
+  children: any;
+  class?: string;
+  'data-cta'?: string;
+  'aria-label'?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  icon,
+  children,
+  class: className = '',
+  'data-cta': dataCta,
+  'aria-label': ariaLabel
+} = Astro.props;
+
+// Size configurations using typography system
+const sizeClasses = {
+  sm: 'px-4 py-2 btn-text',
+  md: 'px-6 py-3 btn-text',
+  lg: 'px-8 py-4 btn-text-lg'
+};
+
+// Variant configurations with AA compliance
+const variantClasses = {
+  primary: `
+    bg-brand-red text-white
+    hover:bg-brand-red-700
+    focus:ring-brand-red-300
+    shadow-lg hover:shadow-xl
+    transform hover:scale-105
+    active:scale-95
+  `,
+  secondary: `
+    bg-transparent border-2 border-brand-red text-brand-red
+    hover:bg-brand-red hover:text-white
+    focus:ring-brand-red-300
+    shadow-md hover:shadow-lg
+  `
+};
+
+// Base button classes (AA compliant)
+const baseClasses = `
+  inline-flex items-center justify-center gap-2
+  font-semibold rounded-xl
+  transition-all duration-200 ease-out
+  focus:outline-none focus:ring-2 focus:ring-offset-2
+  disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+  min-h-[44px] min-w-[44px] /* 48px minimum touch target with padding */
+`;
+
+// Loading spinner SVG
+const loadingSpinner = `
+  <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+  </svg>
+`;
+
+// Combine all classes
+const combinedClasses = [
+  baseClasses,
+  sizeClasses[size],
+  variantClasses[variant],
+  fullWidth ? 'w-full' : '',
+  loading ? 'cursor-wait' : '',
+  className
+].filter(Boolean).join(' ');
+
+// Handle click tracking
+const handleClick = () => {
+  if (dataCta && typeof window !== 'undefined') {
+    // Track CTA clicks
+    if (window.va) {
+      window.va('event', 'cta_click', {
+        cta_type: dataCta,
+        variant,
+        size,
+        page: window.location.pathname,
+        href: href || ''
+      });
+    }
+
+    // Track with Google Analytics
+    if (window.gtag) {
+      window.gtag('event', 'click', {
+        event_category: 'cta',
+        event_label: `${dataCta}_${variant}_${size}`,
+        value: 1
+      });
+    }
+  }
+};
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={combinedClasses}
+      data-cta={dataCta}
+      aria-label={ariaLabel}
+      onclick={handleClick}
+      role="button"
+    >
+      {loading && <span set:html={loadingSpinner} />}
+      {icon && <span class={`icon-${icon}`} aria-hidden="true">{icon}</span>}
+      <span class={loading ? 'opacity-75' : ''}>
+        {children}
+      </span>
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={combinedClasses}
+      disabled={disabled || loading}
+      data-cta={dataCta}
+      aria-label={ariaLabel}
+      onclick={handleClick}
+    >
+      {loading && <span set:html={loadingSpinner} />}
+      {icon && <span class={`icon-${icon}`} aria-hidden="true">{icon}</span>}
+      <span class={loading ? 'opacity-75' : ''}>
+        {children}
+      </span>
+    </button>
+  )
+}
+
+<style>
+  /* Enhanced focus states for better accessibility */
+  .cta-button:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 1px var(--color-focus-ring-offset),
+                0 0 0 5px rgba(220, 38, 38, 0.2);
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .cta-button {
+      border-width: 3px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button {
+      transform: none !important;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-button:hover {
+      transform: none !important;
+    }
+  }
+
+  /* Enhanced touch targets on mobile */
+  @media (max-width: 768px) {
+    .cta-button {
+      min-height: 48px;
+      min-width: 48px;
+      padding: 12px 16px;
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+  }
+</style>

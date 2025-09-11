@@ -86,7 +86,10 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
       </button>
     </div>
 
-    <p id="formMsg" class="text-sm text-ink-muted mt-1" role="status" aria-live="polite"></p>
+    <p id="formMsg" class="text-sm text-ink-muted mt-1 flex items-center gap-2" role="status" aria-live="polite">
+      <span id="errorIcon" class="hidden text-red-500" aria-hidden="true">⚠️</span>
+      <span id="errorText"></span>
+    </p>
   </form>
 </div>
 
@@ -114,6 +117,8 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   const submitLoading = document.getElementById('submitLoading') as HTMLElement;
   const form = /** @type {HTMLFormElement} */(document.getElementById('quoteForm'));
   const msg = document.getElementById('formMsg') as HTMLElement;
+  const errorIcon = document.getElementById('errorIcon') as HTMLElement;
+  const errorText = document.getElementById('errorText') as HTMLElement;
   const startedAt = document.getElementById('startedAt') as HTMLInputElement;
 
   // Initialize form
@@ -182,8 +187,11 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
   // Debounced error clearing
   const clearError = debounce(() => {
-    if (msg.textContent && !msg.textContent.includes('Thanks!')) {
-      msg.textContent = '';
+    if (errorText.textContent && !errorText.textContent.includes('Thanks!')) {
+      errorText.textContent = '';
+      errorIcon.classList.add('hidden');
+      msg.classList.remove('text-red-500');
+      msg.classList.add('text-ink-muted');
     }
   }, 3000);
 
@@ -192,14 +200,20 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
     const err = validateStep(current);
     if(err){
-      msg.textContent = err;
+      errorText.textContent = err;
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
       clearError();
       return;
     }
     if(current < steps.length-1){
       current++;
       showStep(current);
-      msg.textContent="";
+      errorText.textContent="";
+      errorIcon.classList.add('hidden');
+      msg.classList.remove('text-red-500');
+      msg.classList.add('text-ink-muted');
     }
   });
 
@@ -209,7 +223,10 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     if(current>0){
       current--;
       showStep(current);
-      msg.textContent="";
+      errorText.textContent="";
+      errorIcon.classList.add('hidden');
+      msg.classList.remove('text-red-500');
+      msg.classList.add('text-ink-muted');
     }
   });
 
@@ -221,7 +238,10 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     }
 
     setLoading(true);
-    msg.textContent = "Sending…";
+    errorText.textContent = "Sending…";
+    errorIcon.classList.add('hidden');
+    msg.classList.remove('text-red-500');
+    msg.classList.add('text-ink-muted');
 
     // Enhanced analytics tracking
     const fd = new FormData(form);
