@@ -1,16 +1,14 @@
-import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://lccontainer.com',
   compressHTML: true,
   output: 'static',
-  integrations: [
-    tailwind({ config: './tailwind.config.mjs' })
-  ],
+  integrations: [tailwind({ config: './tailwind.config.mjs' })],
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport'
+    defaultStrategy: 'viewport',
   },
   build: {
     inlineStylesheets: 'auto',
@@ -19,8 +17,8 @@ export default defineConfig({
   image: {
     // Enable image optimization
     service: {
-      entrypoint: 'astro/assets/services/sharp'
-    }
+      entrypoint: 'astro/assets/services/sharp',
+    },
   },
   vite: {
     build: {
@@ -55,7 +53,12 @@ export default defineConfig({
       postcss: {},
     },
     optimizeDeps: {
-      include: ['@fontsource/inter/400.css', '@fontsource/inter/500.css', '@fontsource/inter/600.css', '@fontsource/inter/700.css'],
+      exclude: [
+        '@fontsource/inter/400.css',
+        '@fontsource/inter/500.css',
+        '@fontsource/inter/600.css',
+        '@fontsource/inter/700.css',
+      ],
     },
     ssr: {
       noExternal: ['@fontsource/inter'],
