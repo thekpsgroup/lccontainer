@@ -23,7 +23,7 @@ export const INVENTORY: Item[] = [
     size: "10'",
     height: "Standard",
     condition: "Used (WWT)",
-    priceFrom: 1800,
+    priceFrom: 3950,
     blurb: "Compact storage. Easy placement in tight spaces.",
     photos: [
       "/photos/container/standard/10-ft.jpg",
@@ -41,7 +41,7 @@ export const INVENTORY: Item[] = [
     height: "Standard",
     condition: "New (One-Trip)",
     badge: "New",
-    priceFrom: 3400,
+    priceFrom: 4950,
     blurb: "Like-new mini container for small-footprint storage.",
     photos: [
       "/photos/container/standard/10-ft.jpg",
