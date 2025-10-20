@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-10-20T21:53:59.212Z",
+  "version": "1.0.0",
+  "summary": {
+    "totalPages": 3864,
+    "seoScore": 64,
+    "status": "POOR"
+  },
+  "metrics": {
+    "totalPages": 3864,
+    "uniqueTitles": 52,
+    "uniqueDescriptions": 84,
+    "pagesWithSchema": 100,
+    "pagesWithFAQ": 100,
+    "averageContentLength": 1491,
+    "internalLinks": 10,
+    "placeholderContent": 0
+  },
+  "recommendations": [
+    "Improve meta title uniqueness - enhance title generation with more differentiating factors",
+    "Improve meta description uniqueness - add more city-specific details and unique identifiers",
+    "Increase content depth - add more local market insights and detailed service information"
+  ],
+  "testResults": {
+    "metaUniqueness": "REVIEW",
+    "schemaMarkup": "PASS",
+    "contentQuality": "REVIEW",
+    "noPlaceholders": "PASS"
+  }
+}
