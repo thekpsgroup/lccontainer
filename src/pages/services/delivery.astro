@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ContainerGallery from '../../components/ContainerGallery.astro';
+import StickyCallBar from '../../components/StickyCallBar.astro';
 ---
 
 <BaseLayout
@@ -58,6 +59,36 @@ import ContainerGallery from '../../components/ContainerGallery.astro';
   <!-- Container Gallery -->
   <ContainerGallery />
 
+  <!-- Phone-Focused CTA for Delivery -->
+  <section class="py-12 bg-primary-50">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="glass p-8 md:p-12 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-blue-600/10"></div>
+        <div class="relative">
+          <div class="inline-block bg-brand-red text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            🚚 Schedule Your Delivery Today
+          </div>
+          <h2 class="text-3xl font-bold text-white mb-4">
+            Get Your Delivery Quote Now
+          </h2>
+          <p class="text-lg text-white mb-8">
+            Call our delivery team for scheduling and accurate delivery quotes
+          </p>
+          <a
+            href="tel:12145244168"
+            class="inline-flex items-center justify-center gap-3 px-10 py-5 text-xl font-bold bg-brand-red text-white rounded-xl shadow-2xl hover:bg-white hover:text-brand-red transform hover:scale-105 transition-all duration-300"
+            data-cta="delivery_phone_cta"
+            aria-label="Call for delivery scheduling at (214) 524-4168"
+          >
+            <span class="text-2xl">📞</span>
+            <span>(214) 524-4168</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StickyCallBar visible={true} />
   <Footer />
 </BaseLayout>
 
