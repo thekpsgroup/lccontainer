@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -8,7 +8,11 @@ const CONTENT_DIR = path.resolve(__dirname, '../src/content/loc');
 
 function mdFrontmatter(obj: Record<string, any>) {
   const lines = Object.entries(obj)
-    .filter(([k, v]) => v !== undefined && v !== null && v !== '')
+    .filter(([k, v]) => {
+      // Always include notes field even if empty
+      if (k === 'notes') return true;
+      return v !== undefined && v !== null && v !== '';
+    })
     .map(([k, v]) => `${k}: ${JSON.stringify(v)}`);
   return `---\n${lines.join('\n')}\n---`;
 }
@@ -348,7 +352,7 @@ async function main() {
         h1: row.h1,
         internal_links: row.internal_links,
         priority: row.priority,
-        notes: row.notes,
+        notes: row.notes && row.notes !== 'NaN' ? row.notes : '',
         noindex: row.priority !== 1,
         image_alt: generateImageAlt(row),
         last_updated: new Date().toISOString().split('T')[0], // YYYY-MM-DD format

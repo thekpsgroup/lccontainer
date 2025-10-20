@@ -5,32 +5,21 @@ keyword: "20ft wind and water tight (WWT) conex box for rent Terrell, TX"
 intent: "Transactional-Local"
 page_type: "Location-Product"
 city: "Terrell, TX"
-title_tag: "Terrell 20ft conex box for rent | LC Container"
-meta_description: "Buy wind and water tight (WWT) 20ft conex box rent with local delivery in Terrell, TX. LC Container — local Since 2003. Request a fast quote today."
+service_type: "conex box"
+condition: "Wind & Water Tight"
+size: "20ft"
+title_tag: "20ft 5wg Wind & Water Tight conex box Sales in Terrell | LC Container"
+meta_description: "20ft wind & water tight conex box sales in Terrell. Fast delivery, competitive pricing. Serving conex boxes area. Quote ID: PO4. Call (214) 524-4168 for your free quote today."
+original_title: "Terrell 20ft conex box for rent | LC Container"
+original_meta: "Buy wind and water tight (WWT) 20ft conex box rent with local delivery in Terrell, TX. LC Container — local Since 2003. Request a fast quote today."
 url_slug: "/terrell/rent/20ft/conex-boxes/wind-and-water-tight-wwt"
 h1: "Rent 20ft wind and water tight (WWT) conex box in Terrell"
 internal_links: "/terrell/conex-boxes/rentals"
 priority: 3
 notes: "2"
 noindex: true
+image_alt: "20ft wind & water tight conex box available for delivery in Terrell"
+last_updated: "2025-10-20"
 ---
 
-# Rent 20ft wind and water tight (WWT) conex box in Terrell
-
-We provide shipping container sales, rentals, and modifications in Terrell, TX. Call (214) 524-4168 for a fast quote.
-
-## Our Inventory & Services
-- Shipping container sales
-- Container rentals
-- Custom modifications (doors, HVAC, shelving)
-
-<div data-section="internal-links">
-### Helpful links
-- [/terrell/conex-boxes/rentals](/terrell/conex-boxes/rentals
-</div>
-
-<div data-section="cta">
-Get your free quote today — call (214) 524-4168 or <a href="/contact">contact us</a>.
-</div>
-
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does delivery cost in Terrell, TX?","acceptedAnswer":{"@type":"Answer","text":"Delivery costs vary by distance and container size. Most deliveries in Terrell, TX range from $150-$300. Call (214) 524-4168 for an exact quote based on your specific location."}},{"@type":"Question","name":"Do you offer financing or payment plans?","acceptedAnswer":{"@type":"Answer","text":"We accept major credit cards, checks, and can discuss commercial terms for bulk purchases. Call (214) 524-4168 to discuss options."}},{"@type":"Question","name":"Can you customize containers in Terrell, TX?","acceptedAnswer":{"@type":"Answer","text":"Yes — we perform modifications like doors, HVAC, insulation, and shelving. Request a custom quote at (214) 524-4168 or via our contact form."}}]}</script>
+<!-- TODO: Add unique city/inventory copy, images, and internal links here. -->

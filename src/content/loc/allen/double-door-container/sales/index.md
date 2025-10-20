@@ -5,32 +5,19 @@ keyword: "double-door container for sale Allen, TX"
 intent: "Transactional-Local"
 page_type: "Location-Product"
 city: "Allen, TX"
-title_tag: "Allen double-door container for sale | LC Container"
-meta_description: "Double-Door Container for sale with delivery in Allen, TX. LC Container — local Since 2003. Get pricing today."
+service_type: "double door container"
+title_tag: "Double Door Sfr double door container Sales in Allen | LC Container"
+meta_description: "double door container sales in Allen. Double door containers for easy access. Fast delivery, competitive pricing. Serving double door container area. Quote ID: Q6D. Call (214) 524-4168 for your free quote today."
+original_title: "Allen double-door container for sale | LC Container"
+original_meta: "Double-Door Container for sale with delivery in Allen, TX. LC Container — local Since 2003. Get pricing today."
 url_slug: "/allen/double-door-container/sales"
 h1: "Double-Door Container For Sale in Allen"
 internal_links: "/inventory"
 priority: 3
-notes: "NaN"
+notes: ""
 noindex: true
+image_alt: "double door container available for delivery in Allen"
+last_updated: "2025-10-20"
 ---
 
-# Double-Door Container For Sale in Allen
-
-We provide shipping container sales, rentals, and modifications in Allen, TX. Call (214) 524-4168 for a fast quote.
-
-## Our Inventory & Services
-- Shipping container sales
-- Container rentals
-- Custom modifications (doors, HVAC, shelving)
-
-<div data-section="internal-links">
-### Helpful links
-- [/inventory](/inventory
-</div>
-
-<div data-section="cta">
-Get your free quote today — call (214) 524-4168 or <a href="/contact">contact us</a>.
-</div>
-
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does delivery cost in Allen, TX?","acceptedAnswer":{"@type":"Answer","text":"Delivery costs vary by distance and container size. Most deliveries in Allen, TX range from $150-$300. Call (214) 524-4168 for an exact quote based on your specific location."}},{"@type":"Question","name":"Do you offer financing or payment plans?","acceptedAnswer":{"@type":"Answer","text":"We accept major credit cards, checks, and can discuss commercial terms for bulk purchases. Call (214) 524-4168 to discuss options."}},{"@type":"Question","name":"Can you customize containers in Allen, TX?","acceptedAnswer":{"@type":"Answer","text":"Yes — we perform modifications like doors, HVAC, insulation, and shelving. Request a custom quote at (214) 524-4168 or via our contact form."}}]}</script>
+<!-- TODO: Add unique city/inventory copy, images, and internal links here. -->
