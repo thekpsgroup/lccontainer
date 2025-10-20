@@ -11,8 +11,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="LC Container — Texas Shipping Containers | Buy, Lease, Custom"
-  description="Buy, lease, or customize shipping containers in Texas. 10-acre yard in Hutchins. 10', 20', 40' containers. Fast delivery statewide. Established 2003."
+  title="LC Container — Texas Shipping Containers | Call (214) 524-4168 | Buy, Lease, Custom"
+  description="Buy, lease, or customize shipping containers in Texas. Call (214) 524-4168 for instant quotes. 10-acre yard in Hutchins. 10', 20', 40' containers. Fast delivery statewide. Established 2003."
 >
   <SEOEnhancer pageType="home" focusKeyword="shipping containers Texas" />
   <Header />
@@ -30,13 +30,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
       <div class="relative">
         <h2
-          class="text-2xl md:text-3xl font-bold mb-4 text-brand-black dark:text-white"
+          class="text-2xl md:text-3xl font-bold mb-2 text-brand-black dark:text-white"
         >
-          Ready to Get Started?
+          Talk to an Expert Now
         </h2>
+        <p class="text-xl font-semibold text-brand-red mb-4">
+          📞 (214) 524-4168
+        </p>
         <p class="text-lg text-ink-muted mb-8 max-w-2xl mx-auto">
-          Join thousands of satisfied Texas businesses. Get your personalized
-          quote in 24 hours with no obligation.
+          Get instant answers and personalized quotes in 24 hours. Join thousands of satisfied Texas businesses with no obligation.
         </p>
         <div
           class="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -44,23 +46,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <CTAButton
             variant="primary"
             size="lg"
-            href="/contact"
-            data-cta="mid_page_quote"
-            aria-label="Get started with your free quote"
+            href="tel:12145244168"
+            data-cta="mid_page_phone"
+            aria-label="Call us now for immediate assistance"
+            icon="📞"
             class="animate-pulse-subtle"
           >
-            Start Your Project
+            Call Now: (214) 524-4168
           </CTAButton>
 
           <CTAButton
             variant="secondary"
             size="lg"
-            href="tel:12145244168"
-            data-cta="mid_page_phone"
-            aria-label="Call us for immediate assistance"
-            icon="📞"
+            href="/contact"
+            data-cta="mid_page_quote"
+            aria-label="Get started with your free quote"
           >
-            Call (214) 524-4168
+            Request Quote Online
           </CTAButton>
         </div>
         <div
@@ -80,7 +82,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 stroke-width="2"
                 d="M5 13l4 4L19 7"></path>
             </svg>
-            Free Consultation
+            Instant Phone Answers
           </div>
           <div class="flex items-center gap-2">
             <svg
@@ -96,7 +98,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 stroke-width="2"
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            24h Response
+            Same-Day Quotes
           </div>
           <div class="flex items-center gap-2">
             <svg
@@ -112,7 +114,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 stroke-width="2"
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            No Obligation
+            Expert Consultation
           </div>
         </div>
       </div>
