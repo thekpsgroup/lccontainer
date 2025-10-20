@@ -43,28 +43,32 @@ const sub = "Quality shipping containers with <strong>24-hour quotes</strong> an
         </svg>
       </div>
 
-      <div class="mt-12 flex flex-wrap items-center justify-center gap-8">
-        <CTAButton
-          variant="primary"
-          size="lg"
-          href="/contact"
-          data-cta="hero_quote"
-          aria-label="Request your free quote now"
-          class="animate-pulse-subtle"
+      <!-- Prominent Phone CTA -->
+      <div class="mt-12 mb-6">
+        <a
+          href="tel:12145244168"
+          class="inline-flex items-center justify-center gap-3 px-12 py-6 text-2xl md:text-3xl font-extrabold bg-brand-red text-white rounded-2xl shadow-2xl hover:bg-white hover:text-brand-red transform hover:scale-105 transition-all duration-300 animate-pulse-subtle"
+          data-cta="hero_phone_primary"
+          aria-label="Call us now at (214) 524-4168 for immediate assistance"
         >
-          Request a Quote
-        </CTAButton>
-
+          <span class="text-3xl md:text-4xl">📞</span>
+          <span>(214) 524-4168</span>
+        </a>
+      </div>
+      
+      <p class="text-sm text-ink-muted mb-4">
+        Speak with a container expert now | Or request a quote online
+      </p>
+      
+      <div class="flex flex-wrap items-center justify-center gap-4">
         <CTAButton
           variant="secondary"
-          size="lg"
-          href="tel:12145244168"
-          data-cta="hero_phone"
-          aria-label="Call us now at (214) 524-4168"
-          icon="📞"
+          size="md"
+          href="/contact"
+          data-cta="hero_quote"
+          aria-label="Request your free quote online"
         >
-          <span class="block">Call Now</span>
-          <span class="block text-sm font-normal">(214) 524-4168)</span>
+          Request Online Quote
         </CTAButton>
       </div>
     </div>

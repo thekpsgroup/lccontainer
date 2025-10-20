@@ -3,16 +3,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import QuoteForm from "../components/QuoteForm.astro";
+import StickyCallBar from "../components/StickyCallBar.astro";
 ---
 <BaseLayout title="Contact — LC Container" description="Get a free quote within 24 hours. Call (214) 524-4168 or use our quote form.">
   <Header />
   
-  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16 grid md:grid-cols-2 gap-8 items-start">
-    <QuoteForm />
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <!-- Prominent Phone CTA Above Form -->
+    <div class="glass p-8 text-center mb-8 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-red/5 to-blue-600/5"></div>
+      <div class="relative">
+        <div class="inline-block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-3">
+          ⚡ Fastest Response: Call Now
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-3 text-brand-black dark:text-white">
+          Need Immediate Assistance?
+        </h2>
+        <p class="text-lg text-ink-muted mb-4">
+          Speak with a container specialist now for instant answers and real-time pricing
+        </p>
+        <a
+          href="tel:12145244168"
+          class="inline-flex items-center justify-center gap-3 px-10 py-5 text-xl md:text-2xl font-bold bg-brand-red text-white rounded-xl shadow-2xl hover:bg-brand-black transform hover:scale-105 transition-all duration-300"
+          data-cta="contact_phone_hero"
+          aria-label="Call us now at (214) 524-4168"
+        >
+          <span class="text-2xl md:text-3xl">📞</span>
+          <span>(214) 524-4168</span>
+        </a>
+        <p class="text-sm text-ink-muted mt-4">
+          Available Mon-Fri 8AM-5PM CST | Or use the form below for 24h response
+        </p>
+      </div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <QuoteForm />
 
-    <aside class="glass p-6">
-      <h2 class="text-xl font-semibold">Visit the Yard</h2>
-      <p class="text-ink-muted">1211 E Fulghum Rd, Hutchins, TX 75141</p>
+      <aside class="glass p-6">
+        <h2 class="text-xl font-semibold">Visit the Yard</h2>
+        <p class="text-ink-muted">1211 E Fulghum Rd, Hutchins, TX 75141</p>
       <div class="mt-4 rounded-xl overflow-hidden aspect-video">
         <iframe class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=1211+E+Fulghum+Rd,+Hutchins,+TX+75141&output=embed"></iframe>
@@ -30,7 +60,9 @@ import QuoteForm from "../components/QuoteForm.astro";
         <div class="glass p-3 text-center"><div class="font-semibold">200-Mile Service</div></div>
             </div>
     </aside>
+    </div>
   </section>
   
+  <StickyCallBar visible={true} />
   <Footer />
 </BaseLayout>
