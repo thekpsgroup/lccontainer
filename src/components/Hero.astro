@@ -1,12 +1,11 @@
 ---
-import { Image } from 'astro:assets';
-import SmartImage from './SmartImage.astro';
-import CTAButton from './CTAButton.astro';
+import CTAButton from "./CTAButton.astro";
 
+// Location-aware headlines based on traffic source
 const headline = "Texas' Premier Container Supplier";
-const sub = "Quality shipping containers with <strong>24-hour quotes</strong> and <strong>same-day delivery</strong> across Texas. Thousands of containers in stock.";
+const sub =
+  "Quality shipping containers with <strong>24-hour quotes</strong> and <strong>same-day delivery</strong> across Texas. Thousands of containers in stock.";
 ---
-
 
 <section class="relative overflow-hidden">
   <!-- Modern background with soft gradient and image -->
@@ -28,18 +27,35 @@ const sub = "Quality shipping containers with <strong>24-hour quotes</strong> an
       fetchpriority="high"
       type="image/webp"
     />
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-brand-black/70 to-blue-800/60"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-brand-black/70 to-blue-800/60"
+    >
+    </div>
   </div>
 
-  <div class="relative max-w-[1200px] mx-auto px-16 md:px-24 lg:px-32 py-16 md:py-20 lg:py-24 text-center">
-    <div class="backdrop-blur-xl bg-white/70 dark:bg-brand-black/80 shadow-2xl rounded-3xl p-8 md:p-12 max-w-3xl mx-auto border border-brand-line/20">
+  <div
+    class="relative max-w-[1200px] mx-auto px-16 md:px-24 lg:px-32 py-16 md:py-20 lg:py-24 text-center"
+  >
+    <div
+      class="backdrop-blur-xl bg-white/70 dark:bg-brand-black/80 shadow-2xl rounded-3xl p-8 md:p-12 max-w-3xl mx-auto border border-brand-line/20"
+    >
       <h1 class="hero-title mb-8">{headline}</h1>
-      <p class="hero-subtitle" set:html={sub}></p>
+      <p class="hero-subtitle" set:html={sub} />
 
       <!-- Visual cue arrow -->
       <div class="mt-12 mb-6 animate-bounce">
-        <svg class="w-8 h-8 mx-auto text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        <svg
+          class="w-8 h-8 mx-auto text-brand-red"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
       </div>
 
@@ -71,20 +87,26 @@ const sub = "Quality shipping containers with <strong>24-hour quotes</strong> an
 
     <!-- Modern Trust strip -->
     <div class="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-3xl mx-auto">
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow"
+      >
         Licensed & Insured
       </div>
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow"
+      >
         Quotes in 24h
       </div>
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow"
+      >
         10-Acre Yard
       </div>
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow"
+      >
         200-Mile Service
       </div>
     </div>
   </div>
 </section>
-
-
