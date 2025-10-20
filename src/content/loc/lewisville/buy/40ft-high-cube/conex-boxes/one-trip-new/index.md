@@ -5,32 +5,21 @@ keyword: "40ft high cube one-trip (new) conex box for sale Lewisville, TX"
 intent: "Transactional-Local"
 page_type: "Location-Product"
 city: "Lewisville, TX"
-title_tag: "Lewisville 40ft high cube conex box for sale | LC Container"
-meta_description: "Buy one-trip (new) 40ft high cube conex box sale with local delivery in Lewisville, TX. LC Container — local Since 2003. Request a fast quote today."
+service_type: "conex box"
+condition: "New"
+size: "40ft High Cube"
+title_tag: "40ft High Cube High Cube 7cu New conex box Sales in Lewisville | LC Container"
+meta_description: "40ft High Cube new conex box sales in Lewisville. High cube containers with extra height. Fast delivery, competitive pricing. Serving conex boxes area. Quote ID: J1C. Call (214) 524-4168 for your free quote today."
+original_title: "Lewisville 40ft high cube conex box for sale | LC Container"
+original_meta: "Buy one-trip (new) 40ft high cube conex box sale with local delivery in Lewisville, TX. LC Container — local Since 2003. Request a fast quote today."
 url_slug: "/lewisville/buy/40ft-high-cube/conex-boxes/one-trip-new"
 h1: "Buy 40ft high cube one-trip (new) conex box in Lewisville"
 internal_links: "/lewisville/conex-boxes/sales"
 priority: 3
-notes: "NaN"
+notes: ""
 noindex: true
+image_alt: "40ft High Cube new conex box available for delivery in Lewisville"
+last_updated: "2025-10-20"
 ---
 
-# Buy 40ft high cube one-trip (new) conex box in Lewisville
-
-We provide shipping container sales, rentals, and modifications in Lewisville, TX. Call (214) 524-4168 for a fast quote.
-
-## Our Inventory & Services
-- Shipping container sales
-- Container rentals
-- Custom modifications (doors, HVAC, shelving)
-
-<div data-section="internal-links">
-### Helpful links
-- [/lewisville/conex-boxes/sales](/lewisville/conex-boxes/sales
-</div>
-
-<div data-section="cta">
-Get your free quote today — call (214) 524-4168 or <a href="/contact">contact us</a>.
-</div>
-
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does delivery cost in Lewisville, TX?","acceptedAnswer":{"@type":"Answer","text":"Delivery costs vary by distance and container size. Most deliveries in Lewisville, TX range from $150-$300. Call (214) 524-4168 for an exact quote based on your specific location."}},{"@type":"Question","name":"Do you offer financing or payment plans?","acceptedAnswer":{"@type":"Answer","text":"We accept major credit cards, checks, and can discuss commercial terms for bulk purchases. Call (214) 524-4168 to discuss options."}},{"@type":"Question","name":"Can you customize containers in Lewisville, TX?","acceptedAnswer":{"@type":"Answer","text":"Yes — we perform modifications like doors, HVAC, insulation, and shelving. Request a custom quote at (214) 524-4168 or via our contact form."}}]}</script>
+<!-- TODO: Add unique city/inventory copy, images, and internal links here. -->
