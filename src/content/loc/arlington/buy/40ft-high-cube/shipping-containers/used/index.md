@@ -9,10 +9,28 @@ title_tag: "Arlington 40ft high cube shipping container for sale | LC"
 meta_description: "Buy used 40ft high cube shipping container sale with local delivery in Arlington, TX. LC Container — local Since 2003. Request a fast quote today."
 url_slug: "/arlington/buy/40ft-high-cube/shipping-containers/used"
 h1: "Buy 40ft high cube used shipping container in Arlington"
-internal_links: "/arlington/shipping-containers/sales,/delivery,/modifications"
-priority: 1
-notes: "Include real photos, on-lot inventory, delivery lead times, and financing info."
-noindex: false
+internal_links: "/arlington/shipping-containers/sales"
+priority: 3
+notes: "NaN"
+noindex: true
 ---
 
-<!-- TODO: Add unique city/inventory copy, images, and internal links here. -->
+# Buy 40ft high cube used shipping container in Arlington
+
+We provide shipping container sales, rentals, and modifications in Arlington, TX. Call (214) 524-4168 for a fast quote.
+
+## Our Inventory & Services
+- Shipping container sales
+- Container rentals
+- Custom modifications (doors, HVAC, shelving)
+
+<div data-section="internal-links">
+### Helpful links
+- [/arlington/shipping-containers/sales](/arlington/shipping-containers/sales
+</div>
+
+<div data-section="cta">
+Get your free quote today — call (214) 524-4168 or <a href="/contact">contact us</a>.
+</div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does delivery cost in Arlington, TX?","acceptedAnswer":{"@type":"Answer","text":"Delivery costs vary by distance and container size. Most deliveries in Arlington, TX range from $150-$300. Call (214) 524-4168 for an exact quote based on your specific location."}},{"@type":"Question","name":"Do you offer financing or payment plans?","acceptedAnswer":{"@type":"Answer","text":"We accept major credit cards, checks, and can discuss commercial terms for bulk purchases. Call (214) 524-4168 to discuss options."}},{"@type":"Question","name":"Can you customize containers in Arlington, TX?","acceptedAnswer":{"@type":"Answer","text":"Yes — we perform modifications like doors, HVAC, insulation, and shelving. Request a custom quote at (214) 524-4168 or via our contact form."}}]}</script>
