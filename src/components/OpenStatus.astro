@@ -1,0 +1,107 @@
+---
+// Shows Open/Closed with hours and next-open time
+export interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+// Business hours: Mon-Fri 8:00-17:00 Central Time
+// We'll compute status on client for correct user timezone display
+const hours = {
+  tz: "America/Chicago",
+  openHour: 8,
+  closeHour: 17,
+  days: [1, 2, 3, 4, 5], // Mon-Fri
+};
+---
+
+<span
+  class={`inline-flex items-center gap-2 text-sm ${className}`}
+  id="open-status"
+>
+  <span class="w-2 h-2 rounded-full bg-gray-400" id="open-dot"></span>
+  <span id="open-label" class="text-gray-600">Checking hours…</span>
+</span>
+
+<script>
+  const hours = {
+    openHour: 8,
+    closeHour: 17,
+    days: [1, 2, 3, 4, 5],
+  };
+
+  function getCentralTimeDate() {
+    // Convert to Central Time using intl
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      hour12: true,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }).formatToParts(now);
+    const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+    const month = parseInt(map.month, 10) - 1;
+    const day = parseInt(map.day, 10);
+    const year = parseInt(map.year, 10);
+    const hour = parseInt(map.hour, 10) + (map.dayPeriod === "PM" ? 12 : 0);
+    const minute = parseInt(map.minute, 10);
+    return new Date(year, month, day, hour % 24, minute);
+  }
+
+  function computeStatus() {
+    const now = getCentralTimeDate();
+    const day = now.getDay();
+    const hour = now.getHours();
+    const isOpenDay = hours.days.includes(day);
+    const isOpenHour = hour >= hours.openHour && hour < hours.closeHour;
+    const open = isOpenDay && isOpenHour;
+
+    let label = open ? "Open now" : "Closed";
+
+    if (!open) {
+      // compute next open time
+      let next = new Date(now);
+      next.setHours(hours.openHour, 0, 0, 0);
+      if (isOpenDay && hour < hours.openHour) {
+        // opens later today
+      } else {
+        // move to next open day
+        do {
+          next.setDate(next.getDate() + 1);
+        } while (!hours.days.includes(next.getDay()));
+      }
+      const fmt = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: "America/Chicago",
+      });
+      label = `Closed — opens ${fmt.format(next)} CT`;
+    }
+
+    return { open, label };
+  }
+
+  function render() {
+    const { open, label } = computeStatus();
+    const dot = document.getElementById("open-dot");
+    const text = document.getElementById("open-label");
+    if (dot && text) {
+      dot.className = `w-2 h-2 rounded-full ${open ? "bg-green-500" : "bg-gray-400"}`;
+      text.textContent = label;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", render);
+</script>
+
+<style>
+  @media (prefers-contrast: more) {
+    #open-dot {
+      outline: 2px solid currentColor;
+    }
+  }
+</style>

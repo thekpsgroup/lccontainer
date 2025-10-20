@@ -1,20 +1,37 @@
 ---
-import SmartImage from './SmartImage.astro';
-import CTAButton from './CTAButton.astro';
-import Nav from './Nav.astro';
-import MobileMenu from './MobileMenu.astro';
+import SmartImage from "./SmartImage.astro";
+import CTAButton from "./CTAButton.astro";
+import OpenStatus from "./OpenStatus.astro";
+import Nav from "./Nav.astro";
+import MobileMenu from "./MobileMenu.astro";
 ---
-<header class="sticky top-0 z-50 border-b border-brand-line/40 bg-white/60 dark:bg-brand-black/80 backdrop-blur-xl shadow-lg transition-all duration-300" id="header">
-  <div class="max-w-[1200px] mx-auto px-5 flex h-20 items-center justify-between">
+
+<header
+  class="sticky top-0 z-50 border-b border-brand-line/40 bg-white/60 dark:bg-brand-black/80 backdrop-blur-xl shadow-lg transition-all duration-300"
+  id="header"
+>
+  <div
+    class="max-w-[1200px] mx-auto px-5 flex h-20 items-center justify-between"
+  >
     <a href="/" class="flex items-center gap-3">
-      <img src="/photos/lccontainer-dark.png" alt="LC Container" class="h-9 w-auto" />
+      <img
+        src="/photos/lccontainer-dark.png"
+        alt="LC Container"
+        class="h-9 w-auto"
+      />
       <span class="sr-only">LC Container</span>
     </a>
 
     <Nav currentPath={Astro.url.pathname} />
 
     <div class="hidden md:flex items-center gap-5">
-      <a href="tel:12145244168" class="text-base text-ink-muted hover:text-brand-red font-medium transition-colors">Call (214) 524-4168</a>
+      <OpenStatus class="hidden lg:inline-flex" />
+      <a
+        href="tel:12145244168"
+        data-cta="header_phone"
+        class="text-base text-ink-muted hover:text-brand-red font-medium transition-colors"
+        >Call (214) 524-4168</a
+      >
       <CTAButton
         variant="primary"
         size="md"
@@ -33,23 +50,23 @@ import MobileMenu from './MobileMenu.astro';
 
 <script>
   // Header scroll blur effect
-  const header = document.getElementById('header');
+  const header = document.getElementById("header");
   let ticking = false;
 
   const updateHeader = () => {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY > 30) {
-      header?.classList.add('bg-brand-black/95', 'backdrop-blur-md');
+      header?.classList.add("bg-brand-black/95", "backdrop-blur-md");
     } else {
-      header?.classList.remove('bg-brand-black/95', 'backdrop-blur-md');
+      header?.classList.remove("bg-brand-black/95", "backdrop-blur-md");
     }
 
     ticking = false;
   };
 
   window.addEventListener(
-    'scroll',
+    "scroll",
     () => {
       if (!ticking) {
         requestAnimationFrame(updateHeader);
@@ -60,46 +77,49 @@ import MobileMenu from './MobileMenu.astro';
   );
 
   // Mobile menu functionality
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
 
   if (mobileMenuButton && mobileMenu) {
     let isOpen = false;
 
     const toggleMenu = () => {
       isOpen = !isOpen;
-      mobileMenu.classList.toggle('hidden', !isOpen);
-      mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
+      mobileMenu.classList.toggle("hidden", !isOpen);
+      mobileMenuButton.setAttribute("aria-expanded", isOpen.toString());
 
       // Close menu when clicking outside
       if (isOpen) {
         const closeMenu = (e: MouseEvent) => {
-          if (!mobileMenu.contains(e.target as Node) && !mobileMenuButton.contains(e.target as Node)) {
-            mobileMenu.classList.add('hidden');
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
+          if (
+            !mobileMenu.contains(e.target as Node) &&
+            !mobileMenuButton.contains(e.target as Node)
+          ) {
+            mobileMenu.classList.add("hidden");
+            mobileMenuButton.setAttribute("aria-expanded", "false");
             isOpen = false;
-            document.removeEventListener('click', closeMenu);
-            document.removeEventListener('keydown', handleEscape);
+            document.removeEventListener("click", closeMenu);
+            document.removeEventListener("keydown", handleEscape);
           }
         };
 
         const handleEscape = (e: KeyboardEvent) => {
-          if (e.key === 'Escape') {
-            mobileMenu.classList.add('hidden');
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
+          if (e.key === "Escape") {
+            mobileMenu.classList.add("hidden");
+            mobileMenuButton.setAttribute("aria-expanded", "false");
             isOpen = false;
-            document.removeEventListener('click', closeMenu);
-            document.removeEventListener('keydown', handleEscape);
+            document.removeEventListener("click", closeMenu);
+            document.removeEventListener("keydown", handleEscape);
           }
         };
 
         setTimeout(() => {
-          document.addEventListener('click', closeMenu);
-          document.addEventListener('keydown', handleEscape);
+          document.addEventListener("click", closeMenu);
+          document.addEventListener("keydown", handleEscape);
         }, 10);
       }
     };
 
-    mobileMenuButton.addEventListener('click', toggleMenu);
+    mobileMenuButton.addEventListener("click", toggleMenu);
   }
 </script>

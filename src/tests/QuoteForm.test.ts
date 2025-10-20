@@ -1,11 +1,14 @@
 // @vitest-environment jsdom
-import { describe, it, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
+import ts from 'typescript';
+import { describe, expect, it } from 'vitest';
 
 const file = fs.readFileSync(path.resolve('src/components/QuoteForm.astro'), 'utf-8');
 const scriptMatch = file.match(/<script>([\s\S]*)<\/script>/);
-const scriptContent = scriptMatch ? scriptMatch[1] : '';
+let scriptContent = scriptMatch ? scriptMatch[1] : '';
+// Remove ESM-only references for eval in JSDOM
+scriptContent = scriptContent.replace(/import\.meta\.env\.DEV/g, 'false');
 const html = file
   .replace(/^---[\s\S]*?---/, '')
   .replace(/<script>[\s\S]*<\/script>/, '');
@@ -15,8 +18,13 @@ document.body.innerHTML = '';
 document.body.append(...dom.body.children);
 
 if (scriptContent) {
+  // Transpile TypeScript annotations from the inline script before evaluating
+  const transpiled = ts.transpileModule(scriptContent, {
+    compilerOptions: { target: ts.ScriptTarget.ES2019, module: ts.ModuleKind.ESNext },
+  }).outputText;
   // execute component script and expose validateStep globally
-  eval(`${scriptContent};\nwindow.validateStep = validateStep;`);
+  // eslint-disable-next-line no-eval
+  eval(`${transpiled};\nwindow.validateStep = validateStep;`);
 }
 
 const form = document.getElementById('quoteForm') as HTMLFormElement;

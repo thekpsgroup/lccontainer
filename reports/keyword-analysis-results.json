@@ -1,0 +1,35 @@
+{
+  "totalKeywords": 3856,
+  "p1Count": 854,
+  "topCities": [
+    "Arlington, TX",
+    "Dallas, TX",
+    "Fort Worth, TX",
+    "Frisco, TX",
+    "Garland, TX"
+  ],
+  "topClusters": [
+    "container modifications",
+    "conex box rentals",
+    "conex box sales",
+    "shipping container rentals",
+    "shipping container sales"
+  ],
+  "optimizationOpportunities": {
+    "shortMeta": 184,
+    "weakH1": 41,
+    "fewLinks": 270
+  },
+  "priorityPages": [
+    "/arlington/shipping-containers/sales",
+    "/dallas/shipping-containers/sales",
+    "/fort-worth/shipping-containers/sales",
+    "/irving/shipping-containers/sales",
+    "/plano/shipping-containers/sales",
+    "/arlington/conex-boxes/sales",
+    "/arlington/rent/20ft/shipping-containers/one-trip-new",
+    "/arlington/rent/20ft/shipping-containers/used",
+    "/arlington/rent/20ft/shipping-containers/wind-and-water-tight-wwt",
+    "/arlington/rent/40ft-high-cube/shipping-containers/one-trip-new"
+  ]
+}

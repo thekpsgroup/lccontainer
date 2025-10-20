@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { CITIES } from "../data/cities";
 
 export const GET: APIRoute = async ({ site }) => {
@@ -132,7 +133,18 @@ export const GET: APIRoute = async ({ site }) => {
     priority: 0.8
   }));
 
-  const allPages = [...pages, ...cityPages];
+  // Include programmatic loc pages that are indexable
+  const locEntries = await getCollection('loc');
+  const locPages = locEntries
+    .filter((e) => !e.data.noindex)
+    .map((e) => ({
+      url: e.data.url_slug.replace(/\/$/, ''),
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly' as const,
+      priority: 0.7
+    }));
+
+  const allPages = [...pages, ...cityPages, ...locPages];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

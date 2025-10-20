@@ -1,0 +1,170 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
+import FAQ from '../components/FAQ.astro';
+import FAQSchema from '../components/FAQSchema.astro';
+import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('loc');
+  return (entries as CollectionEntry<'loc'>[]).map((e) => {
+    const slugStr = String(e.data.url_slug || '/').replace(/^\//, '').replace(/\/$/, '');
+    return { params: { slug: slugStr } };
+  });
+}
+
+// Find the matching content entry by url_slug frontmatter
+const { slug } = Astro.params;
+const pathname = ('/' + (Array.isArray(slug) ? slug.join('/') : String(slug || ''))).replace(/\/$/, '') || '/';
+const entries = await getCollection('loc');
+const entry = (entries as CollectionEntry<'loc'>[]).find((e) => (e.data.url_slug?.replace(/\/$/, '') ?? '') === pathname);
+
+if (!entry) {
+  throw new Error('Not found');
+}
+
+const { title_tag, meta_description, h1, noindex, city, keyword, internal_links } = entry.data as any;
+
+// Check if high-intent keyword (sales/buy) for phone in title
+const isHighIntent = keyword && (keyword.toLowerCase().includes('sale') || keyword.toLowerCase().includes('buy'));
+const enhancedTitle = isHighIntent ? `${title_tag} | Call (214) 524-4168` : title_tag;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const links = (internal_links || '')
+  .split(',')
+  .map((s: string) => s.trim())
+  .filter(Boolean);
+
+const rendered = await entry.render();
+
+// Extract city name for breadcrumbs and FAQ
+const cityName = city ? city.split(',')[0] : 'DFW Area';
+const citySlug = cityName.toLowerCase().replace(/ /g, '-');
+
+// Build breadcrumb path
+const breadcrumbItems = [
+  { name: 'Home', url: '/' },
+  { name: cityName, url: `/${citySlug}` },
+];
+
+// Add service type to breadcrumb if in URL
+if (pathname.includes('/shipping-containers/')) {
+  breadcrumbItems.push({ name: 'Shipping Containers', url: `/${citySlug}/shipping-containers` });
+} else if (pathname.includes('/storage-containers/')) {
+  breadcrumbItems.push({ name: 'Storage Containers', url: `/${citySlug}/storage-containers` });
+} else if (pathname.includes('/conex-boxes/')) {
+  breadcrumbItems.push({ name: 'Conex Boxes', url: `/${citySlug}/conex-boxes` });
+}
+
+breadcrumbItems.push({ name: h1, url: pathname });
+
+// Build FAQs based on page type
+const isRental = keyword && keyword.toLowerCase().includes('rent');
+const isSale = keyword && (keyword.toLowerCase().includes('sale') || keyword.toLowerCase().includes('buy'));
+
+const faqs = [
+  {
+    question: `How much does delivery cost in ${cityName}?`,
+    answer: `Delivery costs vary by distance and container size. Most deliveries in ${cityName} range from $150-$300. Call (214) 524-4168 for an exact quote based on your specific location.`
+  },
+  {
+    question: "What's the difference between one-trip and used containers?",
+    answer: "One-trip containers are new, used only once to ship goods from overseas. They're in pristine condition with minimal wear. Used containers are older but still fully functional and weather-tight, offering significant cost savings."
+  },
+  ...(isRental ? [{
+    question: "What are your rental terms?",
+    answer: "We offer flexible rental terms starting from 1 month. Monthly rates decrease for longer commitments. Contact us at (214) 524-4168 to discuss your specific rental needs."
+  }] : []),
+  ...(isSale ? [{
+    question: "Do you offer financing for container purchases?",
+    answer: "Yes, we offer flexible payment options including cash, check, all major credit cards, and can set up net-30 terms for commercial customers. Call (214) 524-4168 to discuss financing."
+  }] : []),
+  {
+    question: "How quickly can you deliver?",
+    answer: "We offer same-week delivery for most orders in the DFW area. In some cases, next-day delivery is available. Call (214) 524-4168 to check availability for your location."
+  },
+  {
+    question: "What site preparation is needed for delivery?",
+    answer: "You'll need a flat, level surface with clearance for our truck (at least 14 feet wide and 60-80 feet long depending on container size). We can provide detailed site prep guidelines when you call (214) 524-4168."
+  }
+];
+  ---
+<BaseLayout title={enhancedTitle} description={meta_description}>
+  <Header />
+
+  <section class="max-w-[1200px] mx-auto px-5 py-10 md:py-14">
+    <BreadcrumbSchema items={breadcrumbItems} />
+
+    <h1 class="text-3xl md:text-4xl font-semibold">{h1}</h1>
+    {keyword && (<p class="text-ink-muted mt-2">Focused on: {keyword}</p>)}
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="tel:12145244168" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90" aria-label="Call LC Container now">📞 Call (214) 524-4168</a>
+      <a href="/contact" class="px-4 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5" aria-label="Request a free quote">Get Free Quote</a>
+    </div>
+
+    <article class="prose prose-invert max-w-none mt-8">
+      <rendered.Content />
+    </article>
+
+      {/* Add FAQ Schema with structured data */}
+      <FAQSchema faqs={faqs} />
+
+    {links.length > 0 && (
+      <div class="mt-10">
+        <h2 class="text-xl font-semibold mb-3">Helpful links</h2>
+        <ul class="list-disc list-inside text-ink-muted">
+          {links.map((href: string) => (
+            <li><a href={href} class="hover:underline">{href}</a></li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold">FAQ</h2>
+      <div class="mt-4">
+        <FAQ />
+      </div>
+    </div>
+  </section>
+
+  {noindex && (
+    <fragment slot="head">
+      <meta name="robots" content="noindex,follow" />
+      <link rel="canonical" href={canonical} />
+    </fragment>
+  )}
+
+  <!-- Local Service schema tuned for the location page -->
+  <script type="application/ld+json">
+  {JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Shipping Container Sales, Rentals, and Delivery',
+    areaServed: city ? { '@type': 'City', name: String(city) } : { '@type': 'State', name: 'Texas' },
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'LC Container',
+      telephone: '+1-214-524-4168',
+      url: 'https://lccontainer.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '1211 E Fulghum Rd',
+        addressLocality: 'Hutchins',
+        addressRegion: 'TX',
+        postalCode: '75141',
+        addressCountry: 'US'
+      }
+    },
+    url: canonical,
+    description: meta_description
+  })}
+  </script>
+</BaseLayout>
+
+<!-- Ensure canonical tag is present even when indexable -->
+<fragment slot="head">
+  <link rel="canonical" href={canonical} />
+</fragment>
