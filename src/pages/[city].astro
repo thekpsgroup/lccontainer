@@ -1,6 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
+import BusinessHours from '../components/BusinessHours.astro';
 import Header from '../components/Header.astro';
+import RelatedContent from '../components/RelatedContent.astro';
+import ProductSchema from '../components/seo/ProductSchema.astro';
+import ServiceSchema from '../components/seo/ServiceSchema.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -57,6 +61,27 @@ const description = `Complete container solutions in ${cityName}, TX. Buy, rent,
 ---
 
 <BaseLayout title={title} description={description}>
+  <!-- Enhanced Product Schema for city containers -->
+  <ProductSchema container={{
+    name: `${cityName} Shipping Containers`,
+    description: `High-quality shipping containers available in ${cityName}, TX. New and used options for storage, construction, and custom applications.`,
+    sku: `LC-${citySlug.toUpperCase()}-CONTAINER`,
+    condition: "cargo-worthy",
+    size: "20ft",
+    availability: "InStock"
+  }} />
+
+  <!-- Service Schemas -->
+  <ServiceSchema service={{
+    name: `Container Delivery Service in ${cityName}`,
+    description: `Professional container delivery service in ${cityName}, TX with same-day availability`,
+    serviceType: "Container Delivery",
+    areaServed: [cityName],
+    priceRange: "$150-$500",
+    duration: "Same Day",
+    availableSchedule: "Monday-Friday 8AM-6PM, Saturday 9AM-5PM"
+  }} />
+
   <Header />
 
   <section class="max-w-7xl mx-auto px-4 py-12">
@@ -251,6 +276,23 @@ const description = `Complete container solutions in ${cityName}, TX. Buy, rent,
       <p class="mt-4 text-blue-100">
         Or <a href="/contact" class="underline hover:text-white">request a quote online</a>
       </p>
+    </div>
+
+    <!-- Business Hours -->
+    <div class="mt-12">
+      <BusinessHours />
+    </div>
+
+    <!-- Related Content for Internal Linking -->
+    <div class="mt-12">
+      <RelatedContent
+        currentPage={`Container Services in ${cityName}`}
+        pageType="location"
+        city={cityName}
+        containerType="20ft"
+        serviceType="delivery"
+        tags={["containers", "storage", "delivery"]}
+      />
     </div>
 
     <!-- SEO Text -->

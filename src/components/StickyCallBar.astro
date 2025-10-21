@@ -21,48 +21,7 @@ const {
 const formattedPhone = phoneNumber.replace(/^1?(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3');
 const telLink = `tel:${phoneNumber}`;
 
-// Track phone clicks
-const handlePhoneClick = () => {
-  if (typeof window !== 'undefined') {
-    if (window.va) {
-      window.va('event', 'phone_click', {
-        phone_number: phoneNumber,
-        location: 'sticky_bar',
-        page: window.location.pathname
-      });
-    }
-
-    if (window.gtag) {
-      window.gtag('event', 'click', {
-        event_category: 'phone',
-        event_label: 'sticky_bar',
-        value: 1
-      });
-    }
-  }
-};
-
-// Track quote clicks
-const handleQuoteClick = () => {
-  if (typeof window !== 'undefined') {
-    if (window.va) {
-      window.va('event', 'cta_click', {
-        cta_type: 'quote_form',
-        location: 'sticky_bar',
-        page: window.location.pathname,
-        href: quoteHref
-      });
-    }
-
-    if (window.gtag) {
-      window.gtag('event', 'click', {
-        event_category: 'cta',
-        event_label: 'sticky_quote',
-        value: 1
-      });
-    }
-  }
-};
+// Tracking will be handled client-side
 ---
 
 {
@@ -76,10 +35,10 @@ const handleQuoteClick = () => {
         <!-- Phone Button -->
         <a
           href={telLink}
-          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px]"
-          onclick={handlePhoneClick}
+          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px] sticky-phone-btn"
           role="button"
           aria-label={`Call us now at ${formattedPhone}`}
+          data-phone={phoneNumber}
         >
           <span class="text-xl">📞</span>
           <span class="text-sm font-normal leading-tight">
@@ -91,11 +50,11 @@ const handleQuoteClick = () => {
         <!-- Quote Button -->
         <a
           href={quoteHref}
-          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px]"
-          onclick={handleQuoteClick}
+          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px] sticky-quote-btn"
           role="button"
           aria-label="Get your free quote now"
           data-cta="sticky_quote"
+          data-href={quoteHref}
         >
           <span class="text-xl">💬</span>
           <span class="text-sm font-normal leading-tight">
@@ -182,16 +141,82 @@ const handleQuoteClick = () => {
   }
 </style>
 
-<script>
-  // Enhanced mobile interaction handling
-  document.addEventListener('DOMContentLoaded', () => {
+<script is:inline>
+  // Enhanced mobile interaction handling and analytics tracking
+  document.addEventListener('DOMContentLoaded', function() {
     const stickyBar = document.querySelector('.sticky-call-bar');
 
     if (stickyBar) {
+      // Track phone clicks
+      const phoneBtn = stickyBar.querySelector('.sticky-phone-btn');
+      if (phoneBtn) {
+        phoneBtn.addEventListener('click', function() {
+          const phoneNumber = this.getAttribute('data-phone');
+
+          try {
+            if (window.va) {
+              window.va('event', 'phone_click', {
+                phone_number: phoneNumber,
+                location: 'sticky_bar',
+                page: window.location.pathname
+              });
+            }
+          } catch (error) {
+            console.debug('Vercel Analytics tracking failed:', error);
+          }
+
+          try {
+            if (window.gtag) {
+              window.gtag('event', 'click', {
+                event_category: 'phone',
+                event_label: 'sticky_bar',
+                value: 1
+              });
+            }
+          } catch (error) {
+            console.debug('Google Analytics tracking failed:', error);
+          }
+        });
+      }
+
+      // Track quote clicks
+      const quoteBtn = stickyBar.querySelector('.sticky-quote-btn');
+      if (quoteBtn) {
+        quoteBtn.addEventListener('click', function() {
+          const dataCta = this.getAttribute('data-cta');
+          const href = this.getAttribute('data-href');
+
+          try {
+            if (window.va) {
+              window.va('event', 'cta_click', {
+                cta_type: dataCta,
+                location: 'sticky_bar',
+                page: window.location.pathname,
+                href: href
+              });
+            }
+          } catch (error) {
+            console.debug('Vercel Analytics tracking failed:', error);
+          }
+
+          try {
+            if (window.gtag) {
+              window.gtag('event', 'click', {
+                event_category: 'cta',
+                event_label: 'sticky_quote',
+                value: 1
+              });
+            }
+          } catch (error) {
+            console.debug('Google Analytics tracking failed:', error);
+          }
+        });
+      }
+
       // Prevent body scroll when interacting with sticky bar
       const buttons = stickyBar.querySelectorAll('a');
-      buttons.forEach(button => {
-        button.addEventListener('touchstart', (e) => {
+      buttons.forEach(function(button) {
+        button.addEventListener('touchstart', function(e) {
           // Prevent ghost clicks and improve responsiveness
           e.preventDefault();
 
@@ -199,20 +224,20 @@ const handleQuoteClick = () => {
           button.classList.add('touch-active');
 
           // Trigger click after a short delay for better UX
-          setTimeout(() => {
+          setTimeout(function() {
             button.click();
             button.classList.remove('touch-active');
           }, 50);
         }, { passive: false });
 
-        button.addEventListener('touchend', () => {
+        button.addEventListener('touchend', function() {
           button.classList.remove('touch-active');
         });
       });
 
       // Handle viewport changes (keyboard, etc.)
-      const handleViewportChange = () => {
-        const viewportHeight = window.visualViewport?.height || window.innerHeight;
+      const handleViewportChange = function() {
+        const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
         const windowHeight = window.innerHeight;
 
         if (viewportHeight < windowHeight * 0.8) {

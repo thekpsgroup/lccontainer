@@ -26,22 +26,13 @@ import MobileMenu from "./MobileMenu.astro";
 
     <div class="hidden md:flex items-center gap-5">
       <OpenStatus class="hidden lg:inline-flex" />
-      <a
-        href="tel:12145244168"
-        data-cta="header_phone"
-        class="text-base text-ink-muted hover:text-brand-red font-medium transition-colors"
-        >Call (214) 524-4168</a
-      >
       <CTAButton
-        variant="primary"
         size="md"
-        href="/contact"
-        data-cta="header_quote"
-        aria-label="Request your free quote now"
+        phoneNumber="12145244168"
+        data-cta="header_phone"
+        aria-label="Call us now for a quote"
         class="animate-pulse-subtle"
-      >
-        Request a Quote
-      </CTAButton>
+      />
     </div>
 
     <MobileMenu currentPath={Astro.url.pathname} />

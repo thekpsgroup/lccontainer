@@ -1,0 +1,306 @@
+---
+// Comprehensive Conversion Goal Tracking Component
+// Implements Google Analytics Enhanced Ecommerce and Vercel Analytics
+// For measuring the effectiveness of all conversion optimizations
+---
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Define conversion goals and values
+    const CONVERSION_GOALS = {
+      QUOTE_REQUEST: {
+        name: "Quote Request",
+        value: 50, // Estimated lead value
+        category: "Lead Generation",
+      },
+      PHONE_CALL: {
+        name: "Phone Call",
+        value: 75, // Higher value as phone leads convert better
+        category: "Lead Generation",
+      },
+      EMAIL_CONTACT: {
+        name: "Email Contact",
+        value: 30, // Lower value as email has lower conversion
+        category: "Lead Generation",
+      },
+      PORTFOLIO_VIEW: {
+        name: "Portfolio View",
+        value: 10, // Engagement metric
+        category: "Engagement",
+      },
+      EXIT_INTENT_CONVERTED: {
+        name: "Exit Intent Conversion",
+        value: 40, // Mid-range as it catches abandoning users
+        category: "Retention",
+      },
+      LOCATION_ENGAGEMENT: {
+        name: "Location Page Engagement",
+        value: 20, // Location-specific interest
+        category: "Engagement",
+      },
+    };
+
+    // Enhanced Ecommerce Purchase Tracking (for quote conversions)
+    function trackConversion(goalType, additionalData = {}) {
+      try {
+        // Google Analytics 4 Enhanced Ecommerce
+        if (typeof window !== "undefined" && window.gtag) {
+          const goal = CONVERSION_GOALS[goalType];
+          if (goal) {
+            window.gtag("event", "purchase", {
+              transaction_id: Date.now().toString(),
+              value: goal.value,
+              currency: "USD",
+              items: [
+                {
+                  item_id: goalType.toLowerCase(),
+                  item_name: goal.name,
+                  category: goal.category,
+                  quantity: 1,
+                  price: goal.value,
+                },
+              ],
+              ...additionalData,
+            });
+
+            // Also track as a custom conversion event
+            window.gtag("event", "conversion", {
+              event_category: goal.category,
+              event_label: goal.name,
+              value: goal.value,
+              custom_parameter_location: window.location.pathname,
+              custom_parameter_referrer: document.referrer,
+              ...additionalData,
+            });
+          }
+        }
+
+        // Vercel Analytics tracking
+        if (typeof window !== "undefined" && window.va) {
+          const goal = CONVERSION_GOALS[goalType];
+          if (goal) {
+            window.va("event", "conversion", {
+              type: goalType,
+              name: goal.name,
+              value: goal.value,
+              category: goal.category,
+              page: window.location.pathname,
+              referrer: document.referrer,
+              timestamp: new Date().toISOString(),
+              ...additionalData,
+            });
+          }
+        }
+
+        console.log("Conversion tracked:", goalType, additionalData);
+      } catch (error) {
+        console.debug("Conversion tracking error:", error);
+      }
+    }
+
+    // Expose global conversion tracking function
+    window.trackConversion = trackConversion;
+
+    // Enhanced Quote Form Tracking
+    const quoteForms = document.querySelectorAll(
+      'form[action*="contact"], .quote-form, [data-form="quote"]'
+    );
+    quoteForms.forEach((form) => {
+      form.addEventListener("submit", function (e) {
+        // Extract form data for enhanced tracking
+        const formData = new FormData(form);
+        const additionalData = {
+          form_location:
+            form.closest("[data-location]")?.dataset.location || "unknown",
+          form_type: form.dataset.formType || "quote",
+          has_phone: formData.has("phone") && formData.get("phone") !== "",
+          has_email: formData.has("email") && formData.get("email") !== "",
+          project_type:
+            formData.get("project_type") ||
+            formData.get("service") ||
+            "unknown",
+        };
+
+        trackConversion("QUOTE_REQUEST", additionalData);
+      });
+    });
+
+    // Enhanced Phone Call Tracking
+    const phoneLinks = document.querySelectorAll(
+      'a[href^="tel:"], .phone-link, [data-track="phone"]'
+    );
+    phoneLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        const phoneNumber = this.href.replace("tel:", "") || this.textContent;
+        const additionalData = {
+          phone_number: phoneNumber,
+          link_location:
+            this.closest("[data-location]")?.dataset.location || "unknown",
+          link_type: this.dataset.linkType || "standard",
+          is_mobile: /Mobi|Android/i.test(navigator.userAgent),
+        };
+
+        trackConversion("PHONE_CALL", additionalData);
+      });
+    });
+
+    // Enhanced Email Link Tracking
+    const emailLinks = document.querySelectorAll(
+      'a[href^="mailto:"], .email-link, [data-track="email"]'
+    );
+    emailLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        const emailAddress =
+          this.href.replace("mailto:", "") || this.textContent;
+        const additionalData = {
+          email_address: emailAddress,
+          link_location:
+            this.closest("[data-location]")?.dataset.location || "unknown",
+          link_type: this.dataset.linkType || "standard",
+        };
+
+        trackConversion("EMAIL_CONTACT", additionalData);
+      });
+    });
+
+    // Portfolio/Gallery Engagement Tracking
+    const portfolioItems = document.querySelectorAll(
+      '.portfolio-item, .gallery-item, [data-track="portfolio"]'
+    );
+    portfolioItems.forEach((item) => {
+      item.addEventListener("click", function (e) {
+        const additionalData = {
+          portfolio_category: this.dataset.category || "unknown",
+          portfolio_location: this.dataset.location || "unknown",
+          item_title:
+            this.querySelector("h3, .title, [data-title]")?.textContent ||
+            "unknown",
+        };
+
+        trackConversion("PORTFOLIO_VIEW", additionalData);
+      });
+    });
+
+    // Exit Intent Popup Conversion Tracking
+    document.addEventListener("exitIntentConverted", function (e) {
+      const additionalData = {
+        popup_type: e.detail?.popupType || "exit_intent",
+        conversion_method: e.detail?.method || "unknown",
+        time_on_page: Math.round((Date.now() - performance.timeOrigin) / 1000),
+      };
+
+      trackConversion("EXIT_INTENT_CONVERTED", additionalData);
+    });
+
+    // Location-Specific Engagement Tracking
+    if (window.location.pathname.includes("/locations/")) {
+      const locationName = window.location.pathname
+        .split("/locations/")[1]
+        ?.split("/")[0];
+
+      // Track location page engagement after 30 seconds
+      setTimeout(() => {
+        const additionalData = {
+          location_name: locationName,
+          time_engaged: 30,
+          scroll_depth: Math.round(
+            (window.scrollY /
+              (document.body.scrollHeight - window.innerHeight)) *
+              100
+          ),
+        };
+
+        trackConversion("LOCATION_ENGAGEMENT", additionalData);
+      }, 30000);
+    }
+
+    // Enhanced CTA Button Tracking with A/B Test Variants
+    const ctaButtons = document.querySelectorAll(
+      '.cta-button, [data-track="cta"]'
+    );
+    ctaButtons.forEach((button) => {
+      button.addEventListener("click", function (e) {
+        const buttonText = this.textContent.trim();
+        const buttonVariant = this.dataset.variant || "default";
+        const buttonLocation =
+          this.closest("[data-location]")?.dataset.location || "unknown";
+
+        // Track CTA effectiveness for A/B testing
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "cta_click", {
+            event_category: "CTA",
+            event_label: buttonText,
+            custom_parameter_variant: buttonVariant,
+            custom_parameter_location: buttonLocation,
+            custom_parameter_position:
+              Array.from(document.querySelectorAll(".cta-button")).indexOf(
+                this
+              ) + 1,
+          });
+        }
+
+        if (typeof window !== "undefined" && window.va) {
+          window.va("event", "cta_click", {
+            text: buttonText,
+            variant: buttonVariant,
+            location: buttonLocation,
+            position:
+              Array.from(document.querySelectorAll(".cta-button")).indexOf(
+                this
+              ) + 1,
+            page: window.location.pathname,
+          });
+        }
+      });
+    });
+
+    // Conversion Funnel Tracking
+    function trackFunnelStep(step, additionalData = {}) {
+      try {
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "funnel_step", {
+            event_category: "Conversion Funnel",
+            event_label: step,
+            custom_parameter_step_number: additionalData.stepNumber || 0,
+            custom_parameter_page: window.location.pathname,
+          });
+        }
+
+        if (typeof window !== "undefined" && window.va) {
+          window.va("event", "funnel_step", {
+            step: step,
+            step_number: additionalData.stepNumber || 0,
+            page: window.location.pathname,
+            timestamp: new Date().toISOString(),
+            ...additionalData,
+          });
+        }
+      } catch (error) {
+        console.debug("Funnel tracking error:", error);
+      }
+    }
+
+    // Expose global funnel tracking
+    window.trackFunnelStep = trackFunnelStep;
+
+    // Auto-track funnel steps based on page type
+    const currentPath = window.location.pathname;
+    if (currentPath === "/" || currentPath === "/index.html") {
+      trackFunnelStep("Homepage Visit", { stepNumber: 1 });
+    } else if (currentPath.includes("/locations/")) {
+      trackFunnelStep("Location Page Visit", { stepNumber: 2 });
+    } else if (
+      currentPath.includes("/portfolio") ||
+      currentPath.includes("/gallery")
+    ) {
+      trackFunnelStep("Portfolio View", { stepNumber: 3 });
+    } else if (
+      currentPath.includes("/contact") ||
+      currentPath.includes("/quote")
+    ) {
+      trackFunnelStep("Contact Page Visit", { stepNumber: 4 });
+    }
+
+    console.log("Conversion Goals tracking initialized");
+  });
+</script>

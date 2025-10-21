@@ -3,18 +3,18 @@
 ---
 
 <!-- Vercel Analytics Script -->
-<script>
-  // Vercel Analytics
+<script is:inline>
+  // Vercel Analytics initialization
   window.va =
     window.va ||
     function () {
       (window.vaq = window.vaq || []).push(arguments);
     };
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/insights/script.js" is:inline></script>
 
 <!-- Enhanced Conversion Tracking -->
-<script>
+<script is:inline>
   // Track form submissions
   document.addEventListener("DOMContentLoaded", function () {
     // Lightweight DNI: swap phone based on ?src= parameter
@@ -26,7 +26,7 @@
       }
       const storedSrc = localStorage.getItem("campaign_src");
       if (storedSrc) {
-        document.querySelectorAll('a[href^="tel:"]').forEach((a) => {
+        document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
           // Map sources to numbers (expandable)
           const map = {
             gads: "+1-214-524-4168",
@@ -34,70 +34,92 @@
             seo: "+1-214-524-4168",
           };
           const number = map[storedSrc] || "+1-214-524-4168";
-          a.setAttribute("href", `tel:${number.replace(/[^\d+]/g, "")}`);
+          a.setAttribute("href", "tel:" + number.replace(/[^\d+]/g, ""));
         });
       }
-    } catch {}
+    } catch (error) {
+      console.debug("Analytics initialization error:", error);
+    }
 
     const forms = document.querySelectorAll("form");
-    forms.forEach((form) => {
+    forms.forEach(function (form) {
       form.addEventListener("submit", function (e) {
         // Track form submission with Vercel Analytics
-        if (typeof va !== "undefined") {
-          va("event", "form_submit", {
-            form_type: form.getAttribute("data-form-type") || "contact",
-            page: window.location.pathname,
-          });
+        try {
+          if (typeof window !== "undefined" && window.va) {
+            window.va("event", "form_submit", {
+              form_type: form.getAttribute("data-form-type") || "contact",
+              page: window.location.pathname,
+            });
+          }
+        } catch (error) {
+          console.debug("Form tracking error:", error);
         }
       });
     });
 
     // Track phone number clicks
     const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    phoneLinks.forEach((link) => {
+    phoneLinks.forEach(function (link) {
       link.addEventListener("click", function () {
-        // Track phone clicks with Vercel Analytics
-        if (typeof va !== "undefined") {
-          va("event", "phone_click", {
-            phone_number: this.href.replace("tel:", ""),
-            page: window.location.pathname,
-            source: localStorage.getItem("campaign_src") || "organic",
-          });
+        try {
+          if (typeof window !== "undefined" && window.va) {
+            window.va("event", "phone_click", {
+              phone_number: this.href.replace("tel:", ""),
+              page: window.location.pathname,
+              source: localStorage.getItem("campaign_src") || "organic",
+            });
+          }
+        } catch (error) {
+          console.debug("Phone tracking error:", error);
         }
       });
     });
 
     // Track CTA button clicks with more detail
     const ctaButtons = document.querySelectorAll(
-      'a[href="/contact"], .cta-button, .btn-primary, [data-cta]'
+      '.lcc-btn, .cta-button, button, a[role="button"], a[href="/contact"], [data-cta]'
     );
-    ctaButtons.forEach((button) => {
+    ctaButtons.forEach(function (button) {
       button.addEventListener("click", function () {
-        const ctaText = this.textContent?.trim() || "Unknown CTA";
-        const ctaLocation =
-          this.closest("[data-section]")?.getAttribute("data-section") ||
-          this.closest("header, footer, nav")?.tagName.toLowerCase() ||
-          "body";
+        const ctaText = this.textContent
+          ? this.textContent.trim()
+          : "Unknown CTA";
+        const sectionElement = this.closest("[data-section]");
+        const navElement = this.closest("header, footer, nav");
+        const ctaLocation = sectionElement
+          ? sectionElement.getAttribute("data-section")
+          : navElement
+            ? navElement.tagName.toLowerCase()
+            : "body";
         const ctaType = this.getAttribute("data-cta") || "quote_form";
 
         // Track CTA clicks with detailed info
-        if (typeof va !== "undefined") {
-          va("event", "cta_click", {
-            cta_type: ctaType,
-            cta_text: ctaText,
-            cta_location: ctaLocation,
-            page: window.location.pathname,
-            href: this.getAttribute("href") || "",
-          });
+        try {
+          if (typeof window !== "undefined" && window.va) {
+            window.va("event", "cta_click", {
+              cta_type: ctaType,
+              cta_text: ctaText,
+              cta_location: ctaLocation,
+              page: window.location.pathname,
+              href: this.getAttribute("href") || "",
+            });
+          }
+        } catch (error) {
+          console.debug("CTA tracking error:", error);
         }
 
         // Also track with Google Analytics if available
-        if (typeof gtag !== "undefined") {
-          gtag("event", "click", {
-            event_category: "cta",
-            event_label: `${ctaLocation}_${ctaType}`,
-            value: 1,
-          });
+        try {
+          if (typeof window !== "undefined" && window.gtag) {
+            window.gtag("event", "click", {
+              event_category: "cta",
+              event_label: ctaLocation + "_" + ctaType,
+              value: 1,
+            });
+          }
+        } catch (error) {
+          console.debug("Google Analytics tracking error:", error);
         }
       });
     });
@@ -106,16 +128,21 @@
     const stickyCTA = document.querySelector(".fixed.bottom-0");
     if (stickyCTA) {
       const stickyButtons = stickyCTA.querySelectorAll("a");
-      stickyButtons.forEach((button) => {
+      stickyButtons.forEach(function (button) {
         button.addEventListener("click", function () {
-          const buttonType = this.href?.includes("tel:") ? "phone" : "quote";
+          const buttonType =
+            this.href && this.href.includes("tel:") ? "phone" : "quote";
 
-          if (typeof va !== "undefined") {
-            va("event", "sticky_cta_click", {
-              button_type: buttonType,
-              cta_text: this.textContent?.trim(),
-              page: window.location.pathname,
-            });
+          try {
+            if (typeof window !== "undefined" && window.va) {
+              window.va("event", "sticky_cta_click", {
+                button_type: buttonType,
+                cta_text: this.textContent ? this.textContent.trim() : "",
+                page: window.location.pathname,
+              });
+            }
+          } catch (error) {
+            console.debug("Sticky CTA tracking error:", error);
           }
         });
       });
@@ -132,34 +159,32 @@
         maxScroll = scrollPercent;
 
         // Track scroll depth with Vercel Analytics
-        if (maxScroll >= 25 && maxScroll < 50) {
-          if (typeof va !== "undefined") {
-            va("event", "scroll_depth", {
-              depth: "25%",
-              page: window.location.pathname,
-            });
+        try {
+          if (typeof window !== "undefined" && window.va) {
+            if (maxScroll >= 25 && maxScroll < 50) {
+              window.va("event", "scroll_depth", {
+                depth: "25%",
+                page: window.location.pathname,
+              });
+            } else if (maxScroll >= 50 && maxScroll < 75) {
+              window.va("event", "scroll_depth", {
+                depth: "50%",
+                page: window.location.pathname,
+              });
+            } else if (maxScroll >= 75 && maxScroll < 100) {
+              window.va("event", "scroll_depth", {
+                depth: "75%",
+                page: window.location.pathname,
+              });
+            } else if (maxScroll >= 100) {
+              window.va("event", "scroll_depth", {
+                depth: "100%",
+                page: window.location.pathname,
+              });
+            }
           }
-        } else if (maxScroll >= 50 && maxScroll < 75) {
-          if (typeof va !== "undefined") {
-            va("event", "scroll_depth", {
-              depth: "50%",
-              page: window.location.pathname,
-            });
-          }
-        } else if (maxScroll >= 75 && maxScroll < 100) {
-          if (typeof va !== "undefined") {
-            va("event", "scroll_depth", {
-              depth: "75%",
-              page: window.location.pathname,
-            });
-          }
-        } else if (maxScroll >= 100) {
-          if (typeof va !== "undefined") {
-            va("event", "scroll_depth", {
-              depth: "100%",
-              page: window.location.pathname,
-            });
-          }
+        } catch (error) {
+          console.debug("Scroll tracking error:", error);
         }
       }
     });
@@ -170,11 +195,15 @@
       const timeOnPage = Math.round((Date.now() - startTime) / 1000);
 
       // Track time on page with Vercel Analytics
-      if (typeof va !== "undefined") {
-        va("event", "time_on_page", {
-          duration: timeOnPage,
-          page: window.location.pathname,
-        });
+      try {
+        if (typeof window !== "undefined" && window.va) {
+          window.va("event", "time_on_page", {
+            duration: timeOnPage,
+            page: window.location.pathname,
+          });
+        }
+      } catch (error) {
+        console.debug("Time tracking error:", error);
       }
     });
   });

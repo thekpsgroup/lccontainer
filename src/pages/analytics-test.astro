@@ -1,0 +1,183 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CTAButton from "../components/CTAButton.astro";
+
+const title = "Analytics Test — LC Container";
+const description =
+  "Test page for validating analytics and conversion optimization";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="max-w-4xl mx-auto px-5 py-16">
+    <h1 class="text-4xl font-bold mb-8">Analytics & Conversion Test Page</h1>
+
+    <div class="space-y-8">
+      <!-- CTA Button Tests -->
+      <section class="bg-white/5 p-6 rounded-lg">
+        <h2 class="text-2xl font-semibold mb-4">CTA Button Testing</h2>
+        <div class="space-y-4">
+          <CTAButton phoneNumber="12145244168" />
+          <CTAButton phoneNumber="18001234567" size="lg" />
+        </div>
+      </section>
+
+      <!-- Phone & Email Links -->
+      <section class="bg-white/5 p-6 rounded-lg">
+        <h2 class="text-2xl font-semibold mb-4">Contact Link Testing</h2>
+        <div class="space-y-4">
+          <a href="tel:214-524-4168" class="text-red-500 hover:text-red-400"
+            >📞 Call (214) 524-4168</a
+          >
+          <br />
+          <a
+            href="mailto:info@lccontainer.com"
+            class="text-blue-500 hover:text-blue-400"
+            >✉️ Email info@lccontainer.com</a
+          >
+        </div>
+      </section>
+
+      <!-- Analytics Debug Console -->
+      <section class="bg-white/5 p-6 rounded-lg">
+        <h2 class="text-2xl font-semibold mb-4">Analytics Debug Console</h2>
+        <div
+          id="debug-console"
+          class="bg-black p-4 rounded font-mono text-sm text-green-400 min-h-[200px] overflow-y-auto"
+        >
+          <div>
+            Analytics Debug Console - Click buttons above to test tracking
+          </div>
+        </div>
+        <button
+          id="clear-console"
+          class="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Clear Console
+        </button>
+      </section>
+
+      <!-- A/B Test Display -->
+      <section class="bg-white/5 p-6 rounded-lg">
+        <h2 class="text-2xl font-semibold mb-4">A/B Test Status</h2>
+        <div id="ab-test-status" class="text-sm">
+          <div>Loading A/B test assignments...</div>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    const debugConsole = document.getElementById("debug-console");
+    const clearBtn = document.getElementById("clear-console");
+    const abTestStatus = document.getElementById("ab-test-status");
+
+    // Function to log to debug console
+    function debugLog(message) {
+      const timestamp = new Date().toLocaleTimeString();
+      const logLine = document.createElement("div");
+      logLine.textContent = `[${timestamp}] ${message}`;
+      debugConsole.appendChild(logLine);
+      debugConsole.scrollTop = debugConsole.scrollHeight;
+    }
+
+    // Clear console button
+    clearBtn.addEventListener("click", function () {
+      debugConsole.innerHTML = "<div>Console cleared</div>";
+    });
+
+    // Monitor analytics calls
+    const originalGtag = window.gtag;
+    const originalVa = window.va;
+
+    // Override gtag to log calls
+    if (typeof window.gtag !== "undefined") {
+      window.gtag = function () {
+        debugLog(
+          `Google Analytics: ${arguments[0]} - ${arguments[1]} - ${JSON.stringify(arguments[2] || {})}`
+        );
+        if (originalGtag) {
+          originalGtag.apply(this, arguments);
+        }
+      };
+    }
+
+    // Override Vercel Analytics to log calls
+    if (typeof window.va !== "undefined") {
+      window.va = function () {
+        debugLog(
+          `Vercel Analytics: ${arguments[0]} - ${JSON.stringify(arguments[1] || {})}`
+        );
+        if (originalVa) {
+          originalVa.apply(this, arguments);
+        }
+      };
+    }
+
+    // Monitor conversion tracking
+    if (typeof window.trackConversion !== "undefined") {
+      const originalTrackConversion = window.trackConversion;
+      window.trackConversion = function () {
+        debugLog(
+          `Conversion Tracking: ${arguments[0]} - ${JSON.stringify(arguments[1] || {})}`
+        );
+        if (originalTrackConversion) {
+          originalTrackConversion.apply(this, arguments);
+        }
+      };
+    }
+
+    // Display A/B test status
+    setTimeout(function () {
+      if (typeof window.ABTesting !== "undefined") {
+        const assignments = window.ABTesting.getAssignments();
+        const userId = window.ABTesting.getUserId();
+
+        let html = `<strong>User ID:</strong> ${userId}<br><br>`;
+        html += "<strong>A/B Test Assignments:</strong><br>";
+
+        if (Object.keys(assignments).length === 0) {
+          html += "No active A/B tests on this page";
+        } else {
+          Object.entries(assignments).forEach(([testName, assignment]) => {
+            html += `• ${testName}: ${assignment.variant}<br>`;
+          });
+        }
+
+        abTestStatus.innerHTML = html;
+      } else {
+        abTestStatus.innerHTML = "A/B Testing framework not loaded";
+      }
+    }, 1000);
+
+    // Log initial page load
+    debugLog("Analytics test page loaded");
+    debugLog(`User Agent: ${navigator.userAgent}`);
+    debugLog(`Page: ${window.location.pathname}`);
+
+    // Test scroll tracking
+    let scrollLogged = false;
+    window.addEventListener("scroll", function () {
+      if (!scrollLogged && window.scrollY > 100) {
+        scrollLogged = true;
+        debugLog("Scroll event detected (100px+)");
+      }
+    });
+
+    debugLog("Debug monitoring initialized");
+  });
+</script>
+
+<style>
+  #debug-console::-webkit-scrollbar {
+    width: 6px;
+  }
+  #debug-console::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+  #debug-console::-webkit-scrollbar-thumb {
+    background: #4ade80;
+    border-radius: 3px;
+  }
+</style>

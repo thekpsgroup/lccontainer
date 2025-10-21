@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -72,13 +72,26 @@ function generateSEOTitle(row: any): string {
     hash = ((hash << 5) - hash) + char;
     hash = hash & hash; // Convert to 32-bit integer
   }
-  const hashStr = Math.abs(hash).toString(36).slice(0, 3);
+  // Ensure hash is never 0 and always produces a valid string
+  if (hash === 0) hash = hashInput.length + 1000;
+  let hashStr = Math.abs(hash).toString(36).slice(0, 3);
+  if (hashStr.length < 3) hashStr = hashStr.padEnd(3, 'x');
+  if (hashStr === '000' || hashStr === 'n00' || hashStr.toLowerCase() === 'n00') {
+    hashStr = 'Z' + hashInput.length.toString(36).slice(0, 2);
+  }
   const hashIdentifier = hashStr.charAt(0).toUpperCase() + hashStr.slice(1) + ' ';
 
   // Combine natural identifier with hash for complete uniqueness
   const finalIdentifier = uniqueIdentifier + hashIdentifier;
 
-  return `${sizeText}${finalIdentifier}${conditionText}${serviceType} ${actionText} in ${city} | LC Container`;
+  // Add phone number for high-intent pages (sales/rentals in major cities)
+  const isHighIntent = (intent.toLowerCase().includes('transactional') || intent === 'buy' || intent === 'rent' || cluster.includes('sales') || cluster.includes('rentals')) &&
+                      (city.includes('Dallas') || city.includes('Houston') ||
+                       city.includes('Austin') || city.includes('Fort Worth'));
+
+  const phoneNumber = isHighIntent ? ' ☎ (214) 524-4168' : '';
+
+  return `${sizeText}${finalIdentifier}${conditionText}${serviceType} ${actionText} in ${city}${phoneNumber} | LC Container`;
 }function generateMetaDescription(row: any): string {
   const city = (row.city || '').replace(/,.*$/, '');
   const { serviceType, condition, size } = extractServiceInfo(row);

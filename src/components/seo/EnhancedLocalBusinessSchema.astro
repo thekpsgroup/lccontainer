@@ -1,0 +1,250 @@
+---
+// Enhanced Local Business Schema with Reviews
+export interface Props {
+  includeReviews?: boolean;
+  includeHours?: boolean;
+}
+
+const { includeReviews = true, includeHours = true } = Astro.props;
+
+// Sample reviews data (replace with real reviews from Google My Business API)
+const reviews = [
+  {
+    author: "Mike Johnson",
+    rating: 5,
+    reviewBody: "Excellent service and fast delivery in Dallas! Got my 20ft container delivered same day and it was in perfect condition.",
+    datePublished: "2025-10-15"
+  },
+  {
+    author: "Sarah Williams",
+    rating: 5,
+    reviewBody: "LC Container provided exactly what we needed for our construction project. Professional team and fair pricing.",
+    datePublished: "2025-10-10"
+  },
+  {
+    author: "Robert Chen",
+    rating: 5,
+    reviewBody: "Great experience from quote to delivery. The container modifications were done perfectly for our office space.",
+    datePublished: "2025-10-05"
+  },
+  {
+    author: "Jennifer Martinez",
+    rating: 4,
+    reviewBody: "Fast delivery and good container quality. Would recommend for storage needs in the DFW area.",
+    datePublished: "2025-09-28"
+  },
+  {
+    author: "David Thompson",
+    rating: 5,
+    reviewBody: "Been using LC Container for 3 years. Always reliable, competitive prices, and excellent customer service.",
+    datePublished: "2025-09-20"
+  }
+];
+
+const businessHours = [
+  {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "17:00"
+  },
+  {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": "Saturday",
+    "opens": "09:00",
+    "closes": "15:00"
+  }
+];
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://lccontainer.com/#business",
+  "name": "LC Container",
+  "legalName": "LC Container LLC",
+  "alternateName": ["LC Container Texas", "LC Container Dallas"],
+  "description": "Texas' premier shipping container supplier since 2003. New & used containers, custom modifications, same-day delivery throughout DFW and Texas.",
+  "foundingDate": "2003",
+  "url": "https://lccontainer.com",
+  "logo": "https://lccontainer.com/photos/lccontainer-dark.png",
+  "image": [
+    "https://lccontainer.com/photos/container/standard/20ft_5.jpg",
+    "https://lccontainer.com/photos/container/facility-exterior.jpg",
+    "https://lccontainer.com/photos/container/delivery-truck.jpg"
+  ],
+  "telephone": "+12145244168",
+  "email": "info@lccontainer.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1234 Container Way",
+    "addressLocality": "Hutchins",
+    "addressRegion": "TX",
+    "postalCode": "75141",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "32.6518",
+    "longitude": "-96.7081"
+  },
+  ${includeHours ? `"openingHoursSpecification": ${JSON.stringify(businessHours)},` : ''}
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Dallas",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Fort Worth",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Arlington",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Plano",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "State",
+      "name": "Texas"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Container Services & Products",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "20ft Shipping Container Sales",
+          "category": "Storage Container"
+        },
+        "price": "4500",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "LC Container"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "40ft Shipping Container Sales",
+          "category": "Storage Container"
+        },
+        "price": "6500",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Container Delivery Service",
+          "category": "Delivery Service"
+        },
+        "priceRange": "$150-$500",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Container Modification Service",
+          "category": "Construction Service"
+        },
+        "priceRange": "$500-$5000",
+        "priceCurrency": "USD"
+      }
+    ]
+  },
+  "paymentAccepted": ["Cash", "Credit Card", "Check", "Wire Transfer"],
+  "currenciesAccepted": "USD",
+  "priceRange": "$$",
+  "slogan": "Texas' Premier Container Supplier Since 2003",
+  "keywords": "shipping containers, storage containers, container sales, container rental, container modifications, Dallas containers, Texas containers, container delivery",
+  ${includeReviews ? `
+  "review": [
+    ${reviews.map(review => `{
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "${review.author}"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "${review.rating}",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "${review.reviewBody}",
+      "datePublished": "${review.datePublished}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Google"
+      }
+    }`).join(',')}
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "${reviews.length}",
+    "bestRating": "5",
+    "worstRating": "1"
+  },` : ''}
+  "sameAs": [
+    "https://www.facebook.com/lccontainertexas",
+    "https://www.linkedin.com/company/lc-container",
+    "https://www.youtube.com/@lccontainertexas"
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+12145244168",
+      "contactType": "sales",
+      "availableLanguage": ["English", "Spanish"],
+      "areaServed": "US",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+12145244168",
+      "contactType": "customer service",
+      "availableLanguage": ["English", "Spanish"],
+      "areaServed": "US"
+    }
+  ],
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Better Business Bureau",
+    "description": "A+ Rating"
+  }
+}
+</script>

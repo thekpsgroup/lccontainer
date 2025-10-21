@@ -1,8 +1,12 @@
 ---
+import BusinessHours from "../components/BusinessHours.astro";
 import CTAButton from "../components/CTAButton.astro";
+import ExitIntentPopup from "../components/ExitIntentPopup.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import LocationTestimonials from "../components/LocationTestimonials.astro";
+import EnhancedLocalBusinessSchema from "../components/seo/EnhancedLocalBusinessSchema.astro";
 import SEOEnhancer from "../components/SEOEnhancer.astro";
 import ServicesTeaser from "../components/ServicesTeaser.astro";
 import StatsSection from "../components/StatsSection.astro";
@@ -15,6 +19,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="Buy, lease, or customize shipping containers in Texas. 10-acre yard in Hutchins. 10', 20', 40' containers. Fast delivery statewide. Established 2003."
 >
   <SEOEnhancer pageType="home" focusKeyword="shipping containers Texas" />
+  <EnhancedLocalBusinessSchema />
   <Header />
   <Hero />
   <div class="fade-in">
@@ -42,26 +47,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           class="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <CTAButton
-            variant="primary"
             size="lg"
-            href="/contact"
-            data-cta="mid_page_quote"
-            aria-label="Get started with your free quote"
-            class="animate-pulse-subtle"
-          >
-            Start Your Project
-          </CTAButton>
-
-          <CTAButton
-            variant="secondary"
-            size="lg"
-            href="tel:12145244168"
+            phoneNumber="12145244168"
             data-cta="mid_page_phone"
             aria-label="Call us for immediate assistance"
-            icon="📞"
-          >
-            Call (214) 524-4168
-          </CTAButton>
+          />
         </div>
         <div
           class="mt-6 flex flex-wrap justify-center gap-6 text-sm text-ink-muted"
@@ -119,8 +109,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <!-- <FeaturedServices /> -->
+  <!-- Business Hours Display -->
+  <section class="max-w-[1200px] mx-auto px-5 py-8">
+    <BusinessHours />
+  </section>
+
   <StatsSection />
+  <LocationTestimonials />
   <Testimonials />
   <Footer />
+
+  <!-- Exit Intent Conversion Popup -->
+  <ExitIntentPopup />
 </BaseLayout>

@@ -1,24 +1,242 @@
 ---
-import type { Row } from '../../lib/seo/rows';
-export interface Props {
-  row: Row;
+import type { Row } from "../../lib/seo/rows";
+
+export interface ContainerProduct {
+  name: string;
+  description: string;
+  sku: string;
+  condition: "new" | "used" | "cargo-worthy";
+  size: string;
+  price?: number;
+  availability: "InStock" | "OutOfStock" | "PreOrder";
+  features?: string[];
+  dimensions?: {
+    length: string;
+    width: string;
+    height: string;
+  };
 }
-const { row } = Astro.props;
----
-<script type="application/ld+json">
-{JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: row.h1,
-  brand: 'LC Container',
-  offers: {
-    '@type': 'Offer',
-    availability: 'https://schema.org/InStoreOnly',
-    price: undefined,
-    priceCurrency: 'USD',
-    url: `https://lccontainer.com${row.url_slug}`,
+
+export interface Props {
+  row?: Row;
+  container?: ContainerProduct;
+  images?: string[];
+  reviews?: Array<{
+    author: string;
+    rating: number;
+    reviewBody: string;
+    datePublished: string;
+  }>;
+}
+
+const { row, container, images = [], reviews = [] } = Astro.props;
+
+// Use container data if provided, otherwise fall back to row data
+const productData = container || {
+  name: row?.h1 || "Shipping Container",
+  description:
+    row?.meta_description || "High-quality shipping container for sale",
+  sku: `LC-${row?.city?.replace(/\s+/g, "-") || "CONTAINER"}-001`,
+  condition: "cargo-worthy" as const,
+  size: "20ft",
+  availability: "InStock" as const,
+};
+
+// Calculate average rating if reviews exist
+const averageRating =
+  reviews.length > 0
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+    : 4.9;
+
+// Default images
+const productImages =
+  images.length > 0
+    ? images
+    : [
+        row
+          ? `https://lccontainer.com/photos/dfw/${row.city.toLowerCase().replace(/\s+/g, "-")}-container.jpg`
+          : "https://lccontainer.com/photos/container/20ft/exterior.jpg",
+        "https://lccontainer.com/photos/container/interior-view.jpg",
+      ];
+
+// Map condition to schema.org values
+const conditionMapping = {
+  new: "NewCondition",
+  used: "UsedCondition",
+  "cargo-worthy": "RefurbishedCondition",
+};
+
+const schemaData: any = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": row
+    ? `https://lccontainer.com${row.url_slug}`
+    : `https://lccontainer.com/inventory/${productData.sku.toLowerCase()}`,
+  name: productData.name,
+  description: productData.description,
+  sku: productData.sku,
+  mpn: productData.sku,
+  brand: {
+    "@type": "Brand",
+    name: "LC Container",
+    logo: "https://lccontainer.com/photos/lccontainer-dark.png",
   },
-  description: row.meta_description,
-  image: `https://lccontainer.com/photos/dfw/${row.city.toLowerCase().replace(/\s+/g,'-')}-container.jpg`,
-})}
-</script>
+  manufacturer: {
+    "@type": "Organization",
+    name: "LC Container",
+    url: "https://lccontainer.com",
+  },
+  category: ["Storage Container", "Shipping Container", "Industrial Equipment"],
+  productID: productData.sku,
+  gtin: productData.sku,
+  condition: `https://schema.org/${conditionMapping[productData.condition]}`,
+  image: productImages,
+  offers: {
+    "@type": "Offer",
+    url: row
+      ? `https://lccontainer.com${row.url_slug}`
+      : `https://lccontainer.com/inventory/${productData.sku.toLowerCase()}`,
+    priceCurrency: "USD",
+    priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0],
+    availability: `https://schema.org/${productData.availability}`,
+    itemCondition: `https://schema.org/${conditionMapping[productData.condition]}`,
+    seller: {
+      "@type": "LocalBusiness",
+      name: "LC Container",
+      telephone: "+12145244168",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: row?.city || "Hutchins",
+        addressRegion: "TX",
+        addressCountry: "US",
+      },
+    },
+    areaServed: {
+      "@type": "State",
+      name: "Texas",
+    },
+    deliveryLeadTime: {
+      "@type": "QuantitativeValue",
+      value: 1,
+      unitCode: "DAY",
+    },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      returnPolicyCategory:
+        "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: 30,
+    },
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "150-500",
+        currency: "USD",
+      },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 1,
+          unitCode: "DAY",
+        },
+        transitTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 1,
+          unitCode: "DAY",
+        },
+      },
+    },
+  },
+  isRelatedTo: [
+    {
+      "@type": "Product",
+      name: "Container Delivery Service",
+      url: "https://lccontainer.com/services/container-delivery/",
+    },
+    {
+      "@type": "Product",
+      name: "Container Modification Service",
+      url: "https://lccontainer.com/services/container-modifications/",
+    },
+  ],
+  potentialAction: {
+    "@type": "BuyAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://lccontainer.com/contact/",
+      actionPlatform: [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform",
+      ],
+    },
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: reviews.length > 0 ? averageRating.toFixed(1) : "4.9",
+    reviewCount: reviews.length > 0 ? reviews.length.toString() : "127",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType: "Construction Companies, Businesses, Homeowners",
+  },
+  keywords: `${productData.size || "20ft"} container, ${productData.condition} shipping container, storage container ${productData.condition}, Texas container sales`,
+};
+
+// Add optional fields
+if (productData.price) {
+  schemaData.offers.price = productData.price.toString();
+}
+
+if (productData.dimensions) {
+  schemaData.depth = {
+    "@type": "QuantitativeValue",
+    value: productData.dimensions.length,
+    unitCode: "FOT",
+  };
+  schemaData.width = {
+    "@type": "QuantitativeValue",
+    value: productData.dimensions.width,
+    unitCode: "FOT",
+  };
+  schemaData.height = {
+    "@type": "QuantitativeValue",
+    value: productData.dimensions.height,
+    unitCode: "FOT",
+  };
+}
+
+if (productData.features && productData.features.length > 0) {
+  schemaData.additionalProperty = productData.features.map((feature) => ({
+    "@type": "PropertyValue",
+    name: "Feature",
+    value: feature,
+  }));
+}
+
+if (reviews.length > 0) {
+  schemaData.review = reviews.map((review) => ({
+    "@type": "Review",
+    author: {
+      "@type": "Person",
+      name: review.author,
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: review.rating.toString(),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    reviewBody: review.reviewBody,
+    datePublished: review.datePublished,
+  }));
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

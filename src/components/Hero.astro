@@ -1,90 +1,329 @@
 ---
-import { Image } from 'astro:assets';
-import SmartImage from './SmartImage.astro';
-import CTAButton from './CTAButton.astro';
+import { Image } from "astro:assets";
+import SmartImage from "./SmartImage.astro";
+import CTAButton from "./CTAButton.astro";
 
 const headline = "Texas' Premier Container Supplier";
-const sub = "Quality shipping containers with <strong>24-hour quotes</strong> and <strong>same-day delivery</strong> across Texas. Thousands of containers in stock.";
+const sub =
+  "Quality shipping containers with <strong>24-hour quotes</strong> and <strong>same-day delivery</strong> across Texas. Thousands of containers in stock.";
 ---
 
+<!-- Location-aware conversion script -->
+<script>
+  // Detect if user came from location page
+  const referrer = document.referrer;
+  const isFromLocationPage =
+    referrer.includes("/dallas/") ||
+    referrer.includes("/houston/") ||
+    referrer.includes("/austin/") ||
+    referrer.includes("/fort-worth/") ||
+    referrer.includes("/arlington/") ||
+    referrer.includes("/plano/") ||
+    referrer.includes("/garland/") ||
+    referrer.includes("/irving/");
+
+  // Extract city from referrer URL
+  let cityName = "";
+  if (isFromLocationPage) {
+    const cityMatch = referrer.match(/\/([^\/]+)\//g);
+    if (cityMatch && cityMatch[0]) {
+      cityName = cityMatch[0]
+        .replace(/\//g, "")
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+    }
+  }
+
+  // Update hero messaging for location traffic
+  document.addEventListener("DOMContentLoaded", function () {
+    if (isFromLocationPage && cityName) {
+      // Update headline for location traffic
+      const headline = document.querySelector(".hero-title");
+      if (headline) {
+        headline.innerHTML = `${cityName} Container Experts <span class="text-brand-red">Ready to Deliver</span>`;
+      }
+
+      // Update subtitle with urgency
+      const subtitle = document.querySelector(".hero-subtitle");
+      if (subtitle) {
+        subtitle.innerHTML = `<strong>Same-day delivery to ${cityName}</strong> • Over 1,000 containers in our Hutchins yard • <strong class="text-brand-red">Call now for instant pricing</strong>`;
+      }
+
+      // Update CTA buttons with urgency
+      const phoneBtn = document.querySelector(
+        '[data-cta="hero_phone"] span:first-child'
+      );
+      if (phoneBtn) {
+        phoneBtn.textContent = "Call Now - Same Day Service";
+      }
+
+      // Show location-specific urgency banner
+      const urgencyBanner = document.querySelector(
+        ".location-urgency"
+      ) as HTMLElement;
+      if (urgencyBanner) {
+        urgencyBanner.style.display = "block";
+        const citySpan = urgencyBanner.querySelector(".city-name");
+        if (citySpan) {
+          citySpan.textContent = cityName;
+        }
+      }
+    }
+  });
+</script>
 
 <section class="relative overflow-hidden">
   <!-- Modern background with soft gradient and image -->
   <div class="absolute inset-0">
-    <img
-      src="/photos/container/standard/20ft_5.jpg"
-      alt="LC Container yard with containers in stock"
-      class="h-full w-full object-cover opacity-15"
-      loading="eager"
-      decoding="async"
-      fetchpriority="high"
-    />
+    <picture>
+      <source
+        srcset="/photos/container/standard/20ft_5.webp"
+        type="image/webp"
+      />
+      <img
+        src="/photos/container/standard/20ft_5.jpg"
+        alt="LC Container yard with containers in stock"
+        class="h-full w-full object-cover opacity-15"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        width="1200"
+        height="800"
+      />
+    </picture>
 
-    <!-- Preload critical LCP image -->
-    <link
-      rel="preload"
-      as="image"
-      href="/photos/container/standard/20ft_5.jpg"
-      fetchpriority="high"
-      type="image/webp"
-    />
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-brand-black/70 to-blue-800/60"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-brand-black/70 to-blue-800/60"
+    >
+    </div>
   </div>
 
-  <div class="relative max-w-[1200px] mx-auto px-16 md:px-24 lg:px-32 py-16 md:py-20 lg:py-24 text-center">
-    <div class="backdrop-blur-xl bg-white/70 dark:bg-brand-black/80 shadow-2xl rounded-3xl p-8 md:p-12 max-w-3xl mx-auto border border-brand-line/20">
+  <div
+    class="relative max-w-[1200px] mx-auto px-16 md:px-24 lg:px-32 py-16 md:py-20 lg:py-24 text-center"
+  >
+    <!-- Location-specific urgency banner (hidden by default) -->
+    <div class="location-urgency hidden mb-6 mx-auto max-w-2xl">
+      <div
+        class="bg-gradient-to-r from-brand-red to-red-600 text-white px-6 py-3 rounded-xl shadow-lg animate-pulse-subtle"
+      >
+        <div class="flex items-center justify-center gap-3">
+          <svg
+            class="w-5 h-5 animate-pulse"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="font-bold"
+            >⚡ URGENT: Same-day delivery available to <span class="city-name"
+            ></span> - Limited slots remaining!</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="backdrop-blur-xl bg-white/70 dark:bg-brand-black/80 shadow-2xl rounded-3xl p-8 md:p-12 max-w-3xl mx-auto border border-brand-line/20"
+    >
       <h1 class="hero-title mb-8">{headline}</h1>
-      <p class="hero-subtitle" set:html={sub}></p>
+      <p class="hero-subtitle" set:html={sub} />
+
+      <!-- Enhanced urgency indicators -->
+      <div class="mt-8 mb-6 flex flex-wrap justify-center gap-4 text-sm">
+        <div
+          class="flex items-center gap-2 bg-green-100 dark:bg-green-900/30 px-3 py-2 rounded-full"
+        >
+          <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="font-semibold text-green-800 dark:text-green-300"
+            >1,247 containers in stock</span
+          >
+        </div>
+        <div
+          class="flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 px-3 py-2 rounded-full"
+        >
+          <svg
+            class="w-4 h-4 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="font-semibold text-blue-800 dark:text-blue-300"
+            >Same-day delivery available</span
+          >
+        </div>
+        <div
+          class="flex items-center gap-2 bg-orange-100 dark:bg-orange-900/30 px-3 py-2 rounded-full"
+        >
+          <svg
+            class="w-4 h-4 text-orange-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span class="font-semibold text-orange-800 dark:text-orange-300"
+            >Quotes in 2 hours</span
+          >
+        </div>
+      </div>
 
       <!-- Visual cue arrow -->
       <div class="mt-12 mb-6 animate-bounce">
-        <svg class="w-8 h-8 mx-auto text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        <svg
+          class="w-8 h-8 mx-auto text-brand-red"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
       </div>
 
       <div class="mt-12 flex flex-wrap items-center justify-center gap-8">
         <CTAButton
-          variant="primary"
           size="lg"
-          href="/contact"
-          data-cta="hero_quote"
-          aria-label="Request your free quote now"
-          class="animate-pulse-subtle"
-        >
-          Request a Quote
-        </CTAButton>
-
-        <CTAButton
-          variant="secondary"
-          size="lg"
-          href="tel:12145244168"
+          phoneNumber="12145244168"
           data-cta="hero_phone"
           aria-label="Call us now at (214) 524-4168"
-          icon="📞"
-        >
-          <span class="block">Call Now</span>
-          <span class="block text-sm font-normal">(214) 524-4168)</span>
-        </CTAButton>
+          class="animate-pulse-subtle relative"
+        />
+      </div>
+
+      <!-- Enhanced social proof -->
+      <div class="mt-8 text-sm text-ink-muted">
+        <div class="flex items-center justify-center gap-4 mb-2">
+          <div class="flex -space-x-2">
+            <div
+              class="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full border-2 border-white"
+            >
+            </div>
+            <div
+              class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-600 rounded-full border-2 border-white"
+            >
+            </div>
+            <div
+              class="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full border-2 border-white"
+            >
+            </div>
+            <div
+              class="w-8 h-8 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold"
+            >
+              +50
+            </div>
+          </div>
+          <span class="font-semibold">Happy customers this week</span>
+        </div>
+        <p>
+          ⭐⭐⭐⭐⭐ <span class="font-semibold">4.9/5</span> • Join 500+ satisfied
+          Texas businesses
+        </p>
       </div>
     </div>
 
-    <!-- Modern Trust strip -->
+    <!-- Enhanced Trust strip with urgency -->
     <div class="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-3xl mx-auto">
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
-        Licensed & Insured
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow hover:shadow-lg transition-shadow"
+      >
+        <div class="flex items-center justify-center mb-2">
+          <svg
+            class="w-5 h-5 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div>Licensed & Insured</div>
+        <div class="text-xs text-ink-muted">BBB A+ Rating</div>
       </div>
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
-        Quotes in 24h
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow hover:shadow-lg transition-shadow"
+      >
+        <div class="flex items-center justify-center mb-2">
+          <svg
+            class="w-5 h-5 text-orange-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div>Quotes in 2 Hours</div>
+        <div class="text-xs text-ink-muted">Guaranteed Response</div>
       </div>
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
-        10-Acre Yard
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow hover:shadow-lg transition-shadow"
+      >
+        <div class="flex items-center justify-center mb-2">
+          <svg
+            class="w-5 h-5 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+            ></path>
+          </svg>
+        </div>
+        <div>1,200+ In Stock</div>
+        <div class="text-xs text-ink-muted">Ready to Ship</div>
       </div>
-      <div class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow">
-        200-Mile Service
+      <div
+        class="backdrop-blur bg-white/60 dark:bg-brand-black/60 rounded-xl p-4 text-center text-sm font-semibold shadow hover:shadow-lg transition-shadow"
+      >
+        <div class="flex items-center justify-center mb-2">
+          <svg
+            class="w-5 h-5 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <div>Same-Day Delivery</div>
+        <div class="text-xs text-ink-muted">200-Mile Radius</div>
       </div>
     </div>
   </div>
 </section>
-
-

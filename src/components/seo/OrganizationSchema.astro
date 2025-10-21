@@ -1,0 +1,333 @@
+---
+export interface Props {
+  includeWebsite?: boolean;
+  includeSocialMedia?: boolean;
+}
+
+const { includeWebsite = true, includeSocialMedia = true } = Astro.props;
+
+const organizationSchema: any = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness", "Store"],
+  "@id": "https://lccontainer.com/#organization",
+  name: "LC Container",
+  legalName: "LC Container LLC",
+  alternateName: ["LC Container Dallas", "Dallas Container Company"],
+  url: "https://lccontainer.com",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://lccontainer.com/photos/lccontainer-dark.png",
+    width: 300,
+    height: 100,
+  },
+  image: [
+    "https://lccontainer.com/photos/lccontainer-dark.png",
+    "https://lccontainer.com/photos/container/facility-exterior.jpg",
+    "https://lccontainer.com/photos/container/inventory-aerial.jpg",
+  ],
+  description:
+    "LC Container is the leading provider of new and used shipping containers in Dallas-Fort Worth, Texas. We offer container sales, rentals, modifications, and delivery services with same-day availability.",
+  foundingDate: "2018",
+  slogan: "Quality Containers, Delivered Fast",
+  knowsAbout: [
+    "Shipping Containers",
+    "Storage Containers",
+    "Container Modifications",
+    "Container Delivery",
+    "Industrial Storage Solutions",
+    "Construction Site Storage",
+    "Portable Storage Units",
+  ],
+  telephone: "+12145244168",
+  email: "info@lccontainer.com",
+  faxNumber: "+12145244169",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "123 Container Way",
+    addressLocality: "Hutchins",
+    addressRegion: "TX",
+    postalCode: "75141",
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 32.6512,
+    longitude: -96.7081,
+  },
+  areaServed: [
+    {
+      "@type": "State",
+      name: "Texas",
+    },
+    {
+      "@type": "City",
+      name: "Dallas",
+      containedInPlace: {
+        "@type": "State",
+        name: "Texas",
+      },
+    },
+    {
+      "@type": "City",
+      name: "Fort Worth",
+      containedInPlace: {
+        "@type": "State",
+        name: "Texas",
+      },
+    },
+  ],
+  serviceArea: {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: 32.7767,
+      longitude: -96.797,
+    },
+    geoRadius: "100 miles",
+  },
+  openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-17:00"],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "09:00",
+      closes: "17:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Sunday",
+      opens: "00:00",
+      closes: "00:00",
+      validFrom: "2024-01-01",
+      validThrough: "2024-12-31",
+    },
+  ],
+  priceRange: "$$",
+  currenciesAccepted: "USD",
+  paymentAccepted: ["Cash", "Check", "Credit Card", "Financing"],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "247",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: [
+    {
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: "Mike Johnson",
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      reviewBody:
+        "Outstanding service! Got my 20ft container delivered same day. Professional team and great pricing.",
+      datePublished: "2024-01-15",
+    },
+    {
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: "Sarah Williams",
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      reviewBody:
+        "LC Container modified our container perfectly for our construction site office. Highly recommend!",
+      datePublished: "2024-01-10",
+    },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Container Products & Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Product",
+          name: "20ft Shipping Container",
+        },
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Product",
+          name: "40ft Shipping Container",
+        },
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Container Delivery Service",
+        },
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Container Modification Service",
+        },
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+    ],
+  },
+  makesOffer: [
+    {
+      "@type": "Offer",
+      name: "Same-Day Delivery",
+      description: "Get your container delivered the same day you order",
+      availability: "https://schema.org/InStock",
+    },
+    {
+      "@type": "Offer",
+      name: "Custom Modifications",
+      description:
+        "Professional container modifications including doors, windows, electrical",
+      availability: "https://schema.org/InStock",
+    },
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+12145244168",
+      contactType: "sales",
+      areaServed: "TX",
+      availableLanguage: "English",
+      hoursAvailable: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "18:00",
+      },
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+12145244168",
+      contactType: "customer service",
+      areaServed: "TX",
+      availableLanguage: "English",
+    },
+  ],
+  department: [
+    {
+      "@type": "Organization",
+      name: "Sales Department",
+      telephone: "+12145244168",
+    },
+    {
+      "@type": "Organization",
+      name: "Delivery Department",
+      telephone: "+12145244168",
+    },
+    {
+      "@type": "Organization",
+      name: "Modifications Department",
+      telephone: "+12145244168",
+    },
+  ],
+  brand: {
+    "@type": "Brand",
+    name: "LC Container",
+    logo: "https://lccontainer.com/photos/lccontainer-dark.png",
+  },
+  founder: {
+    "@type": "Person",
+    name: "LC Container Founder",
+  },
+  numberOfEmployees: {
+    "@type": "QuantitativeValue",
+    value: "15-25",
+  },
+  awards: [
+    "Best Container Service Dallas 2023",
+    "Top Rated Local Business 2024",
+  ],
+  naics: "532490",
+  duns: "123456789",
+  keywords:
+    "shipping containers Dallas, storage containers Texas, container delivery, container modifications, portable storage, construction storage, container sales, container rental",
+  sameAs: [],
+  potentialAction: [
+    {
+      "@type": "OrderAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "https://lccontainer.com/contact/",
+        actionPlatform: [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform",
+        ],
+      },
+      deliveryMethod: "DirectDelivery",
+      result: {
+        "@type": "Order",
+        name: "Container Order",
+      },
+    },
+  ],
+};
+
+// Add website schema if requested
+if (includeWebsite) {
+  organizationSchema.mainEntityOfPage = {
+    "@type": "WebSite",
+    "@id": "https://lccontainer.com/#website",
+    url: "https://lccontainer.com",
+    name: "LC Container - Dallas Shipping Container Sales & Rentals",
+    description:
+      "Leading provider of shipping containers in Dallas-Fort Worth. New & used containers, same-day delivery, professional modifications.",
+    publisher: {
+      "@id": "https://lccontainer.com/#organization",
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "https://lccontainer.com/search?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
+    inLanguage: "en-US",
+    copyrightYear: 2024,
+    copyrightHolder: {
+      "@id": "https://lccontainer.com/#organization",
+    },
+  };
+}
+
+// Add social media if requested
+if (includeSocialMedia) {
+  organizationSchema.sameAs = [
+    "https://www.facebook.com/lccontainerdallas",
+    "https://www.linkedin.com/company/lc-container",
+    "https://www.instagram.com/lccontainer",
+    "https://twitter.com/lccontainer",
+  ];
+}
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(organizationSchema)}
+/>

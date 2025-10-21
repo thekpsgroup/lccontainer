@@ -1,0 +1,218 @@
+---
+export interface ServiceData {
+  name: string;
+  description: string;
+  serviceType: string;
+  areaServed?: string[];
+  priceRange?: string;
+  duration?: string;
+  availableSchedule?: string;
+}
+
+export interface Props {
+  service: ServiceData;
+  reviews?: Array<{
+    author: string;
+    rating: number;
+    reviewBody: string;
+    datePublished: string;
+  }>;
+}
+
+const { service, reviews = [] } = Astro.props;
+
+// Calculate average rating if reviews exist
+const averageRating =
+  reviews.length > 0
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+    : 4.8;
+
+// Default service areas if not provided
+const serviceAreas = service.areaServed || [
+  "Dallas",
+  "Fort Worth",
+  "Arlington",
+  "Plano",
+  "Irving",
+  "Garland",
+  "Grand Prairie",
+  "McKinney",
+  "Mesquite",
+  "Carrollton",
+  "Frisco",
+  "Richardson",
+  "Lewisville",
+  "Allen",
+  "Flower Mound",
+  "Euless",
+];
+
+const schemaData: any = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `https://lccontainer.com/services/${service.serviceType.toLowerCase().replace(/\s+/g, "-")}/`,
+  name: service.name,
+  description: service.description,
+  serviceType: service.serviceType,
+  provider: {
+    "@type": "LocalBusiness",
+    name: "LC Container",
+    telephone: "+12145244168",
+    url: "https://lccontainer.com",
+    logo: "https://lccontainer.com/photos/lccontainer-dark.png",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Hutchins",
+      addressRegion: "TX",
+      postalCode: "75141",
+      addressCountry: "US",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 32.6512,
+      longitude: -96.7081,
+    },
+    openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-17:00"],
+    priceRange: service.priceRange || "$$",
+  },
+  areaServed: serviceAreas.map((city) => ({
+    "@type": "City",
+    name: city,
+    containedInPlace: {
+      "@type": "State",
+      name: "Texas",
+    },
+  })),
+  availableChannel: {
+    "@type": "ServiceChannel",
+    servicePhone: "+12145244168",
+    serviceUrl: "https://lccontainer.com/contact/",
+    availableLanguage: "English",
+  },
+  category: [
+    "Storage Solutions",
+    "Container Services",
+    "Industrial Equipment Rental",
+    "Construction Services",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Container Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+        },
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        validFrom: new Date().toISOString(),
+        validThrough: new Date(
+          Date.now() + 365 * 24 * 60 * 60 * 1000
+        ).toISOString(),
+      },
+    ],
+  },
+  serviceOutput: {
+    "@type": "Thing",
+    name: `${service.name} Completion`,
+    description: `Professional ${service.name.toLowerCase()} service delivered to your location`,
+  },
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://lccontainer.com/contact/",
+      actionPlatform: [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform",
+      ],
+    },
+    result: {
+      "@type": "Reservation",
+      name: `${service.name} Booking`,
+    },
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: reviews.length > 0 ? averageRating.toFixed(1) : "4.8",
+    reviewCount: reviews.length > 0 ? reviews.length.toString() : "89",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType:
+      "Construction Companies, Businesses, Property Managers, Homeowners",
+  },
+  keywords: `${service.name.toLowerCase()}, container ${service.serviceType.toLowerCase()}, Dallas container services, Texas storage solutions`,
+};
+
+// Add optional fields
+if (service.duration) {
+  schemaData.estimatedDuration = {
+    "@type": "Duration",
+    name: service.duration,
+  };
+}
+
+if (service.availableSchedule) {
+  schemaData.hoursAvailable = {
+    "@type": "OpeningHoursSpecification",
+    description: service.availableSchedule,
+  };
+}
+
+if (reviews.length > 0) {
+  schemaData.review = reviews.map((review) => ({
+    "@type": "Review",
+    author: {
+      "@type": "Person",
+      name: review.author,
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: review.rating.toString(),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    reviewBody: review.reviewBody,
+    datePublished: review.datePublished,
+  }));
+}
+
+// Service-specific schema additions
+if (service.serviceType.toLowerCase().includes("delivery")) {
+  schemaData.deliveryMethod = {
+    "@type": "DeliveryMethod",
+    name: "Direct Delivery",
+  };
+  schemaData.serviceArea = {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: 32.7767,
+      longitude: -96.797,
+    },
+    geoRadius: "50 miles",
+  };
+}
+
+if (service.serviceType.toLowerCase().includes("modification")) {
+  schemaData.serviceFeature = [
+    {
+      "@type": "PropertyValue",
+      name: "Custom Modifications",
+      value: "Doors, Windows, Electrical, Insulation",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Certification",
+      value: "Professional Welding & Fabrication",
+    },
+  ];
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

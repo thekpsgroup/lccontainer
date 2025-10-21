@@ -1,49 +1,8 @@
-/* Fonts - Optimized local hosting with font-display swap */
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-
 /* Design System Tokens */
 @import "./tokens.css";
 @import "./typography.css";
 
-/* Font optimization */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Inter Regular'), local('Inter-Regular'),
-       url('/fonts/inter-v12-latin-regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: local('Inter Medium'), local('Inter-Medium'),
-       url('/fonts/inter-v12-latin-500.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Inter SemiBold'), local('Inter-SemiBold'),
-       url('/fonts/inter-v12-latin-600.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Inter Bold'), local('Inter-Bold'),
-       url('/fonts/inter-v12-latin-700.woff2') format('woff2');
-}
+/* Fonts will be loaded via Google Fonts in BaseLayout for reliability */
 
 @tailwind base;
 @tailwind components;
@@ -110,8 +69,8 @@
   }
 
   /* Ensure swap behavior and prevent font synthesis */
-  :root { 
-    font-synthesis-weight: none; 
+  :root {
+    font-synthesis-weight: none;
   }
 
   /* Enhanced focus states for WCAG 2.2 compliance */
@@ -253,7 +212,7 @@
     z-index: 100;
     font-weight: 500;
   }
-  
+
   .skip-link:focus {
     top: 6px;
   }
@@ -302,18 +261,7 @@
 }
 
 @layer components {
-  /* Button styles with industrial design */
-  .btn-primary {
-    @apply bg-brand-red text-ink px-8 py-4 rounded-xl font-semibold hover:opacity-90 shadow-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-brand-silver/60 transform;
-  }
-
-  .btn-secondary {
-    @apply border-2 border-brand-silver text-brand-silver px-8 py-4 rounded-xl font-semibold hover:bg-brand-silver hover:text-brand-black transition-all duration-300 focus-visible:ring-2 focus-visible:ring-brand-silver/60 transform;
-  }
-
-  .btn-ghost {
-    @apply text-ink hover:text-brand-red hover:bg-glass px-4 py-2 rounded-xl font-medium transition-all duration-200;
-  }
+  /* Note: Button styles are now handled by individual components for better specificity */
 
   /* Glassmorphism components */
   .glass-card {

@@ -1,0 +1,378 @@
+---
+// A/B Testing Framework for Conversion Optimization
+// Implements client-side split testing for CTA buttons, messaging, and layouts
+// Integrates with Google Analytics and Vercel Analytics for statistical analysis
+---
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    // A/B Test Configuration
+    const AB_TESTS = {
+      CTA_BUTTON_TEXT: {
+        name: "CTA Button Text Optimization",
+        traffic_split: 0.5, // 50/50 split
+        variants: {
+          control: {
+            name: "Original Text",
+            changes: {
+              ".cta-button": "Get Free Quote",
+              ".quote-btn": "Request Quote",
+              ".contact-btn": "Contact Us",
+            },
+          },
+          variant_a: {
+            name: "Action-Oriented Text",
+            changes: {
+              ".cta-button": "Start Your Project",
+              ".quote-btn": "Get Started Today",
+              ".contact-btn": "Let's Build Together",
+            },
+          },
+        },
+      },
+      PHONE_NUMBER_DISPLAY: {
+        name: "Phone Number Optimization",
+        traffic_split: 0.5,
+        variants: {
+          control: {
+            name: "Standard Format",
+            changes: {
+              ".phone-display": "(555) 123-4567",
+            },
+          },
+          variant_a: {
+            name: "Click to Call Format",
+            changes: {
+              ".phone-display": "📞 Call Now: (555) 123-4567",
+            },
+          },
+        },
+      },
+      LOCATION_MESSAGING: {
+        name: "Location-Aware Messaging",
+        traffic_split: 0.5,
+        variants: {
+          control: {
+            name: "Generic Messaging",
+            location_dependent: false,
+          },
+          variant_a: {
+            name: "Location-Specific Messaging",
+            location_dependent: true,
+          },
+        },
+      },
+      EXIT_INTENT_POPUP: {
+        name: "Exit Intent Popup Strategy",
+        traffic_split: 0.5,
+        variants: {
+          control: {
+            name: "Standard Popup",
+            popup_delay: 0,
+            popup_content: "standard",
+          },
+          variant_a: {
+            name: "Delayed Personalized Popup",
+            popup_delay: 3000,
+            popup_content: "personalized",
+          },
+        },
+      },
+    };
+
+    // Utility functions
+    function getUserId() {
+      let userId = localStorage.getItem("ab_test_user_id");
+      if (!userId) {
+        userId =
+          Date.now().toString() + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem("ab_test_user_id", userId);
+      }
+      return userId;
+    }
+
+    function hashUserId(userId, testName) {
+      // Simple hash function for consistent assignment
+      let hash = 0;
+      const str = userId + testName;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash = hash & hash; // Convert to 32-bit integer
+      }
+      return Math.abs(hash);
+    }
+
+    function assignVariant(testName, trafficSplit) {
+      const userId = getUserId();
+      const hash = hashUserId(userId, testName);
+      const bucket = (hash % 100) / 100; // Convert to 0-1 range
+
+      return bucket < trafficSplit ? "variant_a" : "control";
+    }
+
+    // Track A/B test assignment
+    function trackTestAssignment(testName, variant) {
+      try {
+        // Google Analytics
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "ab_test_assignment", {
+            event_category: "A/B Testing",
+            event_label: testName,
+            custom_parameter_variant: variant,
+            custom_parameter_user_id: getUserId(),
+          });
+        }
+
+        // Vercel Analytics
+        if (typeof window !== "undefined" && window.va) {
+          window.va("event", "ab_test_assignment", {
+            test_name: testName,
+            variant: variant,
+            user_id: getUserId(),
+            page: window.location.pathname,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        // Store assignment for later analysis
+        const assignments = JSON.parse(
+          localStorage.getItem("ab_test_assignments") || "{}"
+        );
+        assignments[testName] = {
+          variant: variant,
+          assigned_at: new Date().toISOString(),
+          page: window.location.pathname,
+        };
+        localStorage.setItem(
+          "ab_test_assignments",
+          JSON.stringify(assignments)
+        );
+
+        console.log(`A/B Test Assignment: ${testName} = ${variant}`);
+      } catch (error) {
+        console.debug("A/B test assignment tracking error:", error);
+      }
+    }
+
+    // Apply test variants
+    function applyTestVariant(testName, variant) {
+      const test = AB_TESTS[testName];
+      if (!test || !test.variants[variant]) return;
+
+      const variantConfig = test.variants[variant];
+
+      try {
+        // Apply text changes
+        if (variantConfig.changes) {
+          Object.entries(variantConfig.changes).forEach(([selector, text]) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach((element) => {
+              element.textContent = text;
+              // Mark element as A/B tested for tracking
+              element.setAttribute("data-ab-test", testName);
+              element.setAttribute("data-ab-variant", variant);
+            });
+          });
+        }
+
+        // Apply location-dependent messaging
+        if (testName === "LOCATION_MESSAGING" && variant === "variant_a") {
+          applyLocationMessaging();
+        }
+
+        // Configure exit intent popup
+        if (testName === "EXIT_INTENT_POPUP") {
+          configureExitIntentPopup(variantConfig);
+        }
+
+        console.log(`Applied A/B test variant: ${testName} = ${variant}`);
+      } catch (error) {
+        console.debug("A/B test variant application error:", error);
+      }
+    }
+
+    // Location-specific messaging implementation
+    function applyLocationMessaging() {
+      const currentPath = window.location.pathname;
+
+      if (currentPath.includes("/locations/")) {
+        const locationName = currentPath.split("/locations/")[1]?.split("/")[0];
+        const locationData = getLocationData(locationName);
+
+        if (locationData) {
+          // Update headlines
+          const headlines = document.querySelectorAll("h1, .hero-title");
+          headlines.forEach((headline) => {
+            if (headline.textContent.includes("Custom Builds")) {
+              headline.textContent = `Custom Builds in ${locationData.displayName}`;
+              headline.setAttribute("data-ab-test", "LOCATION_MESSAGING");
+              headline.setAttribute("data-ab-variant", "variant_a");
+            }
+          });
+
+          // Update CTA text
+          const ctaButtons = document.querySelectorAll(".cta-button");
+          ctaButtons.forEach((button) => {
+            if (button.textContent.includes("Get Quote")) {
+              button.textContent = `Get ${locationData.displayName} Quote`;
+              button.setAttribute("data-ab-test", "LOCATION_MESSAGING");
+              button.setAttribute("data-ab-variant", "variant_a");
+            }
+          });
+
+          // Add location-specific trust signals
+          const trustSignals = document.querySelector(
+            ".trust-signals, .benefits"
+          );
+          if (trustSignals) {
+            const locationSignal = document.createElement("div");
+            locationSignal.className = "location-trust-signal";
+            locationSignal.innerHTML = `<span class="icon">📍</span> Serving ${locationData.displayName} for ${locationData.yearsInBusiness || "10+"} years`;
+            locationSignal.setAttribute("data-ab-test", "LOCATION_MESSAGING");
+            locationSignal.setAttribute("data-ab-variant", "variant_a");
+            trustSignals.appendChild(locationSignal);
+          }
+        }
+      }
+    }
+
+    // Exit intent popup configuration
+    function configureExitIntentPopup(config) {
+      // Find existing exit intent component
+      const exitIntentElement = document.querySelector(
+        ".exit-intent-popup, [data-component='exit-intent']"
+      );
+
+      if (exitIntentElement) {
+        // Apply delay
+        if (config.popup_delay > 0) {
+          exitIntentElement.setAttribute("data-delay", config.popup_delay);
+        }
+
+        // Apply personalized content
+        if (config.popup_content === "personalized") {
+          const currentLocation = window.location.pathname.includes(
+            "/locations/"
+          )
+            ? window.location.pathname.split("/locations/")[1]?.split("/")[0]
+            : null;
+
+          if (currentLocation) {
+            const locationData = getLocationData(currentLocation);
+            if (locationData) {
+              const popupTitle =
+                exitIntentElement.querySelector(".popup-title, h3");
+              if (popupTitle) {
+                popupTitle.textContent = `Before you go... Get a free quote in ${locationData.displayName}!`;
+              }
+            }
+          }
+        }
+
+        exitIntentElement.setAttribute("data-ab-test", "EXIT_INTENT_POPUP");
+        exitIntentElement.setAttribute(
+          "data-ab-variant",
+          config.name.toLowerCase().replace(/ /g, "_")
+        );
+      }
+    }
+
+    // Helper function to get location data (mock implementation)
+    function getLocationData(locationSlug) {
+      const locations = {
+        "new-york": { displayName: "New York", yearsInBusiness: "15" },
+        "los-angeles": { displayName: "Los Angeles", yearsInBusiness: "12" },
+        chicago: { displayName: "Chicago", yearsInBusiness: "10" },
+        houston: { displayName: "Houston", yearsInBusiness: "8" },
+        philadelphia: { displayName: "Philadelphia", yearsInBusiness: "11" },
+      };
+      return locations[locationSlug] || null;
+    }
+
+    // Initialize A/B tests
+    function initializeABTests() {
+      Object.entries(AB_TESTS).forEach(([testName, testConfig]) => {
+        // Skip location messaging test if not on a location page
+        if (
+          testName === "LOCATION_MESSAGING" &&
+          !window.location.pathname.includes("/locations/")
+        ) {
+          return;
+        }
+
+        const variant = assignVariant(testName, testConfig.traffic_split);
+        trackTestAssignment(testName, variant);
+        applyTestVariant(testName, variant);
+      });
+    }
+
+    // Enhanced conversion tracking with A/B test context
+    const originalTrackConversion = window.trackConversion;
+    window.trackConversion = function (goalType, additionalData = {}) {
+      // Add A/B test context to conversion data
+      const assignments = JSON.parse(
+        localStorage.getItem("ab_test_assignments") || "{}"
+      );
+      const abTestContext = {
+        ab_tests: assignments,
+        user_id: getUserId(),
+      };
+
+      // Merge A/B test context with additional data
+      const enhancedData = { ...additionalData, ...abTestContext };
+
+      // Call original conversion tracking with enhanced data
+      if (originalTrackConversion) {
+        originalTrackConversion(goalType, enhancedData);
+      }
+
+      // Additional A/B test specific tracking
+      Object.entries(assignments).forEach(([testName, assignment]) => {
+        try {
+          if (typeof window !== "undefined" && window.gtag) {
+            window.gtag("event", "ab_test_conversion", {
+              event_category: "A/B Testing",
+              event_label: testName,
+              custom_parameter_variant: assignment.variant,
+              custom_parameter_conversion_type: goalType,
+              value: additionalData.value || 0,
+            });
+          }
+
+          if (typeof window !== "undefined" && window.va) {
+            window.va("event", "ab_test_conversion", {
+              test_name: testName,
+              variant: assignment.variant,
+              conversion_type: goalType,
+              value: additionalData.value || 0,
+              user_id: getUserId(),
+              page: window.location.pathname,
+              timestamp: new Date().toISOString(),
+            });
+          }
+        } catch (error) {
+          console.debug("A/B test conversion tracking error:", error);
+        }
+      });
+    };
+
+    // Initialize the A/B testing framework
+    initializeABTests();
+
+    // Expose utilities for external use
+    window.ABTesting = {
+      getUserId: getUserId,
+      getAssignments: () =>
+        JSON.parse(localStorage.getItem("ab_test_assignments") || "{}"),
+      forceVariant: (testName, variant) => {
+        trackTestAssignment(testName, variant);
+        applyTestVariant(testName, variant);
+      },
+    };
+
+    console.log("A/B Testing framework initialized");
+    console.log("Active tests:", Object.keys(AB_TESTS));
+    console.log("User ID:", getUserId());
+  });
+</script>

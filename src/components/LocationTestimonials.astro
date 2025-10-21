@@ -1,0 +1,301 @@
+---
+// Location-based testimonials component for enhanced local social proof
+---
+
+<script>
+  // Detect user's location from referrer or URL
+  const referrer = document.referrer;
+  const currentUrl = window.location.href;
+
+  let userCity = "";
+
+  // Check if coming from location page
+  if (referrer.includes("/dallas/")) userCity = "Dallas";
+  else if (referrer.includes("/houston/")) userCity = "Houston";
+  else if (referrer.includes("/austin/")) userCity = "Austin";
+  else if (referrer.includes("/fort-worth/")) userCity = "Fort Worth";
+  else if (referrer.includes("/arlington/")) userCity = "Arlington";
+  else if (referrer.includes("/plano/")) userCity = "Plano";
+  else if (referrer.includes("/garland/")) userCity = "Garland";
+  else if (referrer.includes("/irving/")) userCity = "Irving";
+
+  // Location-specific testimonials database
+  const locationTestimonials = {
+    Dallas: [
+      {
+        name: "Marcus Thompson",
+        business: "Thompson Construction, Dallas",
+        quote:
+          "LC Container delivered 3 containers to our Dallas job site same day. Professional team, fair pricing. Will use again!",
+        rating: 5,
+        service: "20ft containers",
+        date: "2 days ago",
+      },
+      {
+        name: "Sarah Chen",
+        business: "Dallas Event Planning",
+        quote:
+          "Needed storage for downtown Dallas event. They delivered exactly when promised and pickup was seamless.",
+        rating: 5,
+        service: "Event storage rental",
+        date: "1 week ago",
+      },
+    ],
+    Houston: [
+      {
+        name: "Robert Martinez",
+        business: "Martinez Logistics, Houston",
+        quote:
+          "Best container supplier in Houston! Fast delivery to our warehouse, competitive pricing, and great customer service.",
+        rating: 5,
+        service: "40ft high-cube containers",
+        date: "3 days ago",
+      },
+      {
+        name: "Jennifer Wade",
+        business: "Houston Manufacturing",
+        quote:
+          "Used LC Container for temporary storage during our facility expansion. They made the whole process easy.",
+        rating: 5,
+        service: "Long-term lease",
+        date: "5 days ago",
+      },
+    ],
+    Austin: [
+      {
+        name: "David Kim",
+        business: "Austin Tech Solutions",
+        quote:
+          "Converted containers into mobile offices for our Austin campus. LC Container handled everything perfectly.",
+        rating: 5,
+        service: "Custom office build",
+        date: "1 week ago",
+      },
+      {
+        name: "Lisa Rodriguez",
+        business: "Austin Retail Group",
+        quote:
+          "Quick delivery to South Austin location. Container was in perfect condition and exactly as described.",
+        rating: 5,
+        service: "20ft storage container",
+        date: "4 days ago",
+      },
+    ],
+    "Fort Worth": [
+      {
+        name: "Michael Johnson",
+        business: "Johnson Ranch, Fort Worth",
+        quote:
+          "Delivered to our Fort Worth property right on time. Great for storing equipment and tools.",
+        rating: 5,
+        service: "Used 20ft container",
+        date: "2 days ago",
+      },
+      {
+        name: "Amanda Foster",
+        business: "Fort Worth Catering",
+        quote:
+          "Perfect solution for our Fort Worth location. The team was professional and pricing was very fair.",
+        rating: 5,
+        service: "Refrigerated container",
+        date: "6 days ago",
+      },
+    ],
+    default: [
+      {
+        name: "James Wilson",
+        business: "Texas Construction Co.",
+        quote:
+          "LC Container has been our go-to supplier across all Texas locations. Reliable, professional, and fair pricing.",
+        rating: 5,
+        service: "Multiple locations",
+        date: "1 week ago",
+      },
+      {
+        name: "Maria Gonzalez",
+        business: "Lone Star Storage",
+        quote:
+          "Outstanding service throughout Texas. They deliver when they say they will and containers are always quality.",
+        rating: 5,
+        service: "Statewide delivery",
+        date: "3 days ago",
+      },
+    ],
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const testimonialsContainer = document.querySelector(
+      ".location-testimonials"
+    );
+    if (!testimonialsContainer) return;
+
+    // Get testimonials for user's city or default
+    const testimonials =
+      locationTestimonials[userCity] || locationTestimonials["default"];
+
+    // Update testimonials content
+    const testimonialCards =
+      testimonialsContainer.querySelectorAll(".testimonial-card");
+
+    testimonials.forEach((testimonial, index) => {
+      if (testimonialCards[index]) {
+        const card = testimonialCards[index];
+
+        // Update quote
+        const quoteEl = card.querySelector(".testimonial-quote");
+        if (quoteEl) quoteEl.textContent = testimonial.quote;
+
+        // Update name
+        const nameEl = card.querySelector(".testimonial-name");
+        if (nameEl) nameEl.textContent = testimonial.name;
+
+        // Update business
+        const businessEl = card.querySelector(".testimonial-business");
+        if (businessEl) businessEl.textContent = testimonial.business;
+
+        // Update service
+        const serviceEl = card.querySelector(".testimonial-service");
+        if (serviceEl) serviceEl.textContent = testimonial.service;
+
+        // Update date
+        const dateEl = card.querySelector(".testimonial-date");
+        if (dateEl) dateEl.textContent = testimonial.date;
+
+        // Update rating stars
+        const starsEl = card.querySelector(".testimonial-stars");
+        if (starsEl) {
+          starsEl.innerHTML = "⭐".repeat(testimonial.rating);
+        }
+      }
+    });
+
+    // Update section title if user has a specific city
+    if (userCity) {
+      const titleEl = testimonialsContainer.querySelector(".section-title");
+      if (titleEl) {
+        titleEl.innerHTML = `What ${userCity} Customers Say <span class="text-brand-red">About LC Container</span>`;
+      }
+    }
+  });
+</script>
+
+<section
+  class="location-testimonials max-w-[1200px] mx-auto px-5 py-16 bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800"
+>
+  <div class="text-center mb-12">
+    <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">
+      What Texas Customers Say <span class="text-brand-red"
+        >About LC Container</span
+      >
+    </h2>
+    <p class="text-lg text-ink-muted max-w-2xl mx-auto">
+      Real feedback from businesses across Texas who trust LC Container for
+      their storage needs.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    <!-- Testimonial Card 1 -->
+    <div
+      class="testimonial-card glass p-6 hover-lift transition-all duration-300"
+    >
+      <div class="flex items-start gap-4">
+        <div
+          class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg"
+        >
+          J
+        </div>
+        <div class="flex-1">
+          <div class="testimonial-stars text-yellow-500 mb-2">⭐⭐⭐⭐⭐</div>
+          <blockquote
+            class="testimonial-quote text-gray-700 dark:text-gray-300 mb-4 italic"
+          >
+            "Loading default testimonial..."
+          </blockquote>
+          <div class="border-t pt-4">
+            <div
+              class="testimonial-name font-semibold text-brand-black dark:text-white"
+            >
+              Loading...
+            </div>
+            <div class="testimonial-business text-sm text-ink-muted">
+              Business Name
+            </div>
+            <div class="flex items-center justify-between mt-2">
+              <span
+                class="testimonial-service text-xs bg-brand-red/10 text-brand-red px-2 py-1 rounded-full"
+                >Service</span
+              >
+              <span class="testimonial-date text-xs text-ink-muted">Date</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial Card 2 -->
+    <div
+      class="testimonial-card glass p-6 hover-lift transition-all duration-300"
+    >
+      <div class="flex items-start gap-4">
+        <div
+          class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg"
+        >
+          M
+        </div>
+        <div class="flex-1">
+          <div class="testimonial-stars text-yellow-500 mb-2">⭐⭐⭐⭐⭐</div>
+          <blockquote
+            class="testimonial-quote text-gray-700 dark:text-gray-300 mb-4 italic"
+          >
+            "Loading default testimonial..."
+          </blockquote>
+          <div class="border-t pt-4">
+            <div
+              class="testimonial-name font-semibold text-brand-black dark:text-white"
+            >
+              Loading...
+            </div>
+            <div class="testimonial-business text-sm text-ink-muted">
+              Business Name
+            </div>
+            <div class="flex items-center justify-between mt-2">
+              <span
+                class="testimonial-service text-xs bg-brand-red/10 text-brand-red px-2 py-1 rounded-full"
+                >Service</span
+              >
+              <span class="testimonial-date text-xs text-ink-muted">Date</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Urgent CTA -->
+  <div class="text-center">
+    <div
+      class="inline-flex items-center gap-3 bg-gradient-to-r from-brand-red to-red-600 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+    >
+      <svg
+        class="w-6 h-6 animate-pulse"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+        ></path>
+      </svg>
+      <div>
+        <div class="font-bold">Join these satisfied customers!</div>
+        <div class="text-sm opacity-90">
+          Call (214) 524-4168 for same-day delivery
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,32 +5,21 @@ keyword: "20ft one-trip (new) conex box for sale Waxahachie, TX"
 intent: "Transactional-Local"
 page_type: "Location-Product"
 city: "Waxahachie, TX"
-title_tag: "Waxahachie 20ft conex box for sale | LC Container"
-meta_description: "Buy one-trip (new) 20ft conex box sale with local delivery in Waxahachie, TX. LC Container — local Since 2003. Request a fast quote today."
+service_type: "conex box"
+condition: "New"
+size: "20ft"
+title_tag: "20ft U2m New conex box Sales in Waxahachie | LC Container"
+meta_description: "20ft new conex box sales in Waxahachie. Fast delivery, competitive pricing. Serving conex boxes area. Quote ID: FK9. Call (214) 524-4168 for your free quote today."
+original_title: "Waxahachie 20ft conex box for sale | LC Container"
+original_meta: "Buy one-trip (new) 20ft conex box sale with local delivery in Waxahachie, TX. LC Container — local Since 2003. Request a fast quote today."
 url_slug: "/waxahachie/buy/20ft/conex-boxes/one-trip-new"
 h1: "Buy 20ft one-trip (new) conex box in Waxahachie"
 internal_links: "/waxahachie/conex-boxes/sales"
 priority: 3
 notes: "NaN"
 noindex: true
+image_alt: "20ft new conex box available for delivery in Waxahachie"
+last_updated: "2025-10-21"
 ---
 
-# Buy 20ft one-trip (new) conex box in Waxahachie
-
-We provide shipping container sales, rentals, and modifications in Waxahachie, TX. Call (214) 524-4168 for a fast quote.
-
-## Our Inventory & Services
-- Shipping container sales
-- Container rentals
-- Custom modifications (doors, HVAC, shelving)
-
-<div data-section="internal-links">
-### Helpful links
-- [/waxahachie/conex-boxes/sales](/waxahachie/conex-boxes/sales
-</div>
-
-<div data-section="cta">
-Get your free quote today — call (214) 524-4168 or <a href="/contact">contact us</a>.
-</div>
-
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does delivery cost in Waxahachie, TX?","acceptedAnswer":{"@type":"Answer","text":"Delivery costs vary by distance and container size. Most deliveries in Waxahachie, TX range from $150-$300. Call (214) 524-4168 for an exact quote based on your specific location."}},{"@type":"Question","name":"Do you offer financing or payment plans?","acceptedAnswer":{"@type":"Answer","text":"We accept major credit cards, checks, and can discuss commercial terms for bulk purchases. Call (214) 524-4168 to discuss options."}},{"@type":"Question","name":"Can you customize containers in Waxahachie, TX?","acceptedAnswer":{"@type":"Answer","text":"Yes — we perform modifications like doors, HVAC, insulation, and shelving. Request a custom quote at (214) 524-4168 or via our contact form."}}]}</script>
+<!-- TODO: Add unique city/inventory copy, images, and internal links here. -->

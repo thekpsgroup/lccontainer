@@ -3,32 +3,63 @@ const id = Astro.props.id ?? "lb";
 const alt = Astro.props.alt ?? "";
 ---
 
-<dialog id={id} class="backdrop:bg-black/80 p-0 rounded-2xl w-[min(92vw,1000px)]">
+<dialog
+  id={id}
+  class="backdrop:bg-black/80 p-0 rounded-2xl w-[min(92vw,1000px)]"
+>
   <form method="dialog" class="absolute right-2 top-2 z-10">
-    <button class="px-3 py-2 rounded-lg bg-white/10 text-white border border-brand-line hover:bg-white/20" aria-label="Close lightbox">×</button>
+    <button
+      class="px-3 py-2 rounded-lg bg-white/10 text-white border border-brand-line hover:bg-white/20"
+      aria-label="Close lightbox">×</button
+    >
   </form>
   <div class="relative">
-    <img id={`${id}-img`} alt={alt} class="w-full h-auto block max-h-[80vh] object-contain bg-black/40" />
-    <div class="p-4 text-sm text-ink-muted bg-brand-black/80 border-t border-brand-line">
+    <img
+      id={`${id}-img`}
+      alt={alt}
+      class="w-full h-auto block max-h-[80vh] object-contain bg-black/40"
+    />
+    <div
+      class="p-4 text-sm text-ink-muted bg-brand-black/80 border-t border-brand-line"
+    >
       <div id={`${id}-title`} class="text-ink font-semibold"></div>
       <div id={`${id}-caption`} class=""></div>
     </div>
   </div>
 </dialog>
 
-<script>
-  const dialog = document.getElementById({id:JSON.stringify(id)});
-  const img = document.getElementById({id:JSON.stringify(id + "-img")});
-  const titleEl = document.getElementById({id:JSON.stringify(id + "-title")});
-  const capEl = document.getElementById({id:JSON.stringify(id + "-caption")});
-  
-  // Public API: window.openLightbox({ src, alt, title, caption })
-  window.openLightbox = (data) => {
-    if(!dialog || !img) return;
-    img.src = data.src || "";
-    img.alt = data.alt || data.title || "";
-    if (titleEl) titleEl.textContent = data.title || "";
-    if (capEl) capEl.textContent = data.caption || "";
-    dialog.showModal();
-  };
+<script define:vars={{ id }} is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dialog = document.getElementById(id);
+    const img = document.getElementById(id + "-img");
+    const titleEl = document.getElementById(id + "-title");
+    const capEl = document.getElementById(id + "-caption");
+
+    // Public API: window.openLightbox({ src, alt, title, caption })
+    window.openLightbox = function (data) {
+      if (!dialog || !img) return;
+      img.src = data.src || "";
+      img.alt = data.alt || data.title || "";
+      if (titleEl) titleEl.textContent = data.title || "";
+      if (capEl) capEl.textContent = data.caption || "";
+      dialog.showModal();
+    };
+
+    // Handle lightbox triggers with data attributes
+    document.addEventListener("click", function (e) {
+      const trigger = e.target.closest(".lightbox-trigger");
+      if (!trigger) return;
+
+      const data = {
+        src: trigger.getAttribute("data-lightbox-src"),
+        alt: trigger.getAttribute("data-lightbox-alt"),
+        title: trigger.getAttribute("data-lightbox-title"),
+        caption: trigger.getAttribute("data-lightbox-caption"),
+      };
+
+      if (data.src && window.openLightbox) {
+        window.openLightbox(data);
+      }
+    });
+  });
 </script>
