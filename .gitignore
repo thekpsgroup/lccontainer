@@ -101,3 +101,4 @@ lighthouse-report.html
 lighthouse-final.json
 lighthouse-optimized.json
 lighthouse-scores.json
+.env*.local

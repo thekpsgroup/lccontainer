@@ -36,7 +36,7 @@ const sizeStyles = {
 }[size];
 
 // Phone button styles - always primary red styling
-const buttonStyle = `background-color: #B22222; color: #ffffff; border: 1px solid #8B0000; ${sizeStyles} font-weight: 600; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: background-color 0.2s ease; box-sizing: border-box; line-height: 1.2; vertical-align: middle;`;
+const buttonStyle = `background-color: #B22222; color: #ffffff; border: 1px solid #8B0000; ${sizeStyles} font-weight: 600; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: background-color 0.2s ease; box-sizing: border-box; line-height: 1.2; vertical-align: middle; border-radius: 4px;`;
 ---
 
 <a
@@ -108,6 +108,7 @@ const buttonStyle = `background-color: #B22222; color: #ffffff; border: 1px soli
     cursor: pointer !important;
     transition: background-color 0.2s ease !important;
     min-height: 48px !important;
+    border-radius: 4px !important;
   }
 
   a[href^="tel:"]:hover {

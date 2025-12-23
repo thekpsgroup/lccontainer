@@ -43,8 +43,8 @@ const stats = [
 
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
     {stats.map(stat => (
-      <div class="border border-grey-300 bg-white p-8 text-center">
-        <div class="text-4xl md:text-5xl font-bold text-brand-red mb-2">
+      <div class="border border-grey-300 bg-white p-8 text-center rounded hover:border-brand-red/30 hover:shadow-md transition-all duration-200">
+        <div class="text-4xl md:text-5xl font-bold text-brand-red mb-3">
           {stat.number}
         </div>
         <h3 class="text-xl font-semibold mb-2 text-black">{stat.label}</h3>
@@ -60,26 +60,12 @@ const stats = [
       <p class="text-grey-600 mb-6">
         Call now for immediate pricing. Same-day delivery available. Get your free quote within 24 hours. Our expert team is ready to help you find the perfect container solution.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="flex justify-center">
         <a 
           href="tel:12145244168"
-          class="px-6 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark"
+          class="px-8 py-4 bg-brand-red text-white font-bold hover:bg-brand-red-dark text-lg rounded transition-colors duration-200"
         >
           Call (214) 524-4168 Now
-        </a>
-        <a 
-          href="/contact" 
-          data-astro-prefetch
-          class="px-6 py-3 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100"
-        >
-          Get Free Quote
-        </a>
-        <a 
-          href="/inventory"
-          data-astro-prefetch
-          class="px-6 py-3 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100"
-        >
-          Browse Inventory
         </a>
       </div>
     </div>

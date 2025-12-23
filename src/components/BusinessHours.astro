@@ -29,19 +29,19 @@ if (currentDay >= 1 && currentDay <= 5) {
 
 <div class={`business-hours ${className}`}>
   <div class="hours-header">
-    <h3 class="text-lg font-semibold text-ink-primary mb-2">
-      📍 Hours & Location
+    <h3 class="text-lg font-semibold text-black mb-2">
+      Hours & Location
     </h3>
     <div class="status-indicator mb-4">
       <span
-        class={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+        class={`inline-flex items-center gap-2 px-3 py-1 text-sm font-medium ${
           isCurrentlyOpen
-            ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-            : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+            ? "bg-grey-100 text-black"
+            : "bg-grey-200 text-grey-600"
         }`}
       >
         <div
-          class={`w-2 h-2 rounded-full ${isCurrentlyOpen ? "bg-green-500" : "bg-red-500"} animate-pulse`}
+          class={`w-2 h-2 rounded-full ${isCurrentlyOpen ? "bg-brand-red" : "bg-grey-400"}`}
         >
         </div>
         {isCurrentlyOpen ? "Open Now" : "Closed"}
@@ -52,10 +52,10 @@ if (currentDay >= 1 && currentDay <= 5) {
   <div class="hours-grid space-y-3">
     {
       businessHours.map(({ days, hours, open }) => (
-        <div class="flex items-center justify-between py-2 border-b border-brand-line/20 last:border-b-0">
-          <span class="text-sm font-medium text-ink-secondary">{days}</span>
+        <div class="flex items-center justify-between py-2 border-b border-grey-300 last:border-b-0">
+          <span class="text-sm font-medium text-black">{days}</span>
           <span
-            class={`text-sm ${open ? "text-ink-primary" : "text-ink-muted"}`}
+            class={`text-sm ${open ? "text-black" : "text-grey-600"}`}
           >
             {hours}
           </span>
@@ -66,7 +66,7 @@ if (currentDay >= 1 && currentDay <= 5) {
 
   {
     showLocation && (
-      <div class="location-info mt-6 pt-4 border-t border-brand-line/20">
+      <div class="location-info mt-6 pt-4 border-t border-grey-300">
         <div class="space-y-3">
           <div class="flex items-start gap-3">
             <svg
@@ -89,8 +89,8 @@ if (currentDay >= 1 && currentDay <= 5) {
               />
             </svg>
             <div>
-              <p class="text-sm font-medium text-ink-primary">Hutchins, TX</p>
-              <p class="text-xs text-ink-muted">Serving DFW Metroplex</p>
+              <p class="text-sm font-medium text-black">Hutchins, TX</p>
+              <p class="text-xs text-grey-600">Serving DFW Metroplex</p>
             </div>
           </div>
 
@@ -109,10 +109,10 @@ if (currentDay >= 1 && currentDay <= 5) {
               />
             </svg>
             <div>
-              <p class="text-sm font-medium text-ink-primary">
+              <p class="text-sm font-medium text-black">
                 200-Mile Service Radius
               </p>
-              <p class="text-xs text-ink-muted">Same-day delivery available</p>
+              <p class="text-xs text-grey-600">Same-day delivery available</p>
             </div>
           </div>
 
@@ -131,16 +131,16 @@ if (currentDay >= 1 && currentDay <= 5) {
               />
             </svg>
             <div>
-              <p class="text-sm font-medium text-ink-primary">(214) 524-4168</p>
-              <p class="text-xs text-ink-muted">Call for instant pricing</p>
+              <p class="text-sm font-medium text-black">(214) 524-4168</p>
+              <p class="text-xs text-grey-600">Call for instant pricing</p>
             </div>
           </div>
         </div>
 
-        <div class="mt-4 pt-4 border-t border-brand-line/20">
+        <div class="mt-4 pt-4 border-t border-grey-300">
           <a
             href="tel:12145244168"
-            class="w-full bg-brand-red hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
+            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 px-4 flex items-center justify-center gap-2 text-sm"
           >
             <svg
               class="w-4 h-4"
@@ -178,11 +178,11 @@ if (currentDay >= 1 && currentDay <= 5) {
 
 <style>
   .business-hours {
-    @apply bg-white dark:bg-brand-black/20 backdrop-blur-sm rounded-xl border border-brand-line/20 p-6 shadow-sm;
+    @apply bg-white border border-grey-300 p-6;
   }
 
   .hours-grid {
-    @apply divide-y divide-brand-line/10;
+    @apply divide-y divide-grey-300;
   }
 
   @media (max-width: 640px) {
