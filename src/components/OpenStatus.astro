@@ -5,13 +5,12 @@ export interface Props {
 }
 const { class: className = "" } = Astro.props;
 
-// Business hours: Mon-Fri 8:00-17:00 Central Time
+// Business hours: Mon-Fri 8:00-17:00, Sat 9:00-15:00 Central Time
 // We'll compute status on client for correct user timezone display
 const hours = {
   tz: "America/Chicago",
-  openHour: 8,
-  closeHour: 17,
-  days: [1, 2, 3, 4, 5], // Mon-Fri
+  weekdays: { openHour: 8, closeHour: 17, days: [1, 2, 3, 4, 5] }, // Mon-Fri 8am-5pm
+  saturday: { openHour: 9, closeHour: 15, day: 6 }, // Sat 9am-3pm
 };
 ---
 
@@ -25,9 +24,8 @@ const hours = {
 
 <script>
   const hours = {
-    openHour: 8,
-    closeHour: 17,
-    days: [1, 2, 3, 4, 5],
+    weekdays: { openHour: 8, closeHour: 17, days: [1, 2, 3, 4, 5] }, // Mon-Fri 8am-5pm
+    saturday: { openHour: 9, closeHour: 15, day: 6 }, // Sat 9am-3pm
   };
 
   function getCentralTimeDate() {
@@ -56,24 +54,46 @@ const hours = {
     const now = getCentralTimeDate();
     const day = now.getDay();
     const hour = now.getHours();
-    const isOpenDay = hours.days.includes(day);
-    const isOpenHour = hour >= hours.openHour && hour < hours.closeHour;
-    const open = isOpenDay && isOpenHour;
+    
+    // Check if it's a weekday (Mon-Fri)
+    const isWeekday = hours.weekdays.days.includes(day);
+    const isWeekdayOpen = isWeekday && hour >= hours.weekdays.openHour && hour < hours.weekdays.closeHour;
+    
+    // Check if it's Saturday
+    const isSaturday = day === hours.saturday.day;
+    const isSaturdayOpen = isSaturday && hour >= hours.saturday.openHour && hour < hours.saturday.closeHour;
+    
+    const open = isWeekdayOpen || isSaturdayOpen;
 
     let label = open ? "Open now" : "Closed";
 
     if (!open) {
       // compute next open time
       let next = new Date(now);
-      next.setHours(hours.openHour, 0, 0, 0);
-      if (isOpenDay && hour < hours.openHour) {
-        // opens later today
+      let nextOpenHour = hours.weekdays.openHour;
+      
+      if (isWeekday && hour < hours.weekdays.openHour) {
+        // Opens later today (weekday)
+        next.setHours(hours.weekdays.openHour, 0, 0, 0);
+      } else if (isSaturday && hour < hours.saturday.openHour) {
+        // Opens later today (Saturday)
+        next.setHours(hours.saturday.openHour, 0, 0, 0);
       } else {
-        // move to next open day
+        // Move to next open day
         do {
           next.setDate(next.getDate() + 1);
-        } while (!hours.days.includes(next.getDay()));
+          const nextDay = next.getDay();
+          if (hours.weekdays.days.includes(nextDay)) {
+            nextOpenHour = hours.weekdays.openHour;
+            break;
+          } else if (nextDay === hours.saturday.day) {
+            nextOpenHour = hours.saturday.openHour;
+            break;
+          }
+        } while (true);
+        next.setHours(nextOpenHour, 0, 0, 0);
       }
+      
       const fmt = new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
         minute: "2-digit",

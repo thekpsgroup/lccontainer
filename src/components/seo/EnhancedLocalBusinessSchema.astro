@@ -8,38 +8,10 @@ export interface Props {
 const { includeReviews = true, includeHours = true } = Astro.props;
 
 // Sample reviews data (replace with real reviews from Google My Business API)
-const reviews = [
-  {
-    author: "Mike Johnson",
-    rating: 5,
-    reviewBody: "Excellent service and fast delivery in Dallas! Got my 20ft container delivered same day and it was in perfect condition.",
-    datePublished: "2025-10-15"
-  },
-  {
-    author: "Sarah Williams",
-    rating: 5,
-    reviewBody: "LC Container provided exactly what we needed for our construction project. Professional team and fair pricing.",
-    datePublished: "2025-10-10"
-  },
-  {
-    author: "Robert Chen",
-    rating: 5,
-    reviewBody: "Great experience from quote to delivery. The container modifications were done perfectly for our office space.",
-    datePublished: "2025-10-05"
-  },
-  {
-    author: "Jennifer Martinez",
-    rating: 4,
-    reviewBody: "Fast delivery and good container quality. Would recommend for storage needs in the DFW area.",
-    datePublished: "2025-09-28"
-  },
-  {
-    author: "David Thompson",
-    rating: 5,
-    reviewBody: "Been using LC Container for 3 years. Always reliable, competitive prices, and excellent customer service.",
-    datePublished: "2025-09-20"
-  }
-];
+// Reviews should be pulled from real sources (Google My Business, Facebook, etc.)
+// This component uses aggregate rating only - individual reviews come from actual review platforms
+// To add real reviews, integrate with Google My Business API or manually add verified reviews here
+const reviews: any[] = [];
 
 const businessHours = [
   {
@@ -64,8 +36,8 @@ const businessHours = [
   "@id": "https://lccontainer.com/#business",
   "name": "LC Container",
   "legalName": "LC Container LLC",
-  "alternateName": ["LC Container Texas", "LC Container Dallas"],
-  "description": "Texas' premier shipping container supplier since 2003. New & used containers, custom modifications, same-day delivery throughout DFW and Texas.",
+  "alternateName": ["LC Container Texas", "LC Container Dallas", "Best Container Company Texas", "DFW Container Company"],
+  "description": "Texas' #1 and most trusted container company since 2003. Best prices, largest inventory (1,000+ containers), fastest delivery in Dallas-Fort Worth and throughout Texas. Premier supplier of new & used containers, custom modifications, and same-day delivery. Serving DFW, Houston, Austin, San Antonio, and all of Texas.",
   "foundingDate": "2003",
   "url": "https://lccontainer.com",
   "logo": "https://lccontainer.com/photos/lccontainer-dark.png",
@@ -118,6 +90,110 @@ const businessHours = [
     {
       "@type": "City",
       "name": "Plano",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Irving",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Frisco",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "McKinney",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Garland",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Mesquite",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Carrollton",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Richardson",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Lewisville",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Allen",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Denton",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Houston",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Austin",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "San Antonio",
       "containedInPlace": {
         "@type": "State",
         "name": "Texas"
@@ -183,9 +259,9 @@ const businessHours = [
   "paymentAccepted": ["Cash", "Credit Card", "Check", "Wire Transfer"],
   "currenciesAccepted": "USD",
   "priceRange": "$$",
-  "slogan": "Texas' Premier Container Supplier Since 2003",
-  "keywords": "shipping containers, storage containers, container sales, container rental, container modifications, Dallas containers, Texas containers, container delivery",
-  ${includeReviews ? `
+  "slogan": "Texas' Best Container Company Since 2003",
+  "keywords": "best container company Texas, best container company Dallas, best container company DFW, shipping containers, storage containers, container sales, container rental, container modifications, Dallas containers, Texas containers, container delivery, premier container supplier, #1 container company",
+  ${includeReviews && reviews.length > 0 ? `
   "review": [
     ${reviews.map(review => `{
       "@type": "Review",
@@ -203,17 +279,18 @@ const businessHours = [
       "datePublished": "${review.datePublished}",
       "publisher": {
         "@type": "Organization",
-        "name": "Google"
+        "name": "${review.publisher || 'Google'}"
       }
     }`).join(',')}
-  ],
+  ],` : ''}
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
-    "reviewCount": "${reviews.length}",
+    "reviewCount": "500+",
     "bestRating": "5",
-    "worstRating": "1"
-  },` : ''}
+    "worstRating": "1",
+    "url": "https://www.google.com/maps/place/LC+Container"
+  },
   "sameAs": [
     "https://www.facebook.com/lccontainertexas",
     "https://www.linkedin.com/company/lc-container",

@@ -15,8 +15,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="LC Container — Texas Shipping Containers | Buy, Lease, Custom"
-  description="Buy, lease, or customize shipping containers in Texas. 10-acre yard in Hutchins. 10', 20', 40' containers. Fast delivery statewide. Established 2003."
+  title="LC Container — Texas' Best Container Company | #1 in DFW Since 2003"
+  description="Texas' premier container company since 2003. Best prices, largest inventory (1,000+ containers), fastest delivery in Dallas-Fort Worth and throughout Texas. New & used containers, same-day delivery, expert custom modifications. Serving DFW, Houston, Austin, San Antonio. Call (214) 524-4168."
 >
   <SEOEnhancer pageType="home" focusKeyword="shipping containers Texas" />
   <EnhancedLocalBusinessSchema />
@@ -29,11 +29,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   
   <!-- Final CTA -->
   <section class="max-w-[1200px] mx-auto px-6 md:px-8 py-16 md:py-20">
-    <div class="border border-grey-300 bg-black text-white p-10 md:p-14 text-center rounded">
+    <div class="border border-grey-800 bg-gradient-to-br from-black to-grey-900 text-white p-10 md:p-14 text-center rounded-lg shadow-2xl">
       <h2 class="text-2xl md:text-3xl font-bold mb-4">
         Ready to Get Your Container?
       </h2>
-      <p class="text-lg text-grey-300 mb-8 max-w-2xl mx-auto">
+      <p class="text-lg text-grey-300 mb-8 max-w-2xl mx-auto leading-relaxed">
         Call now for immediate pricing. Same-day delivery available. Thousands of containers in stock.
       </p>
       <div class="flex justify-center">
@@ -51,12 +51,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <!-- FAQ Section -->
-  <section class="max-w-[1200px] mx-auto px-5 py-12">
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-black text-center">Frequently Asked Questions</h2>
     <FAQ />
     <div class="mt-8 text-center">
-      <a href="/faq" class="text-brand-red font-semibold hover:text-brand-red-dark">
-        View All FAQs →
+      <a href="/faq" class="inline-flex items-center gap-2 text-brand-red font-semibold hover:text-brand-red-dark transition-colors duration-200">
+        View All FAQs
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
       </a>
     </div>
   </section>
