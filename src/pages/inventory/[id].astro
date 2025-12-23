@@ -4,6 +4,7 @@ import Header from "../../components/Header.astro";
 import Lightbox from "../../components/Lightbox.astro";
 import DeliveryEstimator from "../../components/DeliveryEstimator.astro";
 import { INVENTORY, type Item } from "../../data/inventory";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 
 export async function getStaticPaths() {
   return INVENTORY.map((item) => ({
@@ -21,14 +22,16 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
   <Header />
 
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
-    <nav class="text-sm text-ink-muted mb-4">
-      <a href="/inventory" data-astro-prefetch class="hover:underline">Inventory</a> / <span class="text-ink">{item.title}</span>
-    </nav>
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Inventory", url: "/inventory" },
+      { name: item.title, url: `/inventory/${item.id}` }
+    ]} />
 
     <div class="grid lg:grid-cols-2 gap-8 items-start">
       <!-- Gallery -->
-      <div class="glass p-0 overflow-hidden">
-        <div id="carousel" class="relative aspect-[4/3] bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,.18),transparent_60%)]">
+      <div class="border border-grey-300 bg-white p-0 overflow-hidden">
+        <div id="carousel" class="relative aspect-[4/3] bg-grey-100">
           <button
             id="cimg-btn"
             class="absolute inset-0 w-full h-full cursor-pointer image-overlay lightbox-trigger"
@@ -38,45 +41,45 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
             data-lightbox-title={item.title}
             data-lightbox-caption={item.blurb}
           >
-            <img id="cimg" src={item.photos[0]} alt={item.title} class="h-full w-full object-cover" loading="eager" onerror="this.style.display='none'" />
+            <img id="cimg" src={item.photos[0]} alt={`${item.title} - ${item.size} ${item.height} ${item.condition} shipping container for sale at LC Container Texas`} class="h-full w-full object-cover" loading="eager" onerror="this.style.display='none'" />
           </button>
-          <button id="prev" class="absolute left-3 top-1/2 -translate-y-1/2 px-3 py-2 rounded-xl bg-white/10 border border-brand-line z-10">‹</button>
-          <button id="next" class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-2 rounded-xl bg-white/10 border border-brand-line z-10">›</button>
+          <button id="prev" class="absolute left-3 top-1/2 -translate-y-1/2 px-3 py-2 bg-white border border-grey-300 z-10 hover:bg-grey-100">‹</button>
+          <button id="next" class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-2 bg-white border border-grey-300 z-10 hover:bg-grey-100">›</button>
         </div>
         <div class="grid grid-cols-4 gap-2 p-3">
           {item.photos.map((p,idx) => (
-            <button class="group relative h-16 overflow-hidden rounded-lg border border-brand-line">
-              <img src={p} alt={`${item.title} photo ${idx+1}`} class="h-full w-full object-cover group-hover:opacity-80" loading="lazy" onerror="this.style.display='none'"/>
+            <button class="group relative h-16 overflow-hidden border border-grey-300">
+              <img src={p} alt={`${item.title} - ${item.size} container photo ${idx+1} at LC Container yard`} class="h-full w-full object-cover group-hover:opacity-80" loading="lazy" onerror="this.style.display='none'"/>
             </button>
           ))}
         </div>
       </div>
 
       <!-- Details -->
-      <div class="glass p-6">
-        <h1 class="text-2xl md:text-3xl font-semibold">{item.title}</h1>
+      <div class="border border-grey-300 bg-white p-6">
+        <h1 class="text-2xl md:text-3xl font-semibold text-black">{item.title}</h1>
         <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
-          <span class="px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{item.size}</span>
-          <span class="px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{item.height}</span>
-          <span class="px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{item.condition}</span>
-          {item.badge && <span class="px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{item.badge}</span>}
-          {item.inStock ? <span class="px-2 py-1 rounded-lg bg-white/10 border border-brand-line">In Stock</span> : <span class="px-2 py-1 rounded-lg bg-white/10 border border-brand-line">Check ETA</span>}
+          <span class="px-2 py-1 bg-grey-100 border border-grey-300 text-black">{item.size}</span>
+          <span class="px-2 py-1 bg-grey-100 border border-grey-300 text-black">{item.height}</span>
+          <span class="px-2 py-1 bg-grey-100 border border-grey-300 text-black">{item.condition}</span>
+          {item.badge && <span class="px-2 py-1 bg-grey-100 border border-grey-300 text-black">{item.badge}</span>}
+          {item.inStock ? <span class="px-2 py-1 bg-grey-100 border border-grey-300 text-black">In Stock</span> : <span class="px-2 py-1 bg-grey-100 border border-grey-300 text-black">Check ETA</span>}
         </div>
 
-        <p class="text-ink-muted mt-3">{item.blurb}</p>
-        <p class="text-sm text-ink-muted mt-2">From ${item.priceFrom.toLocaleString()} <span class="text-xs">(container only; delivery extra)</span></p>
+        <p class="text-grey-600 mt-3">{item.blurb}</p>
+        <p class="text-sm text-grey-600 mt-2 font-semibold">Call for Pricing</p>
 
         <div class="mt-4 flex gap-2">
-          <a href={`/contact?interest=${encodeURIComponent(item.title)}`} data-astro-prefetch class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
-          <a href="/inventory" data-astro-prefetch class="px-4 py-2 rounded-xl border border-brand-line text-sm hover:bg-white/5">Back to Inventory</a>
+          <a href={`/contact?interest=${encodeURIComponent(item.title)}`} data-astro-prefetch class="px-4 py-2 bg-brand-red text-white text-sm font-semibold hover:bg-brand-red-dark">Get Quote</a>
+          <a href="/inventory" data-astro-prefetch class="px-4 py-2 border border-grey-300 bg-white text-black text-sm hover:bg-grey-100">Back to Inventory</a>
         </div>
 
-        <h2 class="text-lg font-semibold mt-6">Specs</h2>
-        <ul class="text-sm text-ink-muted list-disc pl-5 mt-2">
+        <h2 class="text-lg font-semibold mt-6 text-black">Specs</h2>
+        <ul class="text-sm text-grey-600 list-disc pl-5 mt-2">
           {item.specs.map(s => <li>{s}</li>)}
         </ul>
-        <p class="text-xs text-ink-muted mt-3">
-          Planning a build? <a href="/custom-builds" data-astro-prefetch class="hover:underline">See custom examples</a>
+        <p class="text-xs text-grey-600 mt-3">
+          Planning a build? <a href="/custom-builds" data-astro-prefetch class="hover:underline text-brand-red">See custom examples</a>
         </p>
 
         <div class="mt-6">
@@ -85,10 +88,10 @@ const desc = `${item.title}: ${item.blurb} · ${item.condition}. From $${item.pr
 
         <!-- Trust -->
         <div class="mt-6 grid sm:grid-cols-2 gap-3 text-sm">
-          <div class="glass p-3 text-center"><div class="font-semibold">Licensed & Insured</div></div>
-          <div class="glass p-3 text-center"><div class="font-semibold">Quotes in 24h</div></div>
-          <div class="glass p-3 text-center"><div class="font-semibold">10-Acre Yard</div></div>
-          <div class="glass p-3 text-center"><div class="font-semibold">200-Mile Service</div></div>
+          <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">Licensed & Insured</div></div>
+          <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">Quotes in 24h</div></div>
+          <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">10-Acre Yard</div></div>
+          <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">200-Mile Service</div></div>
         </div>
       </div>
     </div>

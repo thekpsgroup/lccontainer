@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+---
+
+<BaseLayout title="Container Maintenance Tips | LC Container Texas" description="Essential maintenance tips for shipping containers: rust prevention, door maintenance, cleaning, and longevity tips.">
+  <Header />
+  
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Maintenance Tips", url: "/maintenance-tips" }
+    ]} />
+    
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Container Maintenance Tips</h1>
+    <p class="text-lg text-grey-600 mb-8">Keep your container in excellent condition with these maintenance tips.</p>
+
+    <!-- Regular Maintenance -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Regular Maintenance</h2>
+      <div class="space-y-4">
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">Monthly Checks</h3>
+          <ul class="space-y-2 text-sm text-grey-600">
+            <li>• Inspect door seals for wear or damage</li>
+            <li>• Check for rust spots (especially around door frames)</li>
+            <li>• Ensure doors open and close smoothly</li>
+            <li>• Look for any signs of water intrusion</li>
+            <li>• Check lock mechanisms</li>
+          </ul>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">Quarterly Maintenance</h3>
+          <ul class="space-y-2 text-sm text-grey-600">
+            <li>• Clean interior and exterior</li>
+            <li>• Lubricate door hinges and locks</li>
+            <li>• Inspect floor for damage or wear</li>
+            <li>• Check for structural issues</li>
+            <li>• Touch up paint if needed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rust Prevention -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Rust Prevention</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <p class="text-sm text-grey-600 mb-4">Rust is the biggest threat to container longevity. Here's how to prevent it:</p>
+        <ul class="space-y-2 text-sm text-grey-600">
+          <li>• <strong>Keep it dry:</strong> Ensure proper drainage around container</li>
+          <li>• <strong>Address scratches:</strong> Touch up any scratches or chips immediately</li>
+          <li>• <strong>Ventilation:</strong> Ensure adequate ventilation to prevent condensation</li>
+          <li>• <strong>Elevate if possible:</strong> Keep container off ground using blocks or pads</li>
+          <li>• <strong>Regular inspection:</strong> Catch rust early before it spreads</li>
+        </ul>
+        <p class="text-sm text-grey-600 mt-4"><strong>If rust appears:</strong> Remove with wire brush, apply rust converter, then touch up with paint matching container color.</p>
+      </div>
+    </div>
+
+    <!-- Door Maintenance -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Door Maintenance</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">Door Seals</h3>
+          <p class="text-sm text-grey-600 mb-3">Door seals are critical for keeping water out:</p>
+          <ul class="space-y-1 text-sm text-grey-600">
+            <li>• Inspect regularly for cracks or wear</li>
+            <li>• Replace if damaged or compressed</li>
+            <li>• Keep seals clean and free of debris</li>
+          </ul>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">Hinges & Locks</h3>
+          <p class="text-sm text-grey-600 mb-3">Keep doors functioning smoothly:</p>
+          <ul class="space-y-1 text-sm text-grey-600">
+            <li>• Lubricate hinges every 3-6 months</li>
+            <li>• Check lock mechanisms regularly</li>
+            <li>• Replace locks if they become difficult to operate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cleaning -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Cleaning</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <p class="text-sm text-grey-600 mb-4"><strong>Exterior:</strong></p>
+        <ul class="space-y-1 text-sm text-grey-600 mb-4">
+          <li>• Use mild soap and water</li>
+          <li>• Avoid harsh chemicals that could damage paint</li>
+          <li>• Rinse thoroughly</li>
+          <li>• Clean gutters and drainage areas</li>
+        </ul>
+        <p class="text-sm text-grey-600 mb-4"><strong>Interior:</strong></p>
+        <ul class="space-y-1 text-sm text-grey-600">
+          <li>• Sweep or vacuum regularly</li>
+          <li>• Clean spills immediately</li>
+          <li>• Ensure proper ventilation during cleaning</li>
+          <li>• Check for mold or mildew</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Longevity Tips -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Make Your Container Last</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <ul class="space-y-2 text-sm text-grey-600">
+          <li>• <strong>Proper placement:</strong> Level ground with good drainage</li>
+          <li>• <strong>Ventilation:</strong> Prevent condensation buildup</li>
+          <li>• <strong>Regular inspections:</strong> Catch problems early</li>
+          <li>• <strong>Address issues promptly:</strong> Don't let small problems become big ones</li>
+          <li>• <strong>Protect from elements:</strong> Consider shade or cover if possible</li>
+          <li>• <strong>Keep it locked:</strong> Prevent unauthorized access and damage</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- When to Call a Professional -->
+    <div class="mb-12 border border-grey-300 bg-grey-100 p-6">
+      <h2 class="text-xl font-bold mb-4 text-black">When to Call a Professional</h2>
+      <p class="text-sm text-grey-600 mb-4">Contact us if you notice:</p>
+      <ul class="space-y-1 text-sm text-grey-600">
+        <li>• Significant rust that's spreading</li>
+        <li>• Structural damage or dents</li>
+        <li>• Persistent water leaks</li>
+        <li>• Door mechanisms that won't repair easily</li>
+        <li>• Floor damage or deterioration</li>
+      </ul>
+      <p class="text-sm text-grey-600 mt-4">We can help with repairs, modifications, or replacement if needed.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="border border-grey-300 bg-white p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black">Need Help with Maintenance?</h2>
+      <p class="text-grey-600 mb-6">Our team can help with repairs, modifications, or answer maintenance questions.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:12145244168" class="px-8 py-4 bg-brand-red text-white font-semibold hover:bg-brand-red-dark">Call (214) 524-4168</a>
+        <a href="/contact" class="px-8 py-4 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Get Help</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>
+

@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+---
+
+<BaseLayout title="Container Size Comparison Chart | LC Container Texas" description="Compare shipping container sizes: 10', 20', 40' standard, and 40' high cube. Dimensions, capacity, and use cases for each size.">
+  <Header />
+  
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Size Comparison", url: "/size-comparison" }
+    ]} />
+    
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Container Size Comparison</h1>
+    <p class="text-lg text-grey-600 mb-8">Compare all available container sizes to find the perfect fit for your needs.</p>
+
+    <!-- Comparison Table -->
+    <div class="mb-12 overflow-x-auto">
+      <table class="w-full border-collapse border border-grey-300 bg-white">
+        <thead>
+          <tr class="bg-grey-100">
+            <th class="border border-grey-300 p-4 text-left font-bold text-black">Size</th>
+            <th class="border border-grey-300 p-4 text-left font-bold text-black">Length</th>
+            <th class="border border-grey-300 p-4 text-left font-bold text-black">Width</th>
+            <th class="border border-grey-300 p-4 text-left font-bold text-black">Height</th>
+            <th class="border border-grey-300 p-4 text-left font-bold text-black">Capacity</th>
+            <th class="border border-grey-300 p-4 text-left font-bold text-black">Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-grey-300 p-4 font-semibold text-black">10' Container</td>
+            <td class="border border-grey-300 p-4 text-grey-600">10 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8'6"</td>
+            <td class="border border-grey-300 p-4 text-grey-600">~600 cu ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">Small storage, tight spaces</td>
+          </tr>
+          <tr class="bg-grey-50">
+            <td class="border border-grey-300 p-4 font-semibold text-black">20' Container</td>
+            <td class="border border-grey-300 p-4 text-grey-600">20 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8'6"</td>
+            <td class="border border-grey-300 p-4 text-grey-600">~1,170 cu ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">Most popular, general storage</td>
+          </tr>
+          <tr>
+            <td class="border border-grey-300 p-4 font-semibold text-black">40' Standard</td>
+            <td class="border border-grey-300 p-4 text-grey-600">40 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8'6"</td>
+            <td class="border border-grey-300 p-4 text-grey-600">~2,350 cu ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">Large storage, commercial</td>
+          </tr>
+          <tr class="bg-grey-50">
+            <td class="border border-grey-300 p-4 font-semibold text-black">40' High Cube</td>
+            <td class="border border-grey-300 p-4 text-grey-600">40 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">8 ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">9'6"</td>
+            <td class="border border-grey-300 p-4 text-grey-600">~2,694 cu ft</td>
+            <td class="border border-grey-300 p-4 text-grey-600">Maximum space, offices</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Visual Comparison -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Visual Size Comparison</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <div class="space-y-4">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-black">10' Container</span>
+              <span class="text-xs text-grey-600">10 ft</span>
+            </div>
+            <div class="h-4 bg-brand-red" style="width: 10%;"></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-black">20' Container</span>
+              <span class="text-xs text-grey-600">20 ft</span>
+            </div>
+            <div class="h-4 bg-brand-red" style="width: 20%;"></div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-black">40' Container</span>
+              <span class="text-xs text-grey-600">40 ft</span>
+            </div>
+            <div class="h-4 bg-brand-red" style="width: 40%;"></div>
+          </div>
+        </div>
+        <p class="text-xs text-grey-600 mt-4">* All containers are 8 ft wide. Height varies: 8'6" standard, 9'6" high cube.</p>
+      </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">What Fits in Each Size?</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">10' Container</h3>
+          <ul class="space-y-1 text-sm text-grey-600">
+            <li>• Small furniture and boxes</li>
+            <li>• Seasonal decorations</li>
+            <li>• Tools and equipment</li>
+            <li>• Backyard storage</li>
+          </ul>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">20' Container</h3>
+          <ul class="space-y-1 text-sm text-grey-600">
+            <li>• Contents of 1-2 bedroom apartment</li>
+            <li>• Small vehicle or motorcycle</li>
+            <li>• Business inventory</li>
+            <li>• Workshop space</li>
+          </ul>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">40' Standard</h3>
+          <ul class="space-y-1 text-sm text-grey-600">
+            <li>• Contents of 3-4 bedroom house</li>
+            <li>• Multiple vehicles</li>
+            <li>• Large equipment</li>
+            <li>• Commercial storage</li>
+          </ul>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-lg font-semibold mb-3 text-black">40' High Cube</h3>
+          <ul class="space-y-1 text-sm text-grey-600">
+            <li>• Office conversion</li>
+            <li>• Tall equipment or machinery</li>
+            <li>• Maximum storage capacity</li>
+            <li>• Retail space</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="border border-grey-300 bg-white p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black">Ready to Choose Your Size?</h2>
+      <p class="text-grey-600 mb-6">Call us for expert advice or browse our inventory.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:12145244168" class="px-8 py-4 bg-brand-red text-white font-semibold hover:bg-brand-red-dark">Call (214) 524-4168</a>
+        <a href="/inventory" class="px-8 py-4 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Browse Inventory</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>
+

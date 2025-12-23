@@ -10,7 +10,7 @@ export interface Props {
 
 const {
   phoneNumber = '12145244168',
-  callText = '📞 Call Now',
+  callText = 'Call Now',
   quoteText = 'Get Free Quote',
   quoteHref = '/contact',
   visible = true,
@@ -27,7 +27,7 @@ const telLink = `tel:${phoneNumber}`;
 {
   visible && (
     <div
-      class={`sticky-call-bar fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-4 border-brand-red shadow-2xl pb-safe ${className}`}
+      class={`sticky-call-bar fixed bottom-0 left-0 right-0 z-50 bg-white border-t-4 border-brand-red pb-safe ${className}`}
       role="complementary"
       aria-label="Contact options"
     >
@@ -35,31 +35,33 @@ const telLink = `tel:${phoneNumber}`;
         <!-- Phone Button -->
         <a
           href={telLink}
-          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px] sticky-phone-btn"
+          class="flex-1 py-4 px-4 text-center text-lg font-bold bg-brand-red text-white hover:bg-brand-red-dark flex flex-col items-center justify-center gap-1 min-h-[64px] sticky-phone-btn"
           role="button"
           aria-label={`Call us now at ${formattedPhone}`}
           data-phone={phoneNumber}
         >
-          <span class="text-xl">📞</span>
-          <span class="text-sm font-normal leading-tight">
-            Call Now<br/>
-            <span class="text-xs opacity-90">{formattedPhone}</span>
+          <span class="text-base font-semibold">
+            Call Now
+          </span>
+          <span class="text-sm font-normal">
+            {formattedPhone}
           </span>
         </a>
 
         <!-- Quote Button -->
         <a
           href={quoteHref}
-          class="flex-1 py-4 px-4 text-center text-lg font-extrabold bg-brand-red text-white hover:bg-brand-black/90 transition-all duration-300 active:scale-95 shadow-lg flex flex-col items-center justify-center gap-1 min-h-[64px] sticky-quote-btn"
+          class="flex-1 py-4 px-4 text-center text-lg font-bold bg-black text-white hover:bg-grey-800 flex flex-col items-center justify-center gap-1 min-h-[64px] sticky-quote-btn"
           role="button"
           aria-label="Get your free quote now"
           data-cta="sticky_quote"
           data-href={quoteHref}
         >
-          <span class="text-xl">💬</span>
-          <span class="text-sm font-normal leading-tight">
-            Get Free Quote<br/>
-            <span class="text-xs opacity-90">24h Response</span>
+          <span class="text-base font-semibold">
+            Get Free Quote
+          </span>
+          <span class="text-sm font-normal">
+            24h Response
           </span>
         </a>
       </div>
@@ -104,12 +106,7 @@ const telLink = `tel:${phoneNumber}`;
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .sticky-call-bar a {
-      transition: opacity 0.2s ease;
-      transform: none !important;
-    }
-
-    .sticky-call-bar a:active {
-      transform: none !important;
+      transition: background-color 0.2s ease;
     }
   }
 

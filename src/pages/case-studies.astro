@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+---
+
+<BaseLayout title="Container Projects & Case Studies | LC Container Texas" description="See real examples of container projects: offices, storage, custom modifications, and more from LC Container customers.">
+  <Header />
+  
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Case Studies", url: "/case-studies" }
+    ]} />
+    
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Container Projects & Case Studies</h1>
+    <p class="text-lg text-grey-600 mb-8">Real examples of how our customers use shipping containers.</p>
+
+    <!-- Case Studies -->
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- Case Study 1 -->
+      <div class="border border-grey-300 bg-white">
+        <div class="h-48 bg-grey-200 flex items-center justify-center">
+          <span class="text-grey-400 text-sm">Office Conversion</span>
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-bold mb-2 text-black">Nonprofit Food Distribution Center</h2>
+          <p class="text-sm text-grey-600 mb-4"><strong>Location:</strong> Austin, TX</p>
+          <p class="text-sm text-grey-600 mb-4">MATI-X nonprofit needed a custom-compliant container for food distribution. We designed and modified a 40' container with proper ventilation, shelving, and compliance features.</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Result:</strong> Now distributes 6,000 pounds of fresh food weekly to families in need.</p>
+          <p class="text-xs text-grey-500 italic">"Eric at LC Container was exceptional. His expertise saved us from costly mistakes." - Theresa Tumminia, Nonprofit Director</p>
+        </div>
+      </div>
+
+      <!-- Case Study 2 -->
+      <div class="border border-grey-300 bg-white">
+        <div class="h-48 bg-grey-200 flex items-center justify-center">
+          <span class="text-grey-400 text-sm">Custom Modification</span>
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-bold mb-2 text-black">Floral Business Cooler</h2>
+          <p class="text-sm text-grey-600 mb-4"><strong>Location:</strong> Houston, TX</p>
+          <p class="text-sm text-grey-600 mb-4">A floral business needed a specialized cooler for their inventory. We helped them find the perfect container and provided guidance on insulation and temperature control modifications.</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Result:</strong> Perfect solution for their floral business needs at a great price.</p>
+          <p class="text-xs text-grey-500 italic">"Eric is wonderful to work with! He helped me find the perfect container." - Faith Nabors, Local Guide</p>
+        </div>
+      </div>
+
+      <!-- Case Study 3 -->
+      <div class="border border-grey-300 bg-white">
+        <div class="h-48 bg-grey-200 flex items-center justify-center">
+          <span class="text-grey-400 text-sm">Storage Solution</span>
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-bold mb-2 text-black">Multiple Container Purchase</h2>
+          <p class="text-sm text-grey-600 mb-4"><strong>Location:</strong> San Antonio, TX</p>
+          <p class="text-sm text-grey-600 mb-4">A customer needed multiple containers for a large storage project. We negotiated pricing and provided fast delivery with excellent customer service.</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Result:</strong> Better deal than anywhere else. Fast response and smooth delivery.</p>
+          <p class="text-xs text-grey-500 italic">"We negotiated pricing and I left with a better deal I couldn't find anywhere else." - Tay Michelle, Verified Customer</p>
+        </div>
+      </div>
+
+      <!-- Case Study 4 -->
+      <div class="border border-grey-300 bg-white">
+        <div class="h-48 bg-grey-200 flex items-center justify-center">
+          <span class="text-grey-400 text-sm">Commercial Storage</span>
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-bold mb-2 text-black">Business Inventory Storage</h2>
+          <p class="text-sm text-grey-600 mb-4"><strong>Location:</strong> Dallas, TX</p>
+          <p class="text-sm text-grey-600 mb-4">A business needed reliable storage for inventory. We provided fast, dependable service from start to finish with competitive pricing.</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Result:</strong> Fast service, best price found, knowledgeable team.</p>
+          <p class="text-xs text-grey-500 italic">"LC Container, LLC is fantastic! Their service was fast and dependable." - Chessica Rommell, Verified Customer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Uses -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Common Container Uses</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="font-semibold mb-2 text-black">Storage</h3>
+          <p class="text-sm text-grey-600">Residential, commercial, and industrial storage.</p>
+        </div>
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="font-semibold mb-2 text-black">Offices</h3>
+          <p class="text-sm text-grey-600">Convert containers into office spaces, retail locations, or work areas.</p>
+        </div>
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="font-semibold mb-2 text-black">Workshops</h3>
+          <p class="text-sm text-grey-600">Create dedicated workshop spaces for tools and equipment.</p>
+        </div>
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="font-semibold mb-2 text-black">Specialized</h3>
+          <p class="text-sm text-grey-600">Coolers, food distribution, equipment storage, and more.</p>
+        </div>
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="font-semibold mb-2 text-black">Temporary</h3>
+          <p class="text-sm text-grey-600">Construction sites, events, or short-term storage needs.</p>
+        </div>
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="font-semibold mb-2 text-black">Custom</h3>
+          <p class="text-sm text-grey-600">We can modify containers for virtually any application.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="border border-grey-300 bg-white p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black">Start Your Project</h2>
+      <p class="text-grey-600 mb-6">Let us help you find the perfect container for your needs.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:12145244168" class="px-8 py-4 bg-brand-red text-white font-semibold hover:bg-brand-red-dark">Call (214) 524-4168</a>
+        <a href="/contact" class="px-8 py-4 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Get Free Quote</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>
+

@@ -7,13 +7,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: { DEFAULT: "#E6EAF2", muted: "#B8C0CF" },
         brand: {
-          black: "#0B0B0B",     // logo bg
-          red: "#B22222",       // Texas Red primary
-          silver: "#C0C0C0",    // metallic accent
-          gold: "#C9A75A",      // brass trust accent (sparingly)
-          line: "rgba(255,255,255,0.18)"
+          black: "#000000",
+          "black-900": "#0B0B0B",
+          red: "#B22222",
+          "red-dark": "#8B0000",
+          "red-light": "#DC143C",
+        },
+        grey: {
+          50: "#fafafa",
+          100: "#f5f5f5",
+          200: "#e5e5e5",
+          300: "#d4d4d4",
+          400: "#a3a3a3",
+          500: "#737373",
+          600: "#525252",
+          700: "#404040",
+          800: "#262626",
+          900: "#171717",
+          950: "#0a0a0a",
         },
       },
       borderRadius: { xl: "24px", "2xl": "32px" },

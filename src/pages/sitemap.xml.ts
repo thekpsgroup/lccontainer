@@ -118,6 +118,42 @@ export const GET: APIRoute = async ({ site }) => {
       priority: 0.7
     },
     {
+      url: '/how-to-choose',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.8
+    },
+    {
+      url: '/size-comparison',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.8
+    },
+    {
+      url: '/buying-guide',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.8
+    },
+    {
+      url: '/delivery-prep',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.7
+    },
+    {
+      url: '/case-studies',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.7
+    },
+    {
+      url: '/maintenance-tips',
+      lastmod: new Date().toISOString(),
+      changefreq: 'monthly',
+      priority: 0.7
+    },
+    {
       url: '/city',
       lastmod: new Date().toISOString(),
       changefreq: 'monthly',

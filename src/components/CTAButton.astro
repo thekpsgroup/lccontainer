@@ -36,7 +36,7 @@ const sizeStyles = {
 }[size];
 
 // Phone button styles - always primary red styling
-const buttonStyle = `background-color: #dc2626; color: #ffffff; border: 1px solid #b91c1c; ${sizeStyles} border-radius: 8px; font-weight: 600; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: all 0.2s ease; box-sizing: border-box; line-height: 1.2; vertical-align: middle;`;
+const buttonStyle = `background-color: #B22222; color: #ffffff; border: 1px solid #8B0000; ${sizeStyles} font-weight: 600; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: background-color 0.2s ease; box-sizing: border-box; line-height: 1.2; vertical-align: middle;`;
 ---
 
 <a
@@ -46,10 +46,9 @@ const buttonStyle = `background-color: #dc2626; color: #ffffff; border: 1px soli
   aria-label={ariaLabel || `Call us at ${displayPhone}`}
   data-cta={dataCta}
   class={`phone-btn-${size} ${className}`}
-  onmouseenter="this.style.backgroundColor='#b91c1c'; this.style.transform='translateY(-1px)'"
-  onmouseleave="this.style.backgroundColor='#dc2626'; this.style.transform='translateY(0)'"
+  onmouseenter="this.style.backgroundColor='#8B0000'"
+  onmouseleave="this.style.backgroundColor='#B22222'"
 >
-  <span style="font-style: normal; margin-right: 4px;">📞</span>
   <span style="color: inherit; font-weight: inherit; font-size: inherit;">
     Call {displayPhone}
   </span>
@@ -62,15 +61,11 @@ const buttonStyle = `background-color: #dc2626; color: #ffffff; border: 1px soli
     const phoneButtons = document.querySelectorAll('a[href^="tel:"]');
     phoneButtons.forEach(function (btn) {
       btn.addEventListener("mouseenter", function () {
-        this.style.background = "#b91c1c";
-        this.style.transform = "translateY(-1px)";
-        this.style.boxShadow = "0 4px 8px rgba(220, 38, 38, 0.3)";
+        this.style.background = "#8B0000";
       });
 
       btn.addEventListener("mouseleave", function () {
-        this.style.background = "#dc2626";
-        this.style.transform = "translateY(0)";
-        this.style.boxShadow = "none";
+        this.style.background = "#B22222";
       });
     });
   });
@@ -96,11 +91,10 @@ const buttonStyle = `background-color: #dc2626; color: #ffffff; border: 1px soli
 <style>
   /* Phone button styles */
   a[href^="tel:"] {
-    background: #dc2626 !important;
-    background-color: #dc2626 !important;
+    background: #B22222 !important;
+    background-color: #B22222 !important;
     color: #ffffff !important;
-    border: 1px solid #b91c1c !important;
-    border-radius: 8px !important;
+    border: 1px solid #8B0000 !important;
     padding: 12px 24px !important;
     font-weight: 600 !important;
     font-size: 16px !important;
@@ -112,22 +106,19 @@ const buttonStyle = `background-color: #dc2626; color: #ffffff; border: 1px soli
     gap: 8px !important;
     box-sizing: border-box !important;
     cursor: pointer !important;
-    transition: all 0.2s ease !important;
+    transition: background-color 0.2s ease !important;
     min-height: 48px !important;
   }
 
   a[href^="tel:"]:hover {
-    background: #b91c1c !important;
-    background-color: #b91c1c !important;
+    background: #8B0000 !important;
+    background-color: #8B0000 !important;
     color: #ffffff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3) !important;
   }
 
   a[href^="tel:"]:active {
-    background: #991b1b !important;
-    background-color: #991b1b !important;
-    transform: translateY(0) !important;
+    background: #8B0000 !important;
+    background-color: #8B0000 !important;
   }
 
   /* Size variants */
@@ -149,7 +140,7 @@ const buttonStyle = `background-color: #dc2626; color: #ffffff; border: 1px soli
 
   /* Focus states for accessibility */
   a[href^="tel:"]:focus {
-    outline: 2px solid #ef4444 !important;
+    outline: 2px solid #B22222 !important;
     outline-offset: 2px !important;
   }
 </style>

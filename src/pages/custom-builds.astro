@@ -13,24 +13,24 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
   <Header />
 
   <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
-    <h1 class="text-3xl md:text-4xl font-semibold">Custom Builds</h1>
-    <p class="text-ink-muted mt-2">From simple cut-ins to turnkey office conversions. Real work, real photos from our Hutchins, TX yard.</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-black">Custom Builds</h1>
+    <p class="text-grey-600 mb-8">From simple cut-ins to turnkey office conversions. Real work, real photos from our Hutchins, TX yard.</p>
 
     <!-- Filters -->
-    <div class="glass p-4 mt-6 fade-in">
+    <div class="border border-grey-300 bg-white p-4 mt-6">
       <form id="filters" class="flex flex-wrap gap-2 text-sm">
-        <button type="button" data-tag="" class="px-3 py-2 rounded-xl border border-brand-line hover:bg-white/5" aria-pressed="true">All</button>
+        <button type="button" data-tag="" class="px-3 py-2 border border-grey-300 bg-white text-black hover:bg-grey-100" aria-pressed="true">All</button>
         {TAGS.map(t => (
-          <button type="button" data-tag={t} class="px-3 py-2 rounded-xl border border-brand-line hover:bg-white/5">{t}</button>
+          <button type="button" data-tag={t} class="px-3 py-2 border border-grey-300 bg-white text-black hover:bg-grey-100">{t}</button>
         ))}
       </form>
-      <p id="count" class="text-xs text-ink-muted mt-2">Showing {CUSTOM_BUILDS.length} items</p>
+      <p id="count" class="text-xs text-grey-600 mt-2">Showing {CUSTOM_BUILDS.length} items</p>
     </div>
 
     <!-- Grid -->
-    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+    <div id="grid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {CUSTOM_BUILDS.map(item => (
-        <article class="glass overflow-hidden hover-lift">
+        <article class="border border-grey-300 bg-white overflow-hidden">
                       <button
               class="block relative aspect-[4/3] w-full text-left image-overlay lightbox-trigger"
               aria-label={`Open ${item.title}`}
@@ -42,13 +42,13 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
               <img src={item.photo} alt={item.title} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             </button>
           <div class="p-4">
-            <h2 class="text-lg font-semibold">{item.title}</h2>
-            <p class="text-sm text-ink-muted mt-1">{item.caption}</p>
+            <h2 class="text-lg font-semibold text-black">{item.title}</h2>
+            <p class="text-sm text-grey-600 mt-1">{item.caption}</p>
             <div class="mt-3 flex flex-wrap gap-2">
-              {item.tags.map(tag => <span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">{tag}</span>)}
+              {item.tags.map(tag => <span class="text-xs px-2 py-1 bg-grey-100 border border-grey-300 text-black">{tag}</span>)}
             </div>
             <div class="mt-4">
-              <a href={`/contact?interest=${encodeURIComponent("Custom build: " + item.title)}`} data-astro-prefetch class="inline-flex px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Scope this build</a>
+              <a href={`/contact?interest=${encodeURIComponent("Custom build: " + item.title)}`} data-astro-prefetch class="inline-flex px-4 py-2 bg-brand-red text-white text-sm font-semibold hover:bg-brand-red-dark">Get Quote</a>
             </div>
           </div>
         </article>
@@ -57,10 +57,10 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
 
     <!-- Trust -->
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
-      <div class="glass p-3 text-center"><div class="font-semibold">Licensed & Insured</div></div>
-      <div class="glass p-3 text-center"><div class="font-semibold">Quotes in 24h</div></div>
-      <div class="glass p-3 text-center"><div class="font-semibold">10-Acre Yard</div></div>
-      <div class="glass p-3 text-center"><div class="font-semibold">200-Mile Service</div></div>
+      <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">Licensed & Insured</div></div>
+      <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">Quotes in 24h</div></div>
+      <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">10-Acre Yard</div></div>
+      <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">200-Mile Service</div></div>
     </div>
   </section>
 
@@ -92,20 +92,20 @@ const TAGS: Tag[] = ["Doors","Windows","Insulation","Paint/Branding","Power/HVAC
     let active = "";
 
     function render(items){
-             grid.innerHTML = items.map(item => `
-         <article class="glass overflow-hidden hover-lift" id="${item.id}">
-                     <button class="block relative aspect-[4/3] w-full text-left image-overlay" aria-label="Open ${item.title}"
+      grid.innerHTML = items.map(item => `
+        <article class="border border-grey-300 bg-white overflow-hidden" id="${item.id}">
+                     <button class="block relative aspect-[4/3] w-full text-left" aria-label="Open ${item.title}"
              onclick='openLightbox(${JSON.stringify({ src: item.photo, alt: item.title, title: item.title, caption: item.caption })})'>
              <img src="${item.photo}" alt="${item.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
            </button>
           <div class="p-4">
-            <h2 class="text-lg font-semibold">${item.title}</h2>
-            <p class="text-sm text-ink-muted mt-1">${item.caption}</p>
+            <h2 class="text-lg font-semibold text-black">${item.title}</h2>
+            <p class="text-sm text-grey-600 mt-1">${item.caption}</p>
             <div class="mt-3 flex flex-wrap gap-2">
-              ${item.tags.map(t => `<span class="text-xs px-2 py-1 rounded-lg bg-white/10 border border-brand-line">${t}</span>`).join("")}
+              ${item.tags.map(t => `<span class="text-xs px-2 py-1 bg-grey-100 border border-grey-300 text-black">${t}</span>`).join("")}
             </div>
             <div class="mt-4">
-              <a href="/contact?interest=${encodeURIComponent("Custom build: " + item.title)}" data-astro-prefetch class="inline-flex px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Scope this build</a>
+              <a href="/contact?interest=${encodeURIComponent("Custom build: " + item.title)}" data-astro-prefetch class="inline-flex px-4 py-2 bg-brand-red text-white text-sm font-semibold hover:bg-brand-red-dark">Get Quote</a>
             </div>
           </div>
         </article>

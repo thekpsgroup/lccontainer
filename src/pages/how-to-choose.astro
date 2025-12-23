@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+---
+
+<BaseLayout title="How to Choose a Shipping Container - Size Guide | LC Container" description="Complete guide to choosing the right shipping container: size comparison, new vs used, standard vs high cube. Expert advice from LC Container Texas.">
+  <Header />
+  
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Choose a Shipping Container",
+    "description": "Complete guide to choosing the right shipping container: size comparison, new vs used, standard vs high cube.",
+    "author": {
+      "@type": "Organization",
+      "name": "LC Container"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LC Container",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lccontainer.com/photos/logos/lccontainer-logo-transparent-400.png"
+      }
+    },
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0]
+  })} />
+  
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "How to Choose", url: "/how-to-choose" }
+    ]} />
+    
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">How to Choose a Shipping Container</h1>
+    <p class="text-lg text-grey-600 mb-8">Expert guide to help you select the perfect container for your needs.</p>
+
+    <!-- Size Guide -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Container Sizes</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-xl font-semibold mb-3 text-black">10' Container</h3>
+          <p class="text-sm text-grey-600 mb-3"><strong>Dimensions:</strong> 10' L × 8' W × 8'6" H</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Capacity:</strong> ~600 cu ft</p>
+          <p class="text-sm text-grey-600 mb-4">Perfect for small storage needs, backyard sheds, or tight spaces. Easy to transport and place.</p>
+          <a href="/inventory?size=10" class="text-brand-red hover:text-brand-red-dark font-semibold text-sm">View 10' Containers →</a>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-xl font-semibold mb-3 text-black">20' Container</h3>
+          <p class="text-sm text-grey-600 mb-3"><strong>Dimensions:</strong> 20' L × 8' W × 8'6" H</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Capacity:</strong> ~1,170 cu ft</p>
+          <p class="text-sm text-grey-600 mb-4">Most popular size. Great for storage, small businesses, or single-car garage replacement.</p>
+          <a href="/inventory?size=20" class="text-brand-red hover:text-brand-red-dark font-semibold text-sm">View 20' Containers →</a>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-xl font-semibold mb-3 text-black">40' Container</h3>
+          <p class="text-sm text-grey-600 mb-3"><strong>Dimensions:</strong> 40' L × 8' W × 8'6" H</p>
+          <p class="text-sm text-grey-600 mb-4"><strong>Capacity:</strong> ~2,350 cu ft</p>
+          <p class="text-sm text-grey-600 mb-4">Maximum storage space. Ideal for large equipment, multiple vehicles, or commercial use.</p>
+          <a href="/inventory?size=40" class="text-brand-red hover:text-brand-red-dark font-semibold text-sm">View 40' Containers →</a>
+        </div>
+      </div>
+      
+      <div class="mt-6 border border-grey-300 bg-white p-6">
+        <h3 class="text-xl font-semibold mb-3 text-black">40' High Cube</h3>
+        <p class="text-sm text-grey-600 mb-3"><strong>Dimensions:</strong> 40' L × 8' W × 9'6" H</p>
+        <p class="text-sm text-grey-600 mb-4"><strong>Capacity:</strong> ~2,694 cu ft</p>
+        <p class="text-sm text-grey-600 mb-4">Extra foot of height (9'6" vs 8'6"). Perfect for tall items, office conversions, or when you need maximum vertical space.</p>
+        <a href="/inventory?size=40-high-cube" class="text-brand-red hover:text-brand-red-dark font-semibold text-sm">View 40' High Cube Containers →</a>
+      </div>
+    </div>
+
+    <!-- New vs Used -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">New vs Used Containers</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-xl font-semibold mb-3 text-black">New (One-Trip) Containers</h3>
+          <ul class="space-y-2 text-sm text-grey-600 mb-4">
+            <li>✓ Used only once for shipping</li>
+            <li>✓ Pristine condition, minimal wear</li>
+            <li>✓ Like-new appearance</li>
+            <li>✓ Higher cost but best condition</li>
+            <li>✓ Ideal for retail, offices, or when appearance matters</li>
+          </ul>
+          <p class="text-sm text-grey-600"><strong>Best for:</strong> Businesses, retail spaces, offices, or when you need the best condition.</p>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <h3 class="text-xl font-semibold mb-3 text-black">Used (WWT) Containers</h3>
+          <ul class="space-y-2 text-sm text-grey-600 mb-4">
+            <li>✓ Wind and water tight guaranteed</li>
+            <li>✓ Fully functional, may have cosmetic wear</li>
+            <li>✓ Significant cost savings</li>
+            <li>✓ Perfect for storage and most applications</li>
+            <li>✓ Most popular choice</li>
+          </ul>
+          <p class="text-sm text-grey-600"><strong>Best for:</strong> Storage, workshops, most commercial uses where appearance isn't critical.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standard vs High Cube -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Standard vs High Cube</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-lg font-semibold mb-2 text-black">Standard Height (8'6")</h3>
+            <p class="text-sm text-grey-600 mb-4">Standard shipping height. Works for most applications. More readily available and typically lower cost.</p>
+            <p class="text-sm text-grey-600"><strong>Choose if:</strong> You don't need extra height, want maximum availability, or budget is a concern.</p>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold mb-2 text-black">High Cube (9'6")</h3>
+            <p class="text-sm text-grey-600 mb-4">Extra foot of height provides more vertical space. Great for tall equipment, office conversions, or maximizing capacity.</p>
+            <p class="text-sm text-grey-600"><strong>Choose if:</strong> You have tall items, want an office space, or need maximum storage capacity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decision Guide -->
+    <div class="mb-12 border border-grey-300 bg-grey-100 p-6">
+      <h2 class="text-2xl font-bold mb-4 text-black">Quick Decision Guide</h2>
+      <div class="space-y-4 text-sm text-grey-600">
+        <p><strong>For storage only:</strong> Used 20' or 40' standard height container</p>
+        <p><strong>For office/retail:</strong> New 40' high cube container</p>
+        <p><strong>For tight spaces:</strong> 10' container</p>
+        <p><strong>For maximum space:</strong> 40' high cube container</p>
+        <p><strong>For budget-conscious:</strong> Used standard height container</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="border border-grey-300 bg-white p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black">Still Not Sure?</h2>
+      <p class="text-grey-600 mb-6">Our experts can help you choose the perfect container for your needs.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:12145244168" class="px-8 py-4 bg-brand-red text-white font-semibold hover:bg-brand-red-dark">Call (214) 524-4168</a>
+        <a href="/contact" class="px-8 py-4 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Get Free Quote</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>
+

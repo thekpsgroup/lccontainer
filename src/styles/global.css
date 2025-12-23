@@ -51,21 +51,21 @@
     @apply heading-6;
   }
 
-  /* Performance optimized sections */
+  /* Performance optimized sections - More generous spacing for established business feel */
   section {
-    @apply py-8 md:py-12 lg:py-16;
+    @apply py-12 md:py-16 lg:py-20;
     content-visibility: auto;
     contain-intrinsic-size: 500px;
   }
 
-  /* Consistent Card Padding */
-  .glass {
-    @apply p-6;
+  /* Basic Card Style - More generous padding */
+  .card {
+    @apply p-8 border border-grey-300 bg-white;
   }
 
-  /* Consistent Grid Gaps */
+  /* Consistent Grid Gaps - More space between items */
   .grid {
-    @apply gap-6;
+    @apply gap-8;
   }
 
   /* Ensure swap behavior and prevent font synthesis */
@@ -101,47 +101,11 @@
     text-underline-offset: 2px;
   }
 
-  /* Performance optimized micro-interactions */
-  .hover-lift {
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    will-change: transform;
-  }
-
+  /* Basic hover effect */
   .hover-lift:hover {
-    transform: scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* Performance optimized fade-in animation */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    will-change: opacity, transform;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Subtle pulse animation for CTAs */
-  .animate-pulse-subtle {
-    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes pulse-subtle {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.9;
-    }
-  }
-
-  /* Enhanced shadow utilities */
-  .shadow-3xl {
-    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-  }
 
   /* Note: Using Tailwind's built-in spacing system for consistency */
 
@@ -150,54 +114,6 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* Image overlay treatment */
-  .image-overlay {
-    @apply relative overflow-hidden rounded-xl;
-  }
-
-  .image-overlay::after {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none;
-  }
-
-  /* Text on image with adaptive scrim for AA contrast compliance */
-  .text-on-image {
-    position: relative;
-    color: var(--color-text-inverse);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  }
-
-  .text-on-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--color-bg-inverse);
-    opacity: 0.65;
-    border-radius: inherit;
-    z-index: -1;
-  }
-
-  /* Light image variant */
-  .text-on-image-light::before {
-    background: var(--color-bg-primary);
-    opacity: 0.85;
-  }
-
-  /* Dark image variant */
-  .text-on-image-dark::before {
-    background: var(--color-bg-inverse);
-    opacity: 0.65;
-  }
-
-  /* Strong scrim for low contrast images */
-  .text-on-image-strong::before {
-    opacity: 0.8;
-  }
-
-  /* Minimal scrim for high contrast images */
-  .text-on-image-minimal::before {
-    opacity: 0.4;
-  }
 
   /* Skip to main content link */
   .skip-link {
@@ -205,10 +121,9 @@
     top: -40px;
     left: 6px;
     background: #B22222;
-    color: #E6EAF2;
+    color: #ffffff;
     padding: 8px 12px;
     text-decoration: none;
-    border-radius: 6px;
     z-index: 100;
     font-weight: 500;
   }
@@ -261,47 +176,21 @@
 }
 
 @layer components {
-  /* Note: Button styles are now handled by individual components for better specificity */
-
-  /* Glassmorphism components */
-  .glass-card {
-    @apply glass p-6;
-  }
-
-  .glass-nav {
-    @apply glass backdrop-blur-14;
-  }
-
-  /* Section styles - Compact for fast transactional business */
+  /* Section styles - More generous spacing */
   .section-padding {
-    @apply py-12 md:py-16 lg:py-20;
+    @apply py-16 md:py-20;
   }
 
   .section-padding-sm {
-    @apply py-8 md:py-12 lg:py-16;
+    @apply py-12 md:py-16;
   }
 
-    /* Content wrappers */
-    .content-wrap {
-      @apply max-w-[1200px] mx-auto px-5;
-    }
+  /* Content wrappers - More generous padding */
+  .content-wrap {
+    @apply max-w-[1200px] mx-auto px-6 md:px-8;
+  }
 
   .copy-wrap {
-    @apply max-w-[68ch] space-y-6;
-  }
-
-  /* Optimized animation utilities with hardware acceleration */
-  .slide-up {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUp 0.7s ease-out forwards;
-    will-change: opacity, transform;
-  }
-
-  @keyframes slideUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    @apply max-w-[75ch] space-y-8;
   }
 }

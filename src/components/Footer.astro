@@ -1,18 +1,18 @@
 ---
 const currentYear = new Date().getFullYear();
 ---
-<footer class="bg-gradient-to-br from-brand-black/95 via-blue-900/80 to-brand-black/90 border-t border-brand-line/40 backdrop-blur-xl shadow-2xl">
-  <div class="max-w-[1200px] mx-auto px-5 py-16">
+<footer class="bg-black text-white border-t border-grey-700">
+  <div class="max-w-[1200px] mx-auto px-5 py-12">
     <div class="grid md:grid-cols-4 gap-8">
       <!-- Company Info -->
       <div class="md:col-span-2">
         <div class="flex items-center gap-3 mb-6">
-          <img src="/photos/logos/lccontainer-logo-transparent-400.png" alt="LC Container" class="h-10 w-auto drop-shadow-lg" />
+          <img src="/photos/logos/lccontainer-logo-transparent-400.png" alt="LC Container" class="h-10 w-auto" />
         </div>
-        <p class="text-ink-muted text-base mb-6 leading-relaxed">
+        <p class="text-grey-300 text-base mb-6 leading-relaxed">
           Texas' trusted container supplier since 2003. Serving Dallas, Fort Worth, Austin, Houston, and all of Texas with quality shipping containers and exceptional service.
         </p>
-        <div class="flex items-center gap-4 text-base text-ink-muted font-semibold">
+        <div class="flex items-center gap-4 text-base text-grey-300 font-semibold">
           <span>Licensed & Insured</span>
           <span>•</span>
           <span>BBB Accredited</span>
@@ -21,36 +21,48 @@ const currentYear = new Date().getFullYear();
 
       <!-- Quick Links -->
       <div>
-        <h3 class="font-bold mb-5 text-white tracking-wide text-lg">Services</h3>
-        <ul class="space-y-3 text-base text-ink-muted">
-          <li><a href="/services#buy" class="hover:text-brand-red transition-colors">Buy Containers</a></li>
-          <li><a href="/services#lease" class="hover:text-brand-red transition-colors">Lease Containers</a></li>
-          <li><a href="/services#custom" class="hover:text-brand-red transition-colors">Custom Builds</a></li>
-          <li><a href="/inventory" class="hover:text-brand-red transition-colors">View Inventory</a></li>
+        <h3 class="font-bold mb-5 text-white text-lg">Services</h3>
+        <ul class="space-y-3 text-base text-grey-300">
+          <li><a href="/services#buy" class="hover:text-brand-red">Buy Containers</a></li>
+          <li><a href="/services#lease" class="hover:text-brand-red">Lease Containers</a></li>
+          <li><a href="/services#custom" class="hover:text-brand-red">Custom Builds</a></li>
+          <li><a href="/inventory" class="hover:text-brand-red">View Inventory</a></li>
+          <li><a href="/faq" class="hover:text-brand-red">FAQ</a></li>
+          <li><a href="/shipping-and-delivery" class="hover:text-brand-red">Delivery Info</a></li>
         </ul>
       </div>
 
       <!-- Contact & Resources -->
       <div>
-        <h3 class="font-bold mb-5 text-white tracking-wide text-lg">Contact</h3>
-        <div class="space-y-3 text-base text-ink-muted">
+        <h3 class="font-bold mb-5 text-white text-lg">Resources</h3>
+        <ul class="space-y-3 text-base text-grey-300 mb-6">
+          <li><a href="/how-to-choose" class="hover:text-brand-red">How to Choose</a></li>
+          <li><a href="/size-comparison" class="hover:text-brand-red">Size Comparison</a></li>
+          <li><a href="/buying-guide" class="hover:text-brand-red">Buying Guide</a></li>
+          <li><a href="/delivery-prep" class="hover:text-brand-red">Delivery Prep</a></li>
+          <li><a href="/maintenance-tips" class="hover:text-brand-red">Maintenance Tips</a></li>
+          <li><a href="/case-studies" class="hover:text-brand-red">Case Studies</a></li>
+        </ul>
+        <h3 class="font-bold mb-5 text-white text-lg">Contact</h3>
+        <div class="space-y-3 text-base text-grey-300">
           <p>1211 E Fulghum Rd<br />Hutchins, TX 75141</p>
-          <p><a href="tel:12145244168" class="hover:text-brand-red transition-colors">(214) 524-4168</a></p>
-          <p><a href="/contact" class="hover:text-brand-red transition-colors">Get Free Quote</a></p>
+          <p><a href="tel:12145244168" class="hover:text-brand-red">(214) 524-4168</a></p>
+          <p><a href="/contact" class="hover:text-brand-red">Get Free Quote</a></p>
         </div>
       </div>
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-brand-line/40 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-base text-ink-muted">
+    <div class="border-t border-grey-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-base text-grey-300">
       <div class="flex flex-wrap items-center gap-6">
-        <span class="font-semibold tracking-wide">&copy; {currentYear} LC Container, LLC. All rights reserved.</span>
+        <span class="font-semibold">&copy; {currentYear} LC Container, LLC. All rights reserved.</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="/privacy" class="hover:text-brand-red transition-colors">Privacy Policy</a>
-        <a href="/terms" class="hover:text-brand-red transition-colors">Terms of Service</a>
-        <a href="/accessibility" class="hover:text-brand-red transition-colors">Accessibility</a>
+        <a href="/privacy" class="hover:text-brand-red">Privacy Policy</a>
+        <a href="/terms" class="hover:text-brand-red">Terms of Service</a>
+        <a href="/accessibility" class="hover:text-brand-red">Accessibility</a>
       </div>
     </div>
   </div>
 </footer>
+

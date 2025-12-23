@@ -3,33 +3,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import QuoteForm from "../components/QuoteForm.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
 ---
 <BaseLayout title="Contact — LC Container" description="Get a free quote within 24 hours. Call (214) 524-4168 or use our quote form.">
   <Header />
   
-  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16 grid md:grid-cols-2 gap-8 items-start">
-    <QuoteForm />
+  <section class="max-w-[1200px] mx-auto px-6 md:px-8 py-16 md:py-20">
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Contact", url: "/contact" }
+    ]} />
+    
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <QuoteForm />
 
-    <aside class="glass p-6">
-      <h2 class="text-xl font-semibold">Visit the Yard</h2>
-      <p class="text-ink-muted">1211 E Fulghum Rd, Hutchins, TX 75141</p>
+    <aside class="border border-grey-300 bg-white p-6">
+      <h2 class="text-xl font-bold text-black mb-4">Visit the Yard</h2>
+      <p class="text-grey-600 mb-4">1211 E Fulghum Rd, Hutchins, TX 75141</p>
       <div class="mt-4 rounded-xl overflow-hidden aspect-video">
         <iframe class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=1211+E+Fulghum+Rd,+Hutchins,+TX+75141&output=embed"></iframe>
               </div>
-      <div class="mt-4 text-sm">
-        <div><span class="text-ink-muted">Phone:</span> <a class="hover:underline" href="tel:12145244168">(214) 524-4168</a></div>
-        <div><span class="text-ink-muted">Email:</span> <a class="hover:underline" href="mailto:info@lccontainer.com">info@lccontainer.com</a></div>
-        <div><span class="text-ink-muted">Hours:</span> Mon–Fri 8–5</div>
-            </div>
+      <div class="mt-4 text-sm text-grey-600">
+        <div class="mb-2"><span class="font-semibold text-black">Phone:</span> <a class="text-brand-red hover:text-brand-red-dark" href="tel:12145244168">(214) 524-4168</a></div>
+        <div class="mb-2"><span class="font-semibold text-black">Email:</span> <a class="text-brand-red hover:text-brand-red-dark" href="mailto:info@lccontainer.com">info@lccontainer.com</a></div>
+        <div><span class="font-semibold text-black">Hours:</span> Mon–Fri 8am–5pm, Sat 9am–3pm</div>
+      </div>
 
       <div class="mt-6 grid sm:grid-cols-2 gap-3 text-sm">
-        <div class="glass p-3 text-center"><div class="font-semibold">Licensed & Insured</div></div>
-        <div class="glass p-3 text-center"><div class="font-semibold">Quotes in 24h</div></div>
-        <div class="glass p-3 text-center"><div class="font-semibold">10-Acre Yard</div></div>
-        <div class="glass p-3 text-center"><div class="font-semibold">200-Mile Service</div></div>
-            </div>
+        <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">Licensed & Insured</div></div>
+        <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">Quotes in 24h</div></div>
+        <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">10-Acre Yard</div></div>
+        <div class="border border-grey-300 bg-grey-100 p-3 text-center"><div class="font-semibold text-black">200-Mile Service</div></div>
+      </div>
     </aside>
+    </div>
   </section>
   
   <Footer />

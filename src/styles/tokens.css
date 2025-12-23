@@ -1,136 +1,95 @@
 /* ==========================================================================
    LC Container Design System - Color Tokens
+   Basic Container Company Colors: Black, Grey, Red Only
    ========================================================================== */
 
 /* Base Brand Colors */
 :root {
-  /* Primary Brand Colors - Texas Red Theme */
-  --brand-red-50: #fef2f2;
-  --brand-red-100: #fee2e2;
-  --brand-red-200: #fecaca;
-  --brand-red-300: #fca5a5;
-  --brand-red-400: #f87171;
-  --brand-red-500: #ef4444;
-  --brand-red-600: #dc2626; /* Primary brand red */
-  --brand-red-700: #b91c1c;
-  --brand-red-800: #991b1b;
-  --brand-red-900: #7f1d1d;
-
-  /* Navy Blues for Contrast */
-  --navy-50: #f8fafc;
-  --navy-100: #f1f5f9;
-  --navy-200: #e2e8f0;
-  --navy-300: #cbd5e1;
-  --navy-400: #94a3b8;
-  --navy-500: #64748b;
-  --navy-600: #475569;
-  --navy-700: #334155; /* Primary navy */
-  --navy-800: #1e293b;
-  --navy-900: #0f172a;
-
-  /* Gold Accents for Trust */
-  --gold-50: #fefce8;
-  --gold-100: #fef9c3;
-  --gold-200: #fef08a;
-  --gold-300: #fde047;
-  --gold-400: #facc15;
-  --gold-500: #eab308;
-  --gold-600: #ca8a04; /* Primary gold */
-  --gold-700: #a16207;
-  --gold-800: #854d0e;
-  --gold-900: #713f12;
+  /* Brand Red - Primary Accent */
+  --brand-red: #B22222;
+  --brand-red-dark: #8B0000;
+  --brand-red-light: #DC143C;
 
   /* Neutral Grays */
-  --neutral-50: #fafafa;
-  --neutral-100: #f5f5f5;
-  --neutral-200: #e5e5e5;
-  --neutral-300: #d4d4d4;
-  --neutral-400: #a3a3a3;
-  --neutral-500: #737373;
-  --neutral-600: #525252;
-  --neutral-700: #404040;
-  --neutral-800: #262626;
-  --neutral-900: #171717;
-  --neutral-950: #0a0a0a;
+  --grey-50: #fafafa;
+  --grey-100: #f5f5f5;
+  --grey-200: #e5e5e5;
+  --grey-300: #d4d4d4;
+  --grey-400: #a3a3a3;
+  --grey-500: #737373;
+  --grey-600: #525252;
+  --grey-700: #404040;
+  --grey-800: #262626;
+  --grey-900: #171717;
+  --grey-950: #0a0a0a;
+
+  /* Black */
+  --black: #000000;
+  --black-900: #0B0B0B;
 
   /* ==========================================================================
      WCAG 2.1 AA Compliant Color Combinations
      All combinations below meet 4.5:1 contrast ratio minimum
      ========================================================================== */
 
-  /* Primary Brand Combinations */
-  --text-on-brand-red: var(--neutral-50);      /* 8.2:1 */
-  --brand-red-on-light: var(--brand-red-700);  /* 4.6:1 */
-  --brand-red-on-dark: var(--brand-red-400);   /* 4.5:1 */
+  /* Red Combinations */
+  --text-on-red: var(--grey-50);
+  --red-on-light: var(--brand-red-dark);
+  --red-on-dark: var(--brand-red-light);
 
-  /* Navy Combinations */
-  --text-on-navy: var(--neutral-50);           /* 12.6:1 */
-  --navy-on-light: var(--navy-800);            /* 7.8:1 */
-  --navy-on-dark: var(--navy-400);             /* 4.5:1 */
+  /* Grey Combinations */
+  --text-on-grey: var(--grey-50);
+  --grey-on-light: var(--grey-800);
+  --grey-on-dark: var(--grey-300);
 
-  /* Gold Combinations */
-  --text-on-gold: var(--neutral-900);          /* 11.8:1 */
-  --gold-on-light: var(--gold-700);            /* 4.8:1 */
-  --gold-on-dark: var(--gold-400);             /* 4.5:1 */
-
-  /* Neutral Combinations */
-  --neutral-dark-on-light: var(--neutral-800); /* 6.2:1 */
-  --neutral-light-on-dark: var(--neutral-200); /* 4.5:1 */
-  --neutral-medium-on-light: var(--neutral-700); /* 4.5:1 */
-  --neutral-medium-on-dark: var(--neutral-300); /* 4.6:1 */
+  /* Black Combinations */
+  --text-on-black: var(--grey-50);
+  --black-on-light: var(--black);
 
   /* ==========================================================================
      Semantic Color Tokens
      ========================================================================== */
 
-  --color-text-primary: var(--neutral-900);
-  --color-text-secondary: var(--neutral-600);
-  --color-text-muted: var(--neutral-500);
-  --color-text-inverse: var(--neutral-50);
+  --color-text-primary: var(--black);
+  --color-text-secondary: var(--grey-600);
+  --color-text-muted: var(--grey-500);
+  --color-text-inverse: var(--grey-50);
 
-  --color-bg-primary: var(--neutral-50);
-  --color-bg-secondary: var(--neutral-100);
-  --color-bg-tertiary: var(--neutral-200);
-  --color-bg-inverse: var(--neutral-900);
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: var(--grey-100);
+  --color-bg-tertiary: var(--grey-200);
+  --color-bg-inverse: var(--black-900);
 
-  --color-border-light: var(--neutral-200);
-  --color-border-medium: var(--neutral-300);
-  --color-border-dark: var(--neutral-400);
+  --color-border-light: var(--grey-200);
+  --color-border-medium: var(--grey-300);
+  --color-border-dark: var(--grey-400);
 
   /* ==========================================================================
      Focus and Interactive States
      ========================================================================== */
 
-  --color-focus-ring: var(--brand-red-600);
-  --color-focus-ring-offset: var(--neutral-50);
+  --color-focus-ring: var(--brand-red);
+  --color-focus-ring-offset: var(--grey-50);
 
-  --color-hover-bg: rgba(220, 38, 38, 0.1);
-  --color-active-bg: rgba(220, 38, 38, 0.2);
+  --color-hover-bg: rgba(178, 34, 34, 0.1);
+  --color-active-bg: rgba(178, 34, 34, 0.2);
 
   /* ==========================================================================
      Link Colors with AA Compliance
      ========================================================================== */
 
-  --color-link-default: var(--brand-red-700);   /* 4.6:1 on white */
-  --color-link-hover: var(--brand-red-800);     /* 5.9:1 on white */
-  --color-link-visited: var(--brand-red-800);   /* 5.9:1 on white */
-  --color-link-focus: var(--brand-red-700);     /* 4.6:1 on white */
+  --color-link-default: var(--brand-red-dark);
+  --color-link-hover: var(--brand-red);
+  --color-link-visited: var(--brand-red-dark);
+  --color-link-focus: var(--brand-red);
 
   /* ==========================================================================
-     Success, Warning, Error States
+     Error States (using red only)
      ========================================================================== */
 
-  --color-success: #059669;    /* Green-600 */
-  --color-success-bg: #ecfdf5;  /* Green-50 */
-  --color-success-text: #065f46; /* Green-800 */
-
-  --color-warning: #d97706;    /* Amber-600 */
-  --color-warning-bg: #fffbeb;  /* Amber-50 */
-  --color-warning-text: #92400e; /* Amber-800 */
-
-  --color-error: #dc2626;      /* Red-600 */
-  --color-error-bg: #fef2f2;    /* Red-50 */
-  --color-error-text: #991b1b;  /* Red-800 */
+  --color-error: var(--brand-red);
+  --color-error-bg: var(--grey-100);
+  --color-error-text: var(--brand-red-dark);
 }
 /* ==========================================================================
    Dark Mode Overrides
@@ -138,25 +97,25 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-text-primary: var(--neutral-50);
-    --color-text-secondary: var(--neutral-300);
-    --color-text-muted: var(--neutral-400);
-    --color-text-inverse: var(--neutral-900);
+    --color-text-primary: var(--grey-50);
+    --color-text-secondary: var(--grey-300);
+    --color-text-muted: var(--grey-400);
+    --color-text-inverse: var(--black);
 
-    --color-bg-primary: var(--neutral-900);
-    --color-bg-secondary: var(--neutral-800);
-    --color-bg-tertiary: var(--neutral-700);
-    --color-bg-inverse: var(--neutral-50);
+    --color-bg-primary: var(--black-900);
+    --color-bg-secondary: var(--grey-800);
+    --color-bg-tertiary: var(--grey-700);
+    --color-bg-inverse: var(--grey-50);
 
-    --color-border-light: var(--neutral-700);
-    --color-border-medium: var(--neutral-600);
-    --color-border-dark: var(--neutral-500);
+    --color-border-light: var(--grey-700);
+    --color-border-medium: var(--grey-600);
+    --color-border-dark: var(--grey-500);
 
-    --color-focus-ring-offset: var(--neutral-900);
+    --color-focus-ring-offset: var(--black-900);
 
-    --color-link-default: var(--brand-red-400);   /* 4.5:1 on dark */
-    --color-link-hover: var(--brand-red-300);     /* 5.2:1 on dark */
-    --color-link-visited: var(--brand-red-300);   /* 5.2:1 on dark */
-    --color-link-focus: var(--brand-red-400);     /* 4.5:1 on dark */
+    --color-link-default: var(--brand-red-light);
+    --color-link-hover: var(--brand-red);
+    --color-link-visited: var(--brand-red-light);
+    --color-link-focus: var(--brand-red-light);
   }
 }

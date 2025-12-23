@@ -5,12 +5,19 @@ import Header from "../components/Header.astro";
 <BaseLayout title="Not Found — LC Container" description="We couldn't find that page.">
   <Header />
   <section class="max-w-[900px] mx-auto px-5 py-20 text-center">
-    <div class="glass p-8 inline-block">
-      <h1 class="text-4xl font-semibold">404</h1>
-      <p class="text-ink-muted mt-2">That page rolled off the yard.</p>
-      <div class="mt-4 flex justify-center gap-2">
-        <a href="/inventory" class="px-4 py-2 rounded-xl border border-brand-line hover:bg-white/5 text-sm">Browse Inventory</a>
-        <a href="/contact" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90">Get Free Quote</a>
+    <div class="border border-grey-300 bg-white p-8 inline-block">
+      <h1 class="text-4xl font-bold text-black mb-2">404</h1>
+      <p class="text-grey-600 mt-2 mb-6">That page rolled off the yard. Let's get you back on track.</p>
+      <div class="mt-6 space-y-3">
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/" class="px-6 py-3 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Go Home</a>
+          <a href="/inventory" class="px-6 py-3 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Browse Inventory</a>
+          <a href="/contact" class="px-6 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark">Get Free Quote</a>
+        </div>
+        <div class="mt-6 pt-6 border-t border-grey-300">
+          <p class="text-sm text-grey-600 mb-2">Need help finding something?</p>
+          <a href="tel:12145244168" class="text-brand-red hover:text-brand-red-dark font-semibold">Call (214) 524-4168</a>
+        </div>
       </div>
     </div>
   </section>

@@ -1,0 +1,181 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
+---
+
+<BaseLayout title="Delivery Preparation Checklist | LC Container Texas" description="Complete checklist for preparing your site for container delivery: space requirements, access, permits, and more.">
+  <Header />
+  
+  <section class="max-w-[1200px] mx-auto px-5 py-12 md:py-16">
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Delivery Preparation", url: "/delivery-prep" }
+    ]} />
+    
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Delivery Preparation Checklist</h1>
+    <p class="text-lg text-grey-600 mb-8">Ensure your site is ready for smooth container delivery.</p>
+
+    <!-- Critical Requirements -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Critical Requirements</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <span class="text-brand-red font-bold text-xl">✓</span>
+            <div>
+              <h3 class="font-semibold text-black mb-1">Flat, Level Surface</h3>
+              <p class="text-sm text-grey-600">Container must sit on a flat, level surface. Uneven ground can cause structural issues.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <span class="text-brand-red font-bold text-xl">✓</span>
+            <div>
+              <h3 class="font-semibold text-black mb-1">Adequate Clearance</h3>
+              <p class="text-sm text-grey-600">Minimum 14 feet wide clearance for delivery truck. More is better for easier placement.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <span class="text-brand-red font-bold text-xl">✓</span>
+            <div>
+              <h3 class="font-semibold text-black mb-1">Length Requirements</h3>
+              <p class="text-sm text-grey-600">10' container: 40-50 ft length needed. 20' container: 50-60 ft. 40' container: 60-80 ft.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <span class="text-brand-red font-bold text-xl">✓</span>
+            <div>
+              <h3 class="font-semibold text-black mb-1">No Overhead Obstructions</h3>
+              <p class="text-sm text-grey-600">Check for power lines, tree branches, or other overhead obstacles. Minimum 15 feet clearance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Site Preparation -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Site Preparation Steps</h2>
+      <div class="space-y-4">
+        <div class="border border-grey-300 bg-white p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-grey-600 font-bold">1.</span>
+            <div>
+              <h3 class="font-semibold text-black mb-2">Clear the Area</h3>
+              <p class="text-sm text-grey-600">Remove any debris, vehicles, or obstacles from the delivery area and access path.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-grey-600 font-bold">2.</span>
+            <div>
+              <h3 class="font-semibold text-black mb-2">Level the Ground</h3>
+              <p class="text-sm text-grey-600">Ensure the placement area is level. Use gravel, concrete blocks, or leveling pads if needed.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-grey-600 font-bold">3.</span>
+            <div>
+              <h3 class="font-semibold text-black mb-2">Check Access Route</h3>
+              <p class="text-sm text-grey-600">Verify the delivery truck can access your property. Check gate widths, turns, and road conditions.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-grey-600 font-bold">4.</span>
+            <div>
+              <h3 class="font-semibold text-black mb-2">Mark the Location</h3>
+              <p class="text-sm text-grey-600">Use stakes or markers to indicate exactly where you want the container placed.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border border-grey-300 bg-white p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-grey-600 font-bold">5.</span>
+            <div>
+              <h3 class="font-semibold text-black mb-2">Verify Permits</h3>
+              <p class="text-sm text-grey-600">Check with your local municipality if permits are required. Have them ready before delivery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Issues -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Common Issues to Avoid</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <ul class="space-y-3 text-sm text-grey-600">
+          <li class="flex items-start gap-2">
+            <span class="text-red-600">✗</span>
+            <span><strong>Soft or muddy ground:</strong> Container may sink or become unstable. Use gravel or concrete pads.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-600">✗</span>
+            <span><strong>Insufficient clearance:</strong> Delivery truck needs space to maneuver. Measure twice!</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-600">✗</span>
+            <span><strong>Steep inclines:</strong> Delivery trucks cannot navigate steep driveways. May need alternative placement.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-600">✗</span>
+            <span><strong>Narrow gates:</strong> Standard gates may be too narrow. Minimum 12 feet wide recommended.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-600">✗</span>
+            <span><strong>Low-hanging branches:</strong> Clear tree branches that could interfere with delivery.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Delivery Day -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-black">Delivery Day</h2>
+      <div class="border border-grey-300 bg-white p-6">
+        <p class="text-sm text-grey-600 mb-4"><strong>What to expect:</strong></p>
+        <ul class="space-y-2 text-sm text-grey-600">
+          <li>• Driver will call 30-60 minutes before arrival</li>
+          <li>• Delivery typically takes 15-30 minutes</li>
+          <li>• Driver will position container as requested (within reason)</li>
+          <li>• You'll inspect and sign for delivery</li>
+          <li>• Driver will provide delivery receipt</li>
+        </ul>
+        <p class="text-sm text-grey-600 mt-4"><strong>Be available:</strong> Someone must be present to receive delivery and sign paperwork.</p>
+      </div>
+    </div>
+
+    <!-- Questions -->
+    <div class="mb-12 border border-grey-300 bg-grey-100 p-6">
+      <h2 class="text-xl font-bold mb-4 text-black">Questions About Your Site?</h2>
+      <p class="text-sm text-grey-600 mb-4">Our delivery team can help assess your site and provide recommendations.</p>
+      <a href="tel:12145244168" class="text-brand-red hover:text-brand-red-dark font-semibold">Call (214) 524-4168 for Site Assessment →</a>
+    </div>
+
+    <!-- CTA -->
+    <div class="border border-grey-300 bg-white p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black">Ready to Schedule Delivery?</h2>
+      <p class="text-grey-600 mb-6">Once your site is prepared, call us to schedule your delivery.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:12145244168" class="px-8 py-4 bg-brand-red text-white font-semibold hover:bg-brand-red-dark">Call (214) 524-4168</a>
+        <a href="/contact" class="px-8 py-4 border border-grey-300 bg-white text-black font-semibold hover:bg-grey-100">Schedule Delivery</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>
+

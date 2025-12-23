@@ -2,51 +2,57 @@
 const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom Build","Not sure"];
 ---
 
-<div class="glass p-6 md:p-8" role="form" aria-labelledby="quote-title">
-  <h2 id="quote-title" class="text-2xl font-semibold mb-2">Get a Free Quote</h2>
-  <p class="text-sm text-ink-muted">We'll reply within 24 hours. No hidden fees.</p>
+<div class="border border-grey-300 bg-white p-6 md:p-8" role="form" aria-labelledby="quote-title">
+  <h2 id="quote-title" class="text-2xl font-bold mb-2 text-black">Get a Free Quote</h2>
+  <p class="text-sm text-grey-600">We'll reply within 24 hours. No hidden fees.</p>
 
   <form id="quoteForm" class="grid gap-4 mt-4" action="https://formsubmit.co/info@lccontainer.com" method="POST" novalidate>
-    <!-- honeypot + timer -->
+    <!-- Enhanced spam protection: Multiple honeypots -->
     <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+    <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+    <input type="text" name="url" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
     <input type="hidden" name="startedAt" id="startedAt" />
+    <input type="hidden" name="formToken" id="formToken" />
 
-    <!-- FormSubmit configuration -->
+    <!-- FormSubmit configuration with CAPTCHA enabled -->
     <input type="hidden" name="_subject" value="New Quote Request from LC Container Website" />
-    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_captcha" value="true" />
     <input type="hidden" name="_template" value="table" />
     <input type="hidden" name="_next" value="https://lccontainer.com/contact?submitted=true" />
+    <input type="hidden" name="_autoresponse" value="Thank you for your quote request! We'll call you within 24 hours. If you don't hear from us, please call (214) 524-4168." />
 
     <!-- stepper -->
     <ol class="flex items-center gap-2 text-xs" role="progressbar" aria-label="Quote form progress" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
-      <li id="label-1" class="px-3 py-1 rounded-xl bg-brand-red text-white" aria-current="step">1. Contact</li>
-      <li id="label-2" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line opacity-60">2. Need</li>
-      <li id="label-3" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line opacity-60">3. Delivery</li>
-      <li id="label-4" class="px-3 py-1 rounded-xl bg-white/5 border border-brand-line opacity-60">4. Confirm</li>
+      <li id="label-1" class="px-3 py-1 bg-brand-red text-white" aria-current="step">1. Contact</li>
+      <li id="label-2" class="px-3 py-1 border border-grey-300 bg-grey-100 text-grey-600">2. Need</li>
+      <li id="label-3" class="px-3 py-1 border border-grey-300 bg-grey-100 text-grey-600">3. Delivery</li>
+      <li id="label-4" class="px-3 py-1 border border-grey-300 bg-grey-100 text-grey-600">4. Confirm</li>
     </ol>
 
     <!-- Step 1 -->
     <fieldset class="step" data-step="1">
-      <label class="block text-sm" for="name">Full Name
-        <input id="name" name="name" required autocomplete="name" aria-describedby="name-help" class="mt-1 w-full px-4 py-4 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200 text-base" />
+      <label class="block text-sm text-black" for="name">Full Name
+        <input id="name" name="name" required autocomplete="name" aria-describedby="name-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
       </label>
       <div id="name-help" class="sr-only">Enter your full name for the quote request</div>
 
-      <label class="block text-sm" for="email">Email
-        <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-help" class="mt-1 w-full px-4 py-4 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200 text-base" />
+      <label class="block text-sm text-black" for="email">Email
+        <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-help email-error" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
+        <span id="email-error" class="text-xs text-red-600 hidden mt-1" role="alert"></span>
       </label>
       <div id="email-help" class="sr-only">We'll use this email to send your quote and updates</div>
 
-      <label class="block text-sm" for="phone">Phone
-        <input id="phone" name="phone" required autocomplete="tel" inputmode="tel" aria-describedby="phone-help" class="mt-1 w-full px-4 py-4 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200 text-base" />
+      <label class="block text-sm text-black" for="phone">Phone
+        <input id="phone" name="phone" required autocomplete="tel" inputmode="tel" aria-describedby="phone-help phone-error" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
+        <span id="phone-error" class="text-xs text-red-600 hidden mt-1" role="alert"></span>
       </label>
       <div id="phone-help" class="sr-only">We'll call you within 24 hours to discuss your container needs</div>
     </fieldset>
 
     <!-- Step 2 -->
     <fieldset class="step hidden" data-step="2">
-        <label class="block text-sm" for="interest">What do you need?
-          <select id="interest" name="interest" required aria-describedby="interest-help" class="mt-1 w-full px-4 py-4 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200 text-base">
+        <label class="block text-sm text-black" for="interest">What do you need?
+          <select id="interest" name="interest" required aria-describedby="interest-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base">
             <option value="">Select an option</option>
             {interests.map(i => <option value={i}>{i}</option>)}
           </select>
@@ -56,38 +62,38 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
     <!-- Step 3 -->
     <fieldset class="step hidden" data-step="3">
-      <label class="block text-sm" for="zip">Delivery ZIP
-        <input id="zip" name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" aria-describedby="zip-help" maxlength="5" class="mt-1 w-full px-4 py-4 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200 text-base" />
+      <label class="block text-sm text-black" for="zip">Delivery ZIP
+        <input id="zip" name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" aria-describedby="zip-help" maxlength="5" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
       </label>
       <div id="zip-help" class="sr-only">Enter your 5-digit ZIP code for delivery estimate</div>
 
-      <label class="block text-sm" for="notes">Notes (optional)
-        <textarea id="notes" name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" aria-describedby="notes-help" class="mt-1 w-full px-4 py-4 rounded-xl bg-white/5 border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-silver/60 transition-colors duration-200 text-base"></textarea>
+      <label class="block text-sm text-black" for="notes">Notes (optional)
+        <textarea id="notes" name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" aria-describedby="notes-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base"></textarea>
       </label>
       <div id="notes-help" class="sr-only">Any additional details about your container requirements</div>
     </fieldset>
 
     <!-- Step 4 -->
     <section class="step hidden" data-step="4">
-      <div class="text-sm text-ink-muted">We'll review your info and send a quote within 24 hours.</div>
+      <div class="text-sm text-grey-600">We'll review your info and send a quote within 24 hours.</div>
     </section>
 
     <!-- Controls -->
     <div class="flex gap-3 mt-1">
-      <button type="button" id="prevBtn" class="hidden px-5 py-3 rounded-xl border border-brand-line text-ink hover:bg-white/5 transition-colors duration-200 focus:ring-2 focus:ring-brand-silver/60" aria-label="Go back to previous step">
+      <button type="button" id="prevBtn" class="hidden px-5 py-3 border border-grey-300 bg-white text-black hover:bg-grey-100 focus:ring-2 focus:ring-brand-red" aria-label="Go back to previous step">
         Back
       </button>
-      <button type="button" id="nextBtn" class="px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60" aria-label="Continue to next step">
+      <button type="button" id="nextBtn" class="px-5 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark focus:ring-2 focus:ring-brand-red" aria-label="Continue to next step">
         Next
       </button>
-      <button type="submit" id="submitBtn" class="hidden px-5 py-3 rounded-xl bg-brand-red text-white font-semibold hover:opacity-90 transition-opacity duration-200 focus:ring-2 focus:ring-brand-silver/60" aria-label="Submit your quote request" disabled>
+      <button type="submit" id="submitBtn" class="hidden px-5 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark focus:ring-2 focus:ring-brand-red" aria-label="Submit your quote request" disabled>
         <span id="submitText">Submit Quote Request</span>
         <span id="submitLoading" class="hidden" aria-live="polite">Sending your request...</span>
       </button>
     </div>
 
-    <p id="formMsg" class="text-sm text-ink-muted mt-1 flex items-center gap-2" role="status" aria-live="polite">
-      <span id="errorIcon" class="hidden text-red-500" aria-hidden="true">⚠️</span>
+    <p id="formMsg" class="text-sm text-grey-600 mt-1 flex items-center gap-2" role="status" aria-live="polite">
+      <span id="errorIcon" class="hidden text-brand-red" aria-hidden="true">⚠</span>
       <span id="errorText"></span>
     </p>
   </form>
@@ -121,10 +127,35 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   const errorText = document.getElementById('errorText') as HTMLElement;
   const startedAt = document.getElementById('startedAt') as HTMLInputElement;
 
-  // Initialize form
+  // Initialize form with spam protection
+  const formToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   if (startedAt) {
     startedAt.value = String(Date.now());
   }
+  const tokenInput = document.getElementById('formToken') as HTMLInputElement;
+  if (tokenInput) {
+    tokenInput.value = formToken;
+  }
+  
+  // Rate limiting: Check if form was submitted recently
+  const lastSubmissionKey = 'lc_container_last_form_submission';
+  const minTimeBetweenSubmissions = 60000; // 1 minute
+  
+  function checkRateLimit(): boolean {
+    const lastSubmission = localStorage.getItem(lastSubmissionKey);
+    if (lastSubmission) {
+      const timeSinceLastSubmission = Date.now() - parseInt(lastSubmission);
+      if (timeSinceLastSubmission < minTimeBetweenSubmissions) {
+        return false; // Too soon
+      }
+    }
+    return true; // OK to submit
+  }
+  
+  function setRateLimit() {
+    localStorage.setItem(lastSubmissionKey, String(Date.now()));
+  }
+  
   let current = 0;
   let isSubmitting = false;
 
@@ -231,9 +262,66 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
   });
 
   form.addEventListener('submit', async (e)=>{
-    // Don't prevent default - let FormSubmit handle the submission
+    e.preventDefault(); // Prevent default to add spam checks
+    
     if (isSubmitting) {
-      e.preventDefault();
+      return;
+    }
+
+    // Spam protection checks
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
+    
+    // Check honeypot fields (should be empty)
+    if (payload.website || payload.company || payload.url) {
+      errorText.textContent = "Spam detected. Please contact us directly at (214) 524-4168.";
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
+      return;
+    }
+    
+    // Check form timing (too fast = likely spam)
+    const startTime = parseInt(startedAt?.value || '0');
+    const timeSpent = Date.now() - startTime;
+    const minTimeToFill = 5000; // 5 seconds minimum
+    
+    if (timeSpent < minTimeToFill) {
+      errorText.textContent = "Please take your time filling out the form.";
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
+      return;
+    }
+    
+    // Check rate limiting
+    if (!checkRateLimit()) {
+      errorText.textContent = "Please wait a moment before submitting again. Or call us at (214) 524-4168.";
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
+      return;
+    }
+    
+    // Validate email domain (block common spam domains)
+    const email = payload.email as string;
+    const spamDomains = ['tempmail.com', '10minutemail.com', 'guerrillamail.com', 'mailinator.com', 'throwaway.email'];
+    const emailDomain = email.split('@')[1]?.toLowerCase();
+    if (emailDomain && spamDomains.some(domain => emailDomain.includes(domain))) {
+      errorText.textContent = "Please use a valid email address or call us at (214) 524-4168.";
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
+      return;
+    }
+    
+    // Validate phone number format
+    const phone = (payload.phone as string).replace(/\D/g, '');
+    if (phone.length < 10 || phone.length > 15) {
+      errorText.textContent = "Please enter a valid phone number.";
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
       return;
     }
 
@@ -242,10 +330,11 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     errorIcon.classList.add('hidden');
     msg.classList.remove('text-red-500');
     msg.classList.add('text-ink-muted');
+    
+    // Set rate limit
+    setRateLimit();
 
     // Enhanced analytics tracking
-    const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "quote_submit",
@@ -254,7 +343,26 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
       timestamp: Date.now()
     });
 
-    // FormSubmit will handle the redirect and success messaging
+    // Submit the form
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: fd
+      });
+      
+      if (response.ok) {
+        // Success - redirect
+        window.location.href = 'https://lccontainer.com/contact?submitted=true';
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      setLoading(false);
+      errorText.textContent = "There was an error submitting your form. Please call us at (214) 524-4168.";
+      errorIcon.classList.remove('hidden');
+      msg.classList.remove('text-ink-muted');
+      msg.classList.add('text-red-500');
+    }
   });
 
   // Show success message function
@@ -267,6 +375,73 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     });
     document.dispatchEvent(successEvent);
   }
+
+  // Real-time validation
+  const emailInput = form?.elements?.namedItem('email') as HTMLInputElement;
+  const phoneInput = form?.elements?.namedItem('phone') as HTMLInputElement;
+  const emailError = document.getElementById('email-error');
+  const phoneError = document.getElementById('phone-error');
+  
+  // Email validation
+  emailInput?.addEventListener('blur', () => {
+    const email = emailInput.value;
+    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      if (emailError) {
+        emailError.textContent = 'Please enter a valid email address';
+        emailError.classList.remove('hidden');
+        emailInput.classList.add('border-red-500');
+      }
+    } else {
+      if (emailError) {
+        emailError.classList.add('hidden');
+        emailInput.classList.remove('border-red-500');
+      }
+    }
+  });
+  
+  // Phone validation and formatting
+  phoneInput?.addEventListener('input', (e) => {
+    const input = e.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, '');
+    
+    // Format as (XXX) XXX-XXXX
+    if (value.length > 0) {
+      if (value.length <= 3) {
+        value = `(${value}`;
+      } else if (value.length <= 6) {
+        value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+      } else {
+        value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+      }
+      input.value = value;
+    }
+    
+    // Validate
+    const digits = value.replace(/\D/g, '');
+    if (digits.length > 0 && (digits.length < 10 || digits.length > 15)) {
+      if (phoneError) {
+        phoneError.textContent = 'Please enter a valid phone number';
+        phoneError.classList.remove('hidden');
+        phoneInput.classList.add('border-red-500');
+      }
+    } else {
+      if (phoneError) {
+        phoneError.classList.add('hidden');
+        phoneInput.classList.remove('border-red-500');
+      }
+    }
+  });
+  
+  phoneInput?.addEventListener('blur', () => {
+    const digits = phoneInput.value.replace(/\D/g, '');
+    if (digits.length > 0 && (digits.length < 10 || digits.length > 15)) {
+      if (phoneError) {
+        phoneError.textContent = 'Please enter a valid phone number';
+        phoneError.classList.remove('hidden');
+        phoneInput.classList.add('border-red-500');
+      }
+    }
+  });
 
   // Prefill from URL with error handling
   try {
