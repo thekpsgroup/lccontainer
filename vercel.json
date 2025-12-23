@@ -3,7 +3,6 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "installCommand": "npm install",
-  "functions": {},
   "crons": [],
   "build": {
     "env": {
