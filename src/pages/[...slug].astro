@@ -10,7 +10,11 @@ export async function getStaticPaths() {
   const entries = await getCollection('loc');
   return (entries as CollectionEntry<'loc'>[]).map((e) => {
     const slugStr = String(e.data.url_slug || '/').replace(/^\//, '').replace(/\/$/, '');
-    return { params: { slug: slugStr } };
+    return { 
+      params: { slug: slugStr },
+      // Explicitly prerender all pages
+      prerender: true
+    };
   });
 }
 
@@ -29,6 +33,11 @@ const { title_tag, meta_description, h1, noindex, city, keyword, internal_links 
 // Check if high-intent keyword (sales/buy) for phone in title
 const isHighIntent = keyword && (keyword.toLowerCase().includes('sale') || keyword.toLowerCase().includes('buy'));
 const enhancedTitle = isHighIntent ? `${title_tag} | Call (214) 524-4168` : title_tag;
+
+// Build location-specific keywords for better SEO
+const locationKeywords = city 
+  ? `${keyword || 'shipping containers'}, ${city}, Texas, LC Container`
+  : `${keyword || 'shipping containers'}, Texas, LC Container`;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const links = (internal_links || '')
@@ -96,15 +105,15 @@ const faqs = [
   <section class="max-w-[1200px] mx-auto px-5 py-10 md:py-14">
     <BreadcrumbSchema items={breadcrumbItems} />
 
-    <h1 class="text-3xl md:text-4xl font-semibold">{h1}</h1>
-    {keyword && (<p class="text-ink-muted mt-2">Focused on: {keyword}</p>)}
+    <h1 class="text-3xl md:text-4xl font-bold text-black">{h1}</h1>
+    {keyword && (<p class="text-grey-600 mt-2">Focused on: {keyword}</p>)}
 
     <div class="mt-6 flex flex-wrap gap-3">
-      <a href="tel:12145244168" class="px-4 py-2 rounded-xl bg-brand-red text-white text-sm font-semibold hover:opacity-90" aria-label="Call LC Container now">📞 Call (214) 524-4168</a>
-      <a href="/contact" class="px-4 py-2 border border-grey-300 bg-white text-black text-sm hover:bg-grey-100" aria-label="Request a free quote">Get Free Quote</a>
+      <a href="tel:12145244168" class="px-4 py-2 bg-brand-red text-white text-sm font-semibold hover:bg-brand-red-dark rounded transition-colors duration-200" aria-label="Call LC Container now">Call (214) 524-4168</a>
+      <a href="/contact" class="px-4 py-2 border border-grey-300 bg-white text-black text-sm hover:bg-grey-100 rounded transition-colors duration-200" aria-label="Request a free quote">Get Free Quote</a>
     </div>
 
-    <article class="prose prose-invert max-w-none mt-8">
+    <article class="prose max-w-none mt-8">
       <rendered.Content />
     </article>
 
@@ -114,9 +123,9 @@ const faqs = [
     {links.length > 0 && (
       <div class="mt-10">
         <h2 class="text-xl font-semibold mb-3">Helpful links</h2>
-        <ul class="list-disc list-inside text-ink-muted">
+        <ul class="list-disc list-inside text-grey-600">
           {links.map((href: string) => (
-            <li><a href={href} class="hover:underline">{href}</a></li>
+            <li><a href={href} class="text-brand-red hover:text-brand-red-dark hover:underline">{href}</a></li>
           ))}
         </ul>
       </div>
@@ -164,7 +173,10 @@ const faqs = [
   </script>
 </BaseLayout>
 
-<!-- Ensure canonical tag is present even when indexable -->
+<!-- Enhanced metadata for location pages -->
 <fragment slot="head">
   <link rel="canonical" href={canonical} />
+  <meta name="keywords" content={locationKeywords} />
+  {city && <meta name="geo.placename" content={city} />}
+  {city && <meta name="geo.region" content="US-TX" />}
 </fragment>

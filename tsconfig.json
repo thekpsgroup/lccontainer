@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "strict": true,
     "jsx": "preserve",
     "esModuleInterop": true,
@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "5.0"
   },
-  "include": ["src", "astro-env.d.ts"]
+  "include": ["src", "astro-env.d.ts", "src/env.d.ts"]
 }

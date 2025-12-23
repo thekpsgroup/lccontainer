@@ -69,12 +69,18 @@ import StickyCallBar from "../components/StickyCallBar.astro";
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LC Container" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <meta name="twitter:image:alt" content={title} />
 
     <!-- SEO Enhancements -->
     <meta
@@ -91,10 +97,7 @@ import StickyCallBar from "../components/StickyCallBar.astro";
     />
     <meta name="author" content="LC Container, LLC" />
     <meta name="publisher" content="LC Container, LLC" />
-    <meta
-      name="keywords"
-      content="shipping containers, container sales, container leasing, custom containers, container modifications, storage containers, office containers, Texas containers, Hutchins TX"
-    />
+    <!-- Keywords are now page-specific via individual page components -->
     <meta name="geo.region" content="US-TX" />
     <meta name="geo.placename" content="Hutchins, Texas" />
     <meta name="geo.position" content="32.6454;-96.7111" />

@@ -10,10 +10,6 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'viewport',
   },
-  build: {
-    inlineStylesheets: 'auto',
-    assets: '_astro',
-  },
   image: {
     // Enable image optimization
     service: {
@@ -43,10 +39,14 @@ export default defineConfig({
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
         },
+        // Optimize for large number of pages
+        maxParallelFileOps: 5,
       },
       cssCodeSplit: true,
       sourcemap: false,
       reportCompressedSize: false,
+      // Optimize chunk size for faster builds
+      chunkSizeWarningLimit: 1000,
     },
     css: {
       devSourcemap: false,

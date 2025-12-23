@@ -58,9 +58,17 @@ const storage = cityPages.filter(p =>
 
 const title = `Shipping & Storage Containers in ${cityName}, TX | LC Container`;
 const description = `Containers in ${cityName}, TX. Buy, rent, or customize shipping containers. 20+ years serving DFW. Local delivery available. Call (214) 524-4168.`;
+const cityKeywords = `shipping containers ${cityName}, storage containers ${cityName}, container sales ${cityName} TX, container rental ${cityName}, LC Container ${cityName}`;
+const canonical = new URL(`/city/${citySlug}`, Astro.site);
 ---
 
 <BaseLayout title={title} description={description}>
+  <fragment slot="head">
+    <meta name="keywords" content={cityKeywords} />
+    <meta name="geo.placename" content={`${cityName}, Texas`} />
+    <meta name="geo.region" content="US-TX" />
+    <link rel="canonical" href={canonical} />
+  </fragment>
   <!-- Enhanced Product Schema for city containers -->
   <ProductSchema container={{
     name: `${cityName} Shipping Containers`,

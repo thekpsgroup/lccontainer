@@ -1,8 +1,13 @@
+// @ts-ignore - Astro virtual modules are available at build time
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+// @ts-ignore - Astro virtual modules are available at build time
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { CITIES } from "../data/cities";
 
-export const GET: APIRoute = async ({ site }) => {
+export const prerender = true;
+
+export const GET: APIRoute = async (context: { site: URL | undefined }) => {
+  const { site } = context;
   if (!site) {
     return new Response('Site not found', { status: 404 });
   }
@@ -171,10 +176,10 @@ export const GET: APIRoute = async ({ site }) => {
 
   // Include programmatic loc pages that are indexable
   const locEntries = await getCollection('loc');
-  const locPages = locEntries
+  const locPages = (locEntries as CollectionEntry<'loc'>[])
     .filter((e) => !e.data.noindex)
     .map((e) => ({
-      url: e.data.url_slug.replace(/\/$/, ''),
+      url: String(e.data.url_slug || '').replace(/\/$/, ''),
       lastmod: new Date().toISOString(),
       changefreq: 'weekly' as const,
       priority: 0.7
