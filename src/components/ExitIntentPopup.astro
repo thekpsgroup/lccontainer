@@ -141,12 +141,6 @@
         trackConversion("phone_call");
       });
 
-    // Track quote form link
-    document
-      .querySelector('a[href="/contact"]')
-      ?.addEventListener("click", function () {
-        trackConversion("quote_form");
-      });
 
     // Escape key to close
     document.addEventListener("keydown", function (e) {
@@ -163,12 +157,12 @@
 >
   <div
     id="exit-intent-popup"
-    class="bg-white border border-grey-300 max-w-md w-full p-8 relative transform -translate-y-12 opacity-0 transition-all duration-300"
+    class="bg-white border border-grey-300 max-w-md w-full p-8 relative transform -translate-y-12 opacity-0 transition-all duration-300 shadow-2xl rounded-lg"
   >
     <!-- Close button -->
     <button
       id="close-popup"
-      class="absolute top-4 right-4 text-grey-400 hover:text-black transition-colors"
+      class="absolute top-4 right-4 text-grey-400 hover:text-black hover:bg-grey-100 rounded-full p-1 transition-all duration-200"
       aria-label="Close popup"
     >
       <svg
@@ -189,7 +183,7 @@
     <div class="text-center mb-6">
       <div class="mb-4">
         <div
-          class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4"
+          class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg animate-pulse"
         >
           <svg
             class="w-8 h-8 text-white"
@@ -211,7 +205,7 @@
       </h3>
 
       <p class="text-grey-600 text-lg mb-2">
-        Get your <strong class="text-brand-red">FREE quote</strong> right now
+        Get your <strong class="text-brand-red font-bold">FREE quote</strong> right now
       </p>
       <p class="text-sm text-grey-500">
         Same-day delivery available • Thousands in stock
@@ -321,12 +315,12 @@
       </div>
     </div>
 
-    <!-- CTA Buttons -->
-    <div class="space-y-3">
+    <!-- CTA Button -->
+    <div>
       <a
         id="popup-phone-cta"
         href="tel:12145244168"
-        class="w-full bg-brand-red text-white text-center py-5 px-6 font-bold text-xl hover:bg-brand-red-dark transition-all duration-200 flex items-center justify-center gap-3"
+        class="w-full bg-brand-red text-white text-center py-5 px-6 font-bold text-xl hover:bg-brand-red-dark transition-all duration-200 flex items-center justify-center gap-3 rounded-md shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
       >
         <svg
           class="w-7 h-7"
@@ -342,13 +336,6 @@
           ></path>
         </svg>
         Call (214) 524-4168 Now
-      </a>
-
-      <a
-        href="/contact"
-        class="w-full border border-grey-300 bg-white text-black text-center py-3 px-6 font-semibold hover:bg-grey-100 transition-all duration-200"
-      >
-        Get Free Quote Online
       </a>
     </div>
 

@@ -104,6 +104,154 @@
   /* Basic hover effect */
   .hover-lift:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Smooth transitions for interactive elements */
+  button, a, input, select, textarea {
+    transition: all 0.2s ease;
+  }
+
+  /* Button click bounce animation */
+  button:active, a[role="button"]:active {
+    transform: scale(0.97);
+  }
+
+  /* Form input enhancements */
+  input:focus, select:focus, textarea:focus {
+    border-color: #B22222;
+    box-shadow: 0 0 0 3px rgba(178, 34, 34, 0.1);
+  }
+
+  input:invalid:not(:focus):not(:placeholder-shown),
+  select:invalid:not(:focus),
+  textarea:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  }
+
+  input:valid:not(:focus):not(:placeholder-shown),
+  select:valid:not(:focus),
+  textarea:valid:not(:focus):not(:placeholder-shown) {
+    border-color: #16a34a;
+  }
+
+  /* Scroll progress indicator */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #B22222, #8B0000);
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Image skeleton placeholder */
+  .image-skeleton {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Print styles */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    header, footer, nav, .sticky-call-bar, .scroll-progress, #back-to-top {
+      display: none !important;
+    }
+    
+    a[href^="tel:"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+    }
+    
+    body {
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000;
+      background: #fff;
+    }
+    
+    h1, h2, h3 {
+      page-break-after: avoid;
+    }
+    
+    img {
+      max-width: 100%;
+      page-break-inside: avoid;
+    }
+  }
+
+  /* Enhanced keyboard navigation */
+  .keyboard-nav:focus-visible {
+    outline: 3px solid #B22222;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(178, 34, 34, 0.2);
+  }
+
+  /* Smooth page transitions */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Better link prefetching visual feedback */
+  a[data-astro-prefetch]:hover {
+    cursor: pointer;
+  }
+
+  /* Improved disabled states */
+  button:disabled, input:disabled, select:disabled, textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Loading state for async operations */
+  .loading {
+    position: relative;
+    pointer-events: none;
+  }
+
+  .loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #B22222;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
 

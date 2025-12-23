@@ -32,18 +32,18 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     <!-- Step 1 -->
     <fieldset class="step" data-step="1">
       <label class="block text-sm text-black" for="name">Full Name
-        <input id="name" name="name" required autocomplete="name" aria-describedby="name-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
+        <input id="name" name="name" required autocomplete="name" aria-describedby="name-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-brand-red transition-all duration-200 text-base rounded" />
       </label>
       <div id="name-help" class="sr-only">Enter your full name for the quote request</div>
 
       <label class="block text-sm text-black" for="email">Email
-        <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-help email-error" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
+        <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-help email-error" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-brand-red transition-all duration-200 text-base rounded" />
         <span id="email-error" class="text-xs text-red-600 hidden mt-1" role="alert"></span>
       </label>
       <div id="email-help" class="sr-only">We'll use this email to send your quote and updates</div>
 
       <label class="block text-sm text-black" for="phone">Phone
-        <input id="phone" name="phone" required autocomplete="tel" inputmode="tel" aria-describedby="phone-help phone-error" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
+        <input id="phone" name="phone" required autocomplete="tel" inputmode="tel" aria-describedby="phone-help phone-error" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-brand-red transition-all duration-200 text-base rounded" />
         <span id="phone-error" class="text-xs text-red-600 hidden mt-1" role="alert"></span>
       </label>
       <div id="phone-help" class="sr-only">We'll call you within 24 hours to discuss your container needs</div>
@@ -52,7 +52,7 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     <!-- Step 2 -->
     <fieldset class="step hidden" data-step="2">
         <label class="block text-sm text-black" for="interest">What do you need?
-          <select id="interest" name="interest" required aria-describedby="interest-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base">
+          <select id="interest" name="interest" required aria-describedby="interest-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-brand-red transition-all duration-200 text-base rounded">
             <option value="">Select an option</option>
             {interests.map(i => <option value={i}>{i}</option>)}
           </select>
@@ -63,12 +63,12 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     <!-- Step 3 -->
     <fieldset class="step hidden" data-step="3">
       <label class="block text-sm text-black" for="zip">Delivery ZIP
-        <input id="zip" name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" aria-describedby="zip-help" maxlength="5" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base" />
+        <input id="zip" name="zip" placeholder="e.g., 75141" required inputmode="numeric" pattern="\\d{5}" aria-describedby="zip-help" maxlength="5" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-brand-red transition-all duration-200 text-base rounded" />
       </label>
       <div id="zip-help" class="sr-only">Enter your 5-digit ZIP code for delivery estimate</div>
 
       <label class="block text-sm text-black" for="notes">Notes (optional)
-        <textarea id="notes" name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" aria-describedby="notes-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red text-base"></textarea>
+        <textarea id="notes" name="notes" rows="3" placeholder="Site conditions, timeframe, add-ons needed…" aria-describedby="notes-help" class="mt-1 w-full px-4 py-3 border border-grey-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-brand-red transition-all duration-200 text-base rounded"></textarea>
       </label>
       <div id="notes-help" class="sr-only">Any additional details about your container requirements</div>
     </fieldset>
@@ -80,15 +80,21 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
 
     <!-- Controls -->
     <div class="flex gap-3 mt-1">
-      <button type="button" id="prevBtn" class="hidden px-5 py-3 border border-grey-300 bg-white text-black hover:bg-grey-100 focus:ring-2 focus:ring-brand-red" aria-label="Go back to previous step">
+      <button type="button" id="prevBtn" class="hidden px-5 py-3 border border-grey-300 bg-white text-black hover:bg-grey-100 focus:ring-2 focus:ring-brand-red transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Go back to previous step">
         Back
       </button>
-      <button type="button" id="nextBtn" class="px-5 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark focus:ring-2 focus:ring-brand-red" aria-label="Continue to next step">
+      <button type="button" id="nextBtn" class="px-5 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark focus:ring-2 focus:ring-brand-red transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Continue to next step">
         Next
       </button>
-      <button type="submit" id="submitBtn" class="hidden px-5 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark focus:ring-2 focus:ring-brand-red" aria-label="Submit your quote request" disabled>
+      <button type="submit" id="submitBtn" class="hidden px-5 py-3 bg-brand-red text-white font-semibold hover:bg-brand-red-dark focus:ring-2 focus:ring-brand-red transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2" aria-label="Submit your quote request" disabled>
         <span id="submitText">Submit Quote Request</span>
-        <span id="submitLoading" class="hidden" aria-live="polite">Sending your request...</span>
+        <span id="submitLoading" class="hidden flex items-center gap-2" aria-live="polite">
+          <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Sending...
+        </span>
       </button>
     </div>
 
@@ -179,15 +185,33 @@ const interests = ["Buy - 20'","Buy - 40'","Buy - 40' High Cube","Lease","Custom
     if (loading) {
       if (submitText) submitText.classList.add('hidden');
       if (submitLoading) submitLoading.classList.remove('hidden');
-      if (submitBtn) submitBtn.disabled = true;
-      if (nextBtn) nextBtn.disabled = true;
-      if (prevBtn) prevBtn.disabled = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-75');
+      }
+      if (nextBtn) {
+        nextBtn.disabled = true;
+        nextBtn.classList.add('opacity-75');
+      }
+      if (prevBtn) {
+        prevBtn.disabled = true;
+        prevBtn.classList.add('opacity-75');
+      }
     } else {
       if (submitText) submitText.classList.remove('hidden');
       if (submitLoading) submitLoading.classList.add('hidden');
-      if (submitBtn) submitBtn.disabled = false;
-      if (nextBtn) nextBtn.disabled = false;
-      if (prevBtn) prevBtn.disabled = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-75');
+      }
+      if (nextBtn) {
+        nextBtn.disabled = false;
+        nextBtn.classList.remove('opacity-75');
+      }
+      if (prevBtn) {
+        prevBtn.disabled = false;
+        prevBtn.classList.remove('opacity-75');
+      }
     }
   }
 
